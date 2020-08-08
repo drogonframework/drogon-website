@@ -1,0 +1,19 @@
+{
+  "name": "website_front",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "export": "nuxt export",
+    "serve": "nuxt serve"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "mdui": "^1.0.0",
+    "nuxt": "^2.13.0"
+  },
+  "devDependencies": {}
+}
