@@ -19,18 +19,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(${PROJECT_NAME} main.cc controllers/consts.h)
 
-##########
-# If you include the drogon source code locally in your project, use this method to add drogon
-# add_subdirectory(drogon)
-# target_link_libraries(${PROJECT_NAME} PRIVATE drogon)
-##########
+#########
+add_subdirectory(drogon)
+target_link_libraries(${PROJECT_NAME} PRIVATE drogon)
+#########
 # -DCMAKE_TOOLCHAIN_FILE=/scripts/buildsystems/vcpkg.cmake”
 # set(DCMAKE_TOOLCHAIN_FILE, "C:\\Users\\itgeek\\software\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake")
 # set(VCPKG_ROOT "C:\\Users\\itgeek\\software\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake" CACHE PATH "")
 # set(CMAKE_TOOLCHAIN_FILE ${VCPKG_ROOT})
 # set(CMAKE_PREFIX_PATH, "C:\\Users\\itgeek\\software\\vcpkg\\packages\\jsoncpp_x64-windows\\include")
-find_package(Drogon CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
+# find_package(Drogon CONFIG REQUIRED)
+# target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
 
 if(CMAKE_CXX_STANDARD LESS 17)
 #With C++14, use boost to support any and string_view

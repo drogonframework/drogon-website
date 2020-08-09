@@ -33,10 +33,15 @@
 
 build
 cmake-build-debug
-
-
-# IDE
 .idea
-.vs
+lib/inc/drogon/version.h
+html/
+latex/
 .vscode
-out/
+*.kdev4
+.cproject
+.project
+.settings/
+.vs/
+CMakeSettings.json
+install

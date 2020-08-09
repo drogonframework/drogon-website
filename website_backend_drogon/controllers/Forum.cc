@@ -1,7 +1,7 @@
-#include "forum.h"
-void forum::index(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) const
+#include "Forum.h"
+void Forum::index(const HttpRequestPtr &req,
+                  std::function<void(const HttpResponsePtr &)> &&callback) const
 {
-
     auto para = req->getParameters();
     HttpViewData data;
     data.insert("lang", "zh-CN");
