@@ -25,8 +25,6 @@ addons:
     - openssl
     - libssl-dev
     - libsqlite3-dev
-    - mariadb-client
-    - mariadb-server
     - build-essential
     - cmake
     - boost1.67
@@ -39,10 +37,8 @@ addons:
     - cmake
     - libtool
     - lz4
-    - mariadb
     - sqlite3
     update: true
-  mariadb: '10.0'
 
 before_install:
   - wget https://github.com/google/googletest/archive/release-1.10.0.tar.gz
@@ -57,20 +53,11 @@ before_script:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
        brew tap homebrew/services;
        brew services restart postgresql;
-       brew services start mariadb;
-       sleep 2;
-       mariadb -e "CREATE USER 'root'@'localhost' IDENTIFIED BY ''";
-       mariadb -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('')";
-       mariadb -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'";
-       mariadb -e "FLUSH PRIVILEGES";
-       sleep 2;
-       brew services restart mariadb;
        psql -c 'create user postgres superuser;' postgres;
     fi
 
 services:
   - postgresql
-  - mysql
 
 script:
   - ./build.sh -t
