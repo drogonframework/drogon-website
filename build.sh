@@ -10,7 +10,7 @@ function build() {
     current_dir="${PWD}"
 
     #The folder in which we will build drogon
-    build_dir='./drogon_backend/build'
+    build_dir='./website_backend_drogon/build'
     if [ -d $build_dir ]; then
         echo "Deleted folder: ${build_dir}"
         rm -rf $build_dir

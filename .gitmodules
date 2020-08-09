@@ -1,3 +1,3 @@
-[submodule "drogon_backend/drogon"]
-	path = drogon_backend/drogon
+[submodule "website_backend_drogon/drogon"]
+	path = website_backend_drogon/drogon
 	url = https://github.com/an-tao/drogon
