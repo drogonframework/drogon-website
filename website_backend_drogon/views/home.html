@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="[[lang]]">
+<head>
+    <meta charset="UTF-8">
+    <title>[[Title]]</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://static.makelove.tech/static/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- MDUI CSS -->
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css"
+            integrity="sha384-2PJ2u4NYg6jCNNpv3i1hK9AoAqODy6CdiC+gYiL2DVx+ku5wzJMFNdE3RoWfBIRP"
+            crossorigin="anonymous"
+    />
+
+    <!-- MDUI JavaScript -->
+    <script
+            src="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"
+            integrity="sha384-aB8rnkAu/GBsQ1q6dwTySnlrrbhqDwrDnpVHR2Wgm8pWLbwUnzDcIROX3VvCbaK+"
+            crossorigin="anonymous"
+    ></script>
+    <style>
+        .flex-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .myul {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin: auto;
+            /* align-content: center; */
+            align-items: center;
+        }
+
+        .boxulli {
+            list-style: none;
+            height: 80px;
+            line-height: 80px;
+            width: 10%;
+            align-content: center;
+            justify-content: center;
+        }
+
+        a{
+            text-decoration:none;
+            color: #FFF;
+        }
+
+        a:hover{
+            text-decoration:none;
+            color: #FFF;
+            background-color:#FF6E40;
+        }
+
+
+        .bgsecond {
+            background-color: #FF6E40;
+            /* background-color: #FC6C06; */;
+        }
+    </style>
+</head>
+<body>
+<header style="height:80px;">
+
+    <nav style="width: 100%; background-color: #FF5722">
+        <div class="container ">
+            <div class="flex-row ">
+                <!-- <div>
+                    <h1 class="doc-title mdui-text-color-theme mdui-typo-title ">Drogon</h1>
+                </div> -->
+
+                <ul class="myul ">
+                    <li class="boxulli " style="width: 25%;" >
+                        <div class="row">
+                            <img src="~/static/drogon_white.png" alt="drogon" style="width:75px; height:75px;" v-show="currentIndex!=0">
+                            <h1 style="color: #FFF;">
+                                Drogon
+                            </h1>
+                        </div>
+                    </li>
+                    <a href="/" class="boxulli bgsecond">
+                        <li style="display: flex;justify-content: center">
+                            <text style="color: #FFF; font-size: x-large;">
+                                首页
+                            </text>
+                        </li>
+                    </a>
+                    <a href="/doc" class="boxulli " >
+                        <li style="display: flex;justify-content: center">
+                            <text style="color: #FFF; font-size: x-large;">
+                                文档
+                            </text>
+                        </li>
+                    </a>
+                    <a href="/forum" class="boxulli ">
+                        <li style="display: flex;justify-content: center">
+                            <text style="color: #FFF; font-size: x-large;">
+                                社区
+                            </text>
+                        </li>
+                    </a>
+                </ul>
+                <button type="button" class="btn btn-outline-light" style="height: 40px;">English</button>
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+<div style="width: 100%;display: flex;flex-direction: column;align-content: center;align-items: center;justify-content: center">
+    <!-- <div style="background-color: #FC6C06;padding-top: 150px; padding-bottom: 100px;"> -->
+    <div class="bgsecond" style="padding-top: 150px; padding-bottom: 100px;width: 100%;display: flex;flex-direction: column;align-content: center;align-items: center;justify-content: center">
+        <div align="center">
+            <div style="display: flex; align-content: center;align-items: center;justify-content:center;">
+                <img src="~/static/drogon_white.png" alt="drogon" style="width:180px;height:180px;">
+                <div class="doc-title mdui-typo-display-4 " align="center " style="font-weight:500; color: #FFF; ">
+                    Drogon
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="doc-title mdui-text-color-theme mdui-typo-display-4 " align="center " style="font-weight:500;margin-top: 150px; ">
+            Drogon
+        </div> -->
+        <div class="doc-title mdui-typo-display-1 " align="center " style="margin-top: 80px; color: #FFF; ">
+            C++ powerful web framework build with C++14/17
+        </div>
+        <!-- <div class="doc-title mdui-text-color-theme mdui-typo-display-1 " align="center " style="margin-top: 80px ">
+            C++ powerful web framework build with C++14/17
+        </div> -->
+        <div style="margin-top: 50px; " align="center ">
+            <a href="javascript:void(0) " class="btn btn-outline-warning">github</a>
+            <a href="javascript:void(0) " class="btn btn-outline-warning">gitee</a>
+        </div>
+
+        <!-- <img class="mdui-img-fluid z-index=-1 " src="drogon.jpg " /> -->
+    </div>
+</div>
+
+</body>
+</html>
