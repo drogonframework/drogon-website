@@ -1,19 +1,40 @@
 {
-  "name": "website_front",
-  "version": "1.0.0",
+  "name": "website_frontend_vue",
+  "version": "0.0.1",
+  "description": "Drogon Community",
+  "productName": "Drogon Community",
+  "author": "Elliot",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "export": "nuxt export",
-    "serve": "nuxt serve"
+    "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
-    "mdui": "^1.0.0",
-    "nuxt": "^2.13.0"
+    "@quasar/extras": "^1.0.0",
+    "@vue/composition-api": "^0.6.4",
+    "axios": "^0.18.1",
+    "core-js": "^3.6.5",
+    "quasar": "^1.0.0",
+    "vue-i18n": "^8.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@quasar/app": "^2.0.0",
+    "@types/node": "^10.17.15"
+  },
+  "browserslist": [
+    "ie >= 11",
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
 }

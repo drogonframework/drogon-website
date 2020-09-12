@@ -1,23 +1,22 @@
-# website_front
-this repo is the frontend of drogon website, build with nuxt(a server-side render vue framework)
+# Drogon Community (website_frontend_vue)
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Drogon Community
 
-## Build Setup
-
+## Install the dependencies
 ```bash
-# install dependencies
-$ npm install
+npm install
+```
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
+```bash
+quasar dev
 ```
 
 
+### Build the app for production
+```bash
+quasar build
+```
+
+### Customize the configuration
+See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
