@@ -1,20 +1,24 @@
-import { RouteConfig } from 'vue-router';
+import {RouteConfig} from 'vue-router';
 
 const routes: RouteConfig[] = [
-  {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Index.vue') }
-    ]
-  },
+    {
+      path: '/',
+      component: () => import('layouts/layout.vue'),
+      children: [
 
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '*',
-    component: () => import('pages/Error404.vue')
-  }
-];
+        {path: 'wiki', component: () => import('pages/wiki.vue')},
+        {path: 'bbs', component: () => import('pages/bbs.vue')},
+        {path: 'example', component: () => import('pages/example.vue')},
+        {path: 'join', component: () => import('pages/join.vue')},
+        {path: '*', component: () => import('pages/Index.vue')},
+      ]
+    },
+    {
+      path: '*',
+      component: () => import('layouts/layout.vue')
+    },
+
+  ]
+;
 
 export default routes;
