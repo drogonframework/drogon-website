@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt --host 192.168.43.111",
     "build": "nuxt build",
     "start": "nuxt start",
     "export": "nuxt export",
@@ -13,7 +13,8 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "mdui": "^1.0.0",
-    "nuxt": "^2.13.0"
+    "nuxt": "^2.13.0",
+    "vue-server-renderer": "^2.6.11"
   },
   "devDependencies": {}
 }
