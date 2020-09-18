@@ -1,0 +1,191 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Benchmarks &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Coz" href="Coz-en.html" />
+    <link rel="prev" title="AOP Aspect Oriented Programming" href="AOP-Aspect-Oriented-Programming-en.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Coz-en.html" title="Coz"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="AOP-Aspect-Oriented-Programming-en.html" title="AOP Aspect Oriented Programming"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="benchmarks">
+<h1>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h1>
+<p>As a C++ Http application framework, performance should be one of the focus of attention. This section introduces Drogon’s simple tests and achievements;</p>
+<div class="section" id="test-environment">
+<h2>Test environment<a class="headerlink" href="#test-environment" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>The system is Linux CentOS 7.4;</li>
+<li>The device is a Dell server, the CPU is two Intel(R) Xeon(R) CPUs E5-2670 &#64; 2.60GHz, 16 cores and 32 threads;</li>
+<li>Memory 64GB;</li>
+<li>gcc version 7.3.0;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="test-plan-and-results">
+<h2>Test plan and results<a class="headerlink" href="#test-plan-and-results" title="Permalink to this headline">¶</a></h2>
+<p>We just want to test the performance of the drogon framework, so we want to simplify the controller’s processing as much as possible. We only do an HttpSimpleController and register it on the <em>/benchmark</em> path. The controller returns <em>&lt;p&gt;Hello, world!&lt;/p&gt;</em> for any request. Set the number of drogon threads to 16. The processing function is as follows and you can find the source code at the <em>drogon/examples/benchmark</em> path:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">BenchmarkCtrl</span><span class="o">::</span><span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+    <span class="k">auto</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpResponse</span><span class="p">();</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setBody</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Hello, world!&lt;/p&gt;&quot;</span><span class="p">);</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setExpiredTime</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For comparison, I chose nginx for comparison testing, wrote a <em>hello_world_module</em>, and compiled it with the nginx source. The nginx worker_processes parameter is set to 16.</p>
+<p>The test tool is <em>httpress</em>, a good performance HTTP stress test tool.</p>
+<p>We adjust the parameters of httpress, test each set of parameters five times, and record the maximum and minimum values ​of the number of requests processed per second. The test results are as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="40%" />
+<col width="8%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command line</th>
+<th class="head">Description</th>
+<th class="head">&#160;</th>
+<th class="head">Drogon(kQPS)   nginx(kQPS)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>httpress -c 100 -n 1000000 -t 16 -k -q URL</td>
+<td>100 connections, 1 million requests, 16 threads,Keep-Alive</td>
+<td>561/552</td>
+<td>330/329</td>
+</tr>
+<tr class="row-odd"><td>httpress -c 100 -n 1000000 -t 12 -q URL</td>
+<td>100 connections, 1 million requests, 12 threads, no Keep-Alive</td>
+<td>140/135</td>
+<td>31/49</td>
+</tr>
+<tr class="row-even"><td>httpress -c 1000 -n 1000000 -t 16 -k -q URL</td>
+<td>1000 connections, 1 million requests, 16 threads,Keep-Alive</td>
+<td>573/565</td>
+<td>333/327</td>
+</tr>
+<tr class="row-odd"><td>httpress -c 1000 -n 1000000 -t 16 -q URL</td>
+<td>1000 connections, 1 million requests, 16 threads,no Keep-Alive</td>
+<td>155/143</td>
+<td>52/50</td>
+</tr>
+<tr class="row-even"><td>httpress -c 10000 -n 4000000 -t 16 -k -q URL</td>
+<td>10000 connections, 4 million requests, 16 threads,Keep-Alive</td>
+<td>512/508</td>
+<td>316/314</td>
+</tr>
+<tr class="row-odd"><td>httpress -c 10000 -n 1000000 -t 16 -q URL</td>
+<td>10000 connections, 1 million requests, 16 threads,no Keep-Alive</td>
+<td>143/141</td>
+<td>43/40</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, using the Keep-Alive option on the client side, drogon can process more than 500,000 requests per second in the case where a connection can send multiple requests. This score is quite good. In the case that each request initiates a connection, CPU time will be spent on TCP connection establishment and disconnection, and the throughput will drop to 140,000 requests per second, which is reasonable.</p>
+<p>It’s easy to see that drogon has a clear advantage over nginx in the above test. If someone does a more accurate test, please correct me.</p>
+<p>The image below is a screenshot of a test:</p>
+<p>Test Result</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Benchmarks</a><ul>
+<li><a class="reference internal" href="#test-environment">Test environment</a></li>
+<li><a class="reference internal" href="#test-plan-and-results">Test plan and results</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="AOP-Aspect-Oriented-Programming-en.html"
+                        title="previous chapter">AOP Aspect Oriented Programming</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Coz-en.html"
+                        title="next chapter">Coz</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Benchmarks-en.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Coz-en.html" title="Coz"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="AOP-Aspect-Oriented-Programming-en.html" title="AOP Aspect Oriented Programming"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Overview &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="Installation-en.html" />
+    <link rel="prev" title="Welcome to drogon’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Installation-en.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to drogon’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p><em>Drogon</em> is a C++14/17-based HTTP application framework. Drogon can be used to easily build various types of web application server programs using C++.</p>
+<p><em>Drogon</em> is the name of a dragon in the American TV series “Game of Thrones” that I really like.</p>
+<p>Drogon’s main application platform is Linux. It also supports Mac OS, FreeBSD and Windows.</p>
+<p>Its main features are as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Use a non-blocking I/O network lib based on epoll (kqueue under macOS/FreeBSD) to provide high-concurrency, high-performance network IO, please visit the <a class="reference external" href="https://www.techempower.com/benchmarks/#section=data-r19&amp;hw=ph&amp;test=composite">TFB Tests Results</a>  for more details;</li>
+<li>Provide a completely asynchronous programming mode;</li>
+<li>Support Http1.0/1.1 (server side and client side);</li>
+<li>Based on template, a simple reflection mechanism is implemented to completely decouple the main program framework, controllers and views.</li>
+<li>Support cookies and built-in sessions;</li>
+<li>Support back-end rendering, the controller generates the data to the view to generate the Html page. Views are described by CSP template files, C++ codes are embedded into Html pages through CSP tags. And the drogon command-line tool automatically generates the C++ code files for compilation;</li>
+<li>Support view page dynamic loading (dynamic compilation and loading at runtime);</li>
+<li>Provide a convenient and flexible routing solution from the path to the controller handler;</li>
+<li>Support filter chains to facilitate the execution of unified logic (such as login verification, Http Method constraint verification, etc.) before handling HTTP requests;</li>
+<li>Support https (based on OpenSSL);</li>
+<li>Support WebSocket (server side and client side);</li>
+<li>Support JSON format request and response, very friendly to the Restful API application development;</li>
+<li>Support file download and upload;</li>
+<li>Support gzip, brotli compression transmission;</li>
+<li>Support pipelining;</li>
+<li>Provide a lightweight command line tool, drogon_ctl, to simplify the creation of various classes in Drogon and the generation of view code;</li>
+<li>Support non-blocking I/O based asynchronously reading and writing database (PostgreSQL and MySQL(MariaDB) database);</li>
+<li>Support asynchronously reading and writing sqlite3 database based on thread pool;</li>
+<li>Support ARM Architecture;</li>
+<li>Provide a convenient lightweight ORM implementation that supports for regular object-to-database bidirectional mapping;</li>
+<li>Support plugins which can be installed by the configuration file at load time;</li>
+<li>Support AOP with build-in joinpoints.</li>
+</ul>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to drogon’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Installation-en.html"
+                        title="next chapter">Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Overview-en.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Installation-en.html" title="Installation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to drogon’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,282 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>drogon_ctl Command &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AOP Aspect Oriented Programming" href="AOP-Aspect-Oriented-Programming-en.html" />
+    <link rel="prev" title="Configuration File" href="Configuration-File-en.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="AOP-Aspect-Oriented-Programming-en.html" title="AOP Aspect Oriented Programming"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Configuration-File-en.html" title="Configuration File"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="drogon-ctl-command">
+<h1>drogon_ctl Command<a class="headerlink" href="#drogon-ctl-command" title="Permalink to this headline">¶</a></h1>
+<p>After the Drogon framework is compiled and installed, a command line program <em>drogon_ctl</em> is also installed in the system, for convenience, also installed an identical copy dg_ctl. Users can choose according to their preferences.</p>
+<p>The main function of the program is to make it easy for users to create various drogon project files. Use the <em>dg_ctl help</em> command to see the functions it supports, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl <span class="nb">help</span>
+usage: drogon_ctl &lt;command&gt; <span class="o">[</span>&lt;args&gt;<span class="o">]</span>
+commands list:
+create                  create some <span class="nb">source</span> files<span class="o">(</span>Use <span class="s1">&#39;drogon_ctl help create&#39;</span> <span class="k">for</span> more information<span class="o">)</span>
+<span class="nb">help</span>                    display this message
+version                 display version of this tool
+press                   Do stress testing<span class="o">(</span>Use <span class="s1">&#39;drogon_ctl help press&#39;</span> <span class="k">for</span> more information<span class="o">)</span>
+</pre></div>
+</div>
+<div class="section" id="version-subcommand">
+<h2>Version subcommand<a class="headerlink" href="#version-subcommand" title="Permalink to this headline">¶</a></h2>
+<p>The <em>version</em> subcommand is used to print the drogon version currently installed on the system, as follows:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>     _
+  __<span class="p">|</span> <span class="p">|</span>_ __ ___   __ _  ___  _ __
+ / _<span class="sb">`</span> <span class="p">|</span> <span class="s1">&#39;__/ _ \ / _` |/ _ \| &#39;</span>_ <span class="se">\</span>
+<span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span>
+ <span class="se">\_</span>_,_<span class="p">|</span>_<span class="p">|</span>  <span class="se">\_</span>__/ <span class="se">\_</span>_, <span class="p">|</span><span class="se">\_</span>__/<span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>
+                  <span class="p">|</span>___/
+drogon ctl tools
+version:0.9.30.771
+git commit:d4710d3da7ca9e73b881cbae3149c3a570da8de4
+compile config:-O3 -DNDEBUG -Wall -std<span class="o">=</span>c++17 -I/root/drogon/trantor -I/root/drogon/lib/inc -I/root/drogon/orm_lib/inc -I/usr/local/include -I/usr/include/uuid -I/usr/include -I/usr/include/mysql
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="create-sub-command">
+<h2>Create sub command<a class="headerlink" href="#create-sub-command" title="Permalink to this headline">¶</a></h2>
+<p>The <em>create</em> subcommand is used to create various objects. It is currently the main function of drogon_ctl. Use the <em>dg_ctl help create</em> command to print detailed help for this command, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl <span class="nb">help</span> create
+
+Use create <span class="nb">command</span> to create some <span class="nb">source</span> files of drogon webapp
+
+Usage:drogon_ctl create &lt;view<span class="p">|</span>controller<span class="p">|</span>filter<span class="p">|</span>project<span class="p">|</span>model&gt; <span class="o">[</span>-options<span class="o">]</span> &lt;object name&gt;
+
+drogon_ctl create view &lt;csp file name&gt; //create HttpView <span class="nb">source</span> files from csp file
+
+drogon_ctl create controller <span class="o">[</span>-s<span class="o">]</span> &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create HttpSimpleController <span class="nb">source</span> files
+
+drogon_ctl create controller -h &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create HttpController <span class="nb">source</span> files
+
+drogon_ctl create controller -w &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create WebSocketController <span class="nb">source</span> files
+
+drogon_ctl create filter &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create a filter named class_name
+
+drogon_ctl create project &lt;project_name&gt; //create a project named project_name
+
+drogon_ctl create model &lt;model_path&gt; //create model classes in model_path
+</pre></div>
+</div>
+</div>
+<div class="section" id="view-creation">
+<h2>View creation<a class="headerlink" href="#view-creation" title="Permalink to this headline">¶</a></h2>
+<p>The <em>dg_ctl create view</em> command is used to generate source files from csp files, see the View section. In general, this command does not need to be used directly. It is better practice to configure the cmake file to executed this command automatically. The command example is as follows, assuming the csp file is <em>UsersList.csp</em>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create view UsersList.csp
+</pre></div>
+</div>
+</div>
+<div class="section" id="controller-creation">
+<h2>Controller creation<a class="headerlink" href="#controller-creation" title="Permalink to this headline">¶</a></h2>
+<p>The <em>dg_ctl create controller</em> command is used to help the user create the controller’s source files. The three controllers currently supported by drogon can be created by this command.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">The command to create an HttpSimpleController is as follows:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create controller SimpleControllerTest
+dg_ctl create controller webapp::v1::SimpleControllerTest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>The last parameter is the controller’s class name, which can be prefixed by a namespace.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">The command to create an HttpController is as follows:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create controller -h ControllerTest
+dg_ctl create controller -h api::v1::ControllerTest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">The command to create a WebSocketController is as follows:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create controller -w WsControllerTest
+dg_ctl create controller -w api::v1::WsControllerTest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="filter-creation">
+<h2>Filter creation<a class="headerlink" href="#filter-creation" title="Permalink to this headline">¶</a></h2>
+<p>The <em>dg_ctl create filter</em> command is used to help the user create the source files for filters, see the Filter section.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create filter LoginFilter
+dg_ctl create filter webapp::v1::LoginFilter
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-project">
+<h2>Create project<a class="headerlink" href="#create-project" title="Permalink to this headline">¶</a></h2>
+<p>The best way the user creates a new Drogon application project is via the drogon_ctl command, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create project ProjectName
+</pre></div>
+</div>
+<p>After the command is executed, a complete project directory will be created in the current directory. The directory name is <em>ProjectName</em>, and the user can directly compile the project in the build directory (cmake .. &amp;&amp; make). Of course, it does not have any business logic.</p>
+<p>The directory structure of the project is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├── build                         Build folder
+├── CMakeLists.txt                Project cmake configuration file
+├── cmake_modules                 Cmake scripts <span class="k">for</span> third-party libraries lookup
+│   ├── FindJsoncpp.cmake
+│   ├── FindMySQL.cmake
+│   ├── FindSQLite3.cmake
+│   └── FindUUID.cmake
+├── config.json                   The configuration file of the drogon application, please refer to the introduction section of the configuration file.
+├── controllers                   The directory where the controller <span class="nb">source</span> files are stored
+├── filters                       The directory where the filter files are stored
+├── main.cc                       Main program
+├── models                        The directory of the database model file, model <span class="nb">source</span> file creation see <span class="m">11</span>.2.5
+│   └── model.json
+└── views                         The directory where view csp files are stored, the <span class="nb">source</span> file does not need to be manually created by the user, and csp files are automatically preprocessed to obtain view <span class="nb">source</span> files when the project is compiled.
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-models">
+<h2>Create models<a class="headerlink" href="#create-models" title="Permalink to this headline">¶</a></h2>
+<p>Use the <em>dg_ctl create model</em> command to create database model source files. The last parameter is the directory where models is stored. This directory must contain a model configuration file named <em>model.json</em> to tell dg_ctl how to connect to the database and which tables to be mapped.</p>
+<p>For example, if you want to create models in the project directory mentioned above, execute the following command in the project directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create model models
+</pre></div>
+</div>
+<p>This command will prompt the user that the file will be overwritten directly. After the user enters y, it will generate all the model files.</p>
+<p>Other source files need to reference model classes should include model header files, such as:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;models/User.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that the models directory name is included to distinguish between multiple data sources in the same project. See ORM.</p>
+</div>
+</div>
+<div class="section" id="stress-testing">
+<h2>Stress Testing<a class="headerlink" href="#stress-testing" title="Permalink to this headline">¶</a></h2>
+<p>One can use the <em>dg_ctl press</em> command to do a stress testing, there are several options for this command.</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>-n num</em> Set the number of requests(default : 1)</li>
+<li><em>-t num</em> Set the number of threads(default : 1), Set the number to the number of CPUs to achieve maximum performance</li>
+<li><em>-c num</em> Set the number of concurrent connections(default : 1)</li>
+<li><em>-q</em> No progress indication(default: no)</li>
+</ul>
+</div></blockquote>
+<p>For example, users can test an HTTP server as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl press -n1000000 -t4 -c1000 -q http://localhost:8080/
+dg_ctl press -n <span class="m">1000000</span> -t <span class="m">4</span> -c <span class="m">1000</span> https://www.domain.com/path/to/be/tested
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">drogon_ctl Command</a><ul>
+<li><a class="reference internal" href="#version-subcommand">Version subcommand</a></li>
+<li><a class="reference internal" href="#create-sub-command">Create sub command</a></li>
+<li><a class="reference internal" href="#view-creation">View creation</a></li>
+<li><a class="reference internal" href="#controller-creation">Controller creation</a></li>
+<li><a class="reference internal" href="#filter-creation">Filter creation</a></li>
+<li><a class="reference internal" href="#create-project">Create project</a></li>
+<li><a class="reference internal" href="#create-models">Create models</a></li>
+<li><a class="reference internal" href="#stress-testing">Stress Testing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Configuration-File-en.html"
+                        title="previous chapter">Configuration File</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="AOP-Aspect-Oriented-Programming-en.html"
+                        title="next chapter">AOP Aspect Oriented Programming</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Drogon_ctl-Command-en.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="AOP-Aspect-Oriented-Programming-en.html" title="AOP Aspect Oriented Programming"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Configuration-File-en.html" title="Configuration File"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

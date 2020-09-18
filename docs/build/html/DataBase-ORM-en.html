@@ -1,0 +1,320 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>DataBase ORM &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DataBase FastDbClient" href="Database-FastDbclient-en.html" />
+    <link rel="prev" title="DataBase Transaction" href="DataBase-Transaction-en.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Database-FastDbclient-en.html" title="DataBase FastDbClient"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="DataBase-Transaction-en.html" title="DataBase Transaction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="database-orm">
+<h1>DataBase ORM<a class="headerlink" href="#database-orm" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Using Drogon’s ORM, you first need to create model classes. Drogon’s command-line program drogon_ctl provides the ability to generate model classes. The program reads tables information from a user-specified database and automatically generates multiple source files for the model classes based on this information. When the user uses the model, please include the corresponding header file.</p>
+<p>Obviously, each Model class corresponds to a specific database table, and an instance of a model class, corresponds a row of records in the table.</p>
+<p>The command to create model classes is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create model &lt;model_path&gt;
+</pre></div>
+</div>
+<p>The last parameter is the path to store model classes. There must be a configuration file model.json in the path to configure the connection parameters of drogon_ctl to the database. It is a file in JSON format and supports comments. The examples are as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;rdbms&quot;</span>:<span class="s2">&quot;postgresql&quot;</span>,
+    <span class="s2">&quot;host&quot;</span>:<span class="s2">&quot;127.0.0.1&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>:5432,
+    <span class="s2">&quot;dbname&quot;</span>:<span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;user&quot;</span>:<span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;passwd&quot;</span>:<span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;tables&quot;</span>:<span class="o">[]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The configured parameters are the same as the application’s configuration file. Please refer to Configuration File.</p>
+<p>The <em>tables</em> configuration option is unique to the model configuration. It is an array of strings. Each string represents the name of the table to be converted into a model class. If this option is empty, all tables will be used to generate model classes.</p>
+<p>The models directory and the corresponding model.json file have been created in advance in the project directory created with the <em>drogon_ctl create project</em> command. The user can edit the configuration file and create model classes with the drogon_ctl command.</p>
+</div>
+<div class="section" id="model-class-interface">
+<h2>Model Class Interface<a class="headerlink" href="#model-class-interface" title="Permalink to this headline">¶</a></h2>
+<p>There are mainly two types of interfaces that the user directly uses, getter interfaces and setter interfaces.</p>
+<p>There are two types of getter interfaces:</p>
+<blockquote>
+<div><ul class="simple">
+<li>An interface of the form like <em>getColumnName</em> gets the smart pointer of the field. The return value is a pointer instead of a value is primarily used for the NULL field. The user can determine whether the field is a NULL field by determining whether the pointer is empty.</li>
+<li>An interface of the form like <em>getValueOfColumnName</em>, hence the name, is the value obtained. For efficiency reasons, the interface returns a constant reference. If the corresponding field is NULL, the interface returns the default value given by the function parameter.</li>
+</ul>
+</div></blockquote>
+<p>In addition, the binary block type (blob, bytea) has a special interface, in the form of <em>getValueOfColumnNameAsString</em>, which loads the binary data into the std::string object and returns it to the user.</p>
+<p>The setter interface is used to set the value of the corresponding field, in the form of <em>setColumnName</em>, and the parameter type and field type correspond. Automatically generated fields (such as self-incrementing primary keys) do not have a setter interface.</p>
+<p>The toJson() interface is used to convert the model object into a JSON object. The binary block type is base64 encoded. Please experiment with it yourself.</p>
+<p>The static members of the Model class represent the information of the table. For example, the name of each field can be obtained through the Cols static member, which is convenient to use in an editor that supports automatic prompting.</p>
+</div>
+<div class="section" id="mapper-class-template">
+<h2>Mapper Class Template<a class="headerlink" href="#mapper-class-template" title="Permalink to this headline">¶</a></h2>
+<p>The mapping between the model object and the database table is performed by the Mapper class template. The Mapper class template encapsulates common operations such as adding, deleting, and changing, so that the user can perform the above operations without writing a SQL statement.</p>
+<p>The construction of the Mapper object is very simple. The template parameter is the type of the model you want to access. The constructor has only one parameter, which is the DbClient smart pointer mentioned earlier. As mentioned earlier, the Transaction class is a subclass of DbClient, so you can also construct a Mapper object with a smart pointer to a transaction, which means that the Mapper mapping also supports transactions.</p>
+<p>Like DbClient, Mapper also provides asynchronous and synchronous interfaces. The synchronous interface is blocked and may throw an exception. The returned future object is blocked in get() and may throw an exception. The normal asynchronous interface does not throw an exception, but returns the result through two callbacks (result callback and exception callback). The type of the exception callback is the same as that in the DbClient interface. The result callback is also divided into several categories according to the interface function. The list is as follows (T is the template parameter, which is the type of the model):</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: When using a transaction, the exception does not necessarily cause a rollback. Transactions will not be rolled back in the following cases: When the findByPrimaryKey interface does not find a qualified row, when the findOne interface finds fewer or more than one record, the mapper will throw an exception or enter an exception callback, the exception type is UnexpectedRows. If the business logic needs to be rolled back in this condition, please explicitly call the rollback() interface.</p>
+</div>
+</div>
+<div class="section" id="criteria">
+<h2>Criteria<a class="headerlink" href="#criteria" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, many interfaces required input criteria object parameters. The criteria object is an instance of the Criteria class, indicating a certain condition, such as a field greater than, equal to, less than a given value, or a condition such as <em>is Null</em>.</p>
+<p>The constructor of a criteria object is very simple. Generally, the first argument is the name of the field, the second argument is the enumeration value representing the comparison type, and the third argument is the value being compared. If the comparison type is IsNull or IsNotNull, the third parameter is not required.</p>
+<p>E.g：
+.. code-block:: cpp</p>
+<blockquote>
+<div>Criteria(“user_id”,CompareOperator::EQ,1);</div></blockquote>
+<p>The above example shows that the field user_id is equal to 1 as a condition. In practice, we prefer to write the following:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_id</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This is equivalent to the previous one, but this can use the editor’s automatic prompts, which is more efficient and less prone to errors;</p>
+<p>Criteria objects support AND and OR operations. The sum of two criteria objects constructs a new criteria object, which makes it easy to construct nested conditions. For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Mapper</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">(</span><span class="n">dbClientPtr</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">users</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">findBy</span><span class="p">(</span>
+<span class="p">(</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_name</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">LIKE</span><span class="p">,</span><span class="s">&quot;%Smith&quot;</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_gender</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="o">||</span><span class="p">(</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_name</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">LIKE</span><span class="p">,</span><span class="s">&quot;%Johnson&quot;</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_gender</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>The above program is to query all the men named Smith or the women named Johnson from the users table.</p>
+</div>
+<div class="section" id="mapper-s-chain-interface">
+<h2>Mapper’s Chain Interface<a class="headerlink" href="#mapper-s-chain-interface" title="Permalink to this headline">¶</a></h2>
+<p>Some common sql constraints, such as limit, offset, etc., Mapper class templates also provide support, provided in the form of a chained interface, meaning that users can string multiple constraints to write. After executing any of the interfaces in Section 10.5.3, these constraints are cleared, that is, they are valid in one operation:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Mapper</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">(</span><span class="n">dbClientPtr</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">users</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_join_time</span><span class="p">).</span><span class="n">limit</span><span class="p">(</span><span class="mi">25</span><span class="p">).</span><span class="n">offset</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This program is to select the user list from the users table, return the first page of 25 rows per page.</p>
+<p>Basically, the name of the chain interface expresses its function, so I won’t go into details here. Please refer to the Mapper.h header file.</p>
+</div>
+<div class="section" id="relationships">
+<h2>Relationships<a class="headerlink" href="#relationships" title="Permalink to this headline">¶</a></h2>
+<p>The <em>relationship</em> between the database tables can be configured through the relationships option in the model.json configuration file. We use manual configuration instead of automatically detecting the foreign key of the table because the actual project does not use foreign keys. It is also very common.</p>
+<p>If the <em>enable</em> option is true, the generated model classes will add corresponding interfaces according to the <em>relationships</em> configuration.</p>
+<p>There are three types of relationships,*’has one’<em>,</em>’has many’* and <em>‘many to many’</em>.</p>
+<div class="section" id="has-one">
+<h3>has one<a class="headerlink" href="#has-one" title="Permalink to this headline">¶</a></h3>
+<p><em>has one</em> represents a one-to-one relationship. A record in the original table can be associated with a record in the target table, and vice versa. For example, the <em>products</em> table and <em>skus</em> table have a one-to-one relationship, we can define as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;has one&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;product&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;skus&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;SKU&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>among them:</p>
+<blockquote>
+<div><ul class="simple">
+<li>“type”: Indicates that this relationship is one-to-one;</li>
+<li>“original_table_name”: the name of the original table (the corresponding method will be added to the model corresponding to this table);</li>
+<li>“original_table_alias”: alias (the name in the method, because the one-to-one relationship is singular, so set it to product), if this option is empty, the table name is used to generate the method name;</li>
+<li>“original_key”: the associated key of the original table;</li>
+<li>“target_table_name”: the name of the target table;</li>
+<li>“target_table_alias”: the alias of the target table, if this option is empty, the table name is used to generate the method name;</li>
+<li>“target_key”: the associated key of the target table;</li>
+<li>“enable_reverse”: Indicate whether to automatically generate a reverse relationship, that is, add a method to obtain records of the original table in the model class corresponding to the target table.</li>
+</ul>
+</div></blockquote>
+<p>According to this setting, in the model class corresponding to the products table, the following method will be added:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Relationship interfaces</span>
+<span class="kt">void</span> <span class="nf">getSKU</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Skus</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This is an asynchronous interface that returns the SKU object associated with the current product in the callback.</p>
+<p>At the same time, since the enable_reverse option is set to true, the following method will be added to the model class corresponding to the skus table:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Relationship interfaces</span>
+<span class="kt">void</span> <span class="nf">getProduct</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Products</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="has-many">
+<h3>has many<a class="headerlink" href="#has-many" title="Permalink to this headline">¶</a></h3>
+<p>has many represents a one-to-many relationship. In such a relationship, the table representing many generally has a field associated with the primary key of another table. For example, products and reviews usually have a one-to-many relationship, we can define as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;has many&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;product&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;reviews&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The meaning of each configuration above is the same as the previous example, so I won’t repeat it here, because there are multiple reviews for a single product, so there is no need to create an alias of reviews. According to this setting, after running drogon_ctl create model, the following interface will be added to the model corresponding to the products table:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getReviews</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Reviews</span><span class="o">&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In the model corresponding to the reviews table, the following interface will be added:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getProduct</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Products</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="many-to-many">
+<h3>many to many<a class="headerlink" href="#many-to-many" title="Permalink to this headline">¶</a></h3>
+<p>As the name implies, many to many represents a many-to-many relationship. Usually, a many-to-many relationship requires a pivot table. Each record in the pivot table corresponds to a record in the original table and another record in the target table. For example, the products table and carts table have a many-to-many relationship, which can be defined as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;many to many&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;pivot_table&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;table_name&quot;</span>: <span class="s2">&quot;carts_products&quot;</span>,
+        <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+        <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;cart_id&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;carts&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>For the pivot table, there is an additional pivot_table configuration. The options inside easy to understand and are omitted here.</p>
+<p>The model of products generated according to this configuration will add the following method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getCarts</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Carts</span><span class="p">,</span><span class="n">CartsProducts</span><span class="o">&gt;&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The model class of the carts table will add the following method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getProducts</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                 <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Products</span><span class="p">,</span><span class="n">CartsProducts</span><span class="o">&gt;&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                 <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="restful-api-controllers">
+<h2>Restful API controllers<a class="headerlink" href="#restful-api-controllers" title="Permalink to this headline">¶</a></h2>
+<p>drogon_ctl can also generate restful-style controllers for each model (or table) while creating models, so that users can generate APIs that can add, delete, modify, and search tables with zero coding. These APIs support many functions such as quering by primary key, quering by conditions, sorting by specific fields, returning specified fields, and assigning alias for each field to hide the table structure. It is controlled by the <em>restful_api_controllers</em> option in model.json. these options have corresponding comments in the json file.</p>
+<p>It should be noted that the controller of each table is designed to be composed of a base class and a subclass. Among them, the base class and the table are closely related, and the subclass is used to implement special business logic or modify the interface format. The advantage of this design is that when the table structure changes, users can update only the base class without overwriting the subclass(by setting the <em>generate_base_only</em> option to <em>true</em>).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">DataBase ORM</a><ul>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#model-class-interface">Model Class Interface</a></li>
+<li><a class="reference internal" href="#mapper-class-template">Mapper Class Template</a></li>
+<li><a class="reference internal" href="#criteria">Criteria</a></li>
+<li><a class="reference internal" href="#mapper-s-chain-interface">Mapper’s Chain Interface</a></li>
+<li><a class="reference internal" href="#relationships">Relationships</a><ul>
+<li><a class="reference internal" href="#has-one">has one</a></li>
+<li><a class="reference internal" href="#has-many">has many</a></li>
+<li><a class="reference internal" href="#many-to-many">many to many</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restful-api-controllers">Restful API controllers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="DataBase-Transaction-en.html"
+                        title="previous chapter">DataBase Transaction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Database-FastDbclient-en.html"
+                        title="next chapter">DataBase FastDbClient</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/DataBase-ORM-en.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Database-FastDbclient-en.html" title="DataBase FastDbClient"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="DataBase-Transaction-en.html" title="DataBase Transaction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

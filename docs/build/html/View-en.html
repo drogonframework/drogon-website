@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>View &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Session" href="Session-en.html" />
+    <link rel="prev" title="Filter" href="Filter-en.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Session-en.html" title="Session"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Filter-en.html" title="Filter"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="view">
+<h1>View<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="views-introduction">
+<h2>Views Introduction<a class="headerlink" href="#views-introduction" title="Permalink to this headline">¶</a></h2>
+<p>Although the front-end rendering technology is popular, the back-end application service only needs to return the corresponding data to the front-end. However, a good web framework should provide back-end rendering technology, so that the server program can dynamically generate HTML pages. Views can help users generate these pages. As the name implies, it is only responsible for doing the work related to the presentation, and the complex business logic should be handed over to the controller.</p>
+<p>The earliest web applications embed HTML into the program code to achieve the purpose of dynamically generating HTML pages, but this is inefficient, not intuitive, and so on. So there are languages such as JSP, which are the opposite. , embed the program code into the HTML page. The drogon is of course the latter solution. However, it is obvious that since C++ is compiled and executed, we need to convert the page embedded in C++ code into a C++ source program to compile into the application. Therefore, drogon defines its own specialized CSP (C++ Server Pages) description language, using the command line tool drogon_ctl to convert CSP files into C++ source files for compilation.</p>
+</div>
+<div class="section" id="drogon-s-csp">
+<h2>Drogon’s CSP<a class="headerlink" href="#drogon-s-csp" title="Permalink to this headline">¶</a></h2>
+<p>Drogon’s CSP solution is very simple, we use special markup symbols to embed C++ code into the HTML page. among them:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The content between the tags &lt;%inc and %&gt; is considered to be the part of the header file that needs to be referenced. Only the #include statement can be written here, such as &lt;%inc#include “xx.h” %&gt;, but many common header files are automatically included by drogon. The user basically does not use this tag;</li>
+<li>Everything between the tags &lt;%c++ and %&gt; is treated as C++ code, such as &lt;c++ std:string name=”drogon”; %&gt;;</li>
+<li><dl class="first docutils">
+<dt>C++ code is generally transferred to the target source file intact, except for the following two special tags:</dt>
+<dd><ul class="first last">
+<li>&#64;&#64; represents the data variable passed by the controller, from which you can get the content you want to display;</li>
+<li>$$ represents a stream object representing the content of the page, and the content to be displayed can be displayed on the page by the &lt;&lt; operator;</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>The content sandwiched between the tags [[ and ]] is considered to be the variable name. The view will use the name as the key to find the corresponding variable from the data passed from the controller and output it to the page. Spaces before and after the variable name will be omitted. Paired [[ and ]] should be on the same line. And for performance reasons, only three string data types are supported(const char *, std::string and const std::string), other data types should be output in the above-mentioned way(by $$);</li>
+<li>The content sandwiched between the tags {% and %} is considered to be the name of a variable or an expression of the C++ program (not the keyword of the data passed by the controller), and the view will output the contents of the variable or the value of the expression to the page. It’s easy to know that {%val.xx%} is equivalent to &lt;%c++$$&lt;&lt;val.xx;%&gt;, but the former is simpler and more intuitive. Similarly, do not write two tags in separate lines;</li>
+<li>The content sandwiched between the tags &lt;%view and %&gt; is considered to be the name of the sub-view. The framework will find the corresponding sub-view and fill its contents to the location of the tag; the spaces before and after the view name will be ignored. Do not write &lt;%view and %&gt; in separate lines. Can use multiple levels of nesting, but not loop nesting;</li>
+<li>The content between the tags &lt;%layout and %&gt; is considered as the name of the layout. The framework will find the corresponding layout and fill the content of this view to a position in the layout (in the layout the placeholder [[]] marks this position); spaces before and after the layout name will be ignored, and &lt;%layout and %&gt; should not be written in separate lines. You can use multiple levels of nesting, but not loop nesting. One template file can only inherit from one base layout, multiple inheritance from different layouts is not supported.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-use-of-views">
+<h2>The use of views<a class="headerlink" href="#the-use-of-views" title="Permalink to this headline">¶</a></h2>
+<p>The http response of the drogon application is generated by the controller handler, so the response rendered by the view is also generated by the handler, generated by calling the following interface:</p>
+<p>This interface is a static method of the HttpResponse class, which has two parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>viewName: the name of the view, the name of the incoming csp file (<em>the extension can be omitted</em>);</li>
+<li>data: The controller’s handler passes the data to the view. The type is <em>HttpViewData</em>. This is a special map. You can save and retrieve any type of object. For details, please refer to [HttpViewData API] (API-HttpViewData) Description</li>
+</ul>
+</div></blockquote>
+<p>As you can see, the controller does not need to reference the header file of the view. The controller and the view are well decoupled; their only connection is the data variable.</p>
+</div>
+<div class="section" id="a-simple-example">
+<h2>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s make a view that displays the parameters of the HTTP request sent by the browser in the returned html page.</p>
+<p>This time we directly define the handler with the HttpAppFramework interface. In the main file, add the following code before calling the run() method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">drogon</span><span class="o">::</span><span class="n">HttpAppFramework</span><span class="o">::</span><span class="n">instance</span><span class="p">()</span>
+        <span class="p">.</span><span class="n">registerHttpMethod</span><span class="p">(</span><span class="s">&quot;/list_para&quot;</span><span class="p">,</span>
+                           <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                               <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span>
+                           <span class="p">{</span>
+                                <span class="k">auto</span> <span class="n">para</span><span class="o">=</span><span class="n">req</span><span class="o">-&gt;</span><span class="n">getParameters</span><span class="p">();</span>
+                                <span class="n">HttpViewData</span> <span class="n">data</span><span class="p">;</span>
+                                <span class="n">data</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span><span class="s">&quot;ListParameters&quot;</span><span class="p">);</span>
+                                <span class="n">data</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;parameters&quot;</span><span class="p">,</span><span class="n">para</span><span class="p">);</span>
+                                <span class="k">auto</span> <span class="n">resp</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpViewResponse</span><span class="p">(</span><span class="s">&quot;ListParameters.csp&quot;</span><span class="p">,</span><span class="n">data</span><span class="p">);</span>
+                                <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+                           <span class="p">});</span>
+</pre></div>
+</div>
+<p>The above code registers a lambda expression handler on the <em>/list_para</em> path, passing the requested parameters to the view display. Then, Go to the views folder and create a view file ListParameters.csp with the following contents:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;%c++
+    auto <span class="nv">para</span><span class="o">=</span>@@.get&lt;std::unordered_map&lt;std::string,std::string&gt;&gt;<span class="o">(</span><span class="s2">&quot;parameters&quot;</span><span class="o">)</span><span class="p">;</span>
+%&gt;
+&lt;head&gt;
+    &lt;meta <span class="nv">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span>&gt;
+    &lt;title&gt;<span class="o">[[</span> title <span class="o">]]</span>&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;%c++ <span class="k">if</span><span class="o">(</span>para.size<span class="o">()</span>&gt;0<span class="o">){</span>%&gt;
+    &lt;H1&gt;Parameters&lt;/H1&gt;
+    &lt;table <span class="nv">border</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>&gt;
+    &lt;tr&gt;
+        &lt;th&gt;name&lt;/th&gt;
+        &lt;th&gt;value&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;%c++ <span class="k">for</span><span class="o">(</span>auto iter:para<span class="o">){</span>%&gt;
+    &lt;tr&gt;
+        &lt;td&gt;<span class="o">{</span>%iter.first%<span class="o">}</span>&lt;/td&gt;
+        &lt;td&gt;&lt;%c++ <span class="nv">$$</span>&lt;&lt;iter.second<span class="p">;</span>%&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;%c++<span class="o">}</span>%&gt;
+    &lt;/table&gt;
+    &lt;%c++ <span class="o">}</span><span class="k">else</span><span class="o">{</span>%&gt;
+    &lt;H1&gt;no parameter&lt;/H1&gt;
+    &lt;%c++<span class="o">}</span>%&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+<p>We can use drogon_ctl command tool to convert ListParameters.csp into C++ source files as bellow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create view ListParameters.csp
+</pre></div>
+</div>
+<p>After the operation is finished, two source files, ListParameters.h and ListParameters.cc, will appear in the current directory, which can be used to compile into the web application;</p>
+<p>Recompile the entire project with cmake, run the target program webapp, you can test the effect in the browser, enter <em>http://localhost/list_para?p1=a&amp;p2=b&amp;p3=c</em> in the address bar, you can see the following page :</p>
+<p>view page</p>
+<p>The html page rendered by the backend is simply added.</p>
+</div>
+<div class="section" id="automated-processing-of-csp-files">
+<h2>Automated processing of csp files<a class="headerlink" href="#automated-processing-of-csp-files" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: If your project is create by the <em>drogon_ctl</em> command, the work described in this section is done automatically by <em>drogon_ctl</em>.</p>
+</div>
+<p>Obviously, it is too inconvenient to manually run the drogon_ctl command every time you modify the csp file. We can put the processing of drogon_ctl into the CMakeLists.txt file. Still use the previous example as an example. Let’s assume that we put all the csp files In the views folder, CMakeLists.txt can be added as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">FILE</span><span class="p">(</span><span class="n">GLOB</span> <span class="n">SCP_LIST</span> <span class="n">$</span><span class="p">{</span><span class="n">CMAKE_CURRENT_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">views</span><span class="cm">/*.csp)</span>
+<span class="cm">foreach(cspFile ${SCP_LIST})</span>
+<span class="cm">    message(STATUS &quot;cspFile:&quot; ${cspFile})</span>
+<span class="cm">    EXEC_PROGRAM(basename ARGS &quot;-s .csp ${cspFile}&quot; OUTPUT_VARIABLE classname)</span>
+<span class="cm">    message(STATUS &quot;view classname:&quot; ${classname})</span>
+<span class="cm">    add_custom_command(OUTPUT ${classname}.h ${classname}.cc</span>
+<span class="cm">        COMMAND drogon_ctl</span>
+<span class="cm">        ARGS create view ${cspFile}</span>
+<span class="cm">        DEPENDS ${cspFile}</span>
+<span class="cm">        VERBATIM )</span>
+<span class="cm">set(VIEWSRC ${VIEWSRC} ${classname}.cc)</span>
+<span class="cm">endforeach()</span>
+</pre></div>
+</div>
+<p>Then add a new source file collection ${VIEWSRC} to the add_executable statement as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Add_executable</span><span class="p">(</span><span class="n">webapp</span> <span class="n">$</span><span class="p">{</span><span class="n">SRC_DIR</span><span class="p">}</span> <span class="n">$</span><span class="p">{</span><span class="n">VIEWSRC</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamic-compilation-and-loading-of-views">
+<h2>Dynamic compilation and loading of views<a class="headerlink" href="#dynamic-compilation-and-loading-of-views" title="Permalink to this headline">¶</a></h2>
+<p>Drogon provides a way to dynamically compile and load csp files during the application runtime, using the following interface:</p>
+<p>The interface is a member method of <em>HttpAppFramework</em>, and the parameter is an array of strings representing a list of directories in which the view csp file is located. After calling this interface, drogon will automatically search for csp files in these directories. After discovering new or modified csp files, the source files will be automatically generated, compiled into dynamic library files and loaded into the application. The application process does not need to be restarted. Users can experiment on their own and observe the page changes caused by the modification of csp file.</p>
+<p>Obviously, this function depends on the development environment. If both drogon and webapp are compiled on this server, there should be no problem in dynamically loading the csp page.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: Dynamic views should not be compiled into the application statically. This means that if the view is statically compiled, it cannot be updated via dynamic view loading. You can create a directory outside the compilation folder and move views into it during development.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: This feature is best used to adjust the HTML page during the development phase. In the production environment, it is recommended to compile the csp file directly into the target file. This is mainly for security and stability.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: If a <em>symbol not found</em> error occurs while loading a dynamic view, please use the <em>cmake .. -DCMAKE_ENABLE_EXPORTS=on</em> to configure your project, or uncomment the last line (<em>set_property(TARGET ${PROJECT_NAME} PROPERTY ENABLE_EXPORTS ON)</em>) in your project’s CMakeLists.txt, and then rebuild the project</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">View</a><ul>
+<li><a class="reference internal" href="#views-introduction">Views Introduction</a></li>
+<li><a class="reference internal" href="#drogon-s-csp">Drogon’s CSP</a></li>
+<li><a class="reference internal" href="#the-use-of-views">The use of views</a></li>
+<li><a class="reference internal" href="#a-simple-example">A simple example</a></li>
+<li><a class="reference internal" href="#automated-processing-of-csp-files">Automated processing of csp files</a></li>
+<li><a class="reference internal" href="#dynamic-compilation-and-loading-of-views">Dynamic compilation and loading of views</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Filter-en.html"
+                        title="previous chapter">Filter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Session-en.html"
+                        title="next chapter">Session</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/View-en.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Session-en.html" title="Session"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Filter-en.html" title="Filter"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>
