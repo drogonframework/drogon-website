@@ -1,0 +1,272 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    <title>Installation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="next" title="Quick Start" href="Quick-Start-en.html" />
+    <link rel="prev" title="Overview" href="Overview-en.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Quick-Start-en.html" title="Quick Start"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Overview-en.html" title="Overview"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-en.html" accesskey="U">English documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation</h1>
+<p>This section takes Linux as an example to introduce the installation process. Other systems are similar;</p>
+<div class="section" id="system-requirements">
+<h2>System Requirements</h2>
+<blockquote>
+<div><ul class="simple">
+<li>The Linux kernel should be not lower than 2.6.9, 64-bit version;</li>
+<li>The gcc version is not less than 5.4.0;</li>
+<li>Use cmake as the build tool, and the cmake version should be not less than 3.5;</li>
+<li>Use git as the version management tool;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="library-dependencies">
+<h2>Library Dependencies</h2>
+<blockquote>
+<div><ul class="simple">
+<li>trantor, a non-blocking I/O C++ network library, also developed by the author of Drogon, has been used as a git repository submodule, no need to install in advance;</li>
+<li>jsoncpp, JSON’s c++ library, the version should be no <em>less than 1.7</em>;</li>
+<li>libuuid, generating c library of uuid;</li>
+<li>zlib, used to support compressed transmission;</li>
+<li>OpenSSL, not mandatory, if the OpenSSL library is installed, drogon will support HTTPS as well, otherwise drogon only supports HTTP.</li>
+<li>c-ares, not mandatory, if the c-ares library is installed&#65292;drogon will be more efficient with DNS;</li>
+<li>libbrotli, not mandatory, if the libbrotli library is installed, drogon will support brotli compression when sending HTTP responses;</li>
+<li>boost, the version should be no less than 1.61, is required only if the C++ compiler does not support C++ 17.</li>
+<li>the client development libraries of postgreSQL, mariadb and sqlite3, not mandatory, if one or more of them is installed, drogon will support access to the according database.</li>
+<li>gtest, not mandatory, if the gtest library is installed, the unit tests can be compiled.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="system-preparation-examples">
+<h2>System Preparation Examples</h2>
+<div class="section" id="ubuntu-18-04">
+<h3>Ubuntu 18.04</h3>
+<p>Environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install git
+sudo apt install gcc
+sudo apt install g++
+sudo apt install cmake
+</pre></div>
+</div>
+<p>jsoncpp</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install libjsoncpp-dev
+</pre></div>
+</div>
+<p>uuid</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install uuid-dev
+</pre></div>
+</div>
+<p>OpenSSL</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install openssl
+sudo apt install libssl-dev
+</pre></div>
+</div>
+<p>zlib</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install zlib1g-dev
+</pre></div>
+</div>
+</div>
+<div class="section" id="centos-7-5">
+<h3>CentOS 7.5</h3>
+<p>Environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install git
+yum install gcc
+yum install gcc-c++
+</pre></div>
+</div>
+<p>The default installed cmake version is too low, use source installation</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Kitware/CMake
+<span class="nb">cd</span> CMake/
+./bootstrap <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+<p>Upgrade gcc</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install centos-release-scl
+yum install devtoolset-8
+scl <span class="nb">enable</span> devtoolset-8 bash
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: Command scl enable devtoolset-8 bash only activate the new gcc temporarily until the session is end. If you want to always use the new gcc, you could run command <em>echo “scl enable devtoolset-8 bash” &gt;&gt; ~/.bash_profile</em>, system will automatically activate the new gcc after restarting.</p>
+</div>
+<p>jsoncpp</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/open-source-parsers/jsoncpp
+<span class="nb">cd</span> jsoncpp/
+mkdir build
+<span class="nb">cd</span> build
+cmake ..
+make <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+<p>uuid</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install libuuid-devel
+</pre></div>
+</div>
+<p>OpenSSL</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install openssl-devel
+</pre></div>
+</div>
+<p>zlib</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install zlib-devel
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="database-environment">
+<h2>Database Environment</h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: These libraries below are not mandatory. You could choose to install one or more database according to your actual needs.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: If you want to develop you webapp with database, please install the database develop environment first, then install drogon, otherwise you will encounter a <em>NO DATABASE FOUND</em> issue.</p>
+</div>
+<div class="section" id="postgresql">
+<h3>PostgreSQL</h3>
+<p>PostgreSQL’s native C library libpq needs to be installed. The installation is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu 16: sudo apt-get install postgresql-server-dev-all</li>
+<li>ubuntu 18: sudo apt-get install postgresql-all</li>
+<li>centOS 7: yum install postgresql-devel</li>
+<li>MacOS: brew install postgresql</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="mysql">
+<h3>MySQL</h3>
+<p>MySQL’s native library does not support asynchronous read and write. Fortunately, MySQL also has a version of MariaDB maintained by the original developer community. This version is compatible with MySQL, and its development library supports asynchronous read and write. Therefore, Drogon uses the MariaDB development library to provide the right MySQL support, as a best practice&#65292;your operating system shouldn’t install both Mysql and MariaDB at the same time.</p>
+<p>MariaDB installation is as follows&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu: sudo apt install libmariadbclient-dev</li>
+<li>centOS 7: yum install mariadb-devel</li>
+<li>MacOS: brew install mariadb</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="sqlite3">
+<h3>Sqlite3</h3>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu: sudo apt-get install libsqlite3-dev</li>
+<li>centOS: yum install sqlite-devel</li>
+<li>MacOS: brew install sqlite3</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: Some of the above commands only install the development library. If you want to install a server also, please use Google search yourself.</p>
+</div>
+</div>
+</div>
+<div class="section" id="drogon-installation">
+<h2>Drogon installation</h2>
+<p>Assuming that the above environment and library dependencies are all ready, the installation process is very simple;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$WORK_PATH</span>
+git clone https://github.com/an-tao/drogon
+<span class="nb">cd</span> drogon
+git submodule update --init
+mkdir build
+<span class="nb">cd</span> build
+cmake ..
+make <span class="o">&amp;&amp;</span> sudo make install
+</pre></div>
+</div>
+<p>The default is to compile the debug version. If you want to compile the release version, the cmake command should take the following parameters:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release ..
+</pre></div>
+</div>
+<p>After the installation is complete, the following files will be installed in the system&#65288;One can change the installation location with the CMAKE_INSTALL_PREFIX option&#65289;:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The header file of drogon is installed into /usr/local/include/drogon;</li>
+<li>The drogon library file libdrogon.a is installed into /usr/local/lib;</li>
+<li>Drogon’s command line tool drogon_ctl is installed into /usr/local/bin;</li>
+<li>The trantor header file is installed into /usr/local/include/trantor;</li>
+<li>The trantor library file libtrantor.a is installed into /usr/local/lib;</li>
+</ul>
+</div></blockquote>
+<div class="section" id="include-drogon-source-code-locally">
+<h3>Include drogon source code locally</h3>
+<p>Of course, you can also include the drogon source in your project. Suppose you put the drogon under the third_party of your project directory (don’t forget to update submodule in the drogon source directory). Then, you only need to add the following two lines to your project’s cmake file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>add_subdirectory<span class="o">(</span>third_party/drogon<span class="o">)</span>
+target_link_libraries<span class="o">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span> PRIVATE drogon<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-vcpkg">
+<h3>Use vcpkg</h3>
+<p>The easiest way to install drogon on windows is to use vcpkg</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcpkg.exe install drogon
+</pre></div>
+</div>
+<p>Or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcpkg.exe install drogon:x64-windows
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-docker-image">
+<h3>Use Docker Image</h3>
+<p>We also provide a pre-build docker image on the <a class="reference external" href="https://hub.docker.com/r/drogonframework/drogon" target="_blank">docker hub</a> . All dependencies of Drogon and Drogon itself are already installed in the docker environment, where users can build Drogon-based applications directly.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Quick-Start-en.html" title="Quick Start"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Overview-en.html" title="Overview"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-en.html" >English documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

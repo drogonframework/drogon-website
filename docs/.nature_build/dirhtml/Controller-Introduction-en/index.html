@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Controller Introduction &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Controller HttpSimpleController" href="../Controller-HttpSimpleController-en/" />
+    <link rel="prev" title="Quick Start" href="../Quick-Start-en/" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Controller-HttpSimpleController-en/" title="Controller HttpSimpleController"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Quick-Start-en/" title="Quick Start"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-en/" accesskey="U">English documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="controller-introduction">
+<h1>Controller Introduction<a class="headerlink" href="#controller-introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="controller">
+<h2>Controller<a class="headerlink" href="#controller" title="Permalink to this headline">¶</a></h2>
+<p>The controller is very important in web application development. It processes the request sent by the browser and then generates a response to the browser. The drogon framework has helped us to handle the network transmission, Http protocol analysis and so on. We only need to pay attention to the logic of the controller; each controller object can have one or more processing functions (generally called handlers), and the interface of the function is generally defined as follows:</p>
+<dl class="function">
+<dt id="_CPPv311handlerNameRK14HttpRequestPtrRRNSt8functionIFvRK15HttpResponsePtrEEEz">
+<span id="_CPPv211handlerNameRK14HttpRequestPtrRRNSt8functionIFvRK15HttpResponsePtrEEEz"></span>Void <code class="descname">handlerName</code><span class="sig-paren">(</span><em class="property">const</em> HttpRequestPtr &amp;<em>req</em>, std::function&lt;void<span class="sig-paren">(</span><em class="property">const</em> HttpResponsePtr&amp;<span class="sig-paren">)</span>&gt; &amp;&amp;<em>callback</em>, ..., <span class="sig-paren">)</span><a class="headerlink" href="#_CPPv311handlerNameRK14HttpRequestPtrRRNSt8functionIFvRK15HttpResponsePtrEEEz" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<p>Where <em>req</em> is the object of the Http request (wrapped by the smart pointer), the <em>callback</em> is the callback function object that the framework passes to the controller, and the controller generates the response object (also wrapped by the smart pointer) and then passes the object to the drogon through the callback. Then the framework will send the response content to the browser for you. The last part <em>…</em> is a list of parameters. The drogon maps the parameters in the Http request to the corresponding parameter parameters according to the mapping rules. This is very convenient for application development.</p>
+<p>Obviously, this is an asynchronous interface, one can call the callback after completing the time-consuming operation at other threads;</p>
+<p>Drogon have three types controllers, HttpSimpleController, HttpController, and WebSocketController. When you use them, the corresponding class template needs to be inherited. For example, a custom class “MyClass” declaration of HttpSimpleController is as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>MyClass.h</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpSimpleController</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//TestController(){}</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                                        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+
+    <span class="n">PATH_LIST_BEGIN</span>
+    <span class="nf">PATH_ADD</span><span class="p">(</span><span class="s">&quot;/json&quot;</span><span class="p">);</span>
+    <span class="n">PATH_LIST_END</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="controller-life-cycle">
+<h2>Controller life cycle<a class="headerlink" href="#controller-life-cycle" title="Permalink to this headline">¶</a></h2>
+<p>A controller registered to a drogon framework will have at most only one instance and will not be destroyed during the entire application run, so users can declare and use member variables in the controller class. Note that when the handler of the controller is called, it is in a multi-threaded environment (when the number of IO threads of the framework is configured to be greater than 1), if you need to access non-temporary variables, please do the concurrent protection work.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Controller Introduction</a><ul>
+<li><a class="reference internal" href="#controller">Controller</a></li>
+<li><a class="reference internal" href="#controller-life-cycle">Controller life cycle</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Quick-Start-en/"
+                        title="previous chapter">Quick Start</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Controller-HttpSimpleController-en/"
+                        title="next chapter">Controller HttpSimpleController</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Controller-Introduction-en.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search/" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Controller-HttpSimpleController-en/" title="Controller HttpSimpleController"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Quick-Start-en/" title="Quick Start"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-en/" >English documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

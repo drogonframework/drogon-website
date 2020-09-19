@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QHelpCollectionProject version="1.0">
+    <assistant>
+        <title>drogon v1.0.0-beta21 documentation</title>
+        <homePage>qthelp://org.sphinx.drogon/doc/index.html</homePage>
+        <startPage>qthelp://org.sphinx.drogon/doc/index.html</startPage>
+    </assistant>
+    <docFiles>
+        <generate>
+            <file>
+                <input>drogon.qhp</input>
+                <output>drogon.qch</output>
+            </file>
+        </generate>
+        <register>
+            <file>drogon.qch</file>
+        </register>
+    </docFiles>
+</QHelpCollectionProject>

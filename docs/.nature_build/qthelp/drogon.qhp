@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QtHelpProject version="1.0">
+    <namespace>org.sphinx.drogon</namespace>
+    <virtualFolder>doc</virtualFolder>
+    <customFilter name="drogon ">
+        <filterAttribute>drogon</filterAttribute>
+        <filterAttribute></filterAttribute>
+    </customFilter>
+    <filterSection>
+        <filterAttribute>drogon</filterAttribute>
+        <filterAttribute></filterAttribute>
+        <toc>
+            <section title="drogon v1.0.0-beta21 documentation" ref="index.html">
+                <section title="English-Index" ref="index-en.html">
+                    <section title="Welcome to drogon’s documentation!" ref="index-en.html#welcome-to-drogon-s-documentation">
+                        <section title="Overview" ref="Overview-en.html"/>
+                        <section title="Installation" ref="Installation-en.html">
+                            <section title="System Requirements" ref="Installation-en.html#system-requirements"/>
+                            <section title="Library Dependencies" ref="Installation-en.html#library-dependencies"/>
+                            <section title="System Preparation Examples" ref="Installation-en.html#system-preparation-examples">
+                                <section title="Ubuntu 18.04" ref="Installation-en.html#ubuntu-18-04"/>
+                                <section title="CentOS 7.5" ref="Installation-en.html#centos-7-5"/>
+                            </section>
+                            <section title="Database Environment" ref="Installation-en.html#database-environment">
+                                <section title="PostgreSQL" ref="Installation-en.html#postgresql"/>
+                                <section title="MySQL" ref="Installation-en.html#mysql"/>
+                                <section title="Sqlite3" ref="Installation-en.html#sqlite3"/>
+                            </section>
+                            <section title="Drogon installation" ref="Installation-en.html#drogon-installation">
+                                <section title="Include drogon source code locally" ref="Installation-en.html#include-drogon-source-code-locally"/>
+                                <section title="Use vcpkg" ref="Installation-en.html#use-vcpkg"/>
+                                <section title="Use Docker Image" ref="Installation-en.html#use-docker-image"/>
+                            </section>
+                        </section>
+                        <section title="Quick Start" ref="Quick-Start-en.html">
+                            <section title="Static Site" ref="Quick-Start-en.html#static-site"/>
+                            <section title="Dynamic Site" ref="Quick-Start-en.html#dynamic-site"/>
+                        </section>
+                        <section title="Controller Introduction" ref="Controller-Introduction-en.html">
+                            <section title="Controller" ref="Controller-Introduction-en.html#controller"/>
+                            <section title="Controller life cycle" ref="Controller-Introduction-en.html#controller-life-cycle"/>
+                        </section>
+                        <section title="Controller HttpSimpleController" ref="Controller-HttpSimpleController-en.html"/>
+                        <section title="Controller HttpController" ref="Controller-HttpController-en.html">
+                            <section title="Generation" ref="Controller-HttpController-en.html#generation"/>
+                            <section title="Usage" ref="Controller-HttpController-en.html#usage"/>
+                            <section title="Parameters mapping" ref="Controller-HttpController-en.html#parameters-mapping"/>
+                            <section title="multiple path mapping" ref="Controller-HttpController-en.html#multiple-path-mapping"/>
+                            <section title="Regular expression" ref="Controller-HttpController-en.html#regular-expression"/>
+                        </section>
+                        <section title="Controller WebSocketController" ref="Controller-WebSocketController-en.html">
+                            <section title="WebSocketController" ref="Controller-WebSocketController-en.html#websocketcontroller"/>
+                            <section title="WebSocketConnection" ref="Controller-WebSocketController-en.html#websocketconnection"/>
+                        </section>
+                        <section title="Filter" ref="Filter-en.html">
+                            <section title="Built-in Filter" ref="Filter-en.html#built-in-filter"/>
+                            <section title="Custom Filter" ref="Filter-en.html#custom-filter"/>
+                            <section title="Filter Registration" ref="Filter-en.html#filter-registration"/>
+                        </section>
+                        <section title="View" ref="View-en.html">
+                            <section title="Views Introduction" ref="View-en.html#views-introduction"/>
+                            <section title="Drogon&#8217;s CSP" ref="View-en.html#drogon-s-csp"/>
+                            <section title="The use of views" ref="View-en.html#the-use-of-views"/>
+                            <section title="A simple example" ref="View-en.html#a-simple-example"/>
+                            <section title="Automated processing of csp files" ref="View-en.html#automated-processing-of-csp-files"/>
+                            <section title="Dynamic compilation and loading of views" ref="View-en.html#dynamic-compilation-and-loading-of-views"/>
+                        </section>
+                        <section title="Session" ref="Session-en.html">
+                            <section title="Session object" ref="Session-en.html#session-object"/>
+                            <section title="Examples of sessions" ref="Session-en.html#examples-of-sessions"/>
+                        </section>
+                        <section title="Database General" ref="Database-General-en.html">
+                            <section title="General" ref="Database-General-en.html#general"/>
+                            <section title="DbClient" ref="Database-General-en.html#dbclient"/>
+                            <section title="Transaction" ref="Database-General-en.html#transaction"/>
+                            <section title="ORM" ref="Database-General-en.html#orm"/>
+                        </section>
+                        <section title="DataBase DbClient" ref="DataBase-DbClient-en.html">
+                            <section title="DbClient Object Construction" ref="DataBase-DbClient-en.html#dbclient-object-construction"/>
+                            <section title="Execution Interface" ref="DataBase-DbClient-en.html#execution-interface">
+                                <section title="execSqlAsync" ref="DataBase-DbClient-en.html#execsqlasync"/>
+                                <section title="execSqlAsyncFuture" ref="DataBase-DbClient-en.html#execsqlasyncfuture"/>
+                                <section title="execSqlSync" ref="DataBase-DbClient-en.html#execsqlsync"/>
+                                <section title="operator&lt;&lt;" ref="DataBase-DbClient-en.html#operator"/>
+                            </section>
+                            <section title="Summary" ref="DataBase-DbClient-en.html#summary"/>
+                        </section>
+                        <section title="DataBase Transaction" ref="DataBase-Transaction-en.html">
+                            <section title="Transaction Creation" ref="DataBase-Transaction-en.html#transaction-creation"/>
+                            <section title="Transaction Interface" ref="DataBase-Transaction-en.html#transaction-interface"/>
+                            <section title="Transaction Life Cycle" ref="DataBase-Transaction-en.html#transaction-life-cycle"/>
+                            <section title="One Example" ref="DataBase-Transaction-en.html#one-example"/>
+                        </section>
+                        <section title="DataBase ORM" ref="DataBase-ORM-en.html">
+                            <section title="Model" ref="DataBase-ORM-en.html#model"/>
+                            <section title="Model Class Interface" ref="DataBase-ORM-en.html#model-class-interface"/>
+                            <section title="Mapper Class Template" ref="DataBase-ORM-en.html#mapper-class-template"/>
+                            <section title="Criteria" ref="DataBase-ORM-en.html#criteria"/>
+                            <section title="Mapper&#8217;s Chain Interface" ref="DataBase-ORM-en.html#mapper-s-chain-interface"/>
+                            <section title="Relationships" ref="DataBase-ORM-en.html#relationships">
+                                <section title="has one" ref="DataBase-ORM-en.html#has-one"/>
+                                <section title="has many" ref="DataBase-ORM-en.html#has-many"/>
+                                <section title="many to many" ref="DataBase-ORM-en.html#many-to-many"/>
+                            </section>
+                            <section title="Restful API controllers" ref="DataBase-ORM-en.html#restful-api-controllers"/>
+                        </section>
+                        <section title="Database FastDbclient" ref="Database-FastDbclient-en.html">
+                            <section title="Create and Get" ref="Database-FastDbclient-en.html#create-and-get"/>
+                            <section title="Usage" ref="Database-FastDbclient-en.html#usage"/>
+                        </section>
+                        <section title="Plugin" ref="Plugins-en.html">
+                            <section title="Configuration" ref="Plugins-en.html#configuration"/>
+                            <section title="Definition" ref="Plugins-en.html#definition"/>
+                            <section title="Getting Instance" ref="Plugins-en.html#getting-instance"/>
+                            <section title="Life Cycle" ref="Plugins-en.html#life-cycle"/>
+                        </section>
+                        <section title="Configuration File" ref="Configuration-File-en.html">
+                            <section title="Configuration File Details" ref="Configuration-File-en.html#configuration-file-details"/>
+                            <section title="SSL" ref="Configuration-File-en.html#ssl"/>
+                            <section title="listeners" ref="Configuration-File-en.html#listeners"/>
+                            <section title="db_clients" ref="Configuration-File-en.html#db-clients"/>
+                            <section title="threads_num" ref="Configuration-File-en.html#threads-num"/>
+                            <section title="Session" ref="Configuration-File-en.html#session"/>
+                            <section title="document_root" ref="Configuration-File-en.html#document-root"/>
+                            <section title="upload_path" ref="Configuration-File-en.html#upload-path"/>
+                            <section title="file_types" ref="Configuration-File-en.html#file-types"/>
+                            <section title="Connection number control" ref="Configuration-File-en.html#connection-number-control"/>
+                            <section title="Log option" ref="Configuration-File-en.html#log-option"/>
+                            <section title="Application control" ref="Configuration-File-en.html#application-control"/>
+                            <section title="use_sendfile" ref="Configuration-File-en.html#use-sendfile"/>
+                            <section title="use_gzip" ref="Configuration-File-en.html#use-gzip"/>
+                            <section title="static_files_cache_time" ref="Configuration-File-en.html#static-files-cache-time"/>
+                            <section title="simple_controllers_map" ref="Configuration-File-en.html#simple-controllers-map"/>
+                            <section title="Idle connection timeout control" ref="Configuration-File-en.html#idle-connection-timeout-control"/>
+                            <section title="Dynamic view loading" ref="Configuration-File-en.html#dynamic-view-loading"/>
+                            <section title="Server header field" ref="Configuration-File-en.html#server-header-field"/>
+                            <section title="Keepalive requests" ref="Configuration-File-en.html#keepalive-requests"/>
+                            <section title="Pipelining requests" ref="Configuration-File-en.html#pipelining-requests"/>
+                        </section>
+                        <section title="Drogon_ctl Command" ref="Drogon_ctl-Command-en.html">
+                            <section title="Version subcommand" ref="Drogon_ctl-Command-en.html#version-subcommand"/>
+                            <section title="Create sub command" ref="Drogon_ctl-Command-en.html#create-sub-command"/>
+                            <section title="View creation" ref="Drogon_ctl-Command-en.html#view-creation"/>
+                            <section title="Controller creation" ref="Drogon_ctl-Command-en.html#controller-creation"/>
+                            <section title="Filter creation" ref="Drogon_ctl-Command-en.html#filter-creation"/>
+                            <section title="Create project" ref="Drogon_ctl-Command-en.html#create-project"/>
+                            <section title="Create models" ref="Drogon_ctl-Command-en.html#create-models"/>
+                            <section title="Stress Testing" ref="Drogon_ctl-Command-en.html#stress-testing"/>
+                        </section>
+                        <section title="AOP-Aspect Oriented Programming" ref="AOP-Aspect-Oriented-Programming-en.html">
+                            <section title="Predefined joinpoints" ref="AOP-Aspect-Oriented-Programming-en.html#predefined-joinpoints"/>
+                            <section title="AOP schematic" ref="AOP-Aspect-Oriented-Programming-en.html#aop-schematic"/>
+                        </section>
+                        <section title="Benchmarks" ref="Benchmarks-en.html">
+                            <section title="Test environment" ref="Benchmarks-en.html#test-environment"/>
+                            <section title="Test plan and results" ref="Benchmarks-en.html#test-plan-and-results"/>
+                        </section>
+                        <section title="Coz" ref="Coz-en.html">
+                            <section title="Causal profiling with coz" ref="Coz-en.html#causal-profiling-with-coz"/>
+                        </section>
+                    </section>
+                </section>
+                <section title="中文文档索引" ref="index-zh.html">
+                    <section title="Drogon 中文文档索引" ref="index-zh.html#drogon">
+                        <section title="&#27010;&#36848;" ref="Overview-zh.html"/>
+                        <section title="安装drogon" ref="Installation-zh.html">
+                            <section title="&#31995;&#32479;&#35201;&#27714;" ref="Installation-zh.html#id1"/>
+                            <section title="&#20381;&#36182;&#24211;" ref="Installation-zh.html#id2"/>
+                            <section title="系统准备范例" ref="Installation-zh.html#id3">
+                                <section title="Ubuntu 18.04" ref="Installation-zh.html#ubuntu-18-04"/>
+                                <section title="CentOS 7.5" ref="Installation-zh.html#centos-7-5"/>
+                            </section>
+                            <section title="数据库环境" ref="Installation-zh.html#id4">
+                                <section title="PostgreSQL" ref="Installation-zh.html#postgresql"/>
+                                <section title="MySQL" ref="Installation-zh.html#mysql"/>
+                                <section title="Sqlite3" ref="Installation-zh.html#sqlite3"/>
+                            </section>
+                            <section title="安装drogon" ref="Installation-zh.html#drogon">
+                                <section title="&#30452;&#25509;&#20351;&#29992;drogon&#28304;&#30721;" ref="Installation-zh.html#id5"/>
+                                <section title="&#20351;&#29992;vcpkg&#23433;&#35013;" ref="Installation-zh.html#vcpkg"/>
+                                <section title="&#20351;&#29992;docker&#38236;&#20687;" ref="Installation-zh.html#docker"/>
+                            </section>
+                        </section>
+                        <section title="快速开始" ref="Quick-Start-zh.html">
+                            <section title="&#38745;&#24577;&#32593;&#31449;" ref="Quick-Start-zh.html#id2"/>
+                            <section title="&#21160;&#24577;&#32593;&#31449;" ref="Quick-Start-zh.html#id5"/>
+                        </section>
+                        <section title="控制器简介" ref="Controller-Introduction-zh.html">
+                            <section title="&#31616;&#20171;" ref="Controller-Introduction-zh.html#id2"/>
+                            <section title="&#25511;&#21046;&#22120;&#30340;&#29983;&#21629;&#21608;&#26399;" ref="Controller-Introduction-zh.html#id7"/>
+                        </section>
+                        <section title="HttpSimpleController &#25511;&#21046;&#22120;" ref="Controller-HttpSimpleController-zh.html"/>
+                        <section title="HttpController 控制器" ref="Controller-HttpController-zh.html">
+                            <section title="&#29983;&#25104;" ref="Controller-HttpController-zh.html#id1"/>
+                            <section title="&#20351;&#29992;" ref="Controller-HttpController-zh.html#id2"/>
+                            <section title="&#21442;&#25968;&#26144;&#23556;" ref="Controller-HttpController-zh.html#id9"/>
+                            <section title="&#22810;&#36335;&#24452;&#26144;&#23556;" ref="Controller-HttpController-zh.html#id10"/>
+                            <section title="&#27491;&#21017;&#34920;&#36798;&#24335;" ref="Controller-HttpController-zh.html#id11"/>
+                        </section>
+                        <section title="WebSocketController 控制器" ref="Controller-WebSocketController-zh.html">
+                            <section title="WebSocketController" ref="Controller-WebSocketController-zh.html#id1"/>
+                            <section title="WebSocketConnection" ref="Controller-WebSocketController-zh.html#websocketconnection"/>
+                        </section>
+                        <section title="过滤器" ref="Filter-zh.html">
+                            <section title="&#20869;&#32622;&#36807;&#28388;&#22120;" ref="Filter-zh.html#id2"/>
+                            <section title="&#33258;&#23450;&#20041;&#36807;&#28388;&#22120;" ref="Filter-zh.html#id3"/>
+                            <section title="&#36807;&#28388;&#22120;&#30340;&#27880;&#20876;" ref="Filter-zh.html#id4"/>
+                        </section>
+                        <section title="视图" ref="View-zh.html">
+                            <section title="&#35270;&#22270;&#20171;&#32461;" ref="View-zh.html#id2"/>
+                            <section title="Drogon&#30340;csp" ref="View-zh.html#drogoncsp"/>
+                            <section title="&#35270;&#22270;&#30340;&#20351;&#29992;" ref="View-zh.html#id5"/>
+                            <section title="&#19968;&#20010;&#31616;&#21333;&#30340;&#20363;&#23376;" ref="View-zh.html#id6"/>
+                            <section title="csp&#25991;&#20214;&#30340;&#33258;&#21160;&#21270;&#22788;&#29702;" ref="View-zh.html#csp"/>
+                            <section title="&#35270;&#22270;&#30340;&#21160;&#24577;&#32534;&#35793;&#21644;&#21152;&#36733;" ref="View-zh.html#id7"/>
+                        </section>
+                        <section title="会话" ref="Session-zh.html">
+                            <section title="&#20250;&#35805;&#23545;&#35937;" ref="Session-zh.html#id4"/>
+                            <section title="&#20250;&#35805;&#30340;&#20363;&#23376;" ref="Session-zh.html#id5"/>
+                        </section>
+                        <section title="数据库" ref="Database-General-zh.html">
+                            <section title="&#27010;&#36848;" ref="Database-General-zh.html#id2"/>
+                            <section title="DbClient &#23458;&#25143;&#31471;" ref="Database-General-zh.html#dbclient"/>
+                            <section title="&#20107;&#21153;" ref="Database-General-zh.html#id7"/>
+                            <section title="ORM" ref="Database-General-zh.html#orm"/>
+                        </section>
+                        <section title="数据库 DbClient" ref="DataBase-DbClient-zh.html">
+                            <section title="&#26500;&#24314;DbClient" ref="DataBase-DbClient-zh.html#id1"/>
+                            <section title="执行接口" ref="DataBase-DbClient-zh.html#id2">
+                                <section title="execSqlAsync" ref="DataBase-DbClient-zh.html#execsqlasync"/>
+                                <section title="execSqlAsyncFuture" ref="DataBase-DbClient-zh.html#execsqlasyncfuture"/>
+                                <section title="execSqlSync" ref="DataBase-DbClient-zh.html#execsqlsync"/>
+                                <section title="operator&lt;&lt;" ref="DataBase-DbClient-zh.html#operator"/>
+                            </section>
+                            <section title="&#24635;&#32467;" ref="DataBase-DbClient-zh.html#id9"/>
+                        </section>
+                        <section title="数据库事务" ref="DataBase-Transaction-zh.html">
+                            <section title="&#20107;&#21153;&#30340;&#21019;&#24314;" ref="DataBase-Transaction-zh.html#id10"/>
+                            <section title="&#20107;&#21153;&#30340;&#25509;&#21475;" ref="DataBase-Transaction-zh.html#id15"/>
+                            <section title="&#20107;&#21153;&#30340;&#29983;&#21629;&#21608;&#26399;" ref="DataBase-Transaction-zh.html#id22"/>
+                            <section title="&#19968;&#20010;&#20363;&#23376;" ref="DataBase-Transaction-zh.html#id23"/>
+                        </section>
+                        <section title="数据库 ORM" ref="DataBase-ORM-zh.html">
+                            <section title="Model" ref="DataBase-ORM-zh.html#model"/>
+                            <section title="Model&#31867;&#30340;&#25509;&#21475;" ref="DataBase-ORM-zh.html#id3"/>
+                            <section title="Mapper&#31867;&#27169;&#26495;" ref="DataBase-ORM-zh.html#mapper"/>
+                            <section title="&#26465;&#20214;&#23545;&#35937;" ref="DataBase-ORM-zh.html#id4"/>
+                            <section title="Mapper&#30340;&#38142;&#24335;&#25509;&#21475;" ref="DataBase-ORM-zh.html#id5"/>
+                            <section title="关系" ref="DataBase-ORM-zh.html#id6">
+                                <section title="has one" ref="DataBase-ORM-zh.html#has-one"/>
+                                <section title="has many" ref="DataBase-ORM-zh.html#has-many"/>
+                                <section title="many to many" ref="DataBase-ORM-zh.html#many-to-many"/>
+                            </section>
+                            <section title="Restful API &#25511;&#21046;&#22120;" ref="DataBase-ORM-zh.html#restful-api"/>
+                        </section>
+                        <section title="数据库 FastDbclient" ref="Database-FastDbclient-zh.html">
+                            <section title="&#21019;&#24314;&#21644;&#33719;&#21462;" ref="Database-FastDbclient-zh.html#id1"/>
+                            <section title="&#20351;&#29992;" ref="Database-FastDbclient-zh.html#id2"/>
+                        </section>
+                        <section title="插件" ref="Plugins-zh.html">
+                            <section title="&#37197;&#32622;" ref="Plugins-zh.html#id2"/>
+                            <section title="&#23450;&#20041;" ref="Plugins-zh.html#id3"/>
+                            <section title="&#33719;&#21462;&#23454;&#20363;" ref="Plugins-zh.html#id4"/>
+                            <section title="&#29983;&#21629;&#21608;&#26399;" ref="Plugins-zh.html#id5"/>
+                        </section>
+                        <section title="配置文件" ref="Configuration-File-zh.html">
+                            <section title="&#25991;&#20214;&#35828;&#26126;" ref="Configuration-File-zh.html#id2"/>
+                            <section title="SSL" ref="Configuration-File-zh.html#ssl"/>
+                            <section title="listeners&#30417;&#21548;&#22120;" ref="Configuration-File-zh.html#listeners"/>
+                            <section title="db_clients" ref="Configuration-File-zh.html#db-clients"/>
+                            <section title="threads num&#32447;&#31243;&#25968;" ref="Configuration-File-zh.html#threads-num"/>
+                            <section title="session&#20250;&#35805;" ref="Configuration-File-zh.html#session"/>
+                            <section title="document_root &#26681;&#30446;&#24405;" ref="Configuration-File-zh.html#document-root"/>
+                            <section title="upload_path&#19978;&#20256;&#25991;&#20214;&#36335;&#24452;" ref="Configuration-File-zh.html#upload-path"/>
+                            <section title="file_types&#25991;&#20214;&#31867;&#22411;" ref="Configuration-File-zh.html#file-types"/>
+                            <section title="connections&#36830;&#25509;&#25968;&#25511;&#21046;" ref="Configuration-File-zh.html#connections"/>
+                            <section title="log&#26085;&#24535;&#36873;&#39033;" ref="Configuration-File-zh.html#log"/>
+                            <section title="&#24212;&#29992;&#25511;&#21046;" ref="Configuration-File-zh.html#id5"/>
+                            <section title="use_sendfile&#21457;&#36865;&#25991;&#20214;" ref="Configuration-File-zh.html#use-sendfile"/>
+                            <section title="use_gzip&#21387;&#32553;&#20256;&#36755;" ref="Configuration-File-zh.html#use-gzip"/>
+                            <section title="files_cache_time&#25991;&#20214;&#32531;&#23384;&#26102;&#38388;" ref="Configuration-File-zh.html#files-cache-time"/>
+                            <section title="simple_controllers_map" ref="Configuration-File-zh.html#simple-controllers-map"/>
+                            <section title="idle_connection_timeout&#31354;&#38386;&#36830;&#25509;&#36229;&#26102;&#25511;&#21046;" ref="Configuration-File-zh.html#idle-connection-timeout"/>
+                            <section title="dynamic_views&#21160;&#24577;&#35270;&#22270;&#21152;&#36733;" ref="Configuration-File-zh.html#dynamic-views"/>
+                            <section title="server_header_field&#22836;&#23383;&#27573;" ref="Configuration-File-zh.html#server-header-field"/>
+                            <section title="keepalive_requests&#38271;&#36830;&#25509;&#35831;&#27714;&#25968;" ref="Configuration-File-zh.html#keepalive-requests"/>
+                            <section title="Pipelining&#35831;&#27714;&#25968;" ref="Configuration-File-zh.html#pipelining"/>
+                        </section>
+                        <section title="Drogon_ctl 命令" ref="Drogon_ctl-Command-zh.html">
+                            <section title="version&#23376;&#21629;&#20196;" ref="Drogon_ctl-Command-zh.html#version"/>
+                            <section title="create&#23376;&#21629;&#20196;" ref="Drogon_ctl-Command-zh.html#create"/>
+                            <section title="&#35270;&#22270;&#21019;&#24314;" ref="Drogon_ctl-Command-zh.html#id5"/>
+                            <section title="&#25511;&#21046;&#22120;&#21019;&#24314;" ref="Drogon_ctl-Command-zh.html#id8"/>
+                            <section title="&#36807;&#28388;&#22120;&#21019;&#24314;" ref="Drogon_ctl-Command-zh.html#id11"/>
+                            <section title="&#21019;&#24314;&#24037;&#31243;" ref="Drogon_ctl-Command-zh.html#id14"/>
+                            <section title="&#21019;&#24314;&#27169;&#22411;" ref="Drogon_ctl-Command-zh.html#id15"/>
+                            <section title="&#21387;&#21147;&#27979;&#35797;" ref="Drogon_ctl-Command-zh.html#id16"/>
+                        </section>
+                        <section title="AOP-Aspect 面向切面编程" ref="AOP-Aspect-Oriented-Programming-zh.html">
+                            <section title="&#20869;&#24314;&#25554;&#20837;&#28857;" ref="AOP-Aspect-Oriented-Programming-zh.html#id1"/>
+                            <section title="AOP&#31034;&#24847;&#22270;" ref="AOP-Aspect-Oriented-Programming-zh.html#id2"/>
+                        </section>
+                        <section title="性能测试" ref="Benchmarks-zh.html">
+                            <section title="&#27979;&#35797;&#29615;&#22659;" ref="Benchmarks-zh.html#id2"/>
+                            <section title="&#27979;&#35797;&#26041;&#26696;&#21644;&#32467;&#26524;" ref="Benchmarks-zh.html#id3"/>
+                        </section>
+                        <section title="Coz" ref="Coz-zh.html">
+                            <section title="Causal profiling with coz" ref="Coz-zh.html#causal-profiling-with-coz"/>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </toc>
+        <keywords>
+            <keyword name="handlerName (C++ function)" ref="Controller-Introduction-en.html#_CPPv311handlerNameRK14HttpRequestPtrRRNSt8functionIFvRK15HttpResponsePtrEEEz"/>
+            <keyword name="handlerName (C++ function)" ref="Controller-Introduction-zh.html#_CPPv311handlerNameRK14HttpRequestPtrRRNSt8functionIFvRK15HttpResponsePtrEEEz"/>
+        </keywords>
+        <files>
+            <file>AOP-Aspect-Oriented-Programming-en.html</file>
+            <file>AOP-Aspect-Oriented-Programming-zh.html</file>
+            <file>Benchmarks-en.html</file>
+            <file>Benchmarks-zh.html</file>
+            <file>Configuration-File-en.html</file>
+            <file>Configuration-File-zh.html</file>
+            <file>Controller-HttpController-en.html</file>
+            <file>Controller-HttpController-zh.html</file>
+            <file>Controller-HttpSimpleController-en.html</file>
+            <file>Controller-HttpSimpleController-zh.html</file>
+            <file>Controller-Introduction-en.html</file>
+            <file>Controller-Introduction-zh.html</file>
+            <file>Controller-WebSocketController-en.html</file>
+            <file>Controller-WebSocketController-zh.html</file>
+            <file>Coz-en.html</file>
+            <file>Coz-zh.html</file>
+            <file>DataBase-DbClient-en.html</file>
+            <file>DataBase-DbClient-zh.html</file>
+            <file>DataBase-ORM-en.html</file>
+            <file>DataBase-ORM-zh.html</file>
+            <file>DataBase-Transaction-en.html</file>
+            <file>DataBase-Transaction-zh.html</file>
+            <file>Database-FastDbclient-en.html</file>
+            <file>Database-FastDbclient-zh.html</file>
+            <file>Database-General-en.html</file>
+            <file>Database-General-zh.html</file>
+            <file>Drogon_ctl-Command-en.html</file>
+            <file>Drogon_ctl-Command-zh.html</file>
+            <file>Filter-en.html</file>
+            <file>Filter-zh.html</file>
+            <file>Installation-en.html</file>
+            <file>Installation-zh.html</file>
+            <file>Overview-en.html</file>
+            <file>Overview-zh.html</file>
+            <file>Plugins-en.html</file>
+            <file>Plugins-zh.html</file>
+            <file>Quick-Start-en.html</file>
+            <file>Quick-Start-zh.html</file>
+            <file>Session-en.html</file>
+            <file>Session-zh.html</file>
+            <file>View-en.html</file>
+            <file>View-zh.html</file>
+            <file>genindex.html</file>
+            <file>index-en.html</file>
+            <file>index-zh.html</file>
+            <file>index.html</file>
+            <file>_static\ajax-loader.gif</file>
+            <file>_static\basic.css</file>
+            <file>_static\comment-bright.png</file>
+            <file>_static\comment-close.png</file>
+            <file>_static\comment.png</file>
+            <file>_static\down-pressed.png</file>
+            <file>_static\down.png</file>
+            <file>_static\file.png</file>
+            <file>_static\minus.png</file>
+            <file>_static\nonav.css</file>
+            <file>_static\plus.png</file>
+            <file>_static\pygments.css</file>
+            <file>_static\up-pressed.png</file>
+            <file>_static\up.png</file>
+        </files>
+    </filterSection>
+</QtHelpProject>

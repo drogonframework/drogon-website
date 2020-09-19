@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>会话</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="数据库 概述" href="Database-General-zh.html" />
+    <link rel="prev" title="视图" href="View-zh.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Database-General-zh.html" title="数据库 概述"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="View-zh.html" title="视图"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" accesskey="U">中文文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>会话</h1>
+<p><a href="#id2"><span class="problematic" id="id3">*</span></a>会话（Session）*是web应用的重要概念，用于在服务端保存客户端的状态，一般和浏览器的cookie配合，drogon提供了对会话的支持。drogon默认关闭会话选择，你也可以通过如下接口关闭或打开：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">disableSession</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">enableSession</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>都是通过*HttpAppFramework*单例调用，timeout参数代表了会话失效的时间，单位是秒，框架默认值是1200，即如果用户20分钟以上没有访问应用，则他对应的会话就失效了。timeout设置为0表示drogon将在整个生存期保留用户的会话；</p>
+<p>打开会话特性前请确定你的客户端支持cookie，否则，drogon会为每次不含SessionID的请求创建新的会话，这会白白浪费内存和计算资源。</p>
+<div class="section" id="id4">
+<h2>会话对象</h2>
+<p>drogon的会话对象类型是*drogon::Session*，它和*HttpViewData*非常类似，可以通过关键字存取任意类型的对象；支持并发读写；具体的使用请参考Session class的说明；</p>
+<p>drogon框架会把会话对象放到HttpRequest对象里传递给用户，用户可以通过HttpRequest类的如下接口获取Session对象。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">SessionPtr</span> <span class="nf">session</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>获得的是Session对象的智能指针，通过它可以存取各种对象；</p>
+</div>
+<div class="section" id="id5">
+<h2>会话的例子</h2>
+<p>我们这次加一个需要会话支持的功能，比如，我们要限制用户的访问频度，某一次访问后，如果10秒以内再次访问，就返回错误，否则返回ok。我们需要在会话里记录上次访问的时间，然后和本次访问的时间做比较，就可以实现这个功能。</p>
+<p>我们创建一个Filter来实现这个功能，假设类名是TimeFilter，实现如下：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;TimeFilter.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;trantor/utils/Date.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;trantor/utils/Logger.h&gt;</span><span class="cp"></span>
+<span class="cp">#define VDate &quot;visitDate&quot;</span>
+<span class="kt">void</span> <span class="n">TimeFilter</span><span class="o">::</span><span class="n">doFilter</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                        <span class="n">FilterCallback</span> <span class="o">&amp;&amp;</span><span class="n">cb</span><span class="p">,</span>
+                        <span class="n">FilterChainCallback</span> <span class="o">&amp;&amp;</span><span class="n">ccb</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">trantor</span><span class="o">::</span><span class="n">Date</span> <span class="n">now</span><span class="o">=</span><span class="n">trantor</span><span class="o">::</span><span class="n">Date</span><span class="o">::</span><span class="n">date</span><span class="p">();</span>
+    <span class="n">LOG_TRACE</span><span class="o">&lt;&lt;</span><span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">req</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="n">VDate</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">lastDate</span><span class="o">=</span><span class="n">req</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">trantor</span><span class="o">::</span><span class="n">Date</span><span class="o">&gt;</span><span class="p">(</span><span class="n">VDate</span><span class="p">);</span>
+        <span class="n">LOG_TRACE</span><span class="o">&lt;&lt;</span><span class="s">&quot;last:&quot;</span><span class="o">&lt;&lt;</span><span class="n">lastDate</span><span class="p">.</span><span class="n">toFormattedString</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+        <span class="n">req</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">insert</span><span class="p">(</span><span class="n">VDate</span><span class="p">,</span><span class="n">now</span><span class="p">);</span>
+        <span class="n">LOG_TRACE</span><span class="o">&lt;&lt;</span><span class="s">&quot;update visitDate&quot;</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">now</span><span class="o">&gt;</span><span class="n">lastDate</span><span class="p">.</span><span class="n">after</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="c1">//10 sec later can visit again;</span>
+            <span class="n">ccb</span><span class="p">();</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">json</span><span class="p">;</span>
+            <span class="n">json</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;error&quot;</span><span class="p">;</span>
+            <span class="n">json</span><span class="p">[</span><span class="s">&quot;message&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;Access interval should be at least 10 seconds&quot;</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">res</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpJsonResponse</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+            <span class="n">cb</span><span class="p">(</span><span class="n">res</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">LOG_TRACE</span><span class="o">&lt;&lt;</span><span class="s">&quot;first access,insert visitDate&quot;</span><span class="p">;</span>
+    <span class="n">req</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">insert</span><span class="p">(</span><span class="n">VDate</span><span class="p">,</span><span class="n">now</span><span class="p">);</span>
+    <span class="n">ccb</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们再注册一个lambda表达式到/slow路径上，同时附加上TimeFilter，代码如下：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">drogon</span><span class="o">::</span><span class="n">HttpAppFramework</span><span class="o">::</span><span class="n">instance</span><span class="p">()</span>
+            <span class="p">.</span><span class="n">registerHttpMethod</span><span class="p">(</span><span class="s">&quot;/slow&quot;</span><span class="p">,</span>
+                               <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                                   <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span>
+                               <span class="p">{</span>
+                                   <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">json</span><span class="p">;</span>
+                                   <span class="n">json</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;ok&quot;</span><span class="p">;</span>
+                                   <span class="k">auto</span> <span class="n">resp</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpJsonResponse</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+                                   <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+                               <span class="p">},</span>
+                               <span class="p">{</span><span class="n">Get</span><span class="p">,</span><span class="s">&quot;TimeFilter&quot;</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>调用框架接口打开会话</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">drogon</span><span class="o">::</span><span class="n">HttpAppFramework</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">enableSession</span><span class="p">(</span><span class="mi">1200</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>用cmake重新编译整个工程，运行目标程序webapp，就可以通过浏览器看到效果了。</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Database-General-zh.html" title="数据库 概述"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="View-zh.html" title="视图"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" >中文文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

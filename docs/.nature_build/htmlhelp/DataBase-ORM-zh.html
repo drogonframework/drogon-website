@@ -1,0 +1,267 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    <title>&#25968;&#25454;&#24211; ORM</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="next" title="&#25968;&#25454;&#24211; FastDbclient" href="Database-FastDbclient-zh.html" />
+    <link rel="prev" title="&#25968;&#25454;&#24211; &#20107;&#21153;" href="DataBase-Transaction-zh.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Database-FastDbclient-zh.html" title="&#25968;&#25454;&#24211; FastDbclient"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="DataBase-Transaction-zh.html" title="&#25968;&#25454;&#24211; &#20107;&#21153;"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" accesskey="U">&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="orm">
+<h1>&#25968;&#25454;&#24211; ORM</h1>
+<div class="section" id="model">
+<h2>Model</h2>
+<p>&#20351;&#29992;Drogon&#30340;ORM&#25903;&#25345;&#65292;&#39318;&#20808;&#35201;&#21019;&#24314;Model&#31867;&#65292;Drogon&#30340;&#21629;&#20196;&#34892;&#31243;&#24207;*drogon_ctl*&#25552;&#20379;&#20102;&#29983;&#25104;Model&#31867;&#30340;&#21151;&#33021;&#65292;&#23427;&#20174;&#29992;&#25143;&#25351;&#23450;&#30340;&#25968;&#25454;&#24211;&#35835;&#21462;&#34920;&#20449;&#24687;&#65292;&#26681;&#25454;&#36825;&#20123;&#20449;&#24687;&#33258;&#21160;&#29983;&#25104;&#22810;&#20010;Model&#31867;&#30340;&#28304;&#25991;&#20214;&#12290;&#29992;&#25143;&#20351;&#29992;Model&#26102;include&#23545;&#24212;&#30340;&#22836;&#25991;&#20214;&#21363;&#21487;&#12290;</p>
+<p>&#26174;&#32780;&#26131;&#35265;&#65292;&#27599;&#19968;&#20010;Model&#31867;&#65292;&#23545;&#24212;&#19968;&#20010;&#29305;&#23450;&#30340;&#25968;&#25454;&#24211;&#34920;&#65292;&#27599;&#20010;Model&#31867;&#30340;&#23454;&#20363;&#65292;&#23545;&#24212;&#34920;&#30340;&#19968;&#34892;&#35760;&#24405;&#12290;</p>
+<p>model&#31867;&#30340;&#21019;&#24314;&#21629;&#20196;&#22914;&#19979;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create model &lt;model_path&gt;
+</pre></div>
+</div>
+<p>&#26368;&#21518;&#19968;&#20010;&#21442;&#25968;&#26159;model&#23384;&#25918;&#30340;&#36335;&#24452;&#65292;&#35813;&#36335;&#24452;&#20869;&#24517;&#39035;&#26377;&#19968;&#20010;&#37197;&#32622;&#25991;&#20214;model.json&#65292;&#29992;&#20197;&#37197;&#32622;drogon_ctl&#21040;&#25968;&#25454;&#24211;&#30340;&#36830;&#25509;&#21442;&#25968;&#12290;&#23427;&#26159;JSON&#26684;&#24335;&#30340;&#25991;&#20214;&#65292;&#25903;&#25345;&#27880;&#37322;&#65292;&#20363;&#23376;&#22914;&#19979;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;rdbms&quot;</span>:<span class="s2">&quot;postgresql&quot;</span>,
+    <span class="s2">&quot;host&quot;</span>:<span class="s2">&quot;127.0.0.1&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>:5432,
+    <span class="s2">&quot;dbname&quot;</span>:<span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;user&quot;</span>:<span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;passwd&quot;</span>:<span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;tables&quot;</span>:<span class="o">[]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>&#37197;&#32622;&#30340;&#21442;&#25968;&#21644;&#24212;&#29992;&#30340;&#37197;&#32622;&#25991;&#20214;&#19968;&#33268;&#65292;&#35831;&#21442;&#32771;&#37197;&#32622;&#25991;&#20214;&#12290;</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>tables*&#37197;&#32622;&#39033;&#26159;&#23427;&#29305;&#26377;&#30340;&#65292;&#26159;&#19968;&#20010;&#23383;&#31526;&#20018;&#25968;&#32452;&#65292;&#27599;&#20010;&#23383;&#31526;&#20018;&#34920;&#31034;&#35201;&#36716;&#21270;&#25104;Model&#30340;&#34920;&#21517;&#65292;&#22914;&#26524;&#35813;&#39033;&#20026;&#31354;&#65292;&#21017;&#25152;&#26377;&#30340;&#34920;&#37117;&#20250;&#29983;&#25104;&#23545;&#24212;&#30340;Model&#31867;&#12290;</p>
+<p>&#29992;drogon_ctl create project&#21629;&#20196;&#21019;&#24314;&#30340;&#24037;&#31243;&#30446;&#24405;&#19979;&#24050;&#32463;&#39044;&#20808;&#21019;&#24314;&#20102;models&#30446;&#24405;&#21644;&#23545;&#24212;&#30340;model.json&#25991;&#20214;&#65292;&#29992;&#25143;&#21487;&#20197;&#32534;&#36753;&#37197;&#32622;&#25991;&#20214;&#21518;&#29992;drogon_ctl&#21629;&#20196;&#21019;&#24314;Model&#31867;&#12290;</p>
+</div>
+<div class="section" id="id3">
+<h2>Model&#31867;&#30340;&#25509;&#21475;</h2>
+<p>&#29992;&#25143;&#30452;&#25509;&#20351;&#29992;&#30340;&#20027;&#35201;&#26377;&#20004;&#31867;&#25509;&#21475;&#65292;getter&#25509;&#21475;&#21644;setter&#25509;&#21475;&#12290;</p>
+<p>getter&#25509;&#21475;&#21448;&#26377;&#20004;&#31867;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#24418;&#22914;getColumnName&#30340;&#25509;&#21475;&#65292;&#21462;&#24471;&#35813;&#23383;&#27573;&#30340;&#26234;&#33021;&#25351;&#38024;&#65292;&#21462;&#24471;&#25351;&#38024;&#32780;&#19981;&#26159;&#20540;&#65292;&#20027;&#35201;&#26159;&#20026;&#20102;&#21253;&#21547;NULL&#25968;&#25454;&#30340;&#24773;&#20917;&#65292;&#29992;&#25143;&#21487;&#20197;&#36890;&#36807;&#21028;&#26029;&#35813;&#25351;&#38024;&#26159;&#21542;&#20026;&#31354;&#26469;&#30830;&#23450;&#35813;&#23383;&#27573;&#26159;&#21542;&#26159;NULL&#23383;&#27573;&#12290;</li>
+<li>&#24418;&#22914;getValueOfColumnName&#30340;&#25509;&#21475;&#65292;&#25925;&#21517;&#24605;&#35758;&#65292;&#35813;&#25509;&#21475;&#26159;&#21462;&#24471;&#20540;&#30340;&#65292;&#20986;&#20110;&#25928;&#29575;&#30340;&#32771;&#34385;&#65292;&#35813;&#25509;&#21475;&#36820;&#22238;&#30340;&#26159;&#24120;&#24341;&#29992;&#12290;&#22914;&#26524;&#23545;&#24212;&#23383;&#27573;&#20026;NULL&#65292;&#35813;&#25509;&#21475;&#36820;&#22238;&#31532;&#20108;&#20010;&#21442;&#25968;&#32473;&#23450;&#30340;&#40664;&#35748;&#20540;&#12290;</li>
+</ul>
+</div></blockquote>
+<p>&#21478;&#22806;&#65292;&#20108;&#36827;&#21046;&#22359;&#31867;&#22411;(blob&#65292;bytea)&#26377;&#20010;&#29305;&#27530;&#28857;&#30340;&#25509;&#21475;&#65292;&#24418;&#22914;getValueOfColumnNameAsString&#65292;&#25226;&#20108;&#36827;&#21046;&#25968;&#25454;&#35013;&#36827;std::string&#23545;&#35937;&#36820;&#32473;&#29992;&#25143;&#12290;</p>
+<p>setter&#25509;&#21475;&#29992;&#20110;&#35774;&#32622;&#23545;&#24212;&#23383;&#27573;&#30340;&#20540;&#65292;&#24418;&#22914;setColumnName&#65292;&#21442;&#25968;&#31867;&#22411;&#21644;&#23383;&#27573;&#31867;&#22411;&#23545;&#24212;&#12290;&#33258;&#21160;&#29983;&#25104;&#30340;&#23383;&#27573;&#27604;&#22914;&#33258;&#22686;&#20027;&#38190;&#26159;&#27809;&#26377;setter&#25509;&#21475;&#30340;&#12290;</p>
+<p>toJson()&#25509;&#21475;&#29992;&#20110;&#25226;model&#23545;&#35937;&#36716;&#25442;&#25104;JSON&#23545;&#35937;&#65292;&#20108;&#36827;&#21046;&#22359;&#31867;&#22411;&#37319;&#29992;base64&#32534;&#30721;&#65292;&#35831;&#29992;&#25143;&#33258;&#34892;&#23454;&#39564;&#12290;</p>
+<p>Model&#31867;&#30340;&#38745;&#24577;&#25104;&#21592;&#37117;&#34920;&#31034;&#34920;&#30340;&#20449;&#24687;&#65292;&#27604;&#22914;&#21487;&#20197;&#36890;&#36807;Cols&#38745;&#24577;&#25104;&#21592;&#33719;&#24471;&#27599;&#20010;&#23383;&#27573;&#30340;&#21517;&#23383;&#65292;&#22312;&#25903;&#25345;&#33258;&#21160;&#25552;&#31034;&#30340;&#32534;&#36753;&#22120;&#20013;&#20351;&#29992;&#24456;&#26041;&#20415;&#12290;</p>
+</div>
+<div class="section" id="mapper">
+<h2>Mapper&#31867;&#27169;&#26495;</h2>
+<p>Model&#23545;&#35937;&#21644;&#25968;&#25454;&#24211;&#34920;&#30340;&#26144;&#23556;&#37117;&#26159;&#36890;&#36807;Mapper&#31867;&#27169;&#26495;&#36827;&#34892;&#65292;Mapper&#31867;&#27169;&#26495;&#23553;&#35013;&#20102;&#24120;&#35265;&#30340;&#22686;&#21024;&#25913;&#26597;&#25805;&#20316;&#65292;&#20351;&#29992;&#25143;&#21487;&#20197;&#19981;&#24517;&#25776;&#20889;sql&#35821;&#21477;&#21363;&#21487;&#25191;&#34892;&#19978;&#36848;&#25805;&#20316;&#12290;</p>
+<p>Mapper&#26500;&#36896;&#26102;&#24456;&#31616;&#21333;&#65292;&#27169;&#26495;&#21442;&#25968;&#23601;&#26159;&#20320;&#35201;&#23384;&#21462;&#30340;Model&#30340;&#31867;&#22411;&#65292;&#26500;&#36896;&#20989;&#25968;&#21482;&#26377;&#19968;&#20010;&#21442;&#25968;&#65292;&#23601;&#26159;&#21069;&#25991;&#25552;&#21040;&#30340;DbClient&#26234;&#33021;&#25351;&#38024;&#12290;&#21069;&#25991;&#35828;&#36807;&#65292;Transaction&#31867;&#26159;DbClient&#30340;&#23376;&#31867;&#65292;&#25152;&#20197;&#65292;&#20320;&#20063;&#21487;&#20197;&#29992;&#19968;&#20010;&#20107;&#21153;&#30340;&#26234;&#33021;&#25351;&#38024;&#26500;&#36896;Mapper&#23545;&#35937;&#65292;&#20063;&#23601;&#26159;&#35828;Mapper&#26144;&#23556;&#20063;&#26159;&#25903;&#25345;&#20107;&#21153;&#30340;&#12290;</p>
+<p>&#20687;DbClient&#19968;&#26679;&#65292;Mapper&#20063;&#21516;&#26102;&#25552;&#20379;&#24322;&#27493;&#21644;&#21516;&#27493;&#25509;&#21475;&#12290;&#21516;&#27493;&#25509;&#21475;&#37117;&#38459;&#22622;&#24182;&#21487;&#33021;&#25243;&#24322;&#24120;&#65292;&#36820;&#22238;&#30340;future&#23545;&#35937;&#22312;get()&#26102;&#38459;&#22622;&#24182;&#21487;&#33021;&#25243;&#24322;&#24120;&#65292;&#19968;&#33324;&#30340;&#24322;&#27493;&#25509;&#21475;&#19981;&#20250;&#25243;&#24322;&#24120;&#65292;&#32780;&#26159;&#36890;&#36807;&#20004;&#20010;&#22238;&#35843;&#65288;&#32467;&#26524;&#22238;&#35843;&#21644;&#24322;&#24120;&#22238;&#35843;&#65289;&#36820;&#22238;&#32467;&#26524;&#65292;&#20854;&#20013;&#65292;&#24322;&#24120;&#22238;&#35843;&#30340;&#31867;&#22411;&#21644;DbClient&#25509;&#21475;&#37324;&#30340;&#19968;&#33268;&#65292;&#32467;&#26524;&#22238;&#35843;&#26681;&#25454;&#25509;&#21475;&#21151;&#33021;&#30340;&#19981;&#21516;&#20063;&#20998;&#25104;&#20960;&#31867;&#12290;&#21015;&#34920;&#22914;&#19979;&#65288;T&#26159;&#27169;&#26495;&#21442;&#25968;&#65292;&#20063;&#23601;&#26159;Model&#30340;&#31867;&#22411;&#65289;&#65306;</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#27880;&#24847;: &#20351;&#29992;&#20107;&#21153;&#26102;&#65292;&#24322;&#24120;&#19981;&#24517;&#28982;&#23548;&#33268;&#22238;&#28378;&#65292;&#19979;&#38754;&#30340;&#24773;&#20917;&#26159;&#19981;&#20250;&#22238;&#28378;&#30340;&#65292;&#24403;findByPrimaryKey&#25509;&#21475;&#26410;&#25214;&#21040;&#31526;&#21512;&#26465;&#20214;&#30340;&#34892;&#26102;&#65292;&#24403;findOne&#25509;&#21475;&#25214;&#21040;&#23569;&#20110;&#25110;&#22810;&#20110;&#19968;&#34892;&#35760;&#24405;&#26102;&#65292;&#20250;&#25243;&#24322;&#24120;&#25110;&#36827;&#20837;&#24322;&#24120;&#22238;&#35843;&#65292;&#24322;&#24120;&#31867;&#22411;&#26159;UnexpectedRows&#12290;&#22914;&#26524;&#19994;&#21153;&#36923;&#36753;&#38656;&#35201;&#22312;&#36825;&#31181;&#24773;&#20917;&#19979;&#22238;&#28378;&#65292;&#35831;&#26174;&#24335;&#35843;&#29992;rollback()&#25509;&#21475;&#12290;</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>&#26465;&#20214;&#23545;&#35937;</h2>
+<p>&#19978;&#19968;&#33410;&#20013;&#65292;&#24456;&#22810;&#25509;&#21475;&#37117;&#38656;&#35201;&#36755;&#20837;&#26465;&#20214;&#23545;&#35937;&#21442;&#25968;&#65292;&#26465;&#20214;&#23545;&#35937;&#26159;Criteria&#31867;&#30340;&#23454;&#20363;&#65292;&#34920;&#31034;&#26576;&#31181;where&#26465;&#20214;&#65292;&#27604;&#22914;&#26576;&#20010;&#23383;&#27573;&#22823;&#20110;&#12289;&#31561;&#20110;&#12289;&#23567;&#20110;&#26576;&#20010;&#32473;&#23450;&#20540;&#65292;&#25110;&#32773;isNull&#20043;&#31867;&#30340;&#26465;&#20214;&#12290;</p>
+<p>&#26465;&#20214;&#23545;&#35937;&#30340;&#26500;&#36896;&#20989;&#25968;&#24456;&#31616;&#21333;&#65292;&#19968;&#33324;&#31532;&#19968;&#20010;&#21442;&#25968;&#26159;&#23383;&#27573;&#21517;&#65292;&#31532;&#20108;&#20010;&#21442;&#25968;&#26159;&#34920;&#31034;&#27604;&#36739;&#31867;&#22411;&#30340;&#26522;&#20030;&#20540;&#65292;&#31532;&#19977;&#20010;&#23383;&#27573;&#26159;&#34987;&#27604;&#36739;&#30340;&#20540;&#12290;&#22914;&#26524;&#27604;&#36739;&#31867;&#22411;&#26159;IsNull&#25110;IsNotNull&#65292;&#19981;&#38656;&#35201;&#31532;&#19977;&#20010;&#21442;&#25968;&#12290;</p>
+<p>&#27604;&#22914;&#65306;
+.. code-block:: cpp</p>
+<blockquote>
+<div>Criteria(“user_id”,CompareOperator::EQ,1);</div></blockquote>
+<p>&#34920;&#31034;&#65292;&#23383;&#27573;user_id&#31561;&#20110;1&#20316;&#20026;&#26465;&#20214;&#12290;&#23454;&#36341;&#20013;&#65292;&#25105;&#20204;&#26356;&#24895;&#24847;&#20889;&#25104;&#19979;&#38754;&#36825;&#26679;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_id</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#36319;&#21069;&#38754;&#30340;&#20889;&#27861;&#31561;&#25928;&#65292;&#20294;&#26159;&#36825;&#20010;&#20889;&#27861;&#21487;&#20197;&#26377;&#21161;&#20110;&#32534;&#36753;&#22120;&#30340;&#33258;&#21160;&#25552;&#31034;&#65292;&#25928;&#29575;&#26356;&#39640;&#24182;&#19988;&#19981;&#26131;&#20986;&#38169;&#65307;</p>
+<p>&#26465;&#20214;&#23545;&#35937;&#25903;&#25345;&#19982;&#21644;&#25110;&#30340;&#36816;&#31639;&#65292;&#20004;&#20010;&#26465;&#20214;&#23545;&#35937;&#30340;&#19982;&#21644;&#25110;&#20250;&#26500;&#36896;&#20986;&#26032;&#30340;&#26465;&#20214;&#23545;&#35937;&#65292;&#36825;&#26679;&#21487;&#20197;&#26041;&#20415;&#30340;&#26500;&#36896;&#23884;&#22871;&#30340;where&#26465;&#20214;&#12290;&#27604;&#22914;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Mapper</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">(</span><span class="n">dbClientPtr</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">users</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">findBy</span><span class="p">(</span>
+<span class="p">(</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_name</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">LIKE</span><span class="p">,</span><span class="s">&quot;%Smith&quot;</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_gender</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="o">||</span><span class="p">(</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_name</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">LIKE</span><span class="p">,</span><span class="s">&quot;%Johnson&quot;</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_gender</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>&#19978;&#38754;&#36825;&#27573;&#31243;&#24207;&#26159;&#20174;users&#34920;&#37324;&#26597;&#35810;&#25152;&#26377;&#22995;&#26446;&#30340;&#30007;&#22763;&#25110;&#32773;&#22995;&#29579;&#30340;&#22899;&#22763;&#12290;</p>
+</div>
+<div class="section" id="id5">
+<h2>Mapper&#30340;&#38142;&#24335;&#25509;&#21475;</h2>
+<p>&#26377;&#20123;&#24120;&#35265;&#30340;sql&#32422;&#26463;&#65292;&#27604;&#22914;limit&#65292;offset&#31561;&#31561;&#65292;Mapper&#31867;&#27169;&#26495;&#20063;&#25552;&#20379;&#20102;&#25903;&#25345;&#65292;&#20197;&#38142;&#24335;&#25509;&#21475;&#30340;&#24418;&#24335;&#25552;&#20379;&#65292;&#24847;&#21619;&#30528;&#29992;&#25143;&#21487;&#20197;&#25226;&#22810;&#20010;&#32422;&#26463;&#20018;&#36215;&#26469;&#20889;&#12290;&#25191;&#34892;&#23436;&#20219;&#20309;&#19968;&#20010;&#25509;&#21475;&#65292;&#36825;&#20123;&#32422;&#26463;&#20250;&#34987;&#28165;&#31354;&#65292;&#20063;&#23601;&#26159;&#35828;&#65292;&#36825;&#20123;&#32422;&#26463;&#26159;&#22312;&#19968;&#27425;&#25805;&#20316;&#20013;&#26377;&#25928;&#30340;&#65292;&#27604;&#22914;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Mapper</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">(</span><span class="n">dbClientPtr</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">users</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_join_time</span><span class="p">).</span><span class="n">limit</span><span class="p">(</span><span class="mi">25</span><span class="p">).</span><span class="n">offset</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>&#36825;&#27573;&#31243;&#24207;&#26159;&#20174;users&#34920;&#20013;&#36873;&#25321;&#29992;&#25143;&#21015;&#34920;&#65292;&#27599;&#39029;25&#34892;&#30340;&#31532;&#19968;&#39029;&#12290;</p>
+<p>&#38142;&#24335;&#25509;&#21475;&#22522;&#26412;&#21487;&#20197;&#26395;&#25991;&#29983;&#20041;&#65292;&#36825;&#37324;&#19981;&#20877;&#19968;&#19968;&#36184;&#36848;&#65292;&#35831;&#21442;&#32771;Mapper.h&#22836;&#25991;&#20214;&#12290;</p>
+</div>
+<div class="section" id="id6">
+<h2>&#20851;&#31995;</h2>
+<p>&#25968;&#25454;&#24211;&#30340;&#34920;&#19982;&#34920;&#20043;&#38388;&#30340;&#20851;&#31995;&#65292;&#21487;&#20197;&#36890;&#36807;model.json&#37197;&#32622;&#25991;&#20214;&#20013;&#30340;relationships&#36873;&#39033;&#36827;&#34892;&#37197;&#32622;&#65292;&#25105;&#20204;&#37319;&#29992;&#20102;&#25163;&#21160;&#37197;&#32622;&#30340;&#26041;&#24335;&#32780;&#19981;&#26159;&#33258;&#21160;&#25506;&#27979;&#34920;&#30340;&#22806;&#38190;&#26159;&#22240;&#20026;&#29616;&#23454;&#24037;&#31243;&#20013;&#19981;&#20351;&#29992;&#22806;&#38190;&#30340;&#24773;&#20917;&#20063;&#38750;&#24120;&#24120;&#35265;&#12290;</p>
+<p><a href="#id7"><span class="problematic" id="id8">*</span></a>enable*&#36873;&#39033;&#20026;true&#65292;&#21017;&#29983;&#25104;&#30340;model&#20250;&#25353;&#29031;relationships&#30340;&#37197;&#32622;&#22686;&#21152;&#30456;&#24212;&#30340;&#25509;&#21475;&#12290;</p>
+<p>&#20851;&#31995;&#20849;&#20998;&#20026;&#19977;&#31181;&#31867;&#22411;&#65292;’has one’, ‘has many’&#21644;’many to many’&#12290;</p>
+<div class="section" id="has-one">
+<h3>has one</h3>
+<p><em>has one</em> &#20195;&#34920;&#20102;1&#23545;1&#30340;&#20851;&#31995;&#65292;&#21407;&#22987;&#34920;&#20013;&#30340;&#19968;&#26465;&#35760;&#24405;&#21487;&#20197;&#20851;&#32852;&#21040;&#30446;&#26631;&#34920;&#20013;&#30340;&#19968;&#26465;&#35760;&#24405;&#65292;&#21453;&#36807;&#26469;&#20063;&#19968;&#26679;&#12290;&#20030;&#20010;&#20363;&#23376;&#65292;&#20135;&#21697;&#34920;&#21644;&#24211;&#23384;&#21333;&#20301;&#34920;&#26159;1&#23545;1&#30340;&#20851;&#31995;&#65292;&#25105;&#20204;&#21487;&#20197;&#23450;&#20041;&#22914;&#19979;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;has one&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;product&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;skus&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;SKU&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>&#20854;&#20013;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>“type”: &#34920;&#31034;&#36825;&#20010;&#20851;&#31995;&#26159;1&#23545;1&#65307;</li>
+<li>“original_table_name”: &#21407;&#22987;&#34920;&#21517;&#23383;&#65288;&#36825;&#20010;&#34920;&#23545;&#24212;&#30340;model&#20013;&#23558;&#28155;&#21152;&#23545;&#24212;&#30340;&#26041;&#27861;&#65289;&#65307;</li>
+<li>“original_table_alias”: &#21035;&#21517;&#65288;&#26041;&#27861;&#20013;&#30340;&#21517;&#23383;&#65292;&#22240;&#20026;1&#23545;1&#30340;&#20851;&#31995;&#20013;&#37117;&#26159;&#21333;&#25968;&#65292;&#25152;&#20197;&#35774;&#32622;&#20026;product&#65289;&#65292;&#22914;&#26524;&#36825;&#20010;&#36873;&#39033;&#20026;&#31354;&#65292;&#21017;&#20351;&#29992;&#34920;&#21517;&#29983;&#25104;&#26041;&#27861;&#21517;&#65307;</li>
+<li>“original_key”: &#21407;&#22987;&#34920;&#30340;&#20851;&#32852;&#38190;&#65307;</li>
+<li>“target_table_name”: &#30446;&#26631;&#34920;&#30340;&#21517;&#23383;&#65307;</li>
+<li>“target_table_alias”: &#30446;&#26631;&#34920;&#30340;&#21035;&#21517;&#65292;&#22914;&#26524;&#36825;&#20010;&#36873;&#39033;&#20026;&#31354;&#65292;&#21017;&#20351;&#29992;&#34920;&#21517;&#29983;&#25104;&#26041;&#27861;&#21517;&#65307;</li>
+<li>“target_key”: &#30446;&#26631;&#34920;&#30340;&#20851;&#32852;&#38190;&#65307;</li>
+<li>“enable_reverse”: &#25351;&#26126;&#26159;&#19981;&#26159;&#33258;&#21160;&#29983;&#25104;&#21453;&#21521;&#30340;&#20851;&#31995;&#65292;&#21363;&#22312;&#30446;&#26631;&#34920;&#23545;&#24212;&#30340;model&#31867;&#20013;&#28155;&#21152;&#33719;&#21462;&#21407;&#22987;&#34920;&#30340;&#35760;&#24405;&#30340;&#26041;&#27861;&#12290;</li>
+</ul>
+</div></blockquote>
+<p>&#25353;&#29031;&#36825;&#20010;&#35774;&#32622;&#65292;&#22312;products&#34920;&#23545;&#24212;&#30340;model&#31867;&#20013;&#65292;&#23558;&#28155;&#21152;&#22914;&#19979;&#30340;&#26041;&#27861;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Relationship interfaces</span>
+<span class="kt">void</span> <span class="nf">getSKU</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Skus</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>&#36825;&#26159;&#19968;&#20010;&#24322;&#27493;&#25509;&#21475;&#65292;&#22312;&#22238;&#35843;&#20013;&#36820;&#22238;&#19982;&#24403;&#21069;product&#30456;&#20851;&#32852;&#30340;SKU&#23545;&#35937;&#12290;</p>
+<p>&#21516;&#26102;&#65292;&#30001;&#20110;enable_reverse&#36873;&#39033;&#35774;&#32622;&#20026;&#30495;&#65292;&#37027;&#20040;&#22312;skus&#34920;&#23545;&#24212;&#30340;model&#31867;&#20013;&#65292;&#23558;&#28155;&#21152;&#22914;&#19979;&#26041;&#27861;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Relationship interfaces</span>
+<span class="kt">void</span> <span class="nf">getProduct</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Products</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="has-many">
+<h3>has many</h3>
+<p><em>has many</em> &#20195;&#34920;&#20102;&#19968;&#23545;&#22810;&#30340;&#20851;&#31995;&#65292;&#36825;&#26679;&#30340;&#20851;&#31995;&#20013;&#65292;&#20195;&#34920;&#20102;*&#22810;*&#30340;&#37027;&#20010;&#30340;&#37027;&#20010;&#34920;&#19968;&#33324;&#20250;&#26377;&#20010;&#23383;&#27573;&#21644;&#21478;&#19968;&#20010;&#34920;&#30340;&#20027;&#38190;&#30456;&#20851;&#32852;&#12290;&#27604;&#22914;&#20135;&#21697;&#21644;&#35780;&#20215;&#36890;&#24120;&#26159;&#19968;&#23545;&#22810;&#30340;&#20851;&#31995;&#65292;&#25105;&#20204;&#21487;&#20197;&#23450;&#20041;&#22914;&#19979;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;has many&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;product&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;reviews&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>&#19978;&#38754;&#21508;&#20010;&#37197;&#32622;&#30340;&#21547;&#20041;&#36319;&#21069;&#19968;&#20010;&#20363;&#23376;&#19968;&#26679;&#65292;&#36825;&#37324;&#19981;&#20877;&#36184;&#36848;&#65292;&#22240;&#20026;&#35780;&#20215;&#26377;&#22810;&#20010;&#65292;&#26159;&#22797;&#25968;&#65292;&#25152;&#20197;&#19981;&#29992;&#21478;&#36215;&#19968;&#20010;&#21035;&#21517;&#20102;&#12290;&#25353;&#29031;&#35813;&#35774;&#32622;&#65292;drogon_ctl create model&#20043;&#21518;&#65292;products&#34920;&#23545;&#24212;&#30340;model&#20013;&#65292;&#20250;&#22686;&#21152;&#19979;&#38754;&#30340;&#25509;&#21475;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getReviews</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Reviews</span><span class="o">&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>reviews&#34920;&#23545;&#24212;&#30340;model&#20013;&#65292;&#20250;&#22686;&#21152;&#19979;&#38754;&#30340;&#25509;&#21475;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getProduct</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Products</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="many-to-many">
+<h3>many to many</h3>
+<p>&#39038;&#21517;&#24605;&#20041;&#65292;many to many&#20195;&#34920;&#20102;&#22810;&#23545;&#22810;&#30340;&#20851;&#31995;&#65292;&#36890;&#24120;&#65292;&#22810;&#23545;&#22810;&#30340;&#20851;&#31995;&#35201;&#22686;&#21152;&#19968;&#20010;&#20013;&#38388;&#34920;&#65292;&#20013;&#38388;&#34920;&#20013;&#30340;&#27599;&#19968;&#39033;&#23545;&#24212;&#21407;&#22987;&#34920;&#21644;&#30446;&#26631;&#34920;&#20013;&#30340;&#21508;1&#26465;&#35760;&#24405;&#12290;&#27604;&#22914;&#20135;&#21697;&#21644;&#36141;&#29289;&#36710;&#23601;&#26159;&#22810;&#23545;&#22810;&#30340;&#20851;&#31995;&#65292;&#25105;&#20204;&#21487;&#20197;&#23450;&#20041;&#22914;&#19979;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;many to many&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;pivot_table&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;table_name&quot;</span>: <span class="s2">&quot;carts_products&quot;</span>,
+        <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+        <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;cart_id&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;carts&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>&#19978;&#38754;&#30340;&#37197;&#32622;&#20171;&#32461;&#36807;&#30340;&#36873;&#39033;&#21547;&#20041;&#21644;&#21069;&#38754;&#19968;&#26679;&#65292;&#21482;&#26159;&#23545;&#20110;&#20013;&#38388;&#34920;&#65292;&#22810;&#20102;&#19968;&#39033;pivot_table&#30340;&#37197;&#32622;&#65292;&#37324;&#38754;&#30340;&#36873;&#39033;&#21487;&#20197;&#26395;&#25991;&#29983;&#20041;&#65292;&#36825;&#37324;&#30465;&#30053;&#12290;</p>
+<p>&#25353;&#36825;&#20010;&#37197;&#32622;&#29983;&#25104;&#30340;products&#30340;model&#20250;&#28155;&#21152;&#22914;&#19979;&#26041;&#27861;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getCarts</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Carts</span><span class="p">,</span><span class="n">CartsProducts</span><span class="o">&gt;&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>carts&#34920;&#30340;model&#31867;&#20250;&#28155;&#21152;&#22914;&#19979;&#26041;&#27861;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getProducts</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                 <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Products</span><span class="p">,</span><span class="n">CartsProducts</span><span class="o">&gt;&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                 <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="restful-api">
+<h2>Restful API &#25511;&#21046;&#22120;</h2>
+<p>drogon_ctl&#36824;&#21487;&#20197;&#22312;&#21019;&#24314;model&#30340;&#21516;&#26102;&#65292;&#20026;&#27599;&#20010;model&#65288;&#25110;&#32773;&#35828;&#34920;&#65289;&#29983;&#25104;restful&#39118;&#26684;&#30340;controller&#65292;&#20351;&#29992;&#25143;&#22312;&#38646;&#32534;&#30721;&#30340;&#24773;&#20917;&#19979;&#65292;&#23601;&#29983;&#25104;&#20102;&#21487;&#20197;&#23545;&#34920;&#36827;&#34892;&#22686;&#21024;&#25913;&#26597;&#30340;API&#12290;&#36825;&#20123;API&#25903;&#25345;&#25353;&#20027;&#38190;&#26597;&#35810;&#12289;&#25353;&#26465;&#20214;&#26597;&#35810;&#12289;&#25353;&#29305;&#23450;&#23383;&#27573;&#25490;&#24207;&#12289;&#20540;&#36820;&#22238;&#25351;&#23450;&#23383;&#27573;&#12289;&#20026;&#27599;&#20010;&#23383;&#27573;&#25351;&#23450;&#21035;&#21517;&#20197;&#38544;&#34255;&#34920;&#32467;&#26500;&#31561;&#21151;&#33021;&#12290;&#23427;&#30001;model.json&#20013;&#30340;restful_api_controllers&#36873;&#39033;&#25511;&#21046;&#65292;&#30456;&#20851;&#30340;&#33258;&#36873;&#39033;&#22312;json&#25991;&#20214;&#20013;&#26377;&#30456;&#24212;&#30340;&#27880;&#37322;&#65292;&#29992;&#25143;&#21487;&#20197;&#33258;&#34892;&#23581;&#35797;&#12290;</p>
+<p>&#38656;&#35201;&#27880;&#24847;&#30340;&#26159;&#65292;&#27599;&#20010;&#34920;&#30340;controller&#37117;&#34987;&#35774;&#35745;&#25104;&#30001;&#19968;&#20010;&#22522;&#31867;&#21644;&#19968;&#20010;&#23376;&#31867;&#32452;&#25104;&#65292;&#20854;&#20013;&#65292;&#22522;&#31867;&#21644;&#34920;&#23494;&#20999;&#30456;&#20851;&#65292;&#23376;&#31867;&#29992;&#20110;&#25552;&#20379;&#32473;&#29992;&#25143;&#23454;&#29616;&#29305;&#27530;&#30340;&#19994;&#21153;&#36923;&#36753;&#65292;&#25110;&#32773;&#20462;&#39280;&#25509;&#21475;&#26684;&#24335;&#12290;&#36825;&#26679;&#35774;&#35745;&#30340;&#22909;&#22788;&#26159;&#65292;&#24403;&#34920;&#32467;&#26500;&#21457;&#29983;&#21464;&#21270;&#30340;&#26102;&#20505;&#65292;&#29992;&#25143;&#21487;&#20197;&#25511;&#21046;&#21482;&#26356;&#26032;&#22522;&#31867;&#32780;&#19981;&#35206;&#30422;&#23376;&#31867;&#65292;&#20445;&#35777;&#20102;&#24320;&#21457;&#30340;&#36830;&#32493;&#24615;&#12290;</p>
+<p>&#37492;&#20110;&#36825;&#20010;&#21151;&#33021;&#19981;&#26159;&#37027;&#20040;&#34987;&#26222;&#36941;&#38656;&#35201;&#65292;&#36825;&#37324;&#19981;&#20570;&#35814;&#32454;&#20171;&#32461;&#20102;&#12290;</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Database-FastDbclient-zh.html" title="&#25968;&#25454;&#24211; FastDbclient"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="DataBase-Transaction-zh.html" title="&#25968;&#25454;&#24211; &#20107;&#21153;"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" >&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Filter-zh.rstd:3
+msgid "过滤器"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:5
+msgid "过滤器(filter)可以帮助用户提高编程效率，在HttpController的例子中，getInfo方法在返回用户信息之前应该先校验用户是否登录，我们把这个逻辑写在getInfo方法里当然是可以的，但是，很显然，校验用户登录属于通用逻辑，很多接口都将用到，应该把它单独提取出来，再配置到调用handler之前，这就是filter的作用。"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:7
+msgid "drogon框架做完URL路径匹配后，会先依次调用注册到该路径上的过滤器，只有当所有过滤器都允许\"通过\"时，对应的handler才会被调用;"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:11
+msgid "内置过滤器"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:13
+msgid "drogon内置了如下常用过滤器:"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:15
+msgid "*drogon::IntranetIpFilter*: 只放行内网ip发来的http请求，否则返回404页面；"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:16
+msgid "*drogon::LocalHostFilter*: 只放行本机127.0.0.1或者::1发来的http请求，否则返回404页面；"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:20
+msgid "自定义过滤器"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:22
+msgid "当然，用户可以自定义过滤器，需要继承HttpFilter类模板，模板类型就是子类类型，比如我们想做一个LoginFilter，就可以定义如下:"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:34
+msgid "你可以通过 drogon_ctl 命令创建过滤器, 见 drogon_ctl."
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:36
+msgid "我们需要重载父类的doFilter虚函数实现过滤器逻辑；"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:38
+msgid "这个虚函数有三个参数，分别是："
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:40
+msgid "*req*: http请求；"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:41
+msgid "*fcb*: 过滤器回调函数，函数类型是void (HttpResponsePtr)，当过滤器判定请求不合法时，通过这个回调把特定的响应返回给浏览器；"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:42
+msgid "*fccb*: 过滤器链回调函数，函数类型是void ()，当过滤器判定请求合法时，通过这个回调告诉drogon调用下一个过滤器或者最终的handler"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:44
+msgid "具体的实现可以参考drogon内置过滤器的实现。"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:48
+msgid "过滤器的注册"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:50
+msgid "过滤器总是伴随controller的注册进行，前面提到的注册handler的宏(PATH_ADD,METHOD_ADD等)都可以在最后添加一个或多个过滤器名字；比如，我们把前面getInfo方法的注册行改为如下形式："
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:57
+msgid "则在路径匹配成功后，必须满足如下条件，getInfo方法才会被调用："
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:59
+msgid "请求必须是http get请求；"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:60
+msgid "请求方必须已经登录；"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:62
+msgid "可以看到，过滤器的配置和注册是非常简单的，注册过滤器的controller文件并不需要引用过滤器的头文件，过滤器和控制器也是充分解耦的。"
+msgstr ""
+
+#: ../../source/Filter-zh.rstd:65
+msgid "注意: 如果过滤器定义在命名空间里，注册过滤器时必须把命名空间写全"
+msgstr ""
+

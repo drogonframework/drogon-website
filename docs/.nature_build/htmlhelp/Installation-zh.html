@@ -1,0 +1,272 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    <title>Installation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="next" title="&#24555;&#36895;&#24320;&#22987;" href="Quick-Start-zh.html" />
+    <link rel="prev" title="Overview" href="Overview-zh.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Quick-Start-zh.html" title="&#24555;&#36895;&#24320;&#22987;"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Overview-zh.html" title="Overview"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" accesskey="U">&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation</h1>
+<p>&#26412;&#33410;&#20197;Linux&#20026;&#20363;&#65292;&#31616;&#20171;&#23433;&#35013;&#36807;&#31243;&#65292;&#20854;&#23427;&#31995;&#32479;&#65292;&#22823;&#21516;&#23567;&#24322;</p>
+<div class="section" id="id1">
+<h2>&#31995;&#32479;&#35201;&#27714;</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Linux&#20869;&#26680;&#24212;&#19981;&#20302;&#20110;2.6.9&#65292;64&#20301;&#29256;&#26412;&#65307;</li>
+<li>gcc&#29256;&#26412;&#19981;&#20302;&#20110;5.4.0&#65307;</li>
+<li>&#26500;&#24314;&#24037;&#20855;&#26159;cmake,cmake&#29256;&#26412;&#24212;&#19981;&#20302;&#20110;3.5&#65307;</li>
+<li>git&#29256;&#26412;&#31649;&#29702;&#24037;&#20855;&#65307;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h2>&#20381;&#36182;&#24211;</h2>
+<blockquote>
+<div><ul class="simple">
+<li>trantor&#65292;non-blocking I/O C++&#32593;&#32476;&#24211;&#65292;&#20063;&#26159;&#20316;&#32773;&#24320;&#21457;&#65292;&#24050;&#20316;&#20026;git&#20179;&#24211;submodule&#65292;&#26080;&#38656;&#25552;&#21069;&#23433;&#35013;&#65307;</li>
+<li>jsoncpp&#65292;json&#30340;c++&#24211;&#65292;&#29256;&#26412;&#19981;&#20302;&#20110;1.7&#65307;</li>
+<li>libuuid&#65292;&#29983;&#25104;uuid&#30340;c&#24211;&#65307;</li>
+<li>zlib&#65292;&#29992;&#20110;&#25903;&#25345;&#21387;&#32553;&#20256;&#36755;&#65307;</li>
+<li>OpenSSL&#65292;&#24182;&#38750;&#24517;&#39035;&#65292;&#22914;&#26524;&#23433;&#35013;&#20102;OpenSSL&#24211;&#65292;drogon&#23558;&#25903;&#25345;HTTPS&#65292;&#21542;&#21017;drogon&#21482;&#25903;&#25345;HTTP&#65307;</li>
+<li>c-ares, &#24182;&#38750;&#24517;&#39035;&#65292;&#22914;&#26524;&#23433;&#35013;&#20102;ares&#24211;&#65292;drogon&#23545;DNS&#30340;&#25903;&#25345;&#20250;&#20855;&#26377;&#26356;&#22909;&#30340;&#24615;&#33021;&#65307;</li>
+<li>libbrotli&#65292;&#24182;&#38750;&#24517;&#39035;&#65292;&#22914;&#26524;&#23433;&#35013;&#20102;brotli&#24211;&#65292;drogon&#30340;HTTP&#21709;&#24212;&#20250;&#25903;&#25345;brotli&#21387;&#32553;&#65307;</li>
+<li>boost&#65292;&#29256;&#26412;&#19981;&#20302;&#20110;1.61&#65292;&#21482;&#22312;C++&#32534;&#35793;&#22120;&#19981;&#25903;&#25345;c++17&#26102;&#25165;&#38656;&#35201;&#23433;&#35013;&#65307;</li>
+<li>postgreSQL, mariadb, sqlite3&#30340;&#23458;&#25143;&#31471;&#24320;&#21457;&#24211;&#65292;&#24182;&#38750;&#24517;&#39035;&#65292;&#23433;&#35013;&#21518;drogon&#20250;&#25552;&#20379;&#23545;&#21709;&#24212;&#30340;&#24211;&#30340;&#35775;&#38382;&#33021;&#21147;&#65307;</li>
+<li>gtest, &#24182;&#38750;&#24517;&#39035;&#65292;&#22914;&#26524;&#23433;&#35013;&#20102;gtest&#24211;&#65292;drogon&#30340;&#21333;&#20803;&#27979;&#35797;&#20195;&#30721;&#21487;&#20197;&#34987;&#32534;&#35793;&#65307;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>&#31995;&#32479;&#20934;&#22791;&#33539;&#20363;</h2>
+<div class="section" id="ubuntu-18-04">
+<h3>Ubuntu 18.04</h3>
+<p>&#29615;&#22659;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install git
+sudo apt install gcc
+sudo apt install g++
+sudo apt install cmake
+</pre></div>
+</div>
+<p>jsoncpp</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install libjsoncpp-dev
+</pre></div>
+</div>
+<p>uuid</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install uuid-dev
+</pre></div>
+</div>
+<p>OpenSSL</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install openssl
+sudo apt install libssl-dev
+</pre></div>
+</div>
+<p>zlib</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install zlib1g-dev
+</pre></div>
+</div>
+</div>
+<div class="section" id="centos-7-5">
+<h3>CentOS 7.5</h3>
+<p>&#29615;&#22659;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install git
+yum install gcc
+yum install gcc-c++
+</pre></div>
+</div>
+<p>&#40664;&#35748;&#23433;&#35013;&#30340;cmake&#29256;&#26412;&#22826;&#20302;&#65292;&#20351;&#29992;&#28304;&#30721;&#23433;&#35013;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Kitware/CMake
+<span class="nb">cd</span> CMake/
+./bootstrap <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+<p>&#21319;&#32423;gcc</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install centos-release-scl
+yum install devtoolset-8
+scl <span class="nb">enable</span> devtoolset-8 bash
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#27880;&#24847;: <em>scl enable devtoolset-8</em> bash&#21629;&#20196;&#20165;&#26159;&#20020;&#26102;&#24615;&#30340;&#20351;&#26032;&#30340;gcc&#29983;&#25928;&#65292;&#30452;&#21040;&#20250;&#35805;&#32467;&#26463;&#12290;&#22914;&#26524;&#24819;&#27704;&#20037;&#20351;&#29992;&#26032;&#29256;gcc,&#21487;&#20197;&#20351;&#29992;&#21629;&#20196;*echo “scl enable devtoolset-8 bash” &gt;&gt; ~/.bash_profile*, &#31995;&#32479;&#37325;&#26032;&#21551;&#21160;&#21518;&#23558;&#33258;&#21160;&#20351;&#29992;&#26032;&#29256;gcc&#12290;</p>
+</div>
+<p>jsoncpp</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/open-source-parsers/jsoncpp
+<span class="nb">cd</span> jsoncpp/
+mkdir build
+<span class="nb">cd</span> build
+cmake ..
+make <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+<p>uuid</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install libuuid-devel
+</pre></div>
+</div>
+<p>OpenSSL</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install openssl-devel
+</pre></div>
+</div>
+<p>zlib</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install zlib-devel
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>&#25968;&#25454;&#24211;&#29615;&#22659;</h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#27880;&#24847;&#65306;&#19979;&#38754;&#30340;&#36825;&#20123;&#24211;&#37117;&#19981;&#26159;&#24517;&#39035;&#30340;, &#29992;&#25143;&#21487;&#20197;&#26681;&#25454;&#23454;&#38469;&#38656;&#27714;&#36873;&#25321;&#23433;&#35013;&#19968;&#20010;&#25110;&#32773;&#22810;&#20010;&#25968;&#25454;&#24211;&#12290;</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#27880;&#24847;&#65306;&#22914;&#26524;&#23558;&#26469;&#30340;&#24320;&#21457;&#38656;&#35201;&#29992;&#21040;&#25968;&#25454;&#24211;&#65292;&#35831;&#20808;&#23433;&#35013;&#22909;&#25968;&#25454;&#24211;&#29615;&#22659;&#65292;&#20877;&#23433;&#35013;drogon, &#21542;&#21017;&#65292;&#20250;&#20986;&#29616;&#25214;&#19981;&#21040;&#25968;&#25454;&#24211;&#30340;&#38382;&#39064;&#12290;</p>
+</div>
+<div class="section" id="postgresql">
+<h3>PostgreSQL</h3>
+<p>PostgreSQL&#30340;&#21407;&#29983;C&#24211;libpq&#26159;&#38656;&#35201;&#23433;&#35013;&#30340;&#65292;&#23433;&#35013;&#26041;&#27861;&#22914;&#19979;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu 16: sudo apt-get install postgresql-server-dev-all</li>
+<li>ubuntu 18: sudo apt-get install postgresql-all</li>
+<li>centOS 7: yum install postgresql-devel</li>
+<li>MacOS: brew install postgresql</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="mysql">
+<h3>MySQL</h3>
+<p>MySQL&#30340;&#21407;&#29983;&#24211;&#19981;&#25903;&#25345;&#24322;&#27493;&#35835;&#20889;&#65292;&#32780;&#36890;&#36807;&#21516;&#27493;&#25509;&#21475;+&#32447;&#31243;&#27744;&#30340;&#26041;&#24335;&#23545;&#19978;&#23618;&#25552;&#20379;&#24322;&#27493;&#25509;&#21475;&#24182;&#19981;&#26159;&#19968;&#20010;&#22909;&#30340;&#31574;&#30053;&#65292;&#24184;&#22909;&#65292;MySQL&#36824;&#26377;&#19968;&#20010;&#21407;&#24320;&#21457;&#32773;&#31038;&#21306;&#32500;&#25252;&#30340;&#29256;&#26412;MariaDB&#65292;&#35813;&#29256;&#26412;&#21644;MySQL&#30340;&#23545;&#24212;&#29256;&#26412;&#20860;&#23481;&#65292;&#24182;&#19988;&#23427;&#30340;&#24320;&#21457;&#24211;&#25903;&#25345;&#24322;&#27493;&#35835;&#20889;&#65292;&#22240;&#27492;&#65292;Drogon&#30340;MySQL&#25903;&#25345;&#37319;&#29992;MariaDB&#24320;&#21457;&#24211;&#65292;&#20320;&#30340;&#31995;&#32479;&#65292;Mysql&#21644;MariaDB&#26368;&#22909;&#19981;&#35201;&#28151;&#29992;&#65292;&#21487;&#20197;&#32479;&#19968;&#23433;&#35013;&#25104;MariaDB&#12290;</p>
+<p>&#23433;&#35013;&#26041;&#27861;&#22914;&#19979;:</p>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu: sudo apt install libmariadbclient-dev</li>
+<li>centOS 7: yum install mariadb-devel</li>
+<li>MacOS: brew install mariadb</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="sqlite3">
+<h3>Sqlite3</h3>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu: sudo apt-get install libsqlite3-dev</li>
+<li>centOS: yum install sqlite-devel</li>
+<li>MacOS: brew install sqlite3</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#27880;&#24847;: &#19978;&#36848;&#26377;&#20123;&#21629;&#20196;&#21482;&#23433;&#35013;&#20102;&#24320;&#21457;&#24211;&#65292;&#22914;&#26524;&#36824;&#35201;&#23433;&#35013;server&#31471;&#65292;&#35831;&#33258;&#34892;google&#12290;</p>
+</div>
+</div>
+</div>
+<div class="section" id="drogon">
+<h2>&#23433;&#35013;drogon</h2>
+<p>&#20551;&#35774;&#19978;&#36848;&#31995;&#32479;&#29615;&#22659;&#21644;&#24211;&#20381;&#36182;&#37117;&#24050;&#32463;&#20934;&#22791;&#22909;&#65292;&#23433;&#35013;&#36807;&#31243;&#26159;&#38750;&#24120;&#31616;&#21333;&#30340;&#65307;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$WORK_PATH</span>
+git clone https://github.com/an-tao/drogon
+<span class="nb">cd</span> drogon
+git submodule update --init
+mkdir build
+<span class="nb">cd</span> build
+cmake ..
+make <span class="o">&amp;&amp;</span> sudo make install
+</pre></div>
+</div>
+<p>&#40664;&#35748;&#26159;&#32534;&#35793;debug&#29256;&#26412;&#65292;&#22914;&#26524;&#24819;&#32534;&#35793;release&#29256;&#26412;&#65292;cmake&#21629;&#20196;&#35201;&#24102;&#22914;&#19979;&#21442;&#25968;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release ..
+</pre></div>
+</div>
+<p>&#23433;&#35013;&#32467;&#26463;&#21518;&#65292;&#23558;&#26377;&#22914;&#19979;&#25991;&#20214;&#34987;&#23433;&#35013;&#22312;&#31995;&#32479;&#20013;(CMAKE_INSTALL_PREFIX&#21487;&#20197;&#25913;&#21464;&#23433;&#35013;&#20301;&#32622;)&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>drogon&#30340;&#22836;&#25991;&#20214;&#34987;&#23433;&#35013;&#21040;/usr/local/include/drogon&#20013;&#65307;</li>
+<li>drogon&#30340;&#24211;&#25991;&#20214;libdrogon.a&#34987;&#23433;&#35013;&#21040;/usr/local/lib&#20013;&#65307;</li>
+<li>drogon&#30340;&#21629;&#20196;&#34892;&#24037;&#20855;drogon_ctl&#34987;&#23433;&#35013;&#21040;/usr/local/bin&#20013;&#65307;</li>
+<li>trantor&#30340;&#22836;&#25991;&#20214;&#34987;&#23433;&#35013;&#21040;/usr/local/include/trantor&#20013;&#65307;</li>
+<li>trantor&#30340;&#24211;&#25991;&#20214;libtrantor.a&#34987;&#23433;&#35013;&#21040;/usr/local/lib&#20013;&#65307;</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id5">
+<h3>&#30452;&#25509;&#20351;&#29992;drogon&#28304;&#30721;</h3>
+<p>&#24403;&#28982;&#65292;&#20320;&#20063;&#21487;&#20197;&#22312;&#20320;&#30340;&#39033;&#30446;&#20013;&#21253;&#21547;drogon&#28304;&#30721;&#65292;&#27604;&#22914;&#23558;drogon&#25918;&#32622;&#22312;&#20320;&#30340;&#39033;&#30446;&#30446;&#24405;&#30340;third_party&#19979;&#65292;&#37027;&#20040;&#65292;&#20320;&#21482;&#38656;&#35201;&#22312;&#20320;&#39033;&#30446;&#30340;cmake&#25991;&#20214;&#37324;&#28155;&#21152;&#22914;&#19979;&#20004;&#34892;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>add_subdirectory<span class="o">(</span>third_party/drogon<span class="o">)</span>
+target_link_libraries<span class="o">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span> PRIVATE drogon<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="vcpkg">
+<h3>&#20351;&#29992;vcpkg&#23433;&#35013;</h3>
+<p>The easiest way to install drogon on windows is to use vcpkg</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcpkg.exe install drogon
+</pre></div>
+</div>
+<p>&#25110;&#32773;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcpkg.exe install drogon:x64-windows
+</pre></div>
+</div>
+</div>
+<div class="section" id="docker">
+<h3>&#20351;&#29992;docker&#38236;&#20687;</h3>
+<p>&#25105;&#20204;&#20063;&#22312; <a class="reference external" href="https://hub.docker.com/r/drogonframework/drogon" target="_blank">docker hub</a> . &#19978;&#25552;&#20379;&#20102;&#26500;&#24314;&#22909;&#30340;docker&#38236;&#20687;. &#22312;&#36825;&#20010;docker&#37324;Drogon&#21644;&#23427;&#25152;&#26377;&#30340;&#20381;&#36182;&#37117;&#24050;&#32463;&#23433;&#35013;&#23436;&#27605;&#65292;&#29992;&#25143;&#21487;&#20197;&#22312;&#19978;&#38754;&#30452;&#25509;&#24320;&#21457;Drogon&#24212;&#29992;&#31243;&#24207;&#12290;</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Quick-Start-zh.html" title="&#24555;&#36895;&#24320;&#22987;"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Overview-zh.html" title="Overview"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" >&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

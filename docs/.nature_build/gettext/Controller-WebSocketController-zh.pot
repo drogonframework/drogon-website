@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Controller-WebSocketController-zh.rstd:3
+msgid "控制器 WebSocketController"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:7
+msgid "WebSocketController"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:9
+msgid "顾名思义，*WebSocketController*用于处理websocket逻辑。websocket是基于HTTP的一种长连接方案，在websocket建立之初，有一次HTTP格式的请求和应答交换，建立完成后，所有的消息在websocket上传输，消息由固定的格式包装，但消息的内容和收发次序没有任何要求，完全由用户定义。"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:11
+msgid "可以由*drogon_ctl*工具快速生成*WebSocketController*的源文件，命令格式如下：:"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:17
+msgid "假设我们要通过websocket实现一个简单的回声功能，即服务端只是简单的把客户端发来的消息再发回去，通过drogon_ctl创建WebSocketController的实现类EchoWebsock，如下:"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:23
+msgid "该命令会生成EchoWebsock.h和EchoWebsock.cc两个文件，"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:25
+#: ../../source/Controller-WebSocketController-zh.rstd:63
+msgid "*EchoWebsock.h*"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:44
+#: ../../source/Controller-WebSocketController-zh.rstd:83
+msgid "*EchoWebsock.cc*"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:61
+msgid "编辑后内容如下："
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:101
+msgid "首先，在这个例子中，通过*WS_PATH_ADD*宏把这个控制器注册到了*/echo*路径上，*WS_PATH_ADD*宏的用法跟之前介绍的其他控制器的宏类似，也可以注册路径并且附带若干过滤器Filter。由于websocket在框架中单独处理，所以它可以和前两种控制器的路径重复而不会相互影响。"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:103
+msgid "其次，本例中三个虚函数的实现，只有handleNewMessage有实质内容，只是简单的把收到的消息通过send接口发回客户端。把这个控制器编译进框架，就可以看到效果，请各位自己试验吧。"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:106
+msgid "注意：和通常的HTTP协议一样，http的websocket可以被旁路还原，如果需要安全保障，应由https提供加密功能，当然，用户自己在服务端和客户端完成加密和解密也是可以的，只是https更方便，底层都由drogon处理，用户只需关心业务逻辑。"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:108
+msgid "用户自定义的WebSocketController类继承自drogon::WebSocketController类模板，模板参数是子类类型，用户需自己实现如下三个虚函数来对websocket的建立、关闭和消息进行处理："
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:114
+msgid "容易知道:"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:116
+msgid "handleNewConnection is called after the websocket is established. req is the setup request sent by the client. At this time, the framework has returned the response. What users can do is to get some additional information through req, such as token. wsConn is a smart pointer to this websocket object, and the commonly used interface will be discussed later."
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:117
+msgid "handleNewMessage is called after the websocket receives the new message. The message is stored in the message variable. Note that the message is the message payload. The framework has finished the decapsulation and decoding of the message. The user can directly process the message itself."
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:118
+msgid "handleConnectionClosed is called after the websocket connection is closed, and the user can do some finishing work."
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:122
+msgid "WebSocketConnection"
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:124
+msgid "WebSocketConnection对象常用接口如下："
+msgstr ""
+
+#: ../../source/Controller-WebSocketController-zh.rstd:126
+msgid "*WebSocketConnection.h*"
+msgstr ""
+

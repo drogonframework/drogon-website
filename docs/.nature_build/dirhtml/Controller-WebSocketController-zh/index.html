@@ -1,0 +1,251 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>控制器 WebSocketController &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="过滤器" href="../Filter-zh/" />
+    <link rel="prev" title="HttpController 控制器" href="../Controller-HttpController-zh/" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Filter-zh/" title="过滤器"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Controller-HttpController-zh/" title="HttpController 控制器"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-zh/" accesskey="U">中文文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="websocketcontroller">
+<h1>控制器 WebSocketController<a class="headerlink" href="#websocketcontroller" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>WebSocketController<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>顾名思义，<a href="#id2"><span class="problematic" id="id3">*</span></a>WebSocketController*用于处理websocket逻辑。websocket是基于HTTP的一种长连接方案，在websocket建立之初，有一次HTTP格式的请求和应答交换，建立完成后，所有的消息在websocket上传输，消息由固定的格式包装，但消息的内容和收发次序没有任何要求，完全由用户定义。</p>
+<p>可以由*drogon_ctl*工具快速生成*WebSocketController*的源文件，命令格式如下：:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create controller -w &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt;
+</pre></div>
+</div>
+<p>假设我们要通过websocket实现一个简单的回声功能，即服务端只是简单的把客户端发来的消息再发回去，通过drogon_ctl创建WebSocketController的实现类EchoWebsock，如下:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create controller -w EchoWebsock
+</pre></div>
+</div>
+<p>该命令会生成EchoWebsock.h和EchoWebsock.cc两个文件，</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><em>EchoWebsock.h</em></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/WebSocketController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">EchoWebsock</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">WebSocketController</span><span class="o">&lt;</span><span class="n">EchoWebsock</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleNewMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span><span class="o">&amp;</span><span class="p">,</span>
+                                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleNewConnection</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">WebSocketConnectionPtr</span><span class="o">&amp;</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleConnectionClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span><span class="o">&amp;</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="n">WS_PATH_LIST_BEGIN</span>
+    <span class="c1">//list path definitions here;</span>
+    <span class="n">WS_PATH_LIST_END</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><em>EchoWebsock.cc</em></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;EchoWebsock.h&quot;</span><span class="cp"></span>
+<span class="kt">void</span> <span class="n">EchoWebsock</span><span class="o">::</span><span class="n">handleNewMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span> <span class="o">&amp;</span><span class="n">wsConnPtr</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="n">message</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">EchoWebsock</span><span class="o">::</span><span class="n">handleNewConnection</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span> <span class="o">&amp;</span><span class="n">wsConnPtr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">EchoWebsock</span><span class="o">::</span><span class="n">handleConnectionClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span> <span class="o">&amp;</span><span class="n">wsConnPtr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>编辑后内容如下：</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><em>EchoWebsock.h</em></span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/WebSocketController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">EchoWebsock</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">WebSocketController</span><span class="o">&lt;</span><span class="n">EchoWebsock</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleNewMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span><span class="o">&amp;</span><span class="p">,</span>
+                                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleNewConnection</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">WebSocketConnectionPtr</span><span class="o">&amp;</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">handleConnectionClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span><span class="o">&amp;</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="n">WS_PATH_LIST_BEGIN</span>
+    <span class="c1">//list path definitions here;</span>
+    <span class="n">WS_PATH_ADD</span><span class="p">(</span><span class="s">&quot;/echo&quot;</span><span class="p">);</span>
+    <span class="n">WS_PATH_LIST_END</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><em>EchoWebsock.cc</em></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;EchoWebsock.h&quot;</span><span class="cp"></span>
+<span class="kt">void</span> <span class="n">EchoWebsock</span><span class="o">::</span><span class="n">handleNewMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span> <span class="o">&amp;</span><span class="n">wsConnPtr</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="n">message</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+    <span class="n">wsConnPtr</span><span class="o">-&gt;</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">EchoWebsock</span><span class="o">::</span><span class="n">handleNewConnection</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span> <span class="o">&amp;</span><span class="n">wsConnPtr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">EchoWebsock</span><span class="o">::</span><span class="n">handleConnectionClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">WebSocketConnectionPtr</span> <span class="o">&amp;</span><span class="n">wsConnPtr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>首先，在这个例子中，通过*WS_PATH_ADD*宏把这个控制器注册到了*/echo*路径上，<a href="#id4"><span class="problematic" id="id5">*</span></a>WS_PATH_ADD*宏的用法跟之前介绍的其他控制器的宏类似，也可以注册路径并且附带若干过滤器Filter。由于websocket在框架中单独处理，所以它可以和前两种控制器的路径重复而不会相互影响。</p>
+<p>其次，本例中三个虚函数的实现，只有handleNewMessage有实质内容，只是简单的把收到的消息通过send接口发回客户端。把这个控制器编译进框架，就可以看到效果，请各位自己试验吧。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意：和通常的HTTP协议一样，http的websocket可以被旁路还原，如果需要安全保障，应由https提供加密功能，当然，用户自己在服务端和客户端完成加密和解密也是可以的，只是https更方便，底层都由drogon处理，用户只需关心业务逻辑。</p>
+</div>
+<p>用户自定义的WebSocketController类继承自drogon::WebSocketController类模板，模板参数是子类类型，用户需自己实现如下三个虚函数来对websocket的建立、关闭和消息进行处理：</p>
+<p>容易知道:</p>
+<blockquote>
+<div><ul class="simple">
+<li>handleNewConnection is called after the websocket is established. req is the setup request sent by the client. At this time, the framework has returned the response. What users can do is to get some additional information through req, such as token. wsConn is a smart pointer to this websocket object, and the commonly used interface will be discussed later.</li>
+<li>handleNewMessage is called after the websocket receives the new message. The message is stored in the message variable. Note that the message is the message payload. The framework has finished the decapsulation and decoding of the message. The user can directly process the message itself.</li>
+<li>handleConnectionClosed is called after the websocket connection is closed, and the user can do some finishing work.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="websocketconnection">
+<h2>WebSocketConnection<a class="headerlink" href="#websocketconnection" title="Permalink to this headline">¶</a></h2>
+<p>WebSocketConnection对象常用接口如下：</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text"><em>WebSocketConnection.h</em></span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//发送websocket消息，消息的编码和封包都由框架负责，这里直接发送消息的净荷</span>
+<span class="c1">//of the message are the responsibility of the framework</span>
+<span class="kt">void</span> <span class="nf">send</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">,</span><span class="kt">uint64_t</span> <span class="n">len</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">send</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
+
+<span class="c1">//本websocket的本端和远端地址</span>
+<span class="k">const</span> <span class="n">trantor</span><span class="o">::</span><span class="n">InetAddress</span> <span class="o">&amp;</span><span class="n">localAddr</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">trantor</span><span class="o">::</span><span class="n">InetAddress</span> <span class="o">&amp;</span><span class="n">peerAddr</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="c1">//本weosocket的连接状态</span>
+<span class="kt">bool</span> <span class="nf">connected</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="nf">disconnected</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="c1">//关闭本websocket</span>
+<span class="kt">void</span> <span class="nf">shutdown</span><span class="p">();</span><span class="c1">//close write</span>
+<span class="kt">void</span> <span class="nf">forceClose</span><span class="p">();</span><span class="c1">//close</span>
+
+<span class="c1">//设置和获取本websocket的上下文，由用户存入一些业务数据，</span>
+<span class="c1">//any类型意味着可以存取任意类型的对象。</span>
+<span class="kt">void</span> <span class="nf">setContext</span><span class="p">(</span><span class="k">const</span> <span class="n">any</span> <span class="o">&amp;</span><span class="n">context</span><span class="p">);</span>
+<span class="k">const</span> <span class="n">any</span> <span class="o">&amp;</span><span class="n">getContext</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="n">any</span> <span class="o">*</span><span class="nf">getMutableContext</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">控制器 WebSocketController</a><ul>
+<li><a class="reference internal" href="#id1">WebSocketController</a></li>
+<li><a class="reference internal" href="#websocketconnection">WebSocketConnection</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Controller-HttpController-zh/"
+                        title="previous chapter">HttpController 控制器</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Filter-zh/"
+                        title="next chapter">过滤器</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Controller-WebSocketController-zh.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search/" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Filter-zh/" title="过滤器"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Controller-HttpController-zh/" title="HttpController 控制器"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-zh/" >中文文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

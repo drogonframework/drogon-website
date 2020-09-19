@@ -1,0 +1,233 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>drogon_ctl命令</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AOP面向切面编程" href="AOP-Aspect-Oriented-Programming-zh.html" />
+    <link rel="prev" title="配置文件" href="Configuration-File-zh.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="AOP-Aspect-Oriented-Programming-zh.html" title="AOP面向切面编程"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Configuration-File-zh.html" title="配置文件"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" accesskey="U">中文文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="drogon-ctl">
+<h1>drogon_ctl命令</h1>
+<p>Drogon框架编译安装后，一个命令行程序*drogon_ctl*也同时被安装于系统，为了方便，还安装了一个完全一样的副本dg_ctl。用户可以按喜好自行选用。</p>
+<p>该程序目前的主要功能是为了方便用户创建各种drogon工程文件，使用*dg_ctl help*命令可以看到它支持的功能，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl <span class="nb">help</span>
+usage: drogon_ctl &lt;command&gt; <span class="o">[</span>&lt;args&gt;<span class="o">]</span>
+commands list:
+create                  create some <span class="nb">source</span> files<span class="o">(</span>Use <span class="s1">&#39;drogon_ctl help create&#39;</span> <span class="k">for</span> more information<span class="o">)</span>
+<span class="nb">help</span>                    display this message
+version                 display version of this tool
+press                   Do stress testing<span class="o">(</span>Use <span class="s1">&#39;drogon_ctl help press&#39;</span> <span class="k">for</span> more information<span class="o">)</span>
+</pre></div>
+</div>
+<div class="section" id="version">
+<h2>version子命令</h2>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>version*子命令用于打印目前安装于系统的drogon版本，如下：</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>     _
+  __<span class="p">|</span> <span class="p">|</span>_ __ ___   __ _  ___  _ __
+ / _<span class="sb">`</span> <span class="p">|</span> <span class="s1">&#39;__/ _ \ / _` |/ _ \| &#39;</span>_ <span class="se">\</span>
+<span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span> <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span>
+ <span class="se">\_</span>_,_<span class="p">|</span>_<span class="p">|</span>  <span class="se">\_</span>__/ <span class="se">\_</span>_, <span class="p">|</span><span class="se">\_</span>__/<span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>
+                  <span class="p">|</span>___/
+drogon ctl tools
+version:0.9.30.771
+git commit:d4710d3da7ca9e73b881cbae3149c3a570da8de4
+compile config:-O3 -DNDEBUG -Wall -std<span class="o">=</span>c++17 -I/root/drogon/trantor -I/root/drogon/lib/inc -I/root/drogon/orm_lib/inc -I/usr/local/include -I/usr/include/uuid -I/usr/include -I/usr/include/mysql
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="create">
+<h2>create子命令</h2>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>create*子命令用于创建各种对象，目前是drogon_ctl的主要功能，使用*dg_ctl help create*命令可以打印该命令的详细帮助，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl <span class="nb">help</span> create
+
+Use create <span class="nb">command</span> to create some <span class="nb">source</span> files of drogon webapp
+
+Usage:drogon_ctl create &lt;view<span class="p">|</span>controller<span class="p">|</span>filter<span class="p">|</span>project<span class="p">|</span>model&gt; <span class="o">[</span>-options<span class="o">]</span> &lt;object name&gt;
+
+drogon_ctl create view &lt;csp file name&gt; //create HttpView <span class="nb">source</span> files from csp file
+
+drogon_ctl create controller <span class="o">[</span>-s<span class="o">]</span> &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create HttpSimpleController <span class="nb">source</span> files
+
+drogon_ctl create controller -h &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create HttpController <span class="nb">source</span> files
+
+drogon_ctl create controller -w &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create WebSocketController <span class="nb">source</span> files
+
+drogon_ctl create filter &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt; //create a filter named class_name
+
+drogon_ctl create project &lt;project_name&gt; //create a project named project_name
+
+drogon_ctl create model &lt;model_path&gt; //create model classes in model_path
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>视图创建</h2>
+<p><a href="#id6"><span class="problematic" id="id7">*</span></a>dg_ctl create controller*命令用于帮助用户创建控制器的源文件，drogon目前支持的三种控制器都可以由该命令创建，只是参数稍有差别。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create view UsersList.csp
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>控制器创建</h2>
+<p><a href="#id9"><span class="problematic" id="id10">*</span></a>dg_ctl create controller*命令用于帮助用户创建控制器的源文件，drogon目前支持的三种控制器都可以由该命令创建，只是参数稍有差别。</p>
+<blockquote>
+<div><ul>
+<li><p class="first">创建HttpSimpleController的命令如下：</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create controller SimpleControllerTest
+dg_ctl create controller webapp::v1::SimpleControllerTest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>最后一个参数是控制器的类名，可以在前面附加命名空间。</p>
+<blockquote>
+<div><ul>
+<li><p class="first">创建HttpController的命令如下：</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create controller -h ControllerTest
+dg_ctl create controller -h api::v1::ControllerTest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">创建WebSocketController的命令如下：</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create controller -w WsControllerTest
+dg_ctl create controller -w api::v1::WsControllerTest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>参考wiki的控制器各个章节。</p>
+</div>
+<div class="section" id="id11">
+<h2>过滤器创建</h2>
+<p><a href="#id12"><span class="problematic" id="id13">*</span></a>dg_ctl create filter*命令用于帮助用户创建过滤器的源文件，参见过滤器一节。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create filter LoginFilter
+dg_ctl create filter webapp::v1::LoginFilter
+</pre></div>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>创建工程</h2>
+<p>用户创建一个新的Drogon应用工程的方法是通过drogon_ctl命令实现，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create project ProjectName
+</pre></div>
+</div>
+<p>该命令执行完后，在当前目录会创建完整的工程目录，目录名是ProjectName,用户可以直接进build目录编译这个工程，当然他没有任何业务逻辑。</p>
+<p>工程的目录结构如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├── build                         构建文件夹
+├── CMakeLists.txt                工程的cmake配置文件
+├── cmake_modules                 第三方库查找的cmake脚本
+│   ├── FindJsoncpp.cmake
+│   ├── FindMySQL.cmake
+│   ├── FindSQLite3.cmake
+│   └── FindUUID.cmake
+├── config.json                   drogon应用的配置文件，请参考配置文件介绍章节
+├── controllers                   存放控制器源文件的目录
+├── filters                       存放过滤器文件的目录
+├── main.cc                       主程序
+├── models                        数据库模型文件的目录，模型源文件创建见11.2.5
+│   └── model.json
+└── views                         存放视图csp文件的目录，源文件无需用户手动创建，工程编译时会自动预处理csp文件得到视图的源文件
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h2>创建模型</h2>
+<p>使用*dg_ctl create model*命令创建数据库模型源文件，最后一个参数是模型存放的目录，该目录里必须包含一个名为model.json的模型配置文件，用于告诉dg_ctl如何连接数据库以及映射哪些表。</p>
+<p>比如，如果要在上面提到的工程目录里创建模型，请在工程目录下执行如下命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl create model models
+</pre></div>
+</div>
+<p>该命令会提示用户目录下已有的文件将被直接覆盖，用户输入y确认后就会生成所有模型文件。其他文件要引用模型类需要include模型的头文件，比如：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;models/User.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意要包含models目录名，这是为了区分同一个工程中多个数据源的情况。参见ORM。</p>
+</div>
+</div>
+<div class="section" id="id16">
+<h2>压力测试</h2>
+<p>用户可以使用dg_ctl press命令进行压力测试，该命令有几个选项</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>-n num</em> 设置请求的总数(默认是1)</li>
+<li><em>-t num</em> 设置线程总数(默认是1), 设置成CPU数目可以达到最大性能</li>
+<li><em>-c num</em>  设置并发连接数(默认是1)</li>
+<li><em>-q</em> 表示没有中间过程的信息输出(默认输出信息)</li>
+</ul>
+</div></blockquote>
+<p>例子:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dg_ctl press -n1000000 -t4 -c1000 -q http://localhost:8080/
+dg_ctl press -n <span class="m">1000000</span> -t <span class="m">4</span> -c <span class="m">1000</span> https://www.domain.com/path/to/be/tested
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="AOP-Aspect-Oriented-Programming-zh.html" title="AOP面向切面编程"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Configuration-File-zh.html" title="配置文件"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" >中文文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

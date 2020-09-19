@@ -1,0 +1,323 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>数据库 ORM &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="数据库 FastDbclient" href="../Database-FastDbclient-zh/" />
+    <link rel="prev" title="数据库 事务" href="../DataBase-Transaction-zh/" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Database-FastDbclient-zh/" title="数据库 FastDbclient"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../DataBase-Transaction-zh/" title="数据库 事务"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-zh/" accesskey="U">中文文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="orm">
+<h1>数据库 ORM<a class="headerlink" href="#orm" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>使用Drogon的ORM支持，首先要创建Model类，Drogon的命令行程序*drogon_ctl*提供了生成Model类的功能，它从用户指定的数据库读取表信息，根据这些信息自动生成多个Model类的源文件。用户使用Model时include对应的头文件即可。</p>
+<p>显而易见，每一个Model类，对应一个特定的数据库表，每个Model类的实例，对应表的一行记录。</p>
+<p>model类的创建命令如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create model &lt;model_path&gt;
+</pre></div>
+</div>
+<p>最后一个参数是model存放的路径，该路径内必须有一个配置文件model.json，用以配置drogon_ctl到数据库的连接参数。它是JSON格式的文件，支持注释，例子如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;rdbms&quot;</span>:<span class="s2">&quot;postgresql&quot;</span>,
+    <span class="s2">&quot;host&quot;</span>:<span class="s2">&quot;127.0.0.1&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>:5432,
+    <span class="s2">&quot;dbname&quot;</span>:<span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;user&quot;</span>:<span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;passwd&quot;</span>:<span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;tables&quot;</span>:<span class="o">[]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>配置的参数和应用的配置文件一致，请参考配置文件。</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>tables*配置项是它特有的，是一个字符串数组，每个字符串表示要转化成Model的表名，如果该项为空，则所有的表都会生成对应的Model类。</p>
+<p>用drogon_ctl create project命令创建的工程目录下已经预先创建了models目录和对应的model.json文件，用户可以编辑配置文件后用drogon_ctl命令创建Model类。</p>
+</div>
+<div class="section" id="id3">
+<h2>Model类的接口<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>用户直接使用的主要有两类接口，getter接口和setter接口。</p>
+<p>getter接口又有两类：</p>
+<blockquote>
+<div><ul class="simple">
+<li>形如getColumnName的接口，取得该字段的智能指针，取得指针而不是值，主要是为了包含NULL数据的情况，用户可以通过判断该指针是否为空来确定该字段是否是NULL字段。</li>
+<li>形如getValueOfColumnName的接口，故名思议，该接口是取得值的，出于效率的考虑，该接口返回的是常引用。如果对应字段为NULL，该接口返回第二个参数给定的默认值。</li>
+</ul>
+</div></blockquote>
+<p>另外，二进制块类型(blob，bytea)有个特殊点的接口，形如getValueOfColumnNameAsString，把二进制数据装进std::string对象返给用户。</p>
+<p>setter接口用于设置对应字段的值，形如setColumnName，参数类型和字段类型对应。自动生成的字段比如自增主键是没有setter接口的。</p>
+<p>toJson()接口用于把model对象转换成JSON对象，二进制块类型采用base64编码，请用户自行实验。</p>
+<p>Model类的静态成员都表示表的信息，比如可以通过Cols静态成员获得每个字段的名字，在支持自动提示的编辑器中使用很方便。</p>
+</div>
+<div class="section" id="mapper">
+<h2>Mapper类模板<a class="headerlink" href="#mapper" title="Permalink to this headline">¶</a></h2>
+<p>Model对象和数据库表的映射都是通过Mapper类模板进行，Mapper类模板封装了常见的增删改查操作，使用户可以不必撰写sql语句即可执行上述操作。</p>
+<p>Mapper构造时很简单，模板参数就是你要存取的Model的类型，构造函数只有一个参数，就是前文提到的DbClient智能指针。前文说过，Transaction类是DbClient的子类，所以，你也可以用一个事务的智能指针构造Mapper对象，也就是说Mapper映射也是支持事务的。</p>
+<p>像DbClient一样，Mapper也同时提供异步和同步接口。同步接口都阻塞并可能抛异常，返回的future对象在get()时阻塞并可能抛异常，一般的异步接口不会抛异常，而是通过两个回调（结果回调和异常回调）返回结果，其中，异常回调的类型和DbClient接口里的一致，结果回调根据接口功能的不同也分成几类。列表如下（T是模板参数，也就是Model的类型）：</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意: 使用事务时，异常不必然导致回滚，下面的情况是不会回滚的，当findByPrimaryKey接口未找到符合条件的行时，当findOne接口找到少于或多于一行记录时，会抛异常或进入异常回调，异常类型是UnexpectedRows。如果业务逻辑需要在这种情况下回滚，请显式调用rollback()接口。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>条件对象<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>上一节中，很多接口都需要输入条件对象参数，条件对象是Criteria类的实例，表示某种where条件，比如某个字段大于、等于、小于某个给定值，或者isNull之类的条件。</p>
+<p>条件对象的构造函数很简单，一般第一个参数是字段名，第二个参数是表示比较类型的枚举值，第三个字段是被比较的值。如果比较类型是IsNull或IsNotNull，不需要第三个参数。</p>
+<p>比如：
+.. code-block:: cpp</p>
+<blockquote>
+<div>Criteria(“user_id”,CompareOperator::EQ,1);</div></blockquote>
+<p>表示，字段user_id等于1作为条件。实践中，我们更愿意写成下面这样：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_id</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>跟前面的写法等效，但是这个写法可以有助于编辑器的自动提示，效率更高并且不易出错；</p>
+<p>条件对象支持与和或的运算，两个条件对象的与和或会构造出新的条件对象，这样可以方便的构造嵌套的where条件。比如：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Mapper</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">(</span><span class="n">dbClientPtr</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">users</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">findBy</span><span class="p">(</span>
+<span class="p">(</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_name</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">LIKE</span><span class="p">,</span><span class="s">&quot;%Smith&quot;</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_gender</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="o">||</span><span class="p">(</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_user_name</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">LIKE</span><span class="p">,</span><span class="s">&quot;%Johnson&quot;</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">Criteria</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_gender</span><span class="p">,</span><span class="n">CompareOperator</span><span class="o">::</span><span class="n">EQ</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>上面这段程序是从users表里查询所有姓李的男士或者姓王的女士。</p>
+</div>
+<div class="section" id="id5">
+<h2>Mapper的链式接口<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>有些常见的sql约束，比如limit，offset等等，Mapper类模板也提供了支持，以链式接口的形式提供，意味着用户可以把多个约束串起来写。执行完任何一个接口，这些约束会被清空，也就是说，这些约束是在一次操作中有效的，比如：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Mapper</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">(</span><span class="n">dbClientPtr</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">users</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">Users</span><span class="o">::</span><span class="n">Cols</span><span class="o">::</span><span class="n">_join_time</span><span class="p">).</span><span class="n">limit</span><span class="p">(</span><span class="mi">25</span><span class="p">).</span><span class="n">offset</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>这段程序是从users表中选择用户列表，每页25行的第一页。</p>
+<p>链式接口基本可以望文生义，这里不再一一赘述，请参考Mapper.h头文件。</p>
+</div>
+<div class="section" id="id6">
+<h2>关系<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>数据库的表与表之间的关系，可以通过model.json配置文件中的relationships选项进行配置，我们采用了手动配置的方式而不是自动探测表的外键是因为现实工程中不使用外键的情况也非常常见。</p>
+<p><a href="#id7"><span class="problematic" id="id8">*</span></a>enable*选项为true，则生成的model会按照relationships的配置增加相应的接口。</p>
+<p>关系共分为三种类型，’has one’, ‘has many’和’many to many’。</p>
+<div class="section" id="has-one">
+<h3>has one<a class="headerlink" href="#has-one" title="Permalink to this headline">¶</a></h3>
+<p><em>has one</em> 代表了1对1的关系，原始表中的一条记录可以关联到目标表中的一条记录，反过来也一样。举个例子，产品表和库存单位表是1对1的关系，我们可以定义如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;has one&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;product&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;skus&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;SKU&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li>“type”: 表示这个关系是1对1；</li>
+<li>“original_table_name”: 原始表名字（这个表对应的model中将添加对应的方法）；</li>
+<li>“original_table_alias”: 别名（方法中的名字，因为1对1的关系中都是单数，所以设置为product），如果这个选项为空，则使用表名生成方法名；</li>
+<li>“original_key”: 原始表的关联键；</li>
+<li>“target_table_name”: 目标表的名字；</li>
+<li>“target_table_alias”: 目标表的别名，如果这个选项为空，则使用表名生成方法名；</li>
+<li>“target_key”: 目标表的关联键；</li>
+<li>“enable_reverse”: 指明是不是自动生成反向的关系，即在目标表对应的model类中添加获取原始表的记录的方法。</li>
+</ul>
+</div></blockquote>
+<p>按照这个设置，在products表对应的model类中，将添加如下的方法：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Relationship interfaces</span>
+<span class="kt">void</span> <span class="nf">getSKU</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Skus</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>这是一个异步接口，在回调中返回与当前product相关联的SKU对象。</p>
+<p>同时，由于enable_reverse选项设置为真，那么在skus表对应的model类中，将添加如下方法：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Relationship interfaces</span>
+<span class="kt">void</span> <span class="nf">getProduct</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Products</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="has-many">
+<h3>has many<a class="headerlink" href="#has-many" title="Permalink to this headline">¶</a></h3>
+<p><em>has many</em> 代表了一对多的关系，这样的关系中，代表了*多*的那个的那个表一般会有个字段和另一个表的主键相关联。比如产品和评价通常是一对多的关系，我们可以定义如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;has many&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;product&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;reviews&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>上面各个配置的含义跟前一个例子一样，这里不再赘述，因为评价有多个，是复数，所以不用另起一个别名了。按照该设置，drogon_ctl create model之后，products表对应的model中，会增加下面的接口：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getReviews</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Reviews</span><span class="o">&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>reviews表对应的model中，会增加下面的接口：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getProduct</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Products</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="many-to-many">
+<h3>many to many<a class="headerlink" href="#many-to-many" title="Permalink to this headline">¶</a></h3>
+<p>顾名思义，many to many代表了多对多的关系，通常，多对多的关系要增加一个中间表，中间表中的每一项对应原始表和目标表中的各1条记录。比如产品和购物车就是多对多的关系，我们可以定义如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;many to many&quot;</span>,
+    <span class="s2">&quot;original_table_name&quot;</span>: <span class="s2">&quot;products&quot;</span>,
+    <span class="s2">&quot;original_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;pivot_table&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;table_name&quot;</span>: <span class="s2">&quot;carts_products&quot;</span>,
+        <span class="s2">&quot;original_key&quot;</span>: <span class="s2">&quot;product_id&quot;</span>,
+        <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;cart_id&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;target_table_name&quot;</span>: <span class="s2">&quot;carts&quot;</span>,
+    <span class="s2">&quot;target_table_alias&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;target_key&quot;</span>: <span class="s2">&quot;id&quot;</span>,
+    <span class="s2">&quot;enable_reverse&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>上面的配置介绍过的选项含义和前面一样，只是对于中间表，多了一项pivot_table的配置，里面的选项可以望文生义，这里省略。</p>
+<p>按这个配置生成的products的model会添加如下方法：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getCarts</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Carts</span><span class="p">,</span><span class="n">CartsProducts</span><span class="o">&gt;&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+              <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>carts表的model类会添加如下方法：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">getProducts</span><span class="p">(</span><span class="k">const</span> <span class="n">DbClientPtr</span> <span class="o">&amp;</span><span class="n">clientPtr</span><span class="p">,</span>
+                 <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Products</span><span class="p">,</span><span class="n">CartsProducts</span><span class="o">&gt;&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rcb</span><span class="p">,</span>
+                 <span class="k">const</span> <span class="n">ExceptionCallback</span> <span class="o">&amp;</span><span class="n">ecb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="restful-api">
+<h2>Restful API 控制器<a class="headerlink" href="#restful-api" title="Permalink to this headline">¶</a></h2>
+<p>drogon_ctl还可以在创建model的同时，为每个model（或者说表）生成restful风格的controller，使用户在零编码的情况下，就生成了可以对表进行增删改查的API。这些API支持按主键查询、按条件查询、按特定字段排序、值返回指定字段、为每个字段指定别名以隐藏表结构等功能。它由model.json中的restful_api_controllers选项控制，相关的自选项在json文件中有相应的注释，用户可以自行尝试。</p>
+<p>需要注意的是，每个表的controller都被设计成由一个基类和一个子类组成，其中，基类和表密切相关，子类用于提供给用户实现特殊的业务逻辑，或者修饰接口格式。这样设计的好处是，当表结构发生变化的时候，用户可以控制只更新基类而不覆盖子类，保证了开发的连续性。</p>
+<p>鉴于这个功能不是那么被普遍需要，这里不做详细介绍了。</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">数据库 ORM</a><ul>
+<li><a class="reference internal" href="#model">Model</a></li>
+<li><a class="reference internal" href="#id3">Model类的接口</a></li>
+<li><a class="reference internal" href="#mapper">Mapper类模板</a></li>
+<li><a class="reference internal" href="#id4">条件对象</a></li>
+<li><a class="reference internal" href="#id5">Mapper的链式接口</a></li>
+<li><a class="reference internal" href="#id6">关系</a><ul>
+<li><a class="reference internal" href="#has-one">has one</a></li>
+<li><a class="reference internal" href="#has-many">has many</a></li>
+<li><a class="reference internal" href="#many-to-many">many to many</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restful-api">Restful API 控制器</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../DataBase-Transaction-zh/"
+                        title="previous chapter">数据库 事务</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Database-FastDbclient-zh/"
+                        title="next chapter">数据库 FastDbclient</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/DataBase-ORM-zh.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search/" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Database-FastDbclient-zh/" title="数据库 FastDbclient"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../DataBase-Transaction-zh/" title="数据库 事务"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-zh/" >中文文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

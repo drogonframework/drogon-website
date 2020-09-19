@@ -1,0 +1,141 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    <title>&#25968;&#25454;&#24211; &#20107;&#21153;</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="next" title="&#25968;&#25454;&#24211; ORM" href="DataBase-ORM-zh.html" />
+    <link rel="prev" title="&#25968;&#25454;&#24211; Dbclient" href="DataBase-DbClient-zh.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="DataBase-ORM-zh.html" title="&#25968;&#25454;&#24211; ORM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="DataBase-DbClient-zh.html" title="&#25968;&#25454;&#24211; Dbclient"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" accesskey="U">&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>&#25968;&#25454;&#24211; &#20107;&#21153;</h1>
+<p><a href="#id2"><span class="problematic" id="id3">**</span></a>&#20107;&#21153;**&#26159;&#20851;&#31995;&#22411;&#25968;&#25454;&#24211;&#30340;&#37325;&#35201;&#29305;&#24615;&#65292;Drogon&#36890;&#36807;*Transaction*&#31867;&#25552;&#20379;&#20102;&#23545;&#20107;&#21153;&#30340;&#25903;&#25345;&#12290;</p>
+<p><a href="#id4"><span class="problematic" id="id5">*</span></a>Transaction*&#31867;&#30340;&#23545;&#35937;&#30001;*DbClient*&#21019;&#24314;&#65292;&#20107;&#21153;&#26377;&#20851;&#30340;&#25805;&#20316;&#24456;&#22810;&#26159;&#33258;&#21160;&#36827;&#34892;&#30340;&#65306;</p>
+<blockquote>
+<div><a href="#id6"><span class="problematic" id="id7">*</span></a>Transaction*&#23545;&#35937;&#21019;&#24314;&#20043;&#21021;&#65292;&#33258;&#21160;&#25191;&#34892;&#20102;*begin*&#35821;&#21477;&#24320;&#22987;&#20107;&#21153;&#65307;
+<a href="#id8"><span class="problematic" id="id9">*</span></a>Transaction*&#23545;&#35937;&#26512;&#26500;&#26102;&#65292;&#33258;&#21160;&#25191;&#34892;*commit*&#35821;&#21477;&#32467;&#26463;&#20107;&#21153;&#65307;
+&#22914;&#26524;&#20013;&#38388;&#20986;&#29616;&#23548;&#33268;&#20107;&#21153;&#22833;&#36133;&#30340;&#24322;&#24120;&#65292;&#33258;&#21160;&#25191;&#34892;*rollback*&#35821;&#21477;&#22238;&#28378;&#20107;&#21153;&#65307;
+&#22914;&#26524;&#20107;&#21153;&#24050;&#32463;&#22238;&#28378;&#65292;&#21017;&#20043;&#21518;&#30340;sql&#35821;&#21477;&#37117;&#20250;&#36820;&#22238;&#24322;&#24120;&#65288;&#25243;&#24322;&#24120;&#25110;&#32773;&#25191;&#34892;&#24322;&#24120;&#22238;&#35843;&#65289;&#65307;</div></blockquote>
+<div class="section" id="id10">
+<h2>&#20107;&#21153;&#30340;&#21019;&#24314;</h2>
+<p>&#20107;&#21153;&#21019;&#24314;&#25509;&#21475;&#30001;DbClient&#25552;&#20379;&#65292;&#22914;&#19979;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Transaction</span><span class="o">&gt;</span> <span class="n">newTransaction</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">commitCallback</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span><span class="o">&gt;</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>&#36825;&#20010;&#25509;&#21475;&#24456;&#31616;&#21333;&#65292;&#23427;&#36820;&#22238;&#19968;&#20010;*Transaction*&#23545;&#35937;&#30340;&#26234;&#33021;&#25351;&#38024;&#65292;&#26174;&#28982;&#65292;&#36825;&#20010;&#26234;&#33021;&#25351;&#38024;&#22833;&#21435;&#25152;&#26377;&#25345;&#26377;&#32773;&#32780;&#26512;&#26500;&#20107;&#21153;&#23545;&#35937;&#26102;&#65292;&#20107;&#21153;&#20063;&#23601;&#32467;&#26463;&#20102;&#12290;&#21442;&#25968;*commitCallback*&#29992;&#20110;&#36820;&#22238;&#20107;&#21153;&#25552;&#20132;&#26159;&#21542;&#25104;&#21151;&#65292;&#38656;&#35201;&#27880;&#24847;&#30340;&#26159;&#65292;&#36825;&#20010;&#22238;&#35843;&#21482;&#29992;&#26469;&#25351;&#31034;*commit*&#21629;&#20196;&#26159;&#21542;&#25104;&#21151;&#65292;&#22914;&#26524;&#65292;&#20107;&#21153;&#22312;&#25191;&#34892;&#36807;&#31243;&#20013;&#33258;&#21160;&#25110;&#25163;&#21160;&#22238;&#28378;&#20102;&#65292;&#36825;&#20010;&#22238;&#35843;&#23601;&#19981;&#20250;&#25191;&#34892;&#20102;&#12290;&#36890;&#24120;&#65292;<a href="#id11"><span class="problematic" id="id12">*</span></a>commit*&#21629;&#20196;&#37117;&#20250;&#25104;&#21151;&#65292;&#36825;&#20010;&#22238;&#35843;&#30340;bool&#31867;&#22411;&#21442;&#25968;&#20026;true&#65292;&#21482;&#26377;&#26576;&#20123;&#29305;&#27530;&#24773;&#20917;&#65292;&#27604;&#22914;*commit*&#25191;&#34892;&#36807;&#31243;&#20013;&#36830;&#25509;&#26029;&#20102;&#65292;&#25165;&#20250;&#23548;&#33268;*commitCallback*&#36890;&#30693;&#29992;&#25143;*commit*&#22833;&#36133;&#65292;&#36825;&#26102;&#65292;&#20107;&#21153;&#22312;&#26381;&#21153;&#31471;&#30340;&#29366;&#24577;&#26159;&#19981;&#30830;&#23450;&#30340;&#65292;&#29992;&#25143;&#38656;&#29305;&#27530;&#22788;&#29702;&#65292;&#24403;&#28982;&#65292;&#32771;&#34385;&#21040;&#36825;&#31181;&#24773;&#20917;&#26497;&#23569;&#21457;&#29983;&#65292;&#38750;&#20851;&#38190;&#19994;&#21153;&#20063;&#21487;&#20197;&#36873;&#25321;&#24573;&#30053;&#36825;&#31181;&#20107;&#20214;&#65292;&#37027;&#20040;&#29992;&#25143;&#21482;&#38656;&#35201;&#22312;&#21019;&#24314;&#20107;&#21153;&#26102;&#24573;&#30053;&#36825;&#20010;&#21442;&#25968;&#21363;&#21487;&#65288;&#40664;&#35748;&#30340;&#31354;&#22238;&#35843;&#20250;&#20256;&#20837;&#36825;&#20010;&#25509;&#21475;&#65289;&#12290;</p>
+<p>&#20107;&#21153;&#35201;&#29420;&#21344;&#19968;&#20010;&#25968;&#25454;&#24211;&#36830;&#25509;&#65292;&#22240;&#27492;&#20107;&#21153;&#21019;&#24314;&#36807;&#31243;&#20013;&#65292;<a href="#id13"><span class="problematic" id="id14">*</span></a>DbClient*&#35201;&#20174;&#33258;&#24049;&#30340;&#36830;&#25509;&#27744;&#20013;&#36873;&#19968;&#20010;&#31354;&#38386;&#36830;&#25509;&#20132;&#32473;&#20107;&#21153;&#23545;&#35937;&#31649;&#29702;&#65292;&#36825;&#23601;&#26377;&#19968;&#20010;&#38382;&#39064;&#65292;&#22914;&#26524;DbClient&#30340;&#25152;&#26377;&#36830;&#25509;&#37117;&#22312;&#25191;&#34892;sql&#25110;&#32773;&#20854;&#20182;&#20107;&#21153;&#65292;&#37027;&#20040;&#65292;&#36825;&#20010;&#25509;&#21475;&#20250;&#38459;&#22622;&#30452;&#21040;&#26377;&#31354;&#38386;&#36830;&#25509;&#20026;&#27490;&#12290;</p>
+<p>&#26694;&#26550;&#21516;&#26102;&#25552;&#20379;&#20102;&#19968;&#20010;&#24322;&#27493;&#25509;&#21475;&#21019;&#24314;&#20107;&#21153;&#65292;&#22914;&#19979;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">newTransactionAsync</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Transaction</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">callback</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#36825;&#20010;&#25509;&#21475;&#36890;&#36807;&#22238;&#35843;&#20989;&#25968;&#36820;&#22238;&#20107;&#21153;&#23545;&#35937;&#65292;&#19981;&#20250;&#38459;&#22622;&#24403;&#21069;&#32447;&#31243;&#65292;&#20445;&#35777;&#20102;&#24212;&#29992;&#30340;&#39640;&#24182;&#21457;&#65292;&#32570;&#28857;&#26159;&#22810;&#20102;&#19968;&#27425;&#22238;&#35843;&#20989;&#25968;&#30340;&#23884;&#22871;&#12290;&#29992;&#25143;&#21487;&#26681;&#25454;&#23454;&#38469;&#24773;&#20917;&#33258;&#34892;&#36873;&#29992;&#12290;</p>
+</div>
+<div class="section" id="id15">
+<h2>&#20107;&#21153;&#30340;&#25509;&#21475;</h2>
+<p><a href="#id16"><span class="problematic" id="id17">*</span></a>Transaction*&#30340;&#25509;&#21475;&#21644;*DbClient*&#20960;&#20046;&#23436;&#20840;&#19968;&#33268;&#65292;&#38500;&#20102;&#19979;&#38754;&#36825;&#20004;&#28857;&#21306;&#21035;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li><a href="#id18"><span class="problematic" id="id19">*</span></a>Transaction*&#25552;&#20379;&#20102;*rollback()*&#25509;&#21475;&#65292;&#20351;&#29992;&#25143;&#21487;&#20197;&#22312;&#20219;&#20309;&#24773;&#20917;&#19979;&#22238;&#28378;&#20107;&#21153;&#65292;&#27604;&#22914;&#24182;&#26410;&#26377;&#20219;&#20309;&#38169;&#35823;&#21457;&#29983;&#65292;&#21482;&#26159;&#19994;&#21153;&#36923;&#36753;&#35201;&#27714;&#22238;&#28378;&#20107;&#21153;&#30340;&#24773;&#20917;&#65292;&#26377;&#26102;&#20505;&#20107;&#21153;&#24050;&#32463;&#33258;&#21160;&#22238;&#28378;&#20102;&#65292;&#36825;&#26102;&#20505;&#20877;&#27425;&#35843;&#29992;rollback()&#25509;&#21475;&#65292;&#27809;&#26377;&#20219;&#20309;&#36127;&#20316;&#29992;&#65292;&#22240;&#27492;&#65292;&#26174;&#31034;&#30340;&#20351;&#29992;*rollback()*&#25509;&#21475;&#26159;&#20010;&#19981;&#38169;&#30340;&#31574;&#30053;&#65292;&#33267;&#23569;&#21487;&#20197;&#20445;&#35777;&#19981;&#20250;&#38169;&#35823;&#25552;&#20132;&#12290;</li>
+<li>&#29992;&#25143;&#19981;&#33021;&#35843;&#29992;&#20107;&#21153;&#30340;*newTransaction()*&#25509;&#21475;&#65292;&#36825;&#26159;&#23481;&#26131;&#29702;&#35299;&#30340;&#65292;&#34429;&#28982;&#25968;&#25454;&#24211;&#26377;&#23376;&#20107;&#21153;&#30340;&#27010;&#24565;&#65292;&#20294;&#30446;&#21069;&#26694;&#26550;&#24182;&#19981;&#25903;&#25345;&#12290;</li>
+</ul>
+</div></blockquote>
+<p>&#20107;&#23454;&#19978;&#65292;<a href="#id20"><span class="problematic" id="id21">*</span></a>Transaction*&#34987;&#35774;&#35745;&#25104;*DbClient*&#30340;&#23376;&#31867;&#65292;&#20063;&#26159;&#20026;&#20102;&#20445;&#25345;&#36825;&#20123;&#25509;&#21475;&#30340;&#19968;&#33268;&#24615;&#65292;&#21516;&#26102;&#65292;&#20063;&#20026;&#21518;&#25991;*ORM*&#30340;&#20351;&#29992;&#21019;&#36896;&#20102;&#26041;&#20415;&#26465;&#20214;&#12290;</p>
+<p>&#26694;&#26550;&#30446;&#21069;&#27809;&#26377;&#25552;&#20379;&#25511;&#21046;&#20107;&#21153;&#38548;&#31163;&#31561;&#32423;&#30340;&#25509;&#21475;&#65292;&#20063;&#23601;&#26159;&#35828;&#65292;&#38548;&#31163;&#31561;&#32423;&#23601;&#26159;&#24403;&#21069;&#25968;&#25454;&#24211;&#26381;&#21153;&#30340;&#40664;&#35748;&#31561;&#32423;&#12290;</p>
+</div>
+<div class="section" id="id22">
+<h2>&#20107;&#21153;&#30340;&#29983;&#21629;&#21608;&#26399;</h2>
+<p>&#20107;&#21153;&#23545;&#35937;&#30340;&#26234;&#33021;&#25351;&#38024;&#38500;&#20102;&#34987;&#29992;&#25143;&#25345;&#26377;&#22806;&#65292;&#24403;&#23427;&#26377;&#26410;&#25191;&#34892;&#30340;sql&#26102;&#65292;&#26694;&#26550;&#20063;&#20250;&#25345;&#26377;&#65292;&#25152;&#20197;&#19981;&#29992;&#25285;&#24515;&#22312;&#36824;&#26377;&#26410;&#25191;&#34892;sql&#30340;&#24773;&#20917;&#19979;&#20107;&#21153;&#23545;&#35937;&#34987;&#26512;&#26500;&#12290;&#21478;&#22806;&#65292;&#20107;&#21153;&#23545;&#35937;&#26234;&#33021;&#25351;&#38024;&#24120;&#24120;&#22312;&#23427;&#30340;&#26576;&#20010;&#25509;&#21475;&#30340;&#32467;&#26524;&#22238;&#35843;&#37324;&#34987;&#25429;&#33719;&#24182;&#20351;&#29992;&#65292;&#36825;&#20063;&#26159;&#27491;&#24120;&#30340;&#20351;&#29992;&#26041;&#24335;&#65292;&#19981;&#35201;&#25285;&#24515;&#30001;&#27492;&#24341;&#21457;&#24490;&#29615;&#24341;&#29992;&#23548;&#33268;&#20107;&#21153;&#23545;&#35937;&#27704;&#36828;&#19981;&#20250;&#26512;&#26500;&#65292;&#26694;&#26550;&#20250;&#36890;&#36807;&#22238;&#35843;&#23436;&#27605;&#21518;&#28165;&#31354;&#20107;&#21153;&#20869;&#37096;&#30340;&#22238;&#35843;&#20989;&#25968;&#23545;&#35937;&#26469;&#25171;&#30772;&#24490;&#29615;&#24341;&#29992;&#65307;</p>
+</div>
+<div class="section" id="id23">
+<h2>&#19968;&#20010;&#20363;&#23376;</h2>
+<p>&#20030;&#20010;&#26368;&#31616;&#21333;&#30340;&#20363;&#23376;&#65292;&#20551;&#35774;&#26377;&#19968;&#20010;&#20219;&#21153;&#34920;&#65292;&#29992;&#25143;&#20174;&#20013;&#36873;&#21462;&#19968;&#20010;&#26410;&#22788;&#29702;&#29366;&#24577;&#30340;&#20219;&#21153;&#65292;&#25226;&#23427;&#25913;&#25104;&#27491;&#22312;&#22788;&#29702;&#20013;&#30340;&#29366;&#24577;&#65292;&#20026;&#20102;&#38450;&#27490;&#24182;&#21457;&#30340;&#31454;&#24577;&#26465;&#20214;&#65292;&#25105;&#20204;&#20351;&#29992;Transaction&#65292;&#31243;&#24207;&#22914;&#19979;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">transPtr</span> <span class="o">=</span> <span class="n">clientPtr</span><span class="o">-&gt;</span><span class="n">newTransaction</span><span class="p">();</span>
+    <span class="n">transPtr</span><span class="o">-&gt;</span><span class="n">execSqlAsync</span><span class="p">(</span> <span class="s">&quot;select * from tasks where status=$1 for update order by time&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;none&quot;</span><span class="p">,</span>
+                            <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span> <span class="n">Result</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+                                <span class="p">{</span>
+                                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Got a task!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                                    <span class="o">*</span><span class="n">transPtr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;update tasks set status=$1 where task_id=$2&quot;</span>
+                                            <span class="o">&lt;&lt;</span> <span class="s">&quot;handling&quot;</span>
+                                            <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&quot;task_id&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="p">()</span>
+                                            <span class="o">&gt;&gt;</span> <span class="p">[](</span><span class="k">const</span> <span class="n">Result</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">)</span>
+                                                <span class="p">{</span>
+                                                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Updated!&quot;</span><span class="p">;</span>
+                                                    <span class="p">...</span> <span class="k">do</span> <span class="n">something</span> <span class="n">about</span> <span class="n">the</span> <span class="n">task</span><span class="p">;</span>
+                                                <span class="p">}</span>
+                                            <span class="o">&gt;&gt;</span> <span class="p">[](</span><span class="k">const</span> <span class="n">DrogonDbException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+                                                <span class="p">{</span>
+                                                    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;err:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">base</span><span class="p">().</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">;</span>
+                                                <span class="p">};</span>
+                                <span class="p">}</span>
+                                <span class="k">else</span>
+                                <span class="p">{</span>
+                                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;No new tasks found!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                                <span class="p">}</span>
+                            <span class="p">},</span>
+                            <span class="p">[](</span><span class="k">const</span> <span class="n">DrogonDbException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;err:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">base</span><span class="p">().</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">;</span>
+                            <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>&#26412;&#20363;&#20013;&#20351;&#29992;select for update&#36991;&#20813;&#24182;&#21457;&#20462;&#25913;&#65292;update&#35821;&#21477;&#22312;select&#35821;&#21477;&#30340;&#32467;&#26524;&#22238;&#35843;&#20013;&#23436;&#25104;&#65292;&#36827;&#34892;&#20102;&#19968;&#27425;&#23884;&#22871;&#65292;&#26368;&#22806;&#23618;&#30340;&#22823;&#25324;&#21495;&#26159;&#20026;&#20102;&#38480;&#23450;transPtr&#30340;&#20316;&#29992;&#33539;&#22260;&#65292;&#20351;&#20043;&#22312;&#25191;&#34892;&#23436;sql&#21518;&#21450;&#26102;&#30340;&#38144;&#27585;&#20174;&#32780;&#32467;&#26463;&#20107;&#21153;&#12290;</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="DataBase-ORM-zh.html" title="&#25968;&#25454;&#24211; ORM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="DataBase-DbClient-zh.html" title="&#25968;&#25454;&#24211; Dbclient"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" >&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

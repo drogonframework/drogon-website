@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+  <head>
+    <meta charset="utf-8" />
+    <title>Benchmarks</title>
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head><body>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="benchmarks">
+<h1>Benchmarks</h1>
+<p>As a C++ Http application framework, performance should be one of the focus of attention. This section introduces Drogon’s simple tests and achievements;</p>
+<div class="section" id="test-environment">
+<h2>Test environment</h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>The system is Linux CentOS 7.4;</p></li>
+<li><p>The device is a Dell server, the CPU is two Intel(R) Xeon(R) CPUs E5-2670 &#64; 2.60GHz, 16 cores and 32 threads;</p></li>
+<li><p>Memory 64GB;</p></li>
+<li><p>gcc version 7.3.0;</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="test-plan-and-results">
+<h2>Test plan and results</h2>
+<p>We just want to test the performance of the drogon framework, so we want to simplify the controller’s processing as much as possible. We only do an HttpSimpleController and register it on the <em>/benchmark</em> path. The controller returns <em>&lt;p&gt;Hello, world!&lt;/p&gt;</em> for any request. Set the number of drogon threads to 16. The processing function is as follows and you can find the source code at the <em>drogon/examples/benchmark</em> path:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">BenchmarkCtrl</span><span class="o">::</span><span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+    <span class="k">auto</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpResponse</span><span class="p">();</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setBody</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Hello, world!&lt;/p&gt;&quot;</span><span class="p">);</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setExpiredTime</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For comparison, I chose nginx for comparison testing, wrote a <em>hello_world_module</em>, and compiled it with the nginx source. The nginx worker_processes parameter is set to 16.</p>
+<p>The test tool is <em>httpress</em>, a good performance HTTP stress test tool.</p>
+<p>We adjust the parameters of httpress, test each set of parameters five times, and record the maximum and minimum values ​of the number of requests processed per second. The test results are as follows:</p>
+<table class="docutils">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 40%" />
+<col style="width: 8%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command line</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"></th>
+<th class="head"><p>Drogon(kQPS)   nginx(kQPS)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>httpress -c 100 -n 1000000 -t 16 -k -q URL</p></td>
+<td><p>100 connections, 1 million requests, 16 threads,Keep-Alive</p></td>
+<td><p>561/552</p></td>
+<td><p>330/329</p></td>
+</tr>
+<tr class="row-odd"><td><p>httpress -c 100 -n 1000000 -t 12 -q URL</p></td>
+<td><p>100 connections, 1 million requests, 12 threads, no Keep-Alive</p></td>
+<td><p>140/135</p></td>
+<td><p>31/49</p></td>
+</tr>
+<tr class="row-even"><td><p>httpress -c 1000 -n 1000000 -t 16 -k -q URL</p></td>
+<td><p>1000 connections, 1 million requests, 16 threads,Keep-Alive</p></td>
+<td><p>573/565</p></td>
+<td><p>333/327</p></td>
+</tr>
+<tr class="row-odd"><td><p>httpress -c 1000 -n 1000000 -t 16 -q URL</p></td>
+<td><p>1000 connections, 1 million requests, 16 threads,no Keep-Alive</p></td>
+<td><p>155/143</p></td>
+<td><p>52/50</p></td>
+</tr>
+<tr class="row-even"><td><p>httpress -c 10000 -n 4000000 -t 16 -k -q URL</p></td>
+<td><p>10000 connections, 4 million requests, 16 threads,Keep-Alive</p></td>
+<td><p>512/508</p></td>
+<td><p>316/314</p></td>
+</tr>
+<tr class="row-odd"><td><p>httpress -c 10000 -n 1000000 -t 16 -q URL</p></td>
+<td><p>10000 connections, 1 million requests, 16 threads,no Keep-Alive</p></td>
+<td><p>143/141</p></td>
+<td><p>43/40</p></td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, using the Keep-Alive option on the client side, drogon can process more than 500,000 requests per second in the case where a connection can send multiple requests. This score is quite good. In the case that each request initiates a connection, CPU time will be spent on TCP connection establishment and disconnection, and the throughput will drop to 140,000 requests per second, which is reasonable.</p>
+<p>It’s easy to see that drogon has a clear advantage over nginx in the above test. If someone does a more accurate test, please correct me.</p>
+<p>The image below is a screenshot of a test:</p>
+<p>Test Result</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

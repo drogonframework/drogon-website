@@ -1,0 +1,163 @@
+控制器 WebSocketController
+**************************
+
+
+WebSocketController
+===================
+
+顾名思义，>>*<<WebSocketController*用于处理websocket逻辑。websocket是
+基于HTTP的一种长连接方案，在websocket建立之初，有一次HTTP格式的请求和
+应答交换，建立完成后，所有的消息在websocket上传输，消息由固定的格式包
+装，但消息的内容和收发次序没有任何要求，完全由用户定义。
+
+可以由*drogon_ctl*工具快速生成*WebSocketController*的源文件，命令格式
+如下：:
+
+   drogon_ctl create controller -w <[namespace::]class_name>
+
+假设我们要通过websocket实现一个简单的回声功能，即服务端只是简单的把客
+户端发来的消息再发回去，通过drogon_ctl创建WebSocketController的实现类
+EchoWebsock，如下:
+
+   drogon_ctl create controller -w EchoWebsock
+
+该命令会生成EchoWebsock.h和EchoWebsock.cc两个文件，
+
+*EchoWebsock.h*
+
+   #pragma once
+   #include <drogon/WebSocketController.h>
+   using namespace drogon;
+   class EchoWebsock:public drogon::WebSocketController<EchoWebsock>
+   {
+   public:
+       virtual void handleNewMessage(const WebSocketConnectionPtr&,
+                                   std::string &&)override;
+       virtual void handleNewConnection(const HttpRequestPtr &,
+                                       const WebSocketConnectionPtr&)override;
+       virtual void handleConnectionClosed(const WebSocketConnectionPtr&)override;
+       WS_PATH_LIST_BEGIN
+       //list path definitions here;
+       WS_PATH_LIST_END
+   };
+
+*EchoWebsock.cc*
+
+   #include "EchoWebsock.h"
+   void EchoWebsock::handleNewMessage(const WebSocketConnectionPtr &wsConnPtr,std::string &&message)
+   {
+       //write your application logic here
+   }
+   void EchoWebsock::handleNewConnection(const HttpRequestPtr &req,const WebSocketConnectionPtr &wsConnPtr)
+   {
+       //write your application logic here
+   }
+   void EchoWebsock::handleConnectionClosed(const WebSocketConnectionPtr &wsConnPtr)
+   {
+       //write your application logic here
+   }
+
+编辑后内容如下：
+
+*EchoWebsock.h*
+
+   #pragma once
+   #include <drogon/WebSocketController.h>
+   using namespace drogon;
+   class EchoWebsock:public drogon::WebSocketController<EchoWebsock>
+   {
+   public:
+       virtual void handleNewMessage(const WebSocketConnectionPtr&,
+                                   std::string &&)override;
+       virtual void handleNewConnection(const HttpRequestPtr &,
+                                       const WebSocketConnectionPtr&)override;
+       virtual void handleConnectionClosed(const WebSocketConnectionPtr&)override;
+       WS_PATH_LIST_BEGIN
+       //list path definitions here;
+       WS_PATH_ADD("/echo");
+       WS_PATH_LIST_END
+   };
+
+*EchoWebsock.cc*
+
+   #include "EchoWebsock.h"
+   void EchoWebsock::handleNewMessage(const WebSocketConnectionPtr &wsConnPtr,std::string &&message)
+   {
+       //write your application logic here
+       wsConnPtr->send(message);
+   }
+   void EchoWebsock::handleNewConnection(const HttpRequestPtr &req,const WebSocketConnectionPtr &wsConnPtr)
+   {
+       //write your application logic here
+   }
+   void EchoWebsock::handleConnectionClosed(const WebSocketConnectionPtr &wsConnPtr)
+   {
+       //write your application logic here
+   }
+
+首先，在这个例子中，通过*WS_PATH_ADD*宏把这个控制器注册到了*/echo*路径
+上，>>*<<WS_PATH_ADD*宏的用法跟之前介绍的其他控制器的宏类似，也可以注
+册路径并且附带若干过滤器Filter。由于websocket在框架中单独处理，所以它
+可以和前两种控制器的路径重复而不会相互影响。
+
+其次，本例中三个虚函数的实现，只有handleNewMessage有实质内容，只是简单
+的把收到的消息通过send接口发回客户端。把这个控制器编译进框架，就可以看
+到效果，请各位自己试验吧。
+
+Note: 注意：和通常的HTTP协议一样，http的websocket可以被旁路还原，如
+  果需要 安全保障，应由https提供加密功能，当然，用户自己在服务端和客户
+  端完成 加密和解密也是可以的，只是https更方便，底层都由drogon处理，用
+  户只需 关心业务逻辑。
+
+用户自定义的WebSocketController类继承自drogon::WebSocketController类模
+板，模板参数是子类类型，用户需自己实现如下三个虚函数来对websocket的建
+立、关闭和消息进行处理：
+
+容易知道:
+
+   * handleNewConnection is called after the websocket is
+     established. req is the setup request sent by the client. At this
+     time, the framework has returned the response. What users can do
+     is to get some additional information through req, such as token.
+     wsConn is a smart pointer to this websocket object, and the
+     commonly used interface will be discussed later.
+
+   * handleNewMessage is called after the websocket receives the new
+     message. The message is stored in the message variable. Note that
+     the message is the message payload. The framework has finished
+     the decapsulation and decoding of the message. The user can
+     directly process the message itself.
+
+   * handleConnectionClosed is called after the websocket connection
+     is closed, and the user can do some finishing work.
+
+
+WebSocketConnection
+===================
+
+WebSocketConnection对象常用接口如下：
+
+*WebSocketConnection.h*
+
+   //发送websocket消息，消息的编码和封包都由框架负责，这里直接发送消息的净荷
+   //of the message are the responsibility of the framework
+   void send(const char *msg,uint64_t len);
+   void send(const std::string &msg);
+
+   //本websocket的本端和远端地址
+   const trantor::InetAddress &localAddr() const;
+   const trantor::InetAddress &peerAddr() const;
+
+   //本weosocket的连接状态
+   bool connected() const;
+   bool disconnected() const;
+
+   //关闭本websocket
+   void shutdown();//close write
+   void forceClose();//close
+
+   //设置和获取本websocket的上下文，由用户存入一些业务数据，
+   //any类型意味着可以存取任意类型的对象。
+   void setContext(const any &context);
+   const any &getContext() const;
+   any *getMutableContext();

@@ -1,0 +1,383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>配置文件</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="drogon_ctl命令" href="Drogon_ctl-Command-zh.html" />
+    <link rel="prev" title="插件" href="Plugins-zh.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Drogon_ctl-Command-zh.html" title="drogon_ctl命令"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Plugins-zh.html" title="插件"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" accesskey="U">中文文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>配置文件</h1>
+<p>你可以通过DrogonAppFramework实例的多个接口配置各种参数来控制Http服务端的某些行为。不过，使用配置文件是更好的方式，原因如下：</p>
+<blockquote>
+<div><ul class="simple">
+<li>使用配置文件而不是源码，可以在运行期而不是编译期决定应用的行为，这无疑是更方便和灵活的方式；</li>
+<li>可以保持main文件的简洁；</li>
+</ul>
+</div></blockquote>
+<p>所有的配置接口都有对应的配置文件选项支持，基于上面这些额外的好处，建议应用开发者使用配置文件配置应用的各种参数。</p>
+<p>配置文件的加载很简单，在DrogonAppFramework实例调用run接口之前，调用loadConfigFile接口即可，参数是配置文件的路径和文件名，比如：</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text"><strong>main.cc</strong></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">drogon</span><span class="o">::</span><span class="n">app</span><span class="p">().</span><span class="n">loadConfigFile</span><span class="p">(</span><span class="s">&quot;config.json&quot;</span><span class="p">);</span>
+    <span class="n">drogon</span><span class="o">::</span><span class="n">app</span><span class="p">().</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>这段程序，加载配置文件*config.json*，然后运行。具体的监听端口、日志输出、数据库配置等等行为都可以由配置文件配置，事实上，这段程序基本就可以是整个webapp应用的主函数的全部代码了。</p>
+<div class="section" id="id2">
+<h2>文件说明</h2>
+<p>配置文件的例子在源码目录的顶层*config.example.json*，如果你使用drogon_ctl create project命令创建工程，那么，在工程目录里也可以找到内容一致的文件*config.json*。所以，你基本上不需要重写，而是对这个文件进行适当的修改，就可以完成对webapp的配置。</p>
+<p>文件是json格式，支持注释，你可以用c++的注释符号/**/和//把不需要的配置项注释掉。</p>
+<p>注释掉配置项后，框架会使用默认值初始化，对应项的默认值在配置文件中都有说明，下面分项详述。</p>
+</div>
+<div class="section" id="ssl">
+<h2>SSL</h2>
+<p>ssl项是为了配置https服务的加密配置文件，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;ssl&quot;</span>: <span class="o">{</span>
+  <span class="s2">&quot;cert&quot;</span>: <span class="s2">&quot;../../trantor/trantor/tests/server.pem&quot;</span>,
+  <span class="s2">&quot;key&quot;</span>: <span class="s2">&quot;../../trantor/trantor/tests/server.pem&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>其中，cert是证书文件路径，key是私钥文件路径，如果一个文件既包含证书也包含私钥，则两个路径可以配制成相同的。</p>
+<p>文件的编码格式PEM。</p>
+</div>
+<div class="section" id="listeners">
+<h2>listeners监听器</h2>
+<p>顾名思义，listeners项是为了配置webapp的监听器，它是一个JSON数组类型，每一个JSON对象都表示一个监听，具体的配置如下：</p>
+<p>如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;listeners&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+    <span class="s2">&quot;address&quot;</span>: <span class="s2">&quot;0.0.0.0&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>: <span class="m">80</span>,
+    <span class="s2">&quot;https&quot;</span>: <span class="nb">false</span>
+    <span class="o">}</span>,
+    <span class="o">{</span>
+    <span class="s2">&quot;address&quot;</span>: <span class="s2">&quot;0.0.0.0&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>: <span class="m">443</span>,
+    <span class="s2">&quot;https&quot;</span>: true,
+    <span class="s2">&quot;cert&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;key&quot;</span>: <span class="s2">&quot;&quot;</span>
+    <span class="o">}</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>address</em>: 字符串类型，表示监听的IP地址，如果没有该项，则采用默认值”0.0.0.0”</li>
+<li><em>port</em>: 整数类型，表示监听的端口，必须是合法的端口号，没有默认值，必填项。</li>
+<li><em>https</em>: 布尔类型，表示是否采用https，默认值是false，表示使用http。</li>
+<li><em>cert</em> and <em>key</em>: 字符串类型，在https为true时有效，表示https的证书和私钥，默认值是空字符串，表示采用全局的ssl配置的证书和私钥文件；</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="db-clients">
+<h2>db_clients</h2>
+<p>用于配置数据库客户端，它是一个JSON数组类型，每一个JSON对象都表示一个单独的数据库客户端，具体的配置如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;db_clients&quot;</span>:<span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;rdbms&quot;</span>: <span class="s2">&quot;postgresql&quot;</span>,
+    <span class="s2">&quot;host&quot;</span>: <span class="s2">&quot;127.0.0.1&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>: <span class="m">5432</span>,
+    <span class="s2">&quot;dbname&quot;</span>: <span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;user&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;passwd&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;is_fast&quot;</span>: false,
+    <span class="s2">&quot;connection_number&quot;</span>: <span class="m">1</span>,
+    <span class="s2">&quot;file_name&quot;</span>: <span class="s2">&quot;&quot;</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>其中:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>name</em>: 字符串，客户端名字，默认是”default”，name是应用开发者从框架获取数据库客户端的标记，如果有多项客户端，name字段必须不同，否则，框架不会正常工作；</li>
+<li><em>rdbms</em>：字符串，表示数据库服务端类型，目前支持”postgresql”和”mysql”，大小写不敏感。</li>
+<li><em>host</em>：字符串，数据库服务端地址，localhost是默认值；</li>
+<li><em>port</em>：整数，数据库服务端的端口号；</li>
+<li><em>dbname</em>：字符串，数据库名字；</li>
+<li><em>user</em>：字符串，用户名；</li>
+<li><em>passwd</em>：字符串，密码；</li>
+<li><em>is_fast</em>：bool，默认false，表明该客户端是否是FastDbClient；</li>
+<li><em>connection_number</em>：到数据库服务端的连接数，至少是1，默认值也是1，影响数据读写的并发量；如果is_fast为真，该数值表示每个事件循环的连接数，否则表示总的连接数；</li>
+<li><em>filename</em>: sqlite3数据库的文件名；</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="threads-num">
+<h2>threads num线程数</h2>
+<p>属于app选项的子项，整数，默认值是1，表示框架IO线程数，对网络并发有明确的影响，这个数字并不是越大越好，了解non-blocking I/O原理的应该知道，这个数值应该和你期望网络IO占用的CPU核心数一致。如果这个参数设为0，那么IO线程数将设置为全部CPU核心数。比如：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;threads_num&quot;</span>: <span class="m">16</span>,
+</pre></div>
+</div>
+<p>表示，网络IO占用16个线程，在高负荷情况下，最多可以跑满16个CPU核心(线程核心)。</p>
+</div>
+<div class="section" id="session">
+<h2>session会话</h2>
+<p>会话相关的选项也是app的子项，控制是否采用session和session的超时时间。如：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;enable_session&quot;</span>: true,
+<span class="s2">&quot;session_timeout&quot;</span>: <span class="m">1200</span>,
+</pre></div>
+</div>
+<p>其中:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>enable_session</em>：布尔值，表示是否采用会话，默认值是false，如果客户端不支持cookie，请设为false，因为框架会为每个不带会话cookie的请求创建新的会话，如果客户端不支持cookie而又有大量请求，则服务端会生成大量的无用session对象，这是完全没必要的资源和性能损失；</li>
+<li><em>session_timeout</em>：整数值，表示会话的超时时间，单位是秒，默认值是0，只有enable_session为true时才发挥作用。0表示永久有效。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="document-root">
+<h2>document_root 根目录</h2>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>app*项的子项，字符串，表示Http根目录对应的文档路径，是静态文件下载的根路径，默认值是”./”，表示程序运行的当前路径。比如：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;document_root&quot;</span>: <span class="s2">&quot;./&quot;</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="upload-path">
+<h2>upload_path上传文件路径</h2>
+<p>app项的子项，字符串，表示上传文件的默认路径，默认值是”uploads”，如果这个值不是*/,./<em>或</em>../<em>开始的，并且这个值也不是</em>.*或*..*，则这个路径是前面document_root项的相对路径，否则就是一个绝对路径或者当前目录的相对路径。如：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;upload_path&quot;</span>:<span class="s2">&quot;uploads&quot;</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-types">
+<h2>file_types文件类型</h2>
+<p>app项的子项，字符串数组，默认值如下，表示框架支持的静态文件下载类型，如果请求的静态文件扩展名在这些类型之外的，框架将返回404错误。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;file_types&quot;</span>: <span class="o">[</span>
+    <span class="s2">&quot;gif&quot;</span>,
+    <span class="s2">&quot;png&quot;</span>,
+    <span class="s2">&quot;jpg&quot;</span>,
+    <span class="s2">&quot;js&quot;</span>,
+    <span class="s2">&quot;css&quot;</span>,
+    <span class="s2">&quot;html&quot;</span>,
+    <span class="s2">&quot;ico&quot;</span>,
+    <span class="s2">&quot;swf&quot;</span>,
+    <span class="s2">&quot;xap&quot;</span>,
+    <span class="s2">&quot;apk&quot;</span>,
+    <span class="s2">&quot;cur&quot;</span>,
+    <span class="s2">&quot;xml&quot;</span>
+    <span class="o">]</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="connections">
+<h2>connections连接数控制</h2>
+<p>app项的子项，有两个选项，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;max_connections&quot;</span>: <span class="m">100000</span>,
+<span class="s2">&quot;max_connections_per_ip&quot;</span>: <span class="m">0</span>,
+</pre></div>
+</div>
+<p>其中:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>max_connections</em>：整数，默认值是100000，表示同时并发的最大连接数；当服务端维持的连接达到这个数量时，新的TCP连接请求将被直接拒绝。</li>
+<li><em>max_connections_per_ip</em>：整数，默认值是0，表示单个IP的最大连接数，0表示没有限制。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="log">
+<h2>log日志选项</h2>
+<p>app项的子项，同时也是个JSON对象，控制日志输出的行为，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;log&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;log_path&quot;</span>: <span class="s2">&quot;./&quot;</span>,
+    <span class="s2">&quot;logfile_base_name&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;log_size_limit&quot;</span>: <span class="m">100000000</span>,
+    <span class="s2">&quot;log_level&quot;</span>: <span class="s2">&quot;TRACE&quot;</span>
+    <span class="o">}</span>,
+</pre></div>
+</div>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>log_path</em>：字符串，默认值是空串，表示文件存放的路径，如果是空串，则所有日志输出到标准输出；</li>
+<li><em>logfile_base_name</em>：字符串，表示日志文件的*basename*，默认值是空串，这时basename将为drogon；</li>
+<li><em>log_size_limit</em>：整数，单位是字节，默认值是100000000(100M)，当日志文件的大小达到这个数值时，日志文件会切换。</li>
+<li><em>log_level</em>：字符串，默认值是”DEBUG”，表示日志输出的最低级别，可选值从低到高为：”TRACE”,”DEBUG”,”INFO”,”WARN”，其中的TRACE级别只有在DEBUG编译的情况下才有效。</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意： Drogon的文件日志采用了非阻塞输出结构，大概可以达到每秒百万行的日志输出能力，可以放心使用。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>应用控制</h2>
+<p>也是app子项，有两个控制项，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;run_as_daemon&quot;</span>: false,
+<span class="s2">&quot;relaunch_on_error&quot;</span>: false,
+</pre></div>
+</div>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li>run_as_daemon：布尔值，默认值是false，当为true时，应用程序将以daemon的形式变成1号进程的子进程运行于系统后台。</li>
+<li>relaunch_on_error：布尔值，默认值时false，当为true时，应用程序将fork一次，子进程执行真正的工作，父进程什么都不干，只负责在子进程崩溃或因其它原因退出时重启子进程，这是一种简单的服务保护机制。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="use-sendfile">
+<h2>use_sendfile发送文件</h2>
+<p>app子选项，布尔值，表示在发送文件时是否采用linux系统调用sendfile，默认值时true，使用sendfile可以提高发送效率，减少大文件的内存占用。如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;use_sendfile&quot;</span>: true,
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意：即使该项为true，sendfile系统调用也不一定会采用，因为小文件使用sendfile并不一定划算，框架会根据自己的优化策略决定是否采用。</p>
+</div>
+</div>
+<div class="section" id="use-gzip">
+<h2>use_gzip压缩传输</h2>
+<p><a href="#id6"><span class="problematic" id="id7">*</span></a>app*子选项，布尔值，默认值是true，表示Http响应的Body是否采用压缩传输。当该项为true时，下面的情况采用压缩传输：</p>
+<blockquote>
+<div><ul class="simple">
+<li>客户端支持gzip压缩；</li>
+<li>body是文本类型；</li>
+<li>body的长度大于一定值；</li>
+</ul>
+</div></blockquote>
+<p>配置例子如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;use_gzip&quot;</span>: true,
+</pre></div>
+</div>
+</div>
+<div class="section" id="files-cache-time">
+<h2>files_cache_time文件缓存时间</h2>
+<p><a href="#id8"><span class="problematic" id="id9">*</span></a>app*子选项，JSON对象数组，每一项表示一个从Http路径到HttpSimpleController的映射，这种配置只是一个可选途径，并不是必须配置在这里，请参阅HttpSimpleController。 具体的配置如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;static_files_cache_time&quot;</span>: <span class="m">5</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="simple-controllers-map">
+<h2>simple_controllers_map</h2>
+<p><a href="#id10"><span class="problematic" id="id11">*</span></a>app*子选项，JSON对象数组，每一项表示一个从Http路径到HttpSimpleController的映射，这种配置只是一个可选途径，并不是必须配置在这里，请参阅HttpSimpleController。 具体的配置如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;simple_controllers_map&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&quot;path&quot;</span>: <span class="s2">&quot;/path/name&quot;</span>,
+        <span class="s2">&quot;controller&quot;</span>: <span class="s2">&quot;controllerClassName&quot;</span>,
+        <span class="s2">&quot;http_methods&quot;</span>: <span class="o">[</span><span class="s2">&quot;get&quot;</span>,<span class="s2">&quot;post&quot;</span><span class="o">]</span>,
+        <span class="s2">&quot;filters&quot;</span>: <span class="o">[</span><span class="s2">&quot;FilterClassName&quot;</span><span class="o">]</span>
+    <span class="o">}</span>
+    <span class="o">]</span>,
+</pre></div>
+</div>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>path</em>：字符串，Http路径；</li>
+<li><em>controller</em>：字符串，HttpSimpleController的名字；</li>
+<li><em>http_methods</em>：字符串数组，支持的Http方法，这个列表之外的会被过滤掉，返回405错误；</li>
+<li><em>filters</em>：字符串数组，路径上的filter列表，参见过滤器；</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="idle-connection-timeout">
+<h2>idle_connection_timeout空闲连接超时控制</h2>
+<p>app子选项，整数值，单位秒，默认值是60，当一个连接超过这个数值的时间没有任何读写的时候，该连接将会被强制断开。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;idle_connection_timeout&quot;</span>:60
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamic-views">
+<h2>dynamic_views动态视图加载</h2>
+<p>app的子选项，控制动态视图的使能和路径，有两个选项，如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;load_dynamic_views&quot;</span>:true,
+<span class="s2">&quot;dynamic_views_path&quot;</span>:<span class="o">[</span><span class="s2">&quot;./views&quot;</span><span class="o">]</span>,
+</pre></div>
+</div>
+<p>其中：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>dynamic_views_path</em>：布尔值，默认值是false，当为true时，框架会在视图路径中搜索视图文件，并动态编译成so文件，然后加载进应用，当任何视图文件发生变化时，也会引起自动编译和重新加载；</li>
+<li><em>dynamic_views_path</em>：字符串数组，每一项表示动态视图的搜索路径，如果路径值不是*/,./<em>或</em>../<em>开始的，并且这个值也不是</em>.*或*..*，则这个路径是前面document_root项的相对路径，否则就是一个绝对路径或者当前目录的相对路径。</li>
+</ul>
+</div></blockquote>
+<p>参见视图。</p>
+</div>
+<div class="section" id="server-header-field">
+<h2>server_header_field头字段</h2>
+<p>app的子选项，配置由框架发送的所有response的Server头字段，默认值是空串，当该选项为空时，框架会自动生成形如*Server: drogon/version string*的头字段。如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;server_header_field&quot;</span>: <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="keepalive-requests">
+<h2>keepalive_requests长连接请求数</h2>
+<p><em>keepalive_requests</em> 选项设置客户端在一个keepalive长连接上可以发送的最大请求数。当达到这个请求数时，长连接将被关闭。默认值0代表没有限制。如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;keepalive_requests&quot;</span>: <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pipelining">
+<h2>Pipelining请求数</h2>
+<p><em>pipelining_requests*选项用于设置长连接上已接收但未必处理的最大的请求数。当这个数字达到时，长连接将被关闭。默认值0代表没有限制。关于pipelining的详细描述，请参阅标准文档*rfc2616-8.1.1.2</em>。配置如下所示：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;pipelining_requests&quot;</span>: <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Drogon_ctl-Command-zh.html" title="drogon_ctl命令"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Plugins-zh.html" title="插件"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" >中文文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

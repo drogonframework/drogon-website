@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Coz-zh.rstd:3
+msgid "Coz"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:7
+msgid "Causal profiling with coz"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:9
+msgid "With coz you can profile two things:"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:11
+msgid "throughput"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:12
+msgid "latency"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:14
+msgid "If you want to profile throughput of your application, you should switch on the *COZ_PROFILING* cmake option and include debug information in your exectuable with *Debug* or *RelWithDebInfo* release modes in cmake. Doing so will include coz progress points when serving a request. Profiling latency is currently not supported in whole application scope, but can still be done in user code."
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:16
+msgid "When you're done compiling you application with progress points included. You need to run the executable with the coz profiler, for example *coz run --- [path to your executable]*."
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:18
+msgid "Lastly, the application needs to be stressed, for best results you need to stress all code paths and run the profile for a good amount of time, 15+ min."
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:20
+msgid "The final profile will be a *profile.coz* file created in the current working directory. To view results, open the profile in the official `viewer <https://plasma-umass.org/coz/>`_ , or you could run a local copy from the official `git repo <https://github.com/plasma-umass/coz>`_ ."
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:22
+msgid "Coz also supports scoping source files included for the profile with --source-scope <pattern> or -s <pattern> among other things, that should prove useful."
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:24
+msgid "For more information checkout:"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:26
+msgid "coz run --help"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:27
+msgid "`Git repo <https://github.com/plasma-umass/coz>`_"
+msgstr ""
+
+#: ../../source/Coz-zh.rstd:28
+msgid "`Coz whitepaper <https://github.com/plasma-umass/coz>`_"
+msgstr ""
+

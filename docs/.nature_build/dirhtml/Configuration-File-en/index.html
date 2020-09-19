@@ -1,0 +1,446 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuration File &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="drogon_ctl Command" href="../Drogon_ctl-Command-en/" />
+    <link rel="prev" title="Plugins" href="../Plugins-en/" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Drogon_ctl-Command-en/" title="drogon_ctl Command"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Plugins-en/" title="Plugins"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-en/" accesskey="U">English documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration-file">
+<h1>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h1>
+<p>You can control various behaviors of the Http server by configuring various parameters through multiple interfaces of the DrogonAppFramework instance. However, using a configuration file is a better way for the following reasons:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Using a configuration file instead of source code can determine the behavior of the application at runtime rather than at compile time, which is undoubtedly a more convenient and flexible way;</li>
+<li>Using a configuration file can make the main file more concise;</li>
+</ul>
+</div></blockquote>
+<p>Based on these additional benefits, it is recommended that application developers use configuration files to configure various parameters of the application.</p>
+<p>The configuration file can be loaded very simply by calling the loadConfigFile() interface before calling the run() interface. The parameter of the loadConfigFile() method is the file name of the configuration file, for example:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>main.cc</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">drogon</span><span class="o">::</span><span class="n">app</span><span class="p">().</span><span class="n">loadConfigFile</span><span class="p">(</span><span class="s">&quot;config.json&quot;</span><span class="p">);</span>
+    <span class="n">drogon</span><span class="o">::</span><span class="n">app</span><span class="p">().</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The above program loads the configuration file <em>config.json</em> and then runs the application. The specific listening port, log output, database configuration and so on can be configured by the configuration file. In fact, this program can basically be the entire code of the main file of the web application.</p>
+<div class="section" id="configuration-file-details">
+<h2>Configuration File Details<a class="headerlink" href="#configuration-file-details" title="Permalink to this headline">¶</a></h2>
+<p>An example of a configuration file is at the top level of the source directory, config.example.json. If you use the drogon_ctl create project command to create a project, you can also find the file config.json with the same content in the project directory. So, you basically don’t need to create a new configuration file but make some changes to this file to complete the configuration of the web application.</p>
+<p>The file is in <em>JSON</em> format and supports comments. You can comment out the unneeded configuration items with the c++ comment symbols /**/ and //.</p>
+<p>After commenting out a configuration option, the framework initializes it with default values. The default value for each option can be found in the comments in the configuration file.</p>
+</div>
+<div class="section" id="ssl">
+<h2>SSL<a class="headerlink" href="#ssl" title="Permalink to this headline">¶</a></h2>
+<p>The ssl option is to configure SSL files of the https service as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;ssl&quot;</span>: <span class="o">{</span>
+  <span class="s2">&quot;cert&quot;</span>: <span class="s2">&quot;../../trantor/trantor/tests/server.pem&quot;</span>,
+  <span class="s2">&quot;key&quot;</span>: <span class="s2">&quot;../../trantor/trantor/tests/server.pem&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Where <em>cert</em> is the path of the certificate file and <em>key</em> is the path of the private key file. If a file contains both a certificate and a private key, the two paths can be made the same.</p>
+<p>The file is in PEM encoding format.</p>
+</div>
+<div class="section" id="listeners">
+<h2>listeners<a class="headerlink" href="#listeners" title="Permalink to this headline">¶</a></h2>
+<p>As the name implies, the <em>listeners</em> option is to configure listeners for the web application. It is a JSON array type. Each JSON object represents a listener. The specific configuration is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;listeners&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+    <span class="s2">&quot;address&quot;</span>: <span class="s2">&quot;0.0.0.0&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>: <span class="m">80</span>,
+    <span class="s2">&quot;https&quot;</span>: <span class="nb">false</span>
+    <span class="o">}</span>,
+    <span class="o">{</span>
+    <span class="s2">&quot;address&quot;</span>: <span class="s2">&quot;0.0.0.0&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>: <span class="m">443</span>,
+    <span class="s2">&quot;https&quot;</span>: true,
+    <span class="s2">&quot;cert&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;key&quot;</span>: <span class="s2">&quot;&quot;</span>
+    <span class="o">}</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>Among them:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>address</em>: With the string type indicates the IP address to be listened to. If this option is not available, the default value “0.0.0.0” is used.</li>
+<li><em>port</em>: port: An integer type option indicating the port to be listened to. It must be a valid port number. There is no default value.</li>
+<li><em>https</em>: Boolean type, indicating whether to use https, the default value is false, which means using http.</li>
+<li><em>cert</em> and <em>key</em>: The string type, is valid when https is true, indicating the certificate and private key of https. The default value is an empty string, indicating the certificate and private key file configured by the global option ssl;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="db-clients">
+<h2>db_clients<a class="headerlink" href="#db-clients" title="Permalink to this headline">¶</a></h2>
+<p>This option is used to configure the database client. It is a JSON array type. Each JSON object represents a separate database client. The specific configuration is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;db_clients&quot;</span>:<span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;rdbms&quot;</span>: <span class="s2">&quot;postgresql&quot;</span>,
+    <span class="s2">&quot;host&quot;</span>: <span class="s2">&quot;127.0.0.1&quot;</span>,
+    <span class="s2">&quot;port&quot;</span>: <span class="m">5432</span>,
+    <span class="s2">&quot;dbname&quot;</span>: <span class="s2">&quot;test&quot;</span>,
+    <span class="s2">&quot;user&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;passwd&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;is_fast&quot;</span>: false,
+    <span class="s2">&quot;connection_number&quot;</span>: <span class="m">1</span>,
+    <span class="s2">&quot;file_name&quot;</span>: <span class="s2">&quot;&quot;</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>Among them:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>name</em>: string type, client name, the default value is “default”, name is the application developer to get the database client’s markup from the framework, if there are multiple clients, the name field must be different;</li>
+<li><em>rdbms</em>：A string indicating the type of database server. Currently supports “postgresql” and “mysql”, which is not case sensitive;</li>
+<li><em>host</em>：String, database server address, <em>localhost</em> is the default value;</li>
+<li><em>port</em>：An integer representing the port number of the database server;</li>
+<li><em>dbname</em>：String, database name;</li>
+<li><em>user</em>：String, user name;</li>
+<li><em>passwd</em>：String, password;</li>
+<li><em>is_fast</em>：bool，false by default, indicate if the client is a FastDbClient</li>
+<li><em>connection_number</em>：A integer indicating the number of connections to the database server, at least 1, the default value is also 1, affecting the concurrent performance of data read and write; If the ‘is_fast’ is true, the number is the number of connections per event loop, otherwise it is the total number of all connections.</li>
+<li><em>filename</em>: The filename of sqlite3 database;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="threads-num">
+<h2>threads_num<a class="headerlink" href="#threads-num" title="Permalink to this headline">¶</a></h2>
+<p>Suboption belonging to the app option, an integer, the default value is 1, indicating the number of IO threads, which has a clear impact on network concurrency. This number is not as big as possible. Users who understand the non-blocking I/O principle should know that this value should be the same as the number of processors that he expects network IO to occupy. If the value is set to 0, the number of IO threads will be the number of all hardware cores.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;threads_num&quot;</span>: <span class="m">16</span>,
+</pre></div>
+</div>
+<p>The above example shows that network IO uses 16 threads and can run up to 16 CPU cores under high load conditions.</p>
+</div>
+<div class="section" id="session">
+<h2>Session<a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h2>
+<p>Session-related options are also children of the app option, controlling whether session is used and the session timeout. Such as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;enable_session&quot;</span>: true,
+<span class="s2">&quot;session_timeout&quot;</span>: <span class="m">1200</span>,
+</pre></div>
+</div>
+<p>Among them:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>enable_session</em>：A Boolean value indicating whether to use a session. The default is false. If the client does not support cookies, set it to false because the framework will create a new session for each request without a session cookie, which will result in completely unnecessary resource and performance loss;</li>
+<li><em>session_timeout</em>：An integer value indicating the timeout period of the session, in seconds. The default value is 0, indicating permanent validity. Only works if enable_session is true.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="document-root">
+<h2>document_root<a class="headerlink" href="#document-root" title="Permalink to this headline">¶</a></h2>
+<p>The suboption of the <em>app</em> option, a string, indicates the document path corresponding to the Http root directory, and is the root path of the static file download. The default value is “./”, which indicates the current path of the program running. such as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;document_root&quot;</span>: <span class="s2">&quot;./&quot;</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="upload-path">
+<h2>upload_path<a class="headerlink" href="#upload-path" title="Permalink to this headline">¶</a></h2>
+<p>The child of the app option, a string, represents the default path for uploading files. The default value is “uploads”. If the value is not starting with /, ./ or ../, and this value is not .or..`, then this path is the relative path of the previous document_root entry, otherwise it is an absolute path or a relative path to the current directory. Such as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;upload_path&quot;</span>:<span class="s2">&quot;uploads&quot;</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-types">
+<h2>file_types<a class="headerlink" href="#file-types" title="Permalink to this headline">¶</a></h2>
+<p>The suboption of the app option, an array of strings, with default values ​​as follows, indicates the static file download type supported by the framework. If the requested static file extension is outside of these types, the framework will return a 404 error.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;file_types&quot;</span>: <span class="o">[</span>
+    <span class="s2">&quot;gif&quot;</span>,
+    <span class="s2">&quot;png&quot;</span>,
+    <span class="s2">&quot;jpg&quot;</span>,
+    <span class="s2">&quot;js&quot;</span>,
+    <span class="s2">&quot;css&quot;</span>,
+    <span class="s2">&quot;html&quot;</span>,
+    <span class="s2">&quot;ico&quot;</span>,
+    <span class="s2">&quot;swf&quot;</span>,
+    <span class="s2">&quot;xap&quot;</span>,
+    <span class="s2">&quot;apk&quot;</span>,
+    <span class="s2">&quot;cur&quot;</span>,
+    <span class="s2">&quot;xml&quot;</span>
+    <span class="o">]</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="connection-number-control">
+<h2>Connection number control<a class="headerlink" href="#connection-number-control" title="Permalink to this headline">¶</a></h2>
+<p>The children of the app option have two options, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;max_connections&quot;</span>: <span class="m">100000</span>,
+<span class="s2">&quot;max_connections_per_ip&quot;</span>: <span class="m">0</span>,
+</pre></div>
+</div>
+<p>Among them:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>max_connections</em>：Integer, the default value is 100000, which means the maximum number of simultaneous concurrent connections; when the number of connections maintained by the server reaches this number, the new TCP connection request will be rejected directly.</li>
+<li><em>max_connections_per_ip</em>：Integer, the default value is 0, which means the maximum number of connections for a single client IP, and 0 means no limit.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="log-option">
+<h2>Log option<a class="headerlink" href="#log-option" title="Permalink to this headline">¶</a></h2>
+<p>The child of the <em>app</em> item, a JSON object, controls the behavior of the log output as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;log&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;log_path&quot;</span>: <span class="s2">&quot;./&quot;</span>,
+    <span class="s2">&quot;logfile_base_name&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;log_size_limit&quot;</span>: <span class="m">100000000</span>,
+    <span class="s2">&quot;log_level&quot;</span>: <span class="s2">&quot;TRACE&quot;</span>
+    <span class="o">}</span>,
+</pre></div>
+</div>
+<p>Among them:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>log_path</em>：String, the default value is an empty string, indicating the path where the log file is stored. If it is an empty string, all logs are output to the standard output.</li>
+<li><em>logfile_base_name</em>：A string indicating the basename of the log file. The default value is an empty string which means the basename will be drogon.</li>
+<li><em>log_size_limit</em>：A integer, in bytes. The default value is 100000000 (100M). When the size of the log file reaches this value, the log file will be switched.</li>
+<li><em>log_level</em>：A string, the default value is “DEBUG”, which indicates the lowest level of log output. The optional values ​​are from low to high: “TRACE”, “DEBUG”, “INFO”, “WARN”, where the TRACE level is only valid when compiling in DEBUG mode.</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: Drogon’s file log uses a non-blocking output structure that can achieve a log output of millions of lines per second and can be used with confidence.</p>
+</div>
+</div>
+<div class="section" id="application-control">
+<h2>Application control<a class="headerlink" href="#application-control" title="Permalink to this headline">¶</a></h2>
+<p>They are also children of the <em>app</em> option and have two options, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;run_as_daemon&quot;</span>: false,
+<span class="s2">&quot;relaunch_on_error&quot;</span>: false,
+</pre></div>
+</div>
+<p>Among them：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>run_as_daemon</em>：Boolean value, the default value is false. When it is true, the application will be a child process of the No.1 process in the form of a daemon running in the background of the system.</li>
+<li><em>relaunch_on_error</em>：Boolean value, the default value is false. When it is true, the application will relaunches itself on error.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="use-sendfile">
+<h2>use_sendfile<a class="headerlink" href="#use-sendfile" title="Permalink to this headline">¶</a></h2>
+<p>The suboption of app option, boolean, indicates whether the linux system call sendfile is used when sending the file. The default value is true. Using sendfile can improve the sending efficiency and reduce the memory usage of large files. as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;use_sendfile&quot;</span>: true,
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: Even if this option is true, the sendfile system call will not be used, because the use of sendfile for small files is not necessarily cost-effective, and the framework will decide whether to adopt it according to its own optimization strategy.</p>
+</div>
+</div>
+<div class="section" id="use-gzip">
+<h2>use_gzip<a class="headerlink" href="#use-gzip" title="Permalink to this headline">¶</a></h2>
+<p>The <em>app</em> suboption, boolean, default value is true, indicating whether the body of the Http response uses compressed transmission. When it is true, compression is used in the following cases:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The client supports gzip compression;</li>
+<li>The Http body is the text type;</li>
+<li>The length of the body is greater than a certain value;</li>
+</ul>
+</div></blockquote>
+<p>The configuration example is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;use_gzip&quot;</span>: true,
+</pre></div>
+</div>
+</div>
+<div class="section" id="static-files-cache-time">
+<h2>static_files_cache_time<a class="headerlink" href="#static-files-cache-time" title="Permalink to this headline">¶</a></h2>
+<p>The <em>app</em> suboption, integer value, in seconds, indicates the cache time of the static file, that is, for the repeated request for the file during this time, the framework will return the response directly from the memory without reading the file system. The default value is 5 seconds, 0 means always cache (only read the file system once, use with caution), negative value means no cache. as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;static_files_cache_time&quot;</span>: <span class="m">5</span>,
+</pre></div>
+</div>
+</div>
+<div class="section" id="simple-controllers-map">
+<h2>simple_controllers_map<a class="headerlink" href="#simple-controllers-map" title="Permalink to this headline">¶</a></h2>
+<p>The <em>app</em> suboption, an array of JSON objects, each representing a mapping from the Http path to the HttpSimpleController, this configuration is just an alternative, not necessarily configured here, see HttpSimpleController. The specific configuration is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;simple_controllers_map&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&quot;path&quot;</span>: <span class="s2">&quot;/path/name&quot;</span>,
+        <span class="s2">&quot;controller&quot;</span>: <span class="s2">&quot;controllerClassName&quot;</span>,
+        <span class="s2">&quot;http_methods&quot;</span>: <span class="o">[</span><span class="s2">&quot;get&quot;</span>,<span class="s2">&quot;post&quot;</span><span class="o">]</span>,
+        <span class="s2">&quot;filters&quot;</span>: <span class="o">[</span><span class="s2">&quot;FilterClassName&quot;</span><span class="o">]</span>
+    <span class="o">}</span>
+    <span class="o">]</span>,
+</pre></div>
+</div>
+<p>Among them：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>path</em>：String, Http path;</li>
+<li><em>controller</em>：String, the name of the HttpSimpleController;</li>
+<li><em>http_methods</em>：An array of strings representing the supported Http methods. Requests outside this list will be filtered out, returning a 405 error.</li>
+<li><em>filters</em>：String array, list of filters on the path, see Filter;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="idle-connection-timeout-control">
+<h2>Idle connection timeout control<a class="headerlink" href="#idle-connection-timeout-control" title="Permalink to this headline">¶</a></h2>
+<p>The app suboption, integer value, in seconds, the default value is 60. When a connection exceeds this time without any reading and writing, the connection will be forcibly disconnected. as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;idle_connection_timeout&quot;</span>:60
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamic-view-loading">
+<h2>Dynamic view loading<a class="headerlink" href="#dynamic-view-loading" title="Permalink to this headline">¶</a></h2>
+<p>The sub-options of the app, which control the enabling and the path of the dynamic view, have two options, as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;load_dynamic_views&quot;</span>:true,
+<span class="s2">&quot;dynamic_views_path&quot;</span>:<span class="o">[</span><span class="s2">&quot;./views&quot;</span><span class="o">]</span>,
+</pre></div>
+</div>
+<p>Among them：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>dynamic_views_path</em>：Boolean value, the default value is false. When it is true, the framework searches view files in the view path and dynamically compiles them into .so files, then loads them into the application. When any view file changes, it will also cause automatic compilation and re-loading;</li>
+<li><em>dynamic_views_path</em>：An array of strings, each of which represents the search path of the dynamic view. If the path value is not starting with /, ./ or ../, and the value is not . or .., then This path is the relative path of the previous document_root entry, otherwise it is an absolute path or a relative path to the current directory.</li>
+</ul>
+</div></blockquote>
+<p>See View</p>
+</div>
+<div class="section" id="server-header-field">
+<h2>Server header field<a class="headerlink" href="#server-header-field" title="Permalink to this headline">¶</a></h2>
+<p>The sub-option of the app configures the server header field of all responses sent by the framework. The default value is an empty string. When this option is empty, the framework automatically generates a header field of the form <em>Server: drogon/version string</em>. It’s as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;server_header_field&quot;</span>: <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="keepalive-requests">
+<h2>Keepalive requests<a class="headerlink" href="#keepalive-requests" title="Permalink to this headline">¶</a></h2>
+<p>The <em>keepalive_requests</em> option sets the maximum number of requests that can be served through one keep-alive connection. After the maximum number of requests are made, the connection is closed. The default value of 0 means no limit. It’s as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;keepalive_requests&quot;</span>: <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pipelining-requests">
+<h2>Pipelining requests<a class="headerlink" href="#pipelining-requests" title="Permalink to this headline">¶</a></h2>
+<p>The <em>pipelining_requests</em> sets the maximum number of unhandled requests that can be cached in pipelining buffer. After the maximum number of requests are made, the connection is closed. The default value of 0 means no limit. For details about pipelining, please see the <em>rfc2616-8.1.1.2</em>. It’s as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;pipelining_requests&quot;</span>: <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration File</a><ul>
+<li><a class="reference internal" href="#configuration-file-details">Configuration File Details</a></li>
+<li><a class="reference internal" href="#ssl">SSL</a></li>
+<li><a class="reference internal" href="#listeners">listeners</a></li>
+<li><a class="reference internal" href="#db-clients">db_clients</a></li>
+<li><a class="reference internal" href="#threads-num">threads_num</a></li>
+<li><a class="reference internal" href="#session">Session</a></li>
+<li><a class="reference internal" href="#document-root">document_root</a></li>
+<li><a class="reference internal" href="#upload-path">upload_path</a></li>
+<li><a class="reference internal" href="#file-types">file_types</a></li>
+<li><a class="reference internal" href="#connection-number-control">Connection number control</a></li>
+<li><a class="reference internal" href="#log-option">Log option</a></li>
+<li><a class="reference internal" href="#application-control">Application control</a></li>
+<li><a class="reference internal" href="#use-sendfile">use_sendfile</a></li>
+<li><a class="reference internal" href="#use-gzip">use_gzip</a></li>
+<li><a class="reference internal" href="#static-files-cache-time">static_files_cache_time</a></li>
+<li><a class="reference internal" href="#simple-controllers-map">simple_controllers_map</a></li>
+<li><a class="reference internal" href="#idle-connection-timeout-control">Idle connection timeout control</a></li>
+<li><a class="reference internal" href="#dynamic-view-loading">Dynamic view loading</a></li>
+<li><a class="reference internal" href="#server-header-field">Server header field</a></li>
+<li><a class="reference internal" href="#keepalive-requests">Keepalive requests</a></li>
+<li><a class="reference internal" href="#pipelining-requests">Pipelining requests</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Plugins-en/"
+                        title="previous chapter">Plugins</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Drogon_ctl-Command-en/"
+                        title="next chapter">drogon_ctl Command</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Configuration-File-en.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search/" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Drogon_ctl-Command-en/" title="drogon_ctl Command"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Plugins-en/" title="Plugins"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-en/" >English documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

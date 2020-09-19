@@ -1,0 +1,192 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>性能测试 &#8212; drogon v1.0.0-beta21 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Coz" href="../Coz-zh/" />
+    <link rel="prev" title="AOP面向切面编程" href="../AOP-Aspect-Oriented-Programming-zh/" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Coz-zh/" title="Coz"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../AOP-Aspect-Oriented-Programming-zh/" title="AOP面向切面编程"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-zh/" accesskey="U">中文文档</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>性能测试<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>作为C++的Http应用框架，性能应该是关注的重点之一，本节介绍Drogon的简单测试和成绩；</p>
+<div class="section" id="id2">
+<h2>测试环境<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>系统是Linux CentOS 7.4；</li>
+<li>设备是Dell服务器，CPU是两颗Intel(R) Xeon(R) CPU E5-2670 &#64; 2.60GHz，16核32线程；</li>
+<li>内存64GB；</li>
+<li>gcc版本7.3.0；</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>测试方案和结果<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>我们只是为了测试drogon框架的性能，因而要尽量简化controller的处理，我们只做了一个HttpSimpleController，注册到*/benchmark*路径上。controller对任何请求都返回*&lt;p&gt;Hello, world!&lt;/p&gt;*。设置drogon线程数为16。handler函数的代码如下, 你可以在*drogon/examples/benchmark*目录找到这些源码：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">BenchmarkCtrl</span><span class="o">::</span><span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+    <span class="k">auto</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpResponse</span><span class="p">();</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setBody</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;Hello, world!&lt;/p&gt;&quot;</span><span class="p">);</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setExpiredTime</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>作为对比，我选取了nginx来做对比测试，使用nginx+module源码编译的方式，写了一个hello_world_module，测试时nginx的worker_processes参数设为16。</p>
+<p>测试工具是一个性能不错的HTTP压力测试工具*httpress*。</p>
+<p>我们调整httpress的参数，每组参数测试五次，记录每秒处理请求数的最大值和最小值。测试结果如下表：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="47%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">命令行</th>
+<th class="head">说明</th>
+<th class="head">Drogon(千QPS)</th>
+<th class="head">nginx(千QPS)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>httpress -c 100 -n 1000000 -t 16 -k -q URL</td>
+<td>100连接，100万请求，16线程，Keep-Alive</td>
+<td>561/552</td>
+<td>330/329</td>
+</tr>
+<tr class="row-odd"><td>httpress -c 100 -n 1000000 -t 12 -q URL</td>
+<td>100连接，100万请求，12线程，一次请求一次连接</td>
+<td>140/135</td>
+<td>31/49</td>
+</tr>
+<tr class="row-even"><td>httpress -c 1000 -n 1000000 -t 16 -k -q URL</td>
+<td>1000连接，100万请求，16线程，Keep-Alive</td>
+<td>573/565</td>
+<td>333/327</td>
+</tr>
+<tr class="row-odd"><td>httpress -c 1000 -n 1000000 -t 16 -q URL</td>
+<td>1000连接，100万请求，16线程，一次请求一次连接</td>
+<td>155/143</td>
+<td>52/50</td>
+</tr>
+<tr class="row-even"><td>httpress -c 10000 -n 4000000 -t 16 -k -q URL</td>
+<td>10000连接，400万请求，16线程，Keep-Alive</td>
+<td>512/508</td>
+<td>316/314</td>
+</tr>
+<tr class="row-odd"><td>httpress -c 10000 -n 1000000 -t 16 -q URL</td>
+<td>10000连接，100万请求，16线程，一次请求一次连接</td>
+<td>143/141</td>
+<td>43/40</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到，在客户端使用Keep-Alive选项，在一个连接可以发送多个请求的情况下，drogon每秒可以处理50多万次请求，这个成绩是相当不错的。每次请求都发起一次连接的情况下，CPU会消耗在TCP建立和断开等环节，吞吐量会下降至每秒14万次请求，这也是正常的。drogon对比nginx的成绩处于明显优势，也许是由于nginx配置不当未能发挥它的最大吞吐量，如果哪位高手做了更好的测试，欢迎指正。</p>
+<p>下图是某一次测试的截图：</p>
+<p>测试截图</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">性能测试</a><ul>
+<li><a class="reference internal" href="#id2">测试环境</a></li>
+<li><a class="reference internal" href="#id3">测试方案和结果</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../AOP-Aspect-Oriented-Programming-zh/"
+                        title="previous chapter">AOP面向切面编程</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Coz-zh/"
+                        title="next chapter">Coz</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Benchmarks-zh.rstd.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search/" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex/" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Coz-zh/" title="Coz"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../AOP-Aspect-Oriented-Programming-zh/" title="AOP面向切面编程"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index-zh/" >中文文档</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,460 @@
+<document source="C:\Users\86175\.github\drogon-all\drogon_web_community\drogon-website\docs\source\index-zh.rstd">
+    <comment xml:space="preserve">
+        drogon documentation master file, created by
+        sphinx-quickstart on Fri Sep 18 10:57:34 2020.
+        You can adapt this file completely to your liking, but it should at least
+        contain the root `toctree` directive.
+    <section ids="id1" names="中文文档">
+        <title>
+            中文文档
+        <section ids="drogon" names="drogon\ 中文文档索引">
+            <title>
+                Drogon 中文文档索引
+            <compound classes="toctree-wrapper">
+                <compact_paragraph toctree="True">
+                    <caption>
+                        Contents:
+                    <bullet_list>
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Overview-zh">
+                                    概述
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Installation-zh">
+                                    安装drogon
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id1" internal="True" refuri="Installation-zh#id1">
+                                            系统要求
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Installation-zh#id2">
+                                            依赖库
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id3" internal="True" refuri="Installation-zh#id3">
+                                            系统准备范例
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id4" internal="True" refuri="Installation-zh#id4">
+                                            数据库环境
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#drogon" internal="True" refuri="Installation-zh#drogon">
+                                            安装drogon
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Quick-Start-zh">
+                                    快速开始
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Quick-Start-zh#id2">
+                                            静态网站
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id5" internal="True" refuri="Quick-Start-zh#id5">
+                                            动态网站
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Controller-Introduction-zh">
+                                    控制器简介
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Controller-Introduction-zh#id2">
+                                            简介
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id7" internal="True" refuri="Controller-Introduction-zh#id7">
+                                            控制器的生命周期
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Controller-HttpSimpleController-zh">
+                                    HttpSimpleController 控制器
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Controller-HttpController-zh">
+                                    HttpController 控制器
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id1" internal="True" refuri="Controller-HttpController-zh#id1">
+                                            生成
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Controller-HttpController-zh#id2">
+                                            使用
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id9" internal="True" refuri="Controller-HttpController-zh#id9">
+                                            参数映射
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id10" internal="True" refuri="Controller-HttpController-zh#id10">
+                                            多路径映射
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id11" internal="True" refuri="Controller-HttpController-zh#id11">
+                                            正则表达式
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Controller-WebSocketController-zh">
+                                    WebSocketController 控制器
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id1" internal="True" refuri="Controller-WebSocketController-zh#id1">
+                                            WebSocketController
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#websocketconnection" internal="True" refuri="Controller-WebSocketController-zh#websocketconnection">
+                                            WebSocketConnection
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Filter-zh">
+                                    过滤器
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Filter-zh#id2">
+                                            内置过滤器
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id3" internal="True" refuri="Filter-zh#id3">
+                                            自定义过滤器
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id4" internal="True" refuri="Filter-zh#id4">
+                                            过滤器的注册
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="View-zh">
+                                    视图
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="View-zh#id2">
+                                            视图介绍
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#drogoncsp" internal="True" refuri="View-zh#drogoncsp">
+                                            Drogon的csp
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id5" internal="True" refuri="View-zh#id5">
+                                            视图的使用
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id6" internal="True" refuri="View-zh#id6">
+                                            一个简单的例子
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#csp" internal="True" refuri="View-zh#csp">
+                                            csp文件的自动化处理
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id7" internal="True" refuri="View-zh#id7">
+                                            视图的动态编译和加载
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Session-zh">
+                                    会话
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id4" internal="True" refuri="Session-zh#id4">
+                                            会话对象
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id5" internal="True" refuri="Session-zh#id5">
+                                            会话的例子
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Database-General-zh">
+                                    数据库
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Database-General-zh#id2">
+                                            概述
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#dbclient" internal="True" refuri="Database-General-zh#dbclient">
+                                            DbClient 客户端
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id7" internal="True" refuri="Database-General-zh#id7">
+                                            事务
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#orm" internal="True" refuri="Database-General-zh#orm">
+                                            ORM
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="DataBase-DbClient-zh">
+                                    数据库 DbClient
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id1" internal="True" refuri="DataBase-DbClient-zh#id1">
+                                            构建DbClient
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="DataBase-DbClient-zh#id2">
+                                            执行接口
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id9" internal="True" refuri="DataBase-DbClient-zh#id9">
+                                            总结
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="DataBase-Transaction-zh">
+                                    数据库事务
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id10" internal="True" refuri="DataBase-Transaction-zh#id10">
+                                            事务的创建
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id15" internal="True" refuri="DataBase-Transaction-zh#id15">
+                                            事务的接口
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id22" internal="True" refuri="DataBase-Transaction-zh#id22">
+                                            事务的生命周期
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id23" internal="True" refuri="DataBase-Transaction-zh#id23">
+                                            一个例子
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="DataBase-ORM-zh">
+                                    数据库 ORM
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#model" internal="True" refuri="DataBase-ORM-zh#model">
+                                            Model
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id3" internal="True" refuri="DataBase-ORM-zh#id3">
+                                            Model类的接口
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#mapper" internal="True" refuri="DataBase-ORM-zh#mapper">
+                                            Mapper类模板
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id4" internal="True" refuri="DataBase-ORM-zh#id4">
+                                            条件对象
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id5" internal="True" refuri="DataBase-ORM-zh#id5">
+                                            Mapper的链式接口
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id6" internal="True" refuri="DataBase-ORM-zh#id6">
+                                            关系
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#restful-api" internal="True" refuri="DataBase-ORM-zh#restful-api">
+                                            Restful API 控制器
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Database-FastDbclient-zh">
+                                    数据库 FastDbclient
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id1" internal="True" refuri="Database-FastDbclient-zh#id1">
+                                            创建和获取
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Database-FastDbclient-zh#id2">
+                                            使用
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Plugins-zh">
+                                    插件
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Plugins-zh#id2">
+                                            配置
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id3" internal="True" refuri="Plugins-zh#id3">
+                                            定义
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id4" internal="True" refuri="Plugins-zh#id4">
+                                            获取实例
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id5" internal="True" refuri="Plugins-zh#id5">
+                                            生命周期
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Configuration-File-zh">
+                                    配置文件
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Configuration-File-zh#id2">
+                                            文件说明
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#ssl" internal="True" refuri="Configuration-File-zh#ssl">
+                                            SSL
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#listeners" internal="True" refuri="Configuration-File-zh#listeners">
+                                            listeners监听器
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#db-clients" internal="True" refuri="Configuration-File-zh#db-clients">
+                                            db_clients
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#threads-num" internal="True" refuri="Configuration-File-zh#threads-num">
+                                            threads num线程数
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#session" internal="True" refuri="Configuration-File-zh#session">
+                                            session会话
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#document-root" internal="True" refuri="Configuration-File-zh#document-root">
+                                            document_root 根目录
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#upload-path" internal="True" refuri="Configuration-File-zh#upload-path">
+                                            upload_path上传文件路径
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#file-types" internal="True" refuri="Configuration-File-zh#file-types">
+                                            file_types文件类型
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#connections" internal="True" refuri="Configuration-File-zh#connections">
+                                            connections连接数控制
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#log" internal="True" refuri="Configuration-File-zh#log">
+                                            log日志选项
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id5" internal="True" refuri="Configuration-File-zh#id5">
+                                            应用控制
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#use-sendfile" internal="True" refuri="Configuration-File-zh#use-sendfile">
+                                            use_sendfile发送文件
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#use-gzip" internal="True" refuri="Configuration-File-zh#use-gzip">
+                                            use_gzip压缩传输
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#files-cache-time" internal="True" refuri="Configuration-File-zh#files-cache-time">
+                                            files_cache_time文件缓存时间
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#simple-controllers-map" internal="True" refuri="Configuration-File-zh#simple-controllers-map">
+                                            simple_controllers_map
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#idle-connection-timeout" internal="True" refuri="Configuration-File-zh#idle-connection-timeout">
+                                            idle_connection_timeout空闲连接超时控制
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#dynamic-views" internal="True" refuri="Configuration-File-zh#dynamic-views">
+                                            dynamic_views动态视图加载
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#server-header-field" internal="True" refuri="Configuration-File-zh#server-header-field">
+                                            server_header_field头字段
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#keepalive-requests" internal="True" refuri="Configuration-File-zh#keepalive-requests">
+                                            keepalive_requests长连接请求数
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#pipelining" internal="True" refuri="Configuration-File-zh#pipelining">
+                                            Pipelining请求数
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Drogon_ctl-Command-zh">
+                                    Drogon_ctl 命令
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#version" internal="True" refuri="Drogon_ctl-Command-zh#version">
+                                            version子命令
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#create" internal="True" refuri="Drogon_ctl-Command-zh#create">
+                                            create子命令
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id5" internal="True" refuri="Drogon_ctl-Command-zh#id5">
+                                            视图创建
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id8" internal="True" refuri="Drogon_ctl-Command-zh#id8">
+                                            控制器创建
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id11" internal="True" refuri="Drogon_ctl-Command-zh#id11">
+                                            过滤器创建
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id14" internal="True" refuri="Drogon_ctl-Command-zh#id14">
+                                            创建工程
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id15" internal="True" refuri="Drogon_ctl-Command-zh#id15">
+                                            创建模型
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id16" internal="True" refuri="Drogon_ctl-Command-zh#id16">
+                                            压力测试
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="AOP-Aspect-Oriented-Programming-zh">
+                                    AOP-Aspect 面向切面编程
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id1" internal="True" refuri="AOP-Aspect-Oriented-Programming-zh#id1">
+                                            内建插入点
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="AOP-Aspect-Oriented-Programming-zh#id2">
+                                            AOP示意图
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Benchmarks-zh">
+                                    性能测试
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id2" internal="True" refuri="Benchmarks-zh#id2">
+                                            测试环境
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#id3" internal="True" refuri="Benchmarks-zh#id3">
+                                            测试方案和结果
+                        <list_item classes="toctree-l1">
+                            <compact_paragraph classes="toctree-l1">
+                                <reference anchorname="" internal="True" refuri="Coz-zh">
+                                    Coz
+                            <bullet_list>
+                                <list_item classes="toctree-l2">
+                                    <compact_paragraph classes="toctree-l2">
+                                        <reference anchorname="#causal-profiling-with-coz" internal="True" refuri="Coz-zh#causal-profiling-with-coz">
+                                            Causal profiling with coz

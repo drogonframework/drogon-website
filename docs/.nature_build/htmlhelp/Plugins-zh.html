@@ -1,0 +1,132 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    <title>&#25554;&#20214;</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="next" title="&#37197;&#32622;&#25991;&#20214;" href="Configuration-File-zh.html" />
+    <link rel="prev" title="&#25968;&#25454;&#24211; FastDbclient" href="Database-FastDbclient-zh.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Configuration-File-zh.html" title="&#37197;&#32622;&#25991;&#20214;"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Database-FastDbclient-zh.html" title="&#25968;&#25454;&#24211; FastDbclient"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" accesskey="U">&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>&#25554;&#20214;</h1>
+<p>&#25554;&#20214;&#21487;&#20197;&#24110;&#21161;&#29992;&#25143;&#26500;&#24314;&#22797;&#26434;&#30340;&#24212;&#29992;&#65292;&#22312;Drogon&#20013;&#65292;&#25152;&#26377;&#30340;&#25554;&#20214;&#37117;&#30001;&#26694;&#26550;&#26681;&#25454;&#37197;&#32622;&#25991;&#20214;&#32479;&#19968;&#26500;&#24314;&#24182;&#23433;&#35013;&#21040;&#24212;&#29992;&#31243;&#24207;&#20013;&#12290;Drogon&#20013;&#30340;&#25554;&#20214;&#37117;&#26159;&#21333;&#23454;&#20363;&#30340;&#65292;&#29992;&#25143;&#21487;&#20197;&#29992;&#25554;&#20214;&#23454;&#29616;&#20219;&#20309;&#20182;&#20204;&#24819;&#35201;&#30340;&#21151;&#33021;&#12290;</p>
+<p>Drogon&#22312;&#36816;&#34892;run()&#25509;&#21475;&#30340;&#26102;&#20505;&#65292;&#20250;&#26681;&#25454;&#37197;&#32622;&#25991;&#20214;&#65292;&#36880;&#19968;&#23454;&#20363;&#21270;&#27599;&#20010;&#25554;&#20214;&#65292;&#24182;&#35843;&#29992;&#20854;*initAndStart()*&#25509;&#21475;&#12290;</p>
+<div class="section" id="id2">
+<h2>&#37197;&#32622;</h2>
+<p>&#25554;&#20214;&#37197;&#32622;&#37117;&#22312;&#37197;&#32622;&#25991;&#20214;&#20013;&#23436;&#25104;&#65292;&#20363;&#22914;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;plugins&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+    //name: The class name of the plugin
+    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;DataDictionary&quot;</span>,
+    //dependencies: Plugins that the plugin depends on. It can be commented out
+    <span class="s2">&quot;dependencies&quot;</span>: <span class="o">[]</span>,
+    //config: The configuration of the plugin. This json object is the parameter to initialize the plugin.
+    //It can be commented out
+    <span class="s2">&quot;config&quot;</span>: <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="o">}]</span>,
+</pre></div>
+</div>
+<p>&#21487;&#35265;&#65292;&#27599;&#20010;&#25554;&#20214;&#30340;&#37197;&#32622;&#20849;&#26377;&#19977;&#39033;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>name: &#26159;&#35813;&#25554;&#20214;&#30340;&#31867;&#21517;&#31216;(&#21253;&#21547;&#21629;&#21517;&#31354;&#38388;)&#65292;&#26694;&#26550;&#20250;&#26681;&#25454;&#36825;&#20010;&#31867;&#21517;&#31216;&#21019;&#24314;&#25554;&#20214;&#30340;&#23454;&#20363;&#65292;&#36825;&#31181;&#21453;&#23556;&#26426;&#21046;&#22312;&#25511;&#21046;&#22120;&#12289;&#36807;&#28388;&#22120;&#30340;&#23454;&#20363;&#21019;&#24314;&#20013;&#20063;&#29992;&#21040;&#36807;&#65307;&#27880;&#37322;&#25481;&#35813;&#39033;&#65292;&#21017;&#35813;&#25554;&#20214;&#21464;&#25104;&#31105;&#29992;&#29366;&#24577;&#65307;</li>
+<li>dependencies: &#26159;&#35813;&#25554;&#20214;&#25152;&#20381;&#36182;&#30340;&#20854;&#20182;&#25554;&#20214;&#30340;&#21517;&#31216;&#21015;&#34920;&#65292;&#26694;&#26550;&#20250;&#25353;&#29031;&#39034;&#24207;&#21019;&#24314;&#21644;&#21021;&#22987;&#21270;&#23427;&#20204;&#65292;&#34987;&#20381;&#36182;&#30340;&#25554;&#20214;&#39318;&#20808;&#34987;&#21019;&#24314;&#24182;&#21021;&#22987;&#21270;&#65307;&#31243;&#24207;&#32467;&#26463;&#26102;&#65292;&#25353;&#30456;&#21453;&#30340;&#39034;&#24207;&#20851;&#38381;&#24182;&#38144;&#27585;&#23427;&#20204;&#65307;&#38656;&#35201;&#27880;&#24847;&#65292;&#19981;&#35201;&#22312;&#25554;&#20214;&#20013;&#20135;&#29983;&#24490;&#29615;&#20381;&#36182;&#65292;Drogon&#20250;&#26816;&#26597;&#24490;&#29615;&#20381;&#36182;&#65292;&#22914;&#26524;&#21457;&#29616;&#65292;&#20250;&#25253;&#38169;&#24182;&#36864;&#20986;&#31243;&#24207;&#65307;&#27880;&#37322;&#25481;&#35813;&#39033;&#65292;&#21017;&#20381;&#36182;&#21015;&#34920;&#20026;&#31354;&#65307;</li>
+<li>config: &#29992;&#20110;&#21021;&#22987;&#21270;&#35813;&#25554;&#20214;&#30340;json&#23545;&#35937;&#65292;&#29992;&#25143;&#21487;&#20197;&#22312;&#20854;&#20013;&#33258;&#23450;&#20041;&#20219;&#20309;&#37197;&#32622;&#65292;&#35813;&#23545;&#35937;&#23558;&#34987;&#20316;&#20026;&#20837;&#21442;&#20256;&#20837;&#21040;&#35813;&#25554;&#20214;&#30340;*initAndStart()*&#25509;&#21475;&#20013;&#12290;&#27880;&#37322;&#25481;&#35813;&#39033;&#65292;&#21017;&#20256;&#20837;initAndStart&#25509;&#21475;&#30340;json&#23545;&#35937;&#20026;&#31354;&#23545;&#35937;&#65307;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>&#23450;&#20041;</h2>
+<p>&#29992;&#25143;&#23450;&#20041;&#30340;&#25554;&#20214;&#24517;&#39035;&#32487;&#25215;&#33258;drogon::Plugin&#31867;&#27169;&#26495;&#65292;&#27169;&#26495;&#21442;&#25968;&#23601;&#26159;&#35813;&#25554;&#20214;&#31867;&#22411;&#65292;&#27604;&#22914;&#19979;&#38754;&#30340;&#23450;&#20041;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DataDictionary</span> <span class="o">:</span> <span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">Plugin</span><span class="o">&lt;</span><span class="n">DataDictionary</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">initAndStart</span><span class="p">(</span><span class="k">const</span> <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="o">&amp;</span><span class="n">config</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">shutdown</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>&#24403;&#28982;&#65292;&#21629;&#20196;&#34892;&#31243;&#24207;drogon_ctl&#25552;&#20379;&#20102;&#21019;&#24314;&#25554;&#20214;&#30340;&#21629;&#20196;&#65292;&#22914;&#19979;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create plugin &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt;
+</pre></div>
+</div>
+<p>&#29992;&#25143;&#21487;&#20197;&#29992;&#19978;&#36848;&#21629;&#20196;&#21019;&#24314;&#25554;&#20214;&#30340;&#28304;&#25991;&#20214;&#65292;&#28982;&#21518;&#20877;&#36827;&#19968;&#27493;&#32534;&#36753;&#23427;&#20204;&#65307;</p>
+</div>
+<div class="section" id="id4">
+<h2>&#33719;&#21462;&#23454;&#20363;</h2>
+<p>&#25554;&#20214;&#30340;&#23454;&#20363;&#30001;drogon&#21019;&#24314;&#65292;&#29992;&#25143;&#21487;&#20197;&#36890;&#36807;drogon&#30340;&#22914;&#19979;&#25509;&#21475;&#33719;&#21462;&#25554;&#20214;&#23454;&#20363;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">*</span><span class="n">getPlugin</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>&#25110;&#32773;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">PluginBase</span> <span class="o">*</span><span class="nf">getPlugin</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#26174;&#28982;&#65292;&#31532;&#19968;&#20010;&#26041;&#27861;&#26356;&#26041;&#20415;&#65292;&#20363;&#22914;&#65292;&#21069;&#25991;&#25552;&#21040;&#30340;DataDictionary&#25554;&#20214;&#21487;&#20197;&#36825;&#26679;&#33719;&#21462;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="o">*</span><span class="n">pluginPtr</span><span class="o">=</span><span class="n">app</span><span class="p">().</span><span class="n">getPlugin</span><span class="o">&lt;</span><span class="n">DataDictionary</span><span class="o">&gt;</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>&#27880;&#24847;&#65292;&#33719;&#21462;&#25554;&#20214;&#26368;&#22909;&#22312;&#26694;&#26550;&#30340;run()&#25509;&#21475;&#35843;&#29992;&#20043;&#21518;&#65292;&#21542;&#21017;&#20250;&#24471;&#21040;&#26410;&#21021;&#22987;&#21270;&#30340;&#25554;&#20214;&#23454;&#20363;(&#36825;&#24182;&#19981;&#19968;&#23450;&#24517;&#28982;&#23548;&#33268;&#38169;&#35823;&#65292;&#21482;&#35201;&#22312;&#20351;&#29992;&#23427;&#26102;&#21021;&#22987;&#21270;&#24050;&#32463;&#23436;&#25104;&#21363;&#21487;)&#12290;&#24403;&#28982;&#65292;&#30001;&#20110;&#25554;&#20214;&#26159;&#25353;&#29031;&#20381;&#36182;&#39034;&#24207;&#21021;&#22987;&#21270;&#30340;&#65292;&#25152;&#20197;&#65292;&#21482;&#35201;&#20381;&#36182;&#20851;&#31995;&#35774;&#32622;&#27491;&#30830;&#65292;&#22312;initAndStart()&#25509;&#21475;&#20013;&#33719;&#21462;&#20854;&#20182;&#25554;&#20214;&#30340;&#23454;&#20363;&#26159;&#27809;&#26377;&#38382;&#39064;&#30340;&#12290;</p>
+</div>
+<div class="section" id="id5">
+<h2>&#29983;&#21629;&#21608;&#26399;</h2>
+<p>&#25152;&#26377;&#25554;&#20214;&#22312;run()&#25509;&#21475;&#20869;&#21021;&#22987;&#21270;&#23436;&#27605;&#65292;&#22312;&#24212;&#29992;&#31243;&#24207;&#36864;&#20986;&#26102;&#25165;&#38144;&#27585;&#65292;&#22240;&#27492;&#65292;&#25554;&#20214;&#30340;&#29983;&#21629;&#21608;&#26399;&#20960;&#20046;&#21644;&#24212;&#29992;&#31243;&#24207;&#31561;&#21516;&#65292;&#36825;&#20063;&#26159;getPlugin()&#25509;&#21475;&#19981;&#38656;&#35201;&#36820;&#22238;&#26234;&#33021;&#25351;&#38024;&#30340;&#21407;&#22240;&#12290;</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Configuration-File-zh.html" title="&#37197;&#32622;&#25991;&#20214;"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Database-FastDbclient-zh.html" title="&#25968;&#25454;&#24211; FastDbclient"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">drogon v1.0.0-beta21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index-zh.html" >&#20013;&#25991;&#25991;&#26723;</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

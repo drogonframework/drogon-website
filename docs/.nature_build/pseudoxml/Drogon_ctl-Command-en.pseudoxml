@@ -1,0 +1,220 @@
+<document source="C:\Users\86175\.github\drogon-all\drogon_web_community\drogon-website\docs\source\Drogon_ctl-Command-en.rstd">
+    <section ids="drogon-ctl-command" names="drogon_ctl\ command">
+        <title>
+            drogon_ctl Command
+        <paragraph>
+            After the Drogon framework is compiled and installed, a command line program 
+            <emphasis>
+                drogon_ctl
+             is also installed in the system, for convenience, also installed an identical copy dg_ctl. Users can choose according to their preferences.
+        <paragraph>
+            The main function of the program is to make it easy for users to create various drogon project files. Use the 
+            <emphasis>
+                dg_ctl help
+             command to see the functions it supports, as follows:
+        <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+            dg_ctl help
+            usage: drogon_ctl <command> [<args>]
+            commands list:
+            create                  create some source files(Use 'drogon_ctl help create' for more information)
+            help                    display this message
+            version                 display version of this tool
+            press                   Do stress testing(Use 'drogon_ctl help press' for more information)
+        <section ids="version-subcommand" names="version\ subcommand">
+            <title>
+                Version subcommand
+            <paragraph>
+                The 
+                <emphasis>
+                    version
+                 subcommand is used to print the drogon version currently installed on the system, as follows:
+            <block_quote>
+                <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                         _
+                      __| |_ __ ___   __ _  ___  _ __
+                     / _` | '__/ _ \ / _` |/ _ \| '_ \
+                    | (_| | | | (_) | (_| | (_) | | | |
+                     \__,_|_|  \___/ \__, |\___/|_| |_|
+                                      |___/
+                    drogon ctl tools
+                    version:0.9.30.771
+                    git commit:d4710d3da7ca9e73b881cbae3149c3a570da8de4
+                    compile config:-O3 -DNDEBUG -Wall -std=c++17 -I/root/drogon/trantor -I/root/drogon/lib/inc -I/root/drogon/orm_lib/inc -I/usr/local/include -I/usr/include/uuid -I/usr/include -I/usr/include/mysql
+        <section ids="create-sub-command" names="create\ sub\ command">
+            <title>
+                Create sub command
+            <paragraph>
+                The 
+                <emphasis>
+                    create
+                 subcommand is used to create various objects. It is currently the main function of drogon_ctl. Use the 
+                <emphasis>
+                    dg_ctl help create
+                 command to print detailed help for this command, as follows:
+            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                dg_ctl help create
+                
+                Use create command to create some source files of drogon webapp
+                
+                Usage:drogon_ctl create <view|controller|filter|project|model> [-options] <object name>
+                
+                drogon_ctl create view <csp file name> //create HttpView source files from csp file
+                
+                drogon_ctl create controller [-s] <[namespace::]class_name> //create HttpSimpleController source files
+                
+                drogon_ctl create controller -h <[namespace::]class_name> //create HttpController source files
+                
+                drogon_ctl create controller -w <[namespace::]class_name> //create WebSocketController source files
+                
+                drogon_ctl create filter <[namespace::]class_name> //create a filter named class_name
+                
+                drogon_ctl create project <project_name> //create a project named project_name
+                
+                drogon_ctl create model <model_path> //create model classes in model_path
+        <section ids="view-creation" names="view\ creation">
+            <title>
+                View creation
+            <paragraph>
+                The 
+                <emphasis>
+                    dg_ctl create view
+                 command is used to generate source files from csp files, see the View section. In general, this command does not need to be used directly. It is better practice to configure the cmake file to executed this command automatically. The command example is as follows, assuming the csp file is 
+                <emphasis>
+                    UsersList.csp
+                .
+            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                dg_ctl create view UsersList.csp
+        <section ids="controller-creation" names="controller\ creation">
+            <title>
+                Controller creation
+            <paragraph>
+                The 
+                <emphasis>
+                    dg_ctl create controller
+                 command is used to help the user create the controller’s source files. The three controllers currently supported by drogon can be created by this command.
+            <block_quote>
+                <bullet_list bullet="*">
+                    <list_item>
+                        <paragraph>
+                            The command to create an HttpSimpleController is as follows:
+                        <block_quote>
+                            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                                dg_ctl create controller SimpleControllerTest
+                                dg_ctl create controller webapp::v1::SimpleControllerTest
+            <paragraph>
+                The last parameter is the controller’s class name, which can be prefixed by a namespace.
+            <block_quote>
+                <bullet_list bullet="*">
+                    <list_item>
+                        <paragraph>
+                            The command to create an HttpController is as follows:
+                        <block_quote>
+                            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                                dg_ctl create controller -h ControllerTest
+                                dg_ctl create controller -h api::v1::ControllerTest
+                    <list_item>
+                        <paragraph>
+                            The command to create a WebSocketController is as follows:
+                        <block_quote>
+                            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                                dg_ctl create controller -w WsControllerTest
+                                dg_ctl create controller -w api::v1::WsControllerTest
+        <section ids="filter-creation" names="filter\ creation">
+            <title>
+                Filter creation
+            <paragraph>
+                The 
+                <emphasis>
+                    dg_ctl create filter
+                 command is used to help the user create the source files for filters, see the Filter section.
+            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                dg_ctl create filter LoginFilter
+                dg_ctl create filter webapp::v1::LoginFilter
+        <section ids="create-project" names="create\ project">
+            <title>
+                Create project
+            <paragraph>
+                The best way the user creates a new Drogon application project is via the drogon_ctl command, as follows:
+            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                dg_ctl create project ProjectName
+            <paragraph>
+                After the command is executed, a complete project directory will be created in the current directory. The directory name is 
+                <emphasis>
+                    ProjectName
+                , and the user can directly compile the project in the build directory (cmake .. && make). Of course, it does not have any business logic.
+            <paragraph>
+                The directory structure of the project is as follows:
+            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                ├── build                         Build folder
+                ├── CMakeLists.txt                Project cmake configuration file
+                ├── cmake_modules                 Cmake scripts for third-party libraries lookup
+                │   ├── FindJsoncpp.cmake
+                │   ├── FindMySQL.cmake
+                │   ├── FindSQLite3.cmake
+                │   └── FindUUID.cmake
+                ├── config.json                   The configuration file of the drogon application, please refer to the introduction section of the configuration file.
+                ├── controllers                   The directory where the controller source files are stored
+                ├── filters                       The directory where the filter files are stored
+                ├── main.cc                       Main program
+                ├── models                        The directory of the database model file, model source file creation see 11.2.5
+                │   └── model.json
+                └── views                         The directory where view csp files are stored, the source file does not need to be manually created by the user, and csp files are automatically preprocessed to obtain view source files when the project is compiled.
+        <section ids="create-models" names="create\ models">
+            <title>
+                Create models
+            <paragraph>
+                Use the 
+                <emphasis>
+                    dg_ctl create model
+                 command to create database model source files. The last parameter is the directory where models is stored. This directory must contain a model configuration file named 
+                <emphasis>
+                    model.json
+                 to tell dg_ctl how to connect to the database and which tables to be mapped.
+            <paragraph>
+                For example, if you want to create models in the project directory mentioned above, execute the following command in the project directory:
+            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                dg_ctl create model models
+            <paragraph>
+                This command will prompt the user that the file will be overwritten directly. After the user enters y, it will generate all the model files.
+            <paragraph>
+                Other source files need to reference model classes should include model header files, such as:
+            <literal_block highlight_args="{}" language="cpp" linenos="False" xml:space="preserve">
+                #include "models/User.h"
+            <note>
+                <paragraph>
+                    Note that the models directory name is included to distinguish between multiple data sources in the same project. See ORM.
+        <section ids="stress-testing" names="stress\ testing">
+            <title>
+                Stress Testing
+            <paragraph>
+                One can use the 
+                <emphasis>
+                    dg_ctl press
+                 command to do a stress testing, there are several options for this command.
+            <block_quote>
+                <bullet_list bullet="*">
+                    <list_item>
+                        <paragraph>
+                            <emphasis>
+                                -n num
+                             Set the number of requests(default : 1)
+                    <list_item>
+                        <paragraph>
+                            <emphasis>
+                                -t num
+                             Set the number of threads(default : 1), Set the number to the number of CPUs to achieve maximum performance
+                    <list_item>
+                        <paragraph>
+                            <emphasis>
+                                -c num
+                             Set the number of concurrent connections(default : 1)
+                    <list_item>
+                        <paragraph>
+                            <emphasis>
+                                -q
+                             No progress indication(default: no)
+            <paragraph>
+                For example, users can test an HTTP server as follows:
+            <literal_block highlight_args="{}" language="bash" linenos="False" xml:space="preserve">
+                dg_ctl press -n1000000 -t4 -c1000 -q http://localhost:8080/
+                dg_ctl press -n 1000000 -t 4 -c 1000 https://www.domain.com/path/to/be/tested

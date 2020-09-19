@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Overview-en.rstd:2
+msgid "Overview"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:4
+msgid "*Drogon* is a C++14/17-based HTTP application framework. Drogon can be used to easily build various types of web application server programs using C++."
+msgstr ""
+
+#: ../../source/Overview-en.rstd:6
+msgid "*Drogon* is the name of a dragon in the American TV series \"Game of Thrones\" that I really like."
+msgstr ""
+
+#: ../../source/Overview-en.rstd:8
+msgid "Drogon's main application platform is Linux. It also supports Mac OS, FreeBSD and Windows."
+msgstr ""
+
+#: ../../source/Overview-en.rstd:10
+msgid "Its main features are as follows:"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:12
+msgid "Use a non-blocking I/O network lib based on epoll (kqueue under macOS/FreeBSD) to provide high-concurrency, high-performance network IO, please visit the `TFB Tests Results <https://www.techempower.com/benchmarks/#section=data-r19&hw=ph&test=composite>`_  for more details;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:13
+msgid "Provide a completely asynchronous programming mode;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:14
+msgid "Support Http1.0/1.1 (server side and client side);"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:15
+msgid "Based on template, a simple reflection mechanism is implemented to completely decouple the main program framework, controllers and views."
+msgstr ""
+
+#: ../../source/Overview-en.rstd:16
+msgid "Support cookies and built-in sessions;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:17
+msgid "Support back-end rendering, the controller generates the data to the view to generate the Html page. Views are described by CSP template files, C++ codes are embedded into Html pages through CSP tags. And the drogon command-line tool automatically generates the C++ code files for compilation;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:18
+msgid "Support view page dynamic loading (dynamic compilation and loading at runtime);"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:19
+msgid "Provide a convenient and flexible routing solution from the path to the controller handler;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:20
+msgid "Support filter chains to facilitate the execution of unified logic (such as login verification, Http Method constraint verification, etc.) before handling HTTP requests;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:21
+msgid "Support https (based on OpenSSL);"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:22
+msgid "Support WebSocket (server side and client side);"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:23
+msgid "Support JSON format request and response, very friendly to the Restful API application development;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:24
+msgid "Support file download and upload;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:25
+msgid "Support gzip, brotli compression transmission;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:26
+msgid "Support pipelining;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:27
+msgid "Provide a lightweight command line tool, drogon_ctl, to simplify the creation of various classes in Drogon and the generation of view code;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:28
+msgid "Support non-blocking I/O based asynchronously reading and writing database (PostgreSQL and MySQL(MariaDB) database);"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:29
+msgid "Support asynchronously reading and writing sqlite3 database based on thread pool;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:30
+msgid "Support ARM Architecture;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:31
+msgid "Provide a convenient lightweight ORM implementation that supports for regular object-to-database bidirectional mapping;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:32
+msgid "Support plugins which can be installed by the configuration file at load time;"
+msgstr ""
+
+#: ../../source/Overview-en.rstd:33
+msgid "Support AOP with build-in joinpoints."
+msgstr ""
+

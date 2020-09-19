@@ -1,0 +1,67 @@
+<document source="C:\Users\86175\.github\drogon-all\drogon_web_community\drogon-website\docs\source\Coz-zh.rstd">
+    <section ids="coz" names="coz">
+        <title>
+            Coz
+        <section ids="causal-profiling-with-coz" names="causal\ profiling\ with\ coz">
+            <title>
+                Causal profiling with coz
+            <paragraph>
+                With coz you can profile two things:
+            <block_quote>
+                <bullet_list bullet="*">
+                    <list_item>
+                        <paragraph>
+                            throughput
+                    <list_item>
+                        <paragraph>
+                            latency
+            <paragraph>
+                If you want to profile throughput of your application, you should switch on the 
+                <emphasis>
+                    COZ_PROFILING
+                 cmake option and include debug information in your exectuable with 
+                <emphasis>
+                    Debug
+                 or 
+                <emphasis>
+                    RelWithDebInfo
+                 release modes in cmake. Doing so will include coz progress points when serving a request. Profiling latency is currently not supported in whole application scope, but can still be done in user code.
+            <paragraph>
+                When you’re done compiling you application with progress points included. You need to run the executable with the coz profiler, for example 
+                <emphasis>
+                    coz run — [path to your executable]
+                .
+            <paragraph>
+                Lastly, the application needs to be stressed, for best results you need to stress all code paths and run the profile for a good amount of time, 15+ min.
+            <paragraph>
+                The final profile will be a 
+                <emphasis>
+                    profile.coz
+                 file created in the current working directory. To view results, open the profile in the official 
+                <reference name="viewer" refuri="https://plasma-umass.org/coz/">
+                    viewer
+                <target ids="viewer" names="viewer" refuri="https://plasma-umass.org/coz/">
+                 , or you could run a local copy from the official 
+                <reference name="git repo" refuri="https://github.com/plasma-umass/coz">
+                    git repo
+                <target ids="git-repo" names="git\ repo" refuri="https://github.com/plasma-umass/coz">
+                 .
+            <paragraph>
+                Coz also supports scoping source files included for the profile with –source-scope <pattern> or -s <pattern> among other things, that should prove useful.
+            <paragraph>
+                For more information checkout:
+            <block_quote>
+                <bullet_list bullet="*">
+                    <list_item>
+                        <paragraph>
+                            coz run –help
+                    <list_item>
+                        <paragraph>
+                            <reference name="Git repo" refuri="https://github.com/plasma-umass/coz">
+                                Git repo
+                            <target dupnames="git\ repo" ids="id1" refuri="https://github.com/plasma-umass/coz">
+                    <list_item>
+                        <paragraph>
+                            <reference name="Coz whitepaper" refuri="https://github.com/plasma-umass/coz">
+                                Coz whitepaper
+                            <target ids="coz-whitepaper" names="coz\ whitepaper" refuri="https://github.com/plasma-umass/coz">
