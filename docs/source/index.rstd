@@ -9,7 +9,7 @@ Welcome to drogon's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Language Switch Index:
 
    English-Index <index-en>
    中文文档索引 <index-zh>

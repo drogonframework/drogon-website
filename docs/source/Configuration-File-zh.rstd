@@ -12,7 +12,7 @@
 配置文件的加载很简单，在DrogonAppFramework实例调用run接口之前，调用loadConfigFile接口即可，参数是配置文件的路径和文件名，比如：
 
 .. code-block:: cpp
-    :caption: *main.cc*
+    :caption: **main.cc**
 
     int main()
     {

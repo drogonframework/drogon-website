@@ -215,7 +215,7 @@ demo_v1_User.cc is as follows:
 有了上面的定义和模板特化，我们就可以向下面这样定义路径和handler::
 
 .. code-block:: cpp
-    :caption: *UserController.cc*
+    :caption: **UserController.cc**
 
     class UserController:public drogon::HttpController<UserController>
     {

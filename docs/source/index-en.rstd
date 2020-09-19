@@ -10,7 +10,6 @@ English documentation
 Welcome to drogon's documentation!
 ==================================
 
-Switch to 
 
 .. toctree::
    :maxdepth: 2
@@ -38,8 +37,3 @@ Switch to
    Benchmarks <Benchmarks-en>
    Coz <Coz-en>
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
