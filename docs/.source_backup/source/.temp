@@ -1,0 +1,76 @@
+Vien-en  line 110  view-page    not-found
+
+benchmarks-en line 56  Test Result not-found 
+
+Quick-Start-en  line 29 drogon_ctl  ->  https://github.com/an-tao/drogon/wiki/11-drogon_ctl-Command
+
+Quick-Start-en line 63 Configuration file -> https://github.com/an-tao/drogon/wiki/10-Configureation-File
+
+Quick-Start-en line 75 HttpAppFramework API -> https://github.com/an-tao/drogon/wiki/API-HttpAppFramework
+
+Controller-HttpSimpleController line 50 Filter -> https://github.com/an-tao/drogon/wiki/ENG-05-Filter
+
+Controller-WebSocket Controller line 101 Filter -> https://github.com/an-tao/drogon/wiki/05-Filter
+
+Filter-en line 01 example -> https://github.com/an-tao/drogon/wiki/04.2-Controller-HttpController
+
+Filter-en line 32 drogon_ctl -> https://github.com/an-tao/drogon/wiki/drogon_ctl-command#1123-filter-creation
+
+Database-General-en line 9 Database Enviroment -> https://github.com/an-tao/drogon/wiki/02-Installation#Database-Environment
+
+Database-General-en line 23 DbClient -> https://github.com/an-tao/drogon/wiki/08.1-DataBase-DbClient
+
+Database-General-en line 29 Transaction -> https://github.com/an-tao/drogon/wiki/08.2-DataBase-Transaction
+
+Database-General-en line 35 Orm -> https://github.com/an-tao/drogon/wiki/08.3-DataBase-ORM
+
+Database-DbClient-en line 26 DbClients -> https://github.com/an-tao/drogon/wiki/10-Configuration-file#db_clients
+
+Database-Transaction-en line 45 Orm  -> https://github.com/an-tao/drogon/wiki/ORM
+
+Database-Orm-en line 33 Configuration File -> https://github.com/an-tao/drogon/wiki/10-Configuration-File#db_clients
+
+Database-FastDbClient-en line 17 Configuration File -> https://github.com/an-tao/drogon/wiki/10-Configuration-File#db_clients
+
+Configuration-File line 114 FastDbClient -> https://github.com/an-tao/drogon/wiki/08.4-Database-FastDbClient
+
+Configuration-file line 307 Filter  -> https://github.com/an-tao/drogon/wiki/05-Filter
+
+Configuration-file line 335 View   -> https://github.com/an-tao/drogon/wiki/06-View
+
+drogon_ctl-Command-en line 69  View  -> https://github.com/an-tao/drogon/wiki/06-View
+
+drogon_ctl-Conmand-en line 167 Orm  -> https://github.com/an-tao/drogon/wiki/08.3-Database-ORM
+
+
++-----------------------+-------------------+---------------------------+---------------------------------------+
+| Methods				| Synchronous		|	Blocking/Non-blocking	|	Exception                   		|
+|						| Asynchronous		|							|										|
++=======================+===================+===========================+=======================================+
+| void execSqlAsync		| Asynchronous		|	Non-blocking            | Will not throw an exception			|
+|						|					|							|										|
++-----------------------+-------------------+---------------------------+---------------------------------------+
+| std::future			| Asynchronous		| Block when calling the	| May throw an exception when			|
+| execSqlAsyncFuture	|					| get method of the future	| calling the get method of the future	|
++-----------------------+-------------------+---------------------------+---------------------------------------+
+| const Result			| Synchronous		| Blocking					| May throw an exception				|
+| execSqlSync			|					|							|										|
++-----------------------+-------------------+---------------------------+---------------------------------------+
+| internal::SqlBinder	| Asynchronous		| Default non-blocking		|  Will not throw an exception			|
+| operator<<			|					|							|										|
++-----------------------+-------------------+---------------------------+---------------------------------------+
+
+
+
+
+
+=============================================     ====================================================================== ============== ============ 
+ Command line 								       Description 	                                                          Drogon(kQPS) 	 nginx(kQPS)
+=============================================     ====================================================================== ============== ============
+ httpress -c 100 -n 1000000 -t 16 -k -q URL         100 connections, 1 million requests, 16 threads,Keep-Alive 	          561/552 	     330/329
+ httpress -c 100 -n 1000000 -t 12 -q URL 	       100 		connections, 1 million requests, 12 threads, no Keep-Alive 	  140/135 	     31/49
+ httpress -c 1000 -n 1000000 -t 16 -k -q URL 	   1000 connections, 1 million requests, 16 threads,Keep-Alive 	          573/565 	     333/327
+ httpress -c 1000 -n 1000000 -t 16 -q URL 	       1000 connections, 1 million requests, 16 threads,no Keep-Alive 	      155/143 	     52/50
+ httpress -c 10000 -n 4000000 -t 16 -k -q URL 	   10000 connections, 4 million requests, 16 threads,Keep-Alive 	      512/508 	     316/314
+ httpress -c 10000 -n 1000000 -t 16 -q URL 	       10000 connections, 1 million requests, 16 threads,no Keep-Alive 	      143/141 	     43/40
+=============================================     ====================================================================== ============== ============ 
