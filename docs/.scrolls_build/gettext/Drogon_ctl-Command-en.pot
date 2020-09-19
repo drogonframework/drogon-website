@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Drogon_ctl-Command-en.rstd:3
+msgid "drogon_ctl Command"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:5
+msgid "After the Drogon framework is compiled and installed, a command line program *drogon_ctl* is also installed in the system, for convenience, also installed an identical copy dg_ctl. Users can choose according to their preferences."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:7
+msgid "The main function of the program is to make it easy for users to create various drogon project files. Use the *dg_ctl help* command to see the functions it supports, as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:21
+msgid "Version subcommand"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:23
+msgid "The *version* subcommand is used to print the drogon version currently installed on the system, as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:40
+msgid "Create sub command"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:42
+msgid "The *create* subcommand is used to create various objects. It is currently the main function of drogon_ctl. Use the *dg_ctl help create* command to print detailed help for this command, as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:68
+msgid "View creation"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:70
+msgid "The *dg_ctl create view* command is used to generate source files from csp files, see the View section. In general, this command does not need to be used directly. It is better practice to configure the cmake file to executed this command automatically. The command example is as follows, assuming the csp file is *UsersList.csp*."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:78
+msgid "Controller creation"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:80
+msgid "The *dg_ctl create controller* command is used to help the user create the controller's source files. The three controllers currently supported by drogon can be created by this command."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:82
+msgid "The command to create an HttpSimpleController is as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:89
+msgid "The last parameter is the controller's class name, which can be prefixed by a namespace."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:91
+msgid "The command to create an HttpController is as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:98
+msgid "The command to create a WebSocketController is as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:107
+msgid "Filter creation"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:109
+msgid "The *dg_ctl create filter* command is used to help the user create the source files for filters, see the Filter section."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:118
+msgid "Create project"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:120
+msgid "The best way the user creates a new Drogon application project is via the drogon_ctl command, as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:126
+msgid "After the command is executed, a complete project directory will be created in the current directory. The directory name is *ProjectName*, and the user can directly compile the project in the build directory (cmake .. && make). Of course, it does not have any business logic."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:128
+msgid "The directory structure of the project is as follows:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:149
+msgid "Create models"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:151
+msgid "Use the *dg_ctl create model* command to create database model source files. The last parameter is the directory where models is stored. This directory must contain a model configuration file named *model.json* to tell dg_ctl how to connect to the database and which tables to be mapped."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:153
+msgid "For example, if you want to create models in the project directory mentioned above, execute the following command in the project directory:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:159
+msgid "This command will prompt the user that the file will be overwritten directly. After the user enters y, it will generate all the model files."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:161
+msgid "Other source files need to reference model classes should include model header files, such as:"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:168
+msgid "Note that the models directory name is included to distinguish between multiple data sources in the same project. See ORM."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:172
+msgid "Stress Testing"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:174
+msgid "One can use the *dg_ctl press* command to do a stress testing, there are several options for this command."
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:176
+msgid "*-n num* Set the number of requests(default : 1)"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:177
+msgid "*-t num* Set the number of threads(default : 1), Set the number to the number of CPUs to achieve maximum performance"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:178
+msgid "*-c num* Set the number of concurrent connections(default : 1)"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:179
+msgid "*-q* No progress indication(default: no)"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-en.rstd:181
+msgid "For example, users can test an HTTP server as follows:"
+msgstr ""
+

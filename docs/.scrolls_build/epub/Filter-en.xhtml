@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+  <head>
+    <meta charset="utf-8" />
+    <title>Filter</title>
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head><body>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="filter">
+<h1>Filter</h1>
+<p>In HttpController’s example, the getInfo method should check whether the user is logged in before returning the user’s information. We can write this logic in the getInfo method, but obviously, checking the user’s login membership is general logic which will be used by many interfaces, it should be extracted separately and configured before calling handler, which is what filters do. After the drogon framework completes the URL path matching, it first calls the filters registered on the path in turn, and only when all the filters allow “pass”, the corresponding handler will be called;</p>
+<div class="section" id="built-in-filter">
+<h2>Built-in Filter</h2>
+<p>Drogon contains the following common filters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>drogon::IntranetIpFilter</em>: allow HTTP requests from intranet IP only, or return the 404 page.</p></li>
+<li><p><em>drogon::LocalHostFilter</em>: allow HTTP requests from 127.0.0.1 or ::1 only, or return the 404 page.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="custom-filter">
+<h2>Custom Filter</h2>
+<p>Of course, users can customize the filter, you need to inherit the HttpFilter class template, the template type is the subclass type, for example, if you want to create a LoginFilter, you could define it as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LoginFilter</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpFilter</span><span class="o">&lt;</span><span class="n">LoginFilter</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">doFilter</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                        <span class="n">FilterCallback</span> <span class="o">&amp;&amp;</span><span class="n">fcb</span><span class="p">,</span>
+                        <span class="n">FilterChainCallback</span> <span class="o">&amp;&amp;</span><span class="n">fccb</span><span class="p">)</span> <span class="k">override</span> <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>You could create filter by the <em>drogon_ctl</em> command, see drogon_ctl.</p>
+<p>You need to override the doFilter virtual function of the parent class to implement the filter logic;</p>
+<p>This virtual function has three parameters, which are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>req</em>: http request;</p></li>
+<li><p><em>fcb</em>: filter callback function, the function type is void (HttpResponsePtr), when the filter determines that the request is not valid, the specific response is returned to the browser through this callback;</p></li>
+<li><p><em>fccb</em>: filter chain callback function, the function type is void (), when the filter determines that the request is legal, tells drogon to call the next filter or the final handler through this callback;</p></li>
+</ul>
+</div></blockquote>
+<p>The specific implementation can refer to the implementation of the drogon built-in filter.</p>
+</div>
+<div class="section" id="filter-registration">
+<h2>Filter Registration</h2>
+<p>The registration of filters is always accompanied by the registration of controllers.the macros (PATH_ADD, METHOD_ADD, etc.) mentioned earlier can add the name of one or more filters at the end; for example, we change the registration line of the previous <em>getInfo</em> method to the following form:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">User</span><span class="o">::</span><span class="n">getInfo</span><span class="p">,</span><span class="s">&quot;/{1}/info?token={2}&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">,</span><span class="s">&quot;LoginFilter&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>After the path is successfully matched, the <em>getInfo</em> method will be called only when the following conditions were met:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The request must be an HTTP Get request;</p></li>
+<li><p>The requesting party must have logged in;</p></li>
+</ol>
+</div></blockquote>
+<p>As you can see, the configuration and registration of filters are very simple. The controller source file that registers filters does not need to include the filter’s header file. The filter and controller are fully decoupled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note: If the filter is defined in the namespace, you must write the namespace completely when you register the filter.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

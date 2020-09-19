@@ -1,0 +1,293 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/DataBase-DbClient-en.rstd:3
+msgid "DataBase DbClient"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:7
+msgid "DbClient Object Construction"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:9
+msgid "There are two ways to construct a DbClient object. One is through the static method of the DbClient class. You can see the definition in the DbClient.h header file, as follows:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:20
+msgid "Use the above interface to get the smart pointer of the DbClient implementation object. The parameter connInfo is a connection string. Set a series of connection parameters in the form of key=value. For details, please refer to the comments in the header file. The parameter connNum is the number of database connections of DbClient, which has a key impact on concurrency. Please set it according to the actual situation."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:22
+msgid "The object obtained by the above method, the user has to find a way to **persist** it, such as putting it in some global container. **Creating a temporary object and then releasing it after use is a very unrecommended solution** for the following reasons:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:24
+msgid "This will waste time creating connections and disconnections, increasing system latency;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:25
+msgid "The interface is also a non-blocking interface. That is to say, when the user gets the DbClient object, the connection managed by the it has not been established yet. The framework does not (intentionally) provide a callback interface for successful connection establishment. Do you still have to sleep before starting the query?? This is contrary to the original intention of the asynchronous framework."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:27
+msgid "Therefore, DbClient objects should be built at the beginning of the program and held and used throughout the life time. Obviously, this work can be done entirely by the framework. So the drogon framework provides the second build method, which is built by configuration file or the createDbClient() method. For the configuration method of the configuration file, see db_clients."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:29
+msgid "When needed, the DbClient smart pointer is obtained through the interface of the framework. The interface is as follows:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:35
+msgid "The parameter name is the value of the name configuration option in the configuration file to distinguish multiple different DbClient objects of the same application. The connections managed by DbClient are always reconnected, so users don't need to care about the connection status. They are almost always connected."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:38
+msgid "Note: This method cannot be called before running app.run(), otherwise the user will get an empty shared_ptr."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:42
+msgid "Execution Interface"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:44
+msgid "DbClient provides several different interfaces to users, as listed below:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:71
+msgid "Since the number and type of binding parameters cannot be predetermined, these methods are function templates."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:73
+msgid "The properties of these methods are shown in the following table:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:76
+msgid "Methods"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:76
+msgid "Synchronous/Asynchronous"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:76
+msgid "Blocking/Non-blocking"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:76
+msgid "Exception"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:78
+msgid "void execSqlAsync"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:78
+#: ../../source/DataBase-DbClient-en.rstd:79
+#: ../../source/DataBase-DbClient-en.rstd:81
+msgid "Asynchronous"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:78
+msgid "Non-blocking"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:78
+#: ../../source/DataBase-DbClient-en.rstd:81
+msgid "Will not throw an exception"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:79
+msgid "std::future execSqlAsyncFuture"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:79
+msgid "Block when calling the get method of the future"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:79
+msgid "May throw an exception when calling the get method of the future"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:80
+msgid "const Result execSqlSync"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:80
+msgid "Synchronous"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:80
+msgid "Blocking"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:80
+msgid "May throw an exception"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:81
+msgid "internal::SqlBinder operator<<"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:81
+msgid "Default non-blocking"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:85
+msgid "You may be confused about the combination of asynchronous and blocking. In general, the synchronization method involving network IO is blocking, and the asynchronous method is non-blocking. However, the asynchronous method can also work in blocking mode, meaning that this method will Block until the callback function has finished executing. When the asynchronous method of DbClient works in blocking mode, the callback function will be executed in the thread of the caller, and then the method will return."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:87
+msgid "If your application involves high-concurrency scenarios, please use asynchronous non-blocking methods. If it is in a low concurrent scene (such as a network device management page), you can choose synchronization methods for convenience and intuitiveness."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:90
+msgid "execSqlAsync"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:102
+msgid "This is the most commonly used asynchronous interface, working in non-blocking mode;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:104
+msgid "The parameter *sql* is a string of sql statements. If there are placeholders for binding parameters, use the placeholder rules of the corresponding database. For example, PostgreSQL placeholders are $1, $2 ..., while MySQL placeholders are *?*."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:106
+msgid "The indefinite parameter *args* represents the bound parameter, which can be zero or more. The number of parameters is the same as the number of placeholders in the sql statement. The types can be the following:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:108
+msgid "Integer type: can be an integer of various word lengths, and should match the database field type;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:109
+msgid "Floating point type: can be float or double, should match the database field type;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:110
+msgid "String type: can be std::string or const char[], corresponding to the string type of the database or other types that can be represented by strings;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:111
+msgid "Date type: trantor::Date type, corresponding to the database date, datetime, timestamp types."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:112
+msgid "Binary type: std::vector<char> type, corresponding to PostgreSQL's bytea type or Mysql's blob type;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:114
+msgid "These parameters can be left or right, can be variables or literal constants, and users are free to use them."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:116
+msgid "The parameters rCallback and exceptCallback represent the result callback function and the exception callback function, respectively, which have a fixed definition, as follows:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:118
+msgid "The result callback function: the call type is void (const Result &), various callable objects conforming to this call type, std::function, lambda, etc. can be passed as parameters;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:119
+msgid "Exception callback function: the call type is void (const DrogonDbException &), which can pass various callable objects that are consistent with this call type;"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:121
+msgid "After the execution of sql is successful, the execution result is wrapped by the Result class and passed to the user through the result callback function; if there is any exception in the sql execution, the exception callback function is executed, and the user can obtain the exception information from the DrogonDbException object."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:123
+msgid "Let us give an example:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:142
+msgid "From the example we can see that the Result object is a std standard compatible container, support iterators, you can get the object of each row through the range loop. the various interfaces of Result, Row and Field objects, please refer to the source code."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:144
+msgid "The DrogonDbException class is the base class for all database exceptions. Please refer to the comments in the source code."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:147
+msgid "execSqlAsyncFuture"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:155
+msgid "The asynchronous future interface omits the two callback parameters of the previous interface. Calling this interface will immediately return a future object. The user must call the get() method of the future object to get the returned result. The exception is obtained through the try/catch mechanism. if the get() method isn't in the *try/catch*, and there is no *try/catch* in the entire call stack, the program will exit when the sql execution exception occurs."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:157
+msgid "For example:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:179
+msgid "execSqlSync"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:187
+msgid "Synchronous interface is the most simple and intuitive, the input parameters are sql string and bound parameters, return a Result object, the call will block the current thread, and throw an exception when an error occurs, so also pay attention to catch exception with *try/catch*."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:189
+msgid "E.g:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:206
+msgid "operator<<"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:212
+msgid "The streaming interface is special. It inputs the sql statement and parameters in turn through the << operator, and specifies the result callback function and the exception callback function through the >> operator. For example, the previous example of selecting, using the streaming interface is Look like this:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:232
+msgid "This usage is completely equivalent to the first asynchronous non-blocking interface, and which interface is used depends on the user's usage habits. If you want it to work in blocking mode, you can use << to enter a Mode::Blocking parameter, which is not described here."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:234
+msgid "In addition, the streaming interface has a special usage. Using a special result callback, the framework can pass the result to the user row by row. The call type of this callback is as follows:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:240
+msgid "When the first bool parameter is true, it means that the result is a empty row, that is, all the results have been returned, this is the last callback; Behind is a series of parameters, corresponding to the value of each column of a row of records, the framework will do type conversion, of course, the user should also pay attention to the type of matching. These types can be const-type lvalue references, or rvalue references, and of course value types."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:242
+msgid "Let's rewrite the previous example with this callback:"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:261
+msgid "It can be seen that the values ​​of the user_name and user_id fields in the select statement are respectively assigned to the name and id variables in the callback function, and the user does not need to handle these conversions by themselves, which obviously provides a certain convenience, and the user can use it flexibly."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:264
+msgid "Note: It is important to emphasize that in asynchronous programming the user must pay attention to the variable i in the above example. The user must ensure that the variable i is valid when the callback occurs because it is caught by the reference. The callback will be called in another thread, and the current context may have failed when the callback occurred. Programmers typically use smart pointers to hold temporarily created variables and then capture them through callbacks to ensure the validity of the variables."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:268
+msgid "Summary"
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:270
+msgid "Each DbClient object has one or multiple its own EventLoop threads controlling the database connection IO, accepting the request via an asynchronous or synchronous interface, and returning the result via a callback function."
+msgstr ""
+
+#: ../../source/DataBase-DbClient-en.rstd:272
+msgid "Blocking interfaces of DbClient only block the caller thread, as long as the caller thread is not the EventLoop thread, it will not affect the normal operation of the EventLoop thread. When the callback function is called, the program inside the callback is run on the EventLoop thread. Therefore, do not perform any blocking operations within the callback, otherwise it will affect the concurrency performance of database read and write. Anyone familiar with non-blocking I/O programming should understand this constraint."
+msgstr ""
+

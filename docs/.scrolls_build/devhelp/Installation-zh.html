@@ -1,0 +1,277 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Installation</title>
+  
+    <link rel="stylesheet" href="_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="快速开始" href="Quick-Start-zh.html" />
+    <link rel="prev" title="Overview" href="Overview-zh.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="index.html"
+          title="back to the documentation overview"><span>Installation</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="Overview-zh.html">&laquo; Overview</a> |
+        <a href="#">Installation</a>
+        | <a href="Quick-Start-zh.html">快速开始 &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#id1">系统要求</a></li>
+<li><a class="reference internal" href="#id2">依赖库</a></li>
+<li><a class="reference internal" href="#id3">系统准备范例</a><ul>
+<li><a class="reference internal" href="#ubuntu-18-04">Ubuntu 18.04</a></li>
+<li><a class="reference internal" href="#centos-7-5">CentOS 7.5</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">数据库环境</a><ul>
+<li><a class="reference internal" href="#postgresql">PostgreSQL</a></li>
+<li><a class="reference internal" href="#mysql">MySQL</a></li>
+<li><a class="reference internal" href="#sqlite3">Sqlite3</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#drogon">安装drogon</a><ul>
+<li><a class="reference internal" href="#id5">直接使用drogon源码</a></li>
+<li><a class="reference internal" href="#vcpkg">使用vcpkg安装</a></li>
+<li><a class="reference internal" href="#docker">使用docker镜像</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+  <div class="section" id="installation">
+<h1>Installation</h1>
+<p>本节以Linux为例，简介安装过程，其它系统，大同小异</p>
+<div class="section" id="id1">
+<h2>系统要求</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Linux内核应不低于2.6.9，64位版本；</li>
+<li>gcc版本不低于5.4.0；</li>
+<li>构建工具是cmake,cmake版本应不低于3.5；</li>
+<li>git版本管理工具；</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h2>依赖库</h2>
+<blockquote>
+<div><ul class="simple">
+<li>trantor，non-blocking I/O C++网络库，也是作者开发，已作为git仓库submodule，无需提前安装；</li>
+<li>jsoncpp，json的c++库，版本不低于1.7；</li>
+<li>libuuid，生成uuid的c库；</li>
+<li>zlib，用于支持压缩传输；</li>
+<li>OpenSSL，并非必须，如果安装了OpenSSL库，drogon将支持HTTPS，否则drogon只支持HTTP；</li>
+<li>c-ares, 并非必须，如果安装了ares库，drogon对DNS的支持会具有更好的性能；</li>
+<li>libbrotli，并非必须，如果安装了brotli库，drogon的HTTP响应会支持brotli压缩；</li>
+<li>boost，版本不低于1.61，只在C++编译器不支持c++17时才需要安装；</li>
+<li>postgreSQL, mariadb, sqlite3的客户端开发库，并非必须，安装后drogon会提供对响应的库的访问能力；</li>
+<li>gtest, 并非必须，如果安装了gtest库，drogon的单元测试代码可以被编译；</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>系统准备范例</h2>
+<div class="section" id="ubuntu-18-04">
+<h3>Ubuntu 18.04</h3>
+<p>环境</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install git
+sudo apt install gcc
+sudo apt install g++
+sudo apt install cmake
+</pre></div>
+</div>
+<p>jsoncpp</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install libjsoncpp-dev
+</pre></div>
+</div>
+<p>uuid</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install uuid-dev
+</pre></div>
+</div>
+<p>OpenSSL</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install openssl
+sudo apt install libssl-dev
+</pre></div>
+</div>
+<p>zlib</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install zlib1g-dev
+</pre></div>
+</div>
+</div>
+<div class="section" id="centos-7-5">
+<h3>CentOS 7.5</h3>
+<p>环境</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install git
+yum install gcc
+yum install gcc-c++
+</pre></div>
+</div>
+<p>默认安装的cmake版本太低，使用源码安装</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Kitware/CMake
+<span class="nb">cd</span> CMake/
+./bootstrap <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+<p>升级gcc</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install centos-release-scl
+yum install devtoolset-8
+scl <span class="nb">enable</span> devtoolset-8 bash
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意: <em>scl enable devtoolset-8</em> bash命令仅是临时性的使新的gcc生效，直到会话结束。如果想永久使用新版gcc,可以使用命令*echo “scl enable devtoolset-8 bash” &gt;&gt; ~/.bash_profile*, 系统重新启动后将自动使用新版gcc。</p>
+</div>
+<p>jsoncpp</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/open-source-parsers/jsoncpp
+<span class="nb">cd</span> jsoncpp/
+mkdir build
+<span class="nb">cd</span> build
+cmake ..
+make <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+<p>uuid</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install libuuid-devel
+</pre></div>
+</div>
+<p>OpenSSL</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install openssl-devel
+</pre></div>
+</div>
+<p>zlib</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install zlib-devel
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>数据库环境</h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意：下面的这些库都不是必须的, 用户可以根据实际需求选择安装一个或者多个数据库。</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意：如果将来的开发需要用到数据库，请先安装好数据库环境，再安装drogon, 否则，会出现找不到数据库的问题。</p>
+</div>
+<div class="section" id="postgresql">
+<h3>PostgreSQL</h3>
+<p>PostgreSQL的原生C库libpq是需要安装的，安装方法如下：</p>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu 16: sudo apt-get install postgresql-server-dev-all</li>
+<li>ubuntu 18: sudo apt-get install postgresql-all</li>
+<li>centOS 7: yum install postgresql-devel</li>
+<li>MacOS: brew install postgresql</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="mysql">
+<h3>MySQL</h3>
+<p>MySQL的原生库不支持异步读写，而通过同步接口+线程池的方式对上层提供异步接口并不是一个好的策略，幸好，MySQL还有一个原开发者社区维护的版本MariaDB，该版本和MySQL的对应版本兼容，并且它的开发库支持异步读写，因此，Drogon的MySQL支持采用MariaDB开发库，你的系统，Mysql和MariaDB最好不要混用，可以统一安装成MariaDB。</p>
+<p>安装方法如下:</p>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu: sudo apt install libmariadbclient-dev</li>
+<li>centOS 7: yum install mariadb-devel</li>
+<li>MacOS: brew install mariadb</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="sqlite3">
+<h3>Sqlite3</h3>
+<blockquote>
+<div><ul class="simple">
+<li>ubuntu: sudo apt-get install libsqlite3-dev</li>
+<li>centOS: yum install sqlite-devel</li>
+<li>MacOS: brew install sqlite3</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意: 上述有些命令只安装了开发库，如果还要安装server端，请自行google。</p>
+</div>
+</div>
+</div>
+<div class="section" id="drogon">
+<h2>安装drogon</h2>
+<p>假设上述系统环境和库依赖都已经准备好，安装过程是非常简单的；</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$WORK_PATH</span>
+git clone https://github.com/an-tao/drogon
+<span class="nb">cd</span> drogon
+git submodule update --init
+mkdir build
+<span class="nb">cd</span> build
+cmake ..
+make <span class="o">&amp;&amp;</span> sudo make install
+</pre></div>
+</div>
+<p>默认是编译debug版本，如果想编译release版本，cmake命令要带如下参数：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release ..
+</pre></div>
+</div>
+<p>安装结束后，将有如下文件被安装在系统中(CMAKE_INSTALL_PREFIX可以改变安装位置)：</p>
+<blockquote>
+<div><ul class="simple">
+<li>drogon的头文件被安装到/usr/local/include/drogon中；</li>
+<li>drogon的库文件libdrogon.a被安装到/usr/local/lib中；</li>
+<li>drogon的命令行工具drogon_ctl被安装到/usr/local/bin中；</li>
+<li>trantor的头文件被安装到/usr/local/include/trantor中；</li>
+<li>trantor的库文件libtrantor.a被安装到/usr/local/lib中；</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id5">
+<h3>直接使用drogon源码</h3>
+<p>当然，你也可以在你的项目中包含drogon源码，比如将drogon放置在你的项目目录的third_party下，那么，你只需要在你项目的cmake文件里添加如下两行：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>add_subdirectory<span class="o">(</span>third_party/drogon<span class="o">)</span>
+target_link_libraries<span class="o">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span> PRIVATE drogon<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="vcpkg">
+<h3>使用vcpkg安装</h3>
+<p>The easiest way to install drogon on windows is to use vcpkg</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcpkg.exe install drogon
+</pre></div>
+</div>
+<p>或者</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcpkg.exe install drogon:x64-windows
+</pre></div>
+</div>
+</div>
+<div class="section" id="docker">
+<h3>使用docker镜像</h3>
+<p>我们也在 <a class="reference external" href="https://hub.docker.com/r/drogonframework/drogon">docker hub</a> . 上提供了构建好的docker镜像. 在这个docker里Drogon和它所有的依赖都已经安装完毕，用户可以在上面直接开发Drogon应用程序。</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>数据库 概述 &#8212; drogon v1.0.0-beta21 documentation</title>
+  
+    <link rel="stylesheet" href="../_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="数据库 Dbclient" href="../DataBase-DbClient-zh/" />
+    <link rel="prev" title="会话" href="../Session-zh/" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../"
+          title="back to the documentation overview"><span>数据库 概述</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="../Session-zh/">&laquo; 会话</a> |
+        <a href="#">数据库 概述</a>
+        | <a href="../DataBase-DbClient-zh/">数据库 Dbclient &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li><a class="reference internal" href="#">数据库 概述</a><ul>
+<li><a class="reference internal" href="#id2">概述</a></li>
+<li><a class="reference internal" href="#dbclient">DbClient 客户端</a></li>
+<li><a class="reference internal" href="#id7">事务</a></li>
+<li><a class="reference internal" href="#orm">ORM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+  <div class="section" id="id1">
+<h1>数据库 概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>概述<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>Drogon*内置了数据库读写引擎，对数据库连接的操作基于non-blocking I/O技术实现，因此，从底层到上层接口，都是高效率的非阻塞异步方式，保证了Drogon对高并发性能的追求。目前，Drogon支持PostgreSQL和MySQL数据库，如果要使用数据库，开发系统必须先安装相应数据库的开发环境，Drogon会自动探测这些库的头文件和库文件，编译相应的部分。数据库开发环境的准备，参见安装数据库环境。</p>
+<p>Drogon为了支持轻量级应用，也支持sqlite3数据库，通过线程池实现异步接口，与前述数据库的接口是统一的。</p>
+</div>
+<div class="section" id="dbclient">
+<h2>DbClient 客户端<a class="headerlink" href="#dbclient" title="Permalink to this headline">¶</a></h2>
+<p>Drogon的数据库基本操作对象是*DbClient*(这是一个抽象类，用户可以持有的是*DbClient*类型的智能指针，具体类型取决于构造它的接口)，区别于一般的数据库接口，这个对象并不代表单一的数据库连接，它内部可以包含一个或多个数据库连接，你可以把它看作一个**连接池对象**。</p>
+<p><a href="#id5"><span class="problematic" id="id6">*</span></a>DbClient*同时提供了同步和异步接口，异步接口也同时支持阻塞和非阻塞的模式，当然，出于和Drogon异步框架配合的需要，建议大家多使用异步接口的非阻塞模式，这也是对提高并发性最有效的接口。</p>
+<p>通常，一个异步接口调用时，DbClient会在它管理的空闲连接中随机选取一个，执行相关的查询操作，待有结果返回时，DbClient会处理数据，通过回调函数对象返回给调用方；如果调用时没有空闲连接，执行内容会被缓存，一旦有连接执行完自己的sql请求，就会从缓存中依次取出待执行的命令去执行。</p>
+<p>DbClient的详细内容，见DbClient。</p>
+</div>
+<div class="section" id="id7">
+<h2>事务<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>由*DbClient*可以产生事务对象，用以支持事务操作，事务对象除了多出一个*rollback()*接口，其余基本和*DbClient*一致，事务对象的类是*Transaction*，关于事务的详细内容，参见事务。</p>
+</div>
+<div class="section" id="orm">
+<h2>ORM<a class="headerlink" href="#orm" title="Permalink to this headline">¶</a></h2>
+<p>Drogon也提供了对ORM的支持，用户可以通过drogon_ctl读取数据库中的表，并生成对应的model对象类源码，然后，通过*Mapper&lt;MODEL&gt;*类模板完成这些对象的数据库操作，为标准的数据操作提供了简单便捷的接口，使用户可以不用自己写sql语句就可以完成对表的增删改查。关于*ORM*，请参阅ORM。</p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

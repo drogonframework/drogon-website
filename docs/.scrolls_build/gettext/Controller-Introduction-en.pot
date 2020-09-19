@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Controller-Introduction-en.rstd:3
+msgid "Controller Introduction"
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:6
+msgid "Controller"
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:8
+msgid "The controller is very important in web application development. It processes the request sent by the browser and then generates a response to the browser. The drogon framework has helped us to handle the network transmission, Http protocol analysis and so on. We only need to pay attention to the logic of the controller; each controller object can have one or more processing functions (generally called handlers), and the interface of the function is generally defined as follows:"
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:12
+msgid "Where *req* is the object of the Http request (wrapped by the smart pointer), the *callback* is the callback function object that the framework passes to the controller, and the controller generates the response object (also wrapped by the smart pointer) and then passes the object to the drogon through the callback. Then the framework will send the response content to the browser for you. The last part *...* is a list of parameters. The drogon maps the parameters in the Http request to the corresponding parameter parameters according to the mapping rules. This is very convenient for application development."
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:14
+msgid "Obviously, this is an asynchronous interface, one can call the callback after completing the time-consuming operation at other threads;"
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:16
+msgid "Drogon have three types controllers, HttpSimpleController, HttpController, and WebSocketController. When you use them, the corresponding class template needs to be inherited. For example, a custom class \"MyClass\" declaration of HttpSimpleController is as follows:"
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:18
+msgid "*MyClass.h*"
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:35
+msgid "Controller life cycle"
+msgstr ""
+
+#: ../../source/Controller-Introduction-en.rstd:37
+msgid "A controller registered to a drogon framework will have at most only one instance and will not be destroyed during the entire application run, so users can declare and use member variables in the controller class. Note that when the handler of the controller is called, it is in a multi-threaded environment (when the number of IO threads of the framework is configured to be greater than 1), if you need to access non-temporary variables, please do the concurrent protection work."
+msgstr ""
+

@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Session-zh.rstd:3
+msgid "会话"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:5
+msgid "*会话（Session）*是web应用的重要概念，用于在服务端保存客户端的状态，一般和浏览器的cookie配合，drogon提供了对会话的支持。drogon默认关闭会话选择，你也可以通过如下接口关闭或打开："
+msgstr ""
+
+#: ../../source/Session-zh.rstd:12
+msgid "都是通过*HttpAppFramework*单例调用，timeout参数代表了会话失效的时间，单位是秒，框架默认值是1200，即如果用户20分钟以上没有访问应用，则他对应的会话就失效了。timeout设置为0表示drogon将在整个生存期保留用户的会话；"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:14
+msgid "打开会话特性前请确定你的客户端支持cookie，否则，drogon会为每次不含SessionID的请求创建新的会话，这会白白浪费内存和计算资源。"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:18
+msgid "会话对象"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:20
+msgid "drogon的会话对象类型是*drogon::Session*，它和*HttpViewData*非常类似，可以通过关键字存取任意类型的对象；支持并发读写；具体的使用请参考Session class的说明；"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:22
+msgid "drogon框架会把会话对象放到HttpRequest对象里传递给用户，用户可以通过HttpRequest类的如下接口获取Session对象。"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:28
+msgid "获得的是Session对象的智能指针，通过它可以存取各种对象；"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:32
+msgid "会话的例子"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:34
+msgid "我们这次加一个需要会话支持的功能，比如，我们要限制用户的访问频度，某一次访问后，如果10秒以内再次访问，就返回错误，否则返回ok。我们需要在会话里记录上次访问的时间，然后和本次访问的时间做比较，就可以实现这个功能。"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:36
+msgid "我们创建一个Filter来实现这个功能，假设类名是TimeFilter，实现如下："
+msgstr ""
+
+#: ../../source/Session-zh.rstd:77
+msgid "我们再注册一个lambda表达式到/slow路径上，同时附加上TimeFilter，代码如下："
+msgstr ""
+
+#: ../../source/Session-zh.rstd:93
+msgid "调用框架接口打开会话"
+msgstr ""
+
+#: ../../source/Session-zh.rstd:99
+msgid "用cmake重新编译整个工程，运行目标程序webapp，就可以通过浏览器看到效果了。"
+msgstr ""
+

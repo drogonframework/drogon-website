@@ -1,0 +1,210 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>快速开始</title>
+  
+    <link rel="stylesheet" href="_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="控制器 简介" href="Controller-Introduction-zh.html" />
+    <link rel="prev" title="Installation" href="Installation-zh.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="index.html"
+          title="back to the documentation overview"><span>快速开始</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="Installation-zh.html">&laquo; Installation</a> |
+        <a href="#">快速开始</a>
+        | <a href="Controller-Introduction-zh.html">控制器 简介 &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li><a class="reference internal" href="#">快速开始</a><ul>
+<li><a class="reference internal" href="#id2">静态网站</a></li>
+<li><a class="reference internal" href="#id5">动态网站</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+  <div class="section" id="id1">
+<h1>快速开始</h1>
+<div class="section" id="id2">
+<h2>静态网站</h2>
+<p>我们从一个最简单的例子开始，介绍drogon的使用，在这个例子中我们使用命令行工具*drogon_ctl*创建一个工程：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create project your_project_name
+</pre></div>
+</div>
+<p>进入工程目录，可以看到如下文件:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├── build                         构建文件夹
+├── CMakeLists.txt                工程的cmake配置文件
+├── config.json                   drogon应用的配置文件
+├── controllers                   存放控制器文件的目录
+├── filters                       存放过滤器文件的目录
+├── main.cc                       主程序
+├── models                        数据库模型文件的目录
+│   └── model.json
+└── views                         存放视图csp文件的目录
+</pre></div>
+</div>
+<p>文件夹的名字就反应了它的用途，用户可以把各类文件(如控制器、过滤器、视图等等)分别放入对应的文件夹，方便项目管理，请读者自行实验。关于drogon_ctl的详细使用，可参见 drogon_ctl。</p>
+<p>让我们看一下main.cc文件，内容如下：</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><em>main.cpp</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;drogon/HttpAppFramework.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//Set HTTP listener address and port</span>
+    <span class="n">drogon</span><span class="o">::</span><span class="n">app</span><span class="p">().</span><span class="n">addListener</span><span class="p">(</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="mi">80</span><span class="p">);</span>
+    <span class="c1">//Load config file</span>
+    <span class="c1">//drogon::app().loadConfigFile(&quot;../config.json&quot;);</span>
+    <span class="c1">//Run HTTP framework,the method will block in the internal event loop</span>
+    <span class="n">drogon</span><span class="o">::</span><span class="n">app</span><span class="p">().</span><span class="n">run</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>然后构建项目:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> build
+cmake ..
+make
+</pre></div>
+</div>
+<p>编译完成后，运行目标程序 <em>./your_project_name</em>.</p>
+<p>现在，我们在Http根目录添加一个最简单的静态文件index.html:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;&lt;h1&gt;Hello Drogon!&lt;/h1&gt;&#39;</span> &gt;&gt;index.html
+</pre></div>
+</div>
+<p>Http根目录默认值是*”./”<a href="#id3"><span class="problematic" id="id4">*</span></a>， 也就是webapp程序运行的当前路径， Http根目录也可在config.json配置文件中进行更改，可参见配置文件， 然后在地址栏输入*http://localhost*或*http://localhost/index.html*(或者你的webapp所在服务器的ip)可以访问到这个页面</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Hello Drogon!</p>
+</div>
+<p>If server cannot find the the page you have requested, it return 404 page: 404 page</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意：请确认服务器的防火墙已经打开80端口，否则你看不到这些页面。</p>
+</div>
+<p>我们可以把一个静态网站的目录和文件复制到这个webapp的运行目录，然后通过浏览器就可以访问到它们，drogon默认支持的文件类型有”html”,”js”,”css”,”xml”,”xsl”,”txt”,”svg”,”ttf”,”otf”,”woff2”,”woff”,”eot”,”png”,”jpg”,”jpeg”,”gif”,”bmp”,”ico”,”icns”等等，drogon也提供接口更改这些文件类型，具体请参考HttpAppFramework的API。</p>
+</div>
+<div class="section" id="id5">
+<h2>动态网站</h2>
+<p>下面我们看看怎么给这个应用添加控制器（controller）,并使用控制器（controller）输出内容。</p>
+<p>在controller目录下运行drogon_ctl命令行工具生成控制器（controller）源文件:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create controller TestCtrl
+</pre></div>
+</div>
+<p>可以看到，目录下新增加了两个文件，TestCtrl.h和TestCtrl.cc:</p>
+<p>TestCtrl.h如下：</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><em>TestCtrl.h</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/HttpSimpleController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">TestCtrl</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpSimpleController</span><span class="o">&lt;</span><span class="n">TestCtrl</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                                        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="n">PATH_LIST_BEGIN</span>
+    <span class="c1">//list path definitions here;</span>
+    <span class="c1">//PATH_ADD(&quot;/path&quot;,&quot;filter1&quot;,&quot;filter2&quot;,HttpMethod1,HttpMethod2...);</span>
+    <span class="n">PATH_LIST_END</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<p>TestCtrl.cc如下：</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><em>TestCtrl.cc</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;TestCtrl.h&quot;</span><span class="cp"></span>
+<span class="kt">void</span> <span class="n">TestCtrl</span><span class="o">::</span><span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                                    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>我们编辑一下这两个文件，让这个控制器处理函数回应一个简单的“Hello World!”。</p>
+<p>TestCtrl.h如下：</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><em>TestCtrl.h</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/HttpSimpleController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">TestCtrl</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpSimpleController</span><span class="o">&lt;</span><span class="n">TestCtrl</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                                        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span><span class="k">override</span><span class="p">;</span>
+    <span class="n">PATH_LIST_BEGIN</span>
+    <span class="c1">//list path definitions here;</span>
+    <span class="c1">//PATH_ADD(&quot;/path&quot;,&quot;filter1&quot;,&quot;filter2&quot;,HttpMethod1,HttpMethod2...);</span>
+    <span class="n">PATH_ADD</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+    <span class="n">PATH_ADD</span><span class="p">(</span><span class="s">&quot;/test&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">);</span>
+    <span class="n">PATH_LIST_END</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<p>使用PATH_ADD添加路径到处理函数的映射，这里映射了两个路径’/’和’/test’,并在路径后面添加了对这个路径的约束。</p>
+<p>TestCtrl.cc如下：</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text"><em>TestCtrl.h</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;TestCtrl.h&quot;</span><span class="cp"></span>
+<span class="kt">void</span> <span class="n">TestCtrl</span><span class="o">::</span><span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                                    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//write your application logic here</span>
+    <span class="k">auto</span> <span class="n">resp</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpResponse</span><span class="p">();</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setStatusCode</span><span class="p">(</span><span class="n">k200OK</span><span class="p">);</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setContentTypeCode</span><span class="p">(</span><span class="n">CT_TEXT_HTML</span><span class="p">);</span>
+    <span class="n">resp</span><span class="o">-&gt;</span><span class="n">setBody</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>重新用cmake编译这个工程，然后运行目标程序./your_project_name：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ../build
+cmake ..
+make
+./your_project_name
+</pre></div>
+</div>
+<p>在浏览器地址栏输入*http://localhost/<em>或者*http://localhost/test</em>，你就可以在浏览器看到Hello World!了。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意: 同时存在静态和动态资源的情况下，框架优先使用控制器响应请求，此例中*http://localhost/* 响应的是TestCtrl控制器的输出Hello Word！而不是静态网页index.html的Hello Drogon！</p>
+</div>
+<p>我们看到，在应用中添加controller非常简单，只需要添加对应的源文件即可，甚至main文件不用做任何修改，这种低耦合度的设计对web应用开发是非常有效的。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意: Drogon没有限制控制器（controller）源文件的位置，也可以放在工程目录下，甚至可以在CMakeLists.txt中指定到新的目录中，为了方便管理，建议将控制器源文件放在controllers目录。</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

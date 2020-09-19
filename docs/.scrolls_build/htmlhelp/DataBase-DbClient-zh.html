@@ -1,0 +1,320 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    <title>&#25968;&#25454;&#24211; Dbclient</title>
+  
+    <link rel="stylesheet" href="_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="next" title="&#25968;&#25454;&#24211; &#20107;&#21153;" href="DataBase-Transaction-zh.html" />
+    <link rel="prev" title="&#25968;&#25454;&#24211; &#27010;&#36848;" href="Database-General-zh.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="index.html"
+          title="back to the documentation overview"><span>&#25968;&#25454;&#24211; Dbclient</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="Database-General-zh.html">&laquo; &#25968;&#25454;&#24211; &#27010;&#36848;</a> |
+        <a href="#">&#25968;&#25454;&#24211; Dbclient</a>
+        | <a href="DataBase-Transaction-zh.html">&#25968;&#25454;&#24211; &#20107;&#21153; &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li><a class="reference internal" href="#">&#25968;&#25454;&#24211; Dbclient</a><ul>
+<li><a class="reference internal" href="#id1">&#26500;&#24314;DbClient</a></li>
+<li><a class="reference internal" href="#id2">&#25191;&#34892;&#25509;&#21475;</a><ul>
+<li><a class="reference internal" href="#execsqlasync">execSqlAsync</a></li>
+<li><a class="reference internal" href="#execsqlasyncfuture">execSqlAsyncFuture</a></li>
+<li><a class="reference internal" href="#execsqlsync">execSqlSync</a></li>
+<li><a class="reference internal" href="#operator">operator&lt;&lt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">&#24635;&#32467;</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+  <div class="section" id="dbclient">
+<h1>&#25968;&#25454;&#24211; Dbclient</h1>
+<div class="section" id="id1">
+<h2>&#26500;&#24314;DbClient</h2>
+<p>&#26500;&#36896;DbClient&#23545;&#35937;&#26377;&#20004;&#31181;&#36884;&#24452;&#65292;&#19968;&#20010;&#26159;&#36890;&#36807;DbClient&#31867;&#30340;&#38745;&#24577;&#26041;&#27861;&#65292;&#22312;DbClient.h&#22836;&#25991;&#20214;&#21487;&#20197;&#30475;&#21040;&#23450;&#20041;&#65292;&#22914;&#19979;:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#if USE_POSTGRESQL</span>
+    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DbClient</span><span class="o">&gt;</span> <span class="n">newPgClient</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">connInfo</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">connNum</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="cp">#if USE_MYSQL</span>
+    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DbClient</span><span class="o">&gt;</span> <span class="n">newMysqlClient</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">connInfo</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">connNum</span><span class="p">);</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>&#24471;&#21040;DbClient&#23454;&#29616;&#23545;&#35937;&#30340;&#26234;&#33021;&#25351;&#38024;&#65292;&#21442;&#25968;connInfo&#26159;&#20010;&#36830;&#25509;&#23383;&#31526;&#20018;&#65292;&#37319;&#29992;key=value&#30340;&#24418;&#24335;&#35774;&#32622;&#19968;&#31995;&#21015;&#36830;&#25509;&#21442;&#25968;&#65292;&#20855;&#20307;&#35828;&#26126;&#35265;&#22836;&#25991;&#20214;&#30340;&#27880;&#37322;&#12290;&#21442;&#25968;connNum&#26159;DbClient&#30340;&#36830;&#25509;&#25968;&#65292;&#21363;&#35813;&#23545;&#35937;&#31649;&#29702;&#30340;&#25968;&#25454;&#24211;&#36830;&#25509;&#20010;&#25968;&#65292;&#23545;&#24182;&#21457;&#26377;&#20851;&#38190;&#24433;&#21709;&#65292;&#35831;&#26681;&#25454;&#23454;&#38469;&#24773;&#20917;&#35774;&#32622;&#12290;</p>
+<p>&#36890;&#36807;&#36825;&#31181;&#26041;&#27861;&#24471;&#21040;&#30340;&#23545;&#35937;&#65292;&#29992;&#25143;&#35201;&#24819;&#21150;&#27861;**&#25345;&#20037;&#21270;**&#65292;&#27604;&#22914;&#25918;&#22312;&#26576;&#20123;&#20840;&#23616;&#23481;&#22120;&#20869;&#65292;<strong>&#21019;&#24314;&#20020;&#26102;&#23545;&#35937;&#65292;&#20351;&#29992;&#23436;&#20877;&#37322;&#25918;&#26159;&#38750;&#24120;&#19981;&#25512;&#33616;&#30340;&#26041;&#26696;</strong>&#65292;&#29702;&#30001;&#22914;&#19979;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#30333;&#30333;&#30340;&#28010;&#36153;&#21019;&#24314;&#36830;&#25509;&#21644;&#26029;&#24320;&#36830;&#25509;&#30340;&#26102;&#38388;&#65292;&#22686;&#21152;&#20102;&#31995;&#32479;&#26102;&#24310;&#65307;</li>
+<li>&#35813;&#25509;&#21475;&#20063;&#26159;&#38750;&#38459;&#22622;&#25509;&#21475;&#65292;&#20063;&#23601;&#26159;&#35828;&#65292;&#29992;&#25143;&#25343;&#21040;DbClient&#23545;&#35937;&#26102;&#65292;&#23427;&#31649;&#29702;&#30340;&#36830;&#25509;&#36824;&#27809;&#24314;&#31435;&#36215;&#26469;&#65292;&#26694;&#26550;&#27809;&#26377;&#65288;&#25925;&#24847;&#30340;&#65289;&#25552;&#20379;&#36830;&#25509;&#24314;&#31435;&#25104;&#21151;&#30340;&#22238;&#35843;&#25509;&#21475;&#65292;&#38590;&#36947;&#36824;&#35201;sleep&#19968;&#19979;&#20877;&#24320;&#22987;&#26597;&#35810;&#20040;&#65311;&#36825;&#21644;&#24322;&#27493;&#26694;&#26550;&#30340;&#21021;&#34935;&#30456;&#36829;&#32972;&#12290;</li>
+</ul>
+</div></blockquote>
+<p>&#25152;&#20197;&#65292;&#24212;&#35813;&#22312;&#31243;&#24207;&#24320;&#22987;&#20043;&#21021;&#23601;&#26500;&#24314;&#36825;&#20123;&#23545;&#35937;&#65292;&#24182;&#22312;&#25972;&#20010;&#29983;&#23384;&#21608;&#26399;&#25345;&#26377;&#24182;&#20351;&#29992;&#23427;&#12290;&#26174;&#28982;&#65292;&#36825;&#20010;&#24037;&#20316;&#23436;&#20840;&#21487;&#20197;&#30001;&#26694;&#26550;&#26469;&#20570;&#65292;&#22240;&#27492;&#65292;&#26694;&#26550;&#25552;&#20379;&#20102;&#31532;&#20108;&#31181;&#26500;&#24314;&#26041;&#24335;&#65292;&#23601;&#26159;&#36890;&#36807;&#37197;&#32622;&#25991;&#20214;&#26500;&#24314;&#25110;&#20351;&#29992;createDbClient&#25509;&#21475;&#21019;&#24314;&#65292;&#37197;&#32622;&#26041;&#27861;&#35265;&#37197;&#32622;&#25991;&#20214;&#12290;</p>
+<p>&#38656;&#35201;&#20351;&#29992;&#26102;&#65292;&#36890;&#36807;&#26694;&#26550;&#30340;&#25509;&#21475;&#33719;&#24471;DbClient&#30340;&#26234;&#33021;&#25351;&#38024;&#65292;&#25509;&#21475;&#22914;&#19979;&#65288;&#27880;&#24847;&#35813;&#25509;&#21475;&#24517;&#39035;&#22312;app.run()&#35843;&#29992;&#21518;&#25165;&#33021;&#24471;&#21040;&#27491;&#30830;&#30340;&#23545;&#35937;&#65289;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">orm</span><span class="o">::</span><span class="n">DbClientPtr</span> <span class="n">getDbClient</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;default&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#21442;&#25968;name&#23601;&#26159;&#37197;&#32622;&#25991;&#20214;&#20013;&#30340;name&#37197;&#32622;&#39033;&#30340;&#20540;&#65292;&#29992;&#20197;&#21306;&#20998;&#21516;&#19968;&#20010;&#24212;&#29992;&#30340;&#22810;&#20010;&#19981;&#21516;&#30340;DbClient&#23545;&#35937;&#12290;DbClient&#31649;&#29702;&#30340;&#36830;&#25509;&#24635;&#26159;&#26029;&#32447;&#37325;&#36830;&#30340;&#65292;&#25152;&#20197;&#29992;&#25143;&#19981;&#29992;&#20851;&#24515;&#36830;&#25509;&#29366;&#24577;&#65292;&#20182;&#20204;&#20960;&#20046;&#24635;&#26159;&#27491;&#24120;&#36830;&#25509;&#30340;&#29366;&#24577;&#12290;</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: This method cannot be called before running app.run(), otherwise the user will get an empty shared_ptr.</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>&#25191;&#34892;&#25509;&#21475;</h2>
+<p>DbClient&#23545;&#22806;&#25552;&#20379;&#20102;&#20960;&#31181;&#19981;&#21516;&#30340;&#25509;&#21475;&#65292;&#21015;&#20030;&#22914;&#19979;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// &#24322;&#27493;&#25509;&#21475;</span>
+<span class="k">template</span> <span class="o">&lt;</span>
+        <span class="k">typename</span> <span class="nc">FUNCTION1</span><span class="p">,</span>
+        <span class="k">typename</span> <span class="nc">FUNCTION2</span><span class="p">,</span>
+        <span class="k">typename</span><span class="p">...</span> <span class="n">Arguments</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">execSqlAsync</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">,</span>
+                <span class="n">FUNCTION1</span> <span class="o">&amp;&amp;</span><span class="n">rCallback</span><span class="p">,</span>
+                <span class="n">FUNCTION2</span> <span class="o">&amp;&amp;</span><span class="n">exceptCallback</span><span class="p">,</span>
+                <span class="n">Arguments</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+
+<span class="c1">/// &#24322;&#27493;future&#25509;&#21475;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Arguments</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Result</span><span class="o">&gt;</span> <span class="n">execSqlAsyncFuture</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">,</span>
+                                            <span class="n">Arguments</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+
+<span class="c1">/// &#21516;&#27493;&#25509;&#21475;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Arguments</span><span class="o">&gt;</span>
+<span class="k">const</span> <span class="n">Result</span> <span class="n">execSqlSync</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">,</span>
+                        <span class="n">Arguments</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+
+<span class="c1">/// &#27969;&#24335;&#25509;&#21475;</span>
+<span class="n">internal</span><span class="o">::</span><span class="n">SqlBinder</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#22240;&#20026;&#28041;&#21450;&#20219;&#24847;&#25968;&#37327;&#21644;&#31867;&#22411;&#30340;&#32465;&#23450;&#21442;&#25968;&#65292;&#22240;&#27492;&#36825;&#20123;&#25509;&#21475;&#37117;&#26159;&#20989;&#25968;&#27169;&#26495;&#12290;</p>
+<p>&#36825;&#20123;&#25509;&#21475;&#30340;&#24615;&#36136;&#22914;&#19979;&#34920;&#25152;&#31034;&#65306;</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="15%" />
+<col width="28%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#25509;&#21475;</th>
+<th class="head">&#21516;&#27493;/&#24322;&#27493;</th>
+<th class="head">&#38459;&#22622;/&#38750;&#38459;&#22622;</th>
+<th class="head">&#24322;&#24120;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>void execSqlAsync</td>
+<td>&#24322;&#27493;</td>
+<td>&#38750;&#38459;&#22622;</td>
+<td>&#19981;&#25243;&#24322;&#24120;</td>
+</tr>
+<tr class="row-odd"><td>std::future execSqlAsyncFuture</td>
+<td>&#24322;&#27493;</td>
+<td>&#35843;&#29992;future&#30340;get&#26041;&#27861;&#26102;&#38459;&#22622;</td>
+<td>&#35843;&#29992;future&#30340;get&#26041;&#27861;&#26102;&#21487;&#33021;&#25243;&#24322;&#24120;</td>
+</tr>
+<tr class="row-even"><td>const Result execSqlSync</td>
+<td>&#21516;&#27493;</td>
+<td>&#38459;&#22622;</td>
+<td>&#21487;&#33021;&#25243;&#24322;&#24120;</td>
+</tr>
+<tr class="row-odd"><td>internal::SqlBinder operator&lt;&lt;</td>
+<td>&#24322;&#27493;</td>
+<td>&#40664;&#35748;&#38750;&#38459;&#22622;&#65292;&#20063;&#21487;&#20197;&#38459;&#22622;</td>
+<td>&#19981;&#25243;&#24322;&#24120;</td>
+</tr>
+</tbody>
+</table>
+<p>&#20320;&#21487;&#33021;&#23545;&#24322;&#27493;&#21644;&#38459;&#22622;&#30340;&#32452;&#21512;&#26377;&#28857;&#22256;&#24785;&#65292;&#19968;&#33324;&#32780;&#35328;&#65292;&#21516;&#27493;&#25509;&#21475;&#28041;&#21450;&#32593;&#32476;IO&#37117;&#26159;&#38459;&#22622;&#30340;&#65292;&#24322;&#27493;&#25509;&#21475;&#21017;&#26159;&#38750;&#38459;&#22622;&#30340;&#65292;&#19981;&#36807;&#65292;&#24322;&#27493;&#25509;&#21475;&#20063;&#21487;&#20197;&#24037;&#20316;&#20110;&#38459;&#22622;&#27169;&#24335;&#65292;&#24847;&#24605;&#26159;&#35828;&#65292;&#36825;&#20010;&#25509;&#21475;&#20250;&#38459;&#22622;&#19968;&#30452;&#31561;&#21040;&#22238;&#35843;&#20989;&#25968;&#25191;&#34892;&#23436;&#27605;&#25165;&#20250;&#36864;&#20986;&#12290;DbClient&#30340;&#24322;&#27493;&#25509;&#21475;&#24037;&#20316;&#20110;&#38459;&#22622;&#27169;&#24335;&#26102;&#65292;&#22238;&#35843;&#20989;&#25968;&#20250;&#22312;&#21516;&#19968;&#20010;&#32447;&#31243;&#34987;&#25191;&#34892;&#65292;&#28982;&#21518;&#35813;&#25509;&#21475;&#25165;&#25191;&#34892;&#23436;&#27605;&#12290;</p>
+<p>&#22914;&#26524;&#20320;&#30340;&#24212;&#29992;&#28041;&#21450;&#39640;&#24182;&#21457;&#22330;&#26223;&#65292;&#35831;&#36873;&#25321;&#24322;&#27493;&#38750;&#38459;&#22622;&#25509;&#21475;&#65292;&#22914;&#26524;&#26159;&#20302;&#24182;&#21457;&#22330;&#26223;&#65292;&#27604;&#22914;&#19968;&#20010;&#32593;&#32476;&#35774;&#22791;&#30340;&#31649;&#29702;&#39029;&#38754;&#65292;&#21017;&#21487;&#20197;&#20986;&#20110;&#30452;&#35266;&#26041;&#20415;&#30340;&#32771;&#34385;&#65292;&#36873;&#25321;&#21516;&#27493;&#25509;&#21475;&#12290;</p>
+<div class="section" id="execsqlasync">
+<h3>execSqlAsync</h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FUNCTION1</span><span class="p">,</span>
+        <span class="k">typename</span> <span class="nc">FUNCTION2</span><span class="p">,</span>
+        <span class="k">typename</span><span class="p">...</span> <span class="n">Arguments</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">execSqlAsync</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">,</span>
+                <span class="n">FUNCTION1</span> <span class="o">&amp;&amp;</span><span class="n">rCallback</span><span class="p">,</span>
+                <span class="n">FUNCTION2</span> <span class="o">&amp;&amp;</span><span class="n">exceptCallback</span><span class="p">,</span>
+                <span class="n">Arguments</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>&#36825;&#26159;&#26368;&#24120;&#20351;&#29992;&#30340;&#24322;&#27493;&#25509;&#21475;&#65292;&#24037;&#20316;&#20110;&#38750;&#38459;&#22622;&#27169;&#24335;&#65307;</p>
+<p>&#21442;&#25968;*sql*&#26159;sql&#35821;&#21477;&#30340;&#23383;&#31526;&#20018;&#65292;&#22914;&#26524;&#26377;&#38656;&#35201;&#32465;&#23450;&#21442;&#25968;&#30340;&#21344;&#20301;&#31526;&#65292;&#20351;&#29992;&#30456;&#24212;&#25968;&#25454;&#24211;&#30340;&#21344;&#20301;&#31526;&#35268;&#21017;&#65292;&#27604;&#22914;PostgreSQL&#30340;&#21344;&#20301;&#31526;&#26159;$1,$2..&#65292;&#32780;MySQL&#30340;&#21344;&#20301;&#31526;&#26159;*?*&#12290;</p>
+<p>&#19981;&#23450;&#21442;&#25968;*args*&#20195;&#34920;&#32465;&#23450;&#30340;&#21442;&#25968;&#65292;&#21487;&#20197;&#26159;&#38646;&#20010;&#25110;&#22810;&#20010;&#65292;&#20855;&#20307;&#25968;&#25454;&#21644;sql&#35821;&#21477;&#30340;&#21344;&#20301;&#31526;&#20010;&#25968;&#19968;&#33268;&#65292;&#31867;&#22411;&#21487;&#20197;&#26159;&#20197;&#19979;&#20960;&#31867;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#25972;&#25968;&#31867;&#22411;&#65306;&#21487;&#20197;&#26159;&#21508;&#31181;&#23383;&#38271;&#30340;&#25972;&#25968;&#65292;&#24212;&#21644;&#25968;&#25454;&#24211;&#23383;&#27573;&#31867;&#22411;&#30456;&#21305;&#37197;&#65307;</li>
+<li>&#28014;&#28857;&#31867;&#22411;&#65306;&#21487;&#20197;&#26159;*float*&#25110;&#32773;*double*&#65292;&#24212;&#21644;&#25968;&#25454;&#24211;&#23383;&#27573;&#31867;&#22411;&#30456;&#21305;&#37197;&#65307;</li>
+<li>&#23383;&#31526;&#20018;&#31867;&#22411;&#65306;&#21487;&#20197;&#26159;*std::string*&#25110;&#32773;*const char[]*&#65292;&#23545;&#24212;&#25968;&#25454;&#24211;&#30340;&#23383;&#31526;&#20018;&#31867;&#22411;&#25110;&#32773;&#20854;&#20182;&#21487;&#20197;&#29992;&#23383;&#31526;&#20018;&#34920;&#31034;&#30340;&#31867;&#22411;&#65307;</li>
+<li>&#26085;&#26399;&#31867;&#22411;&#65306;<a href="#id3"><span class="problematic" id="id4">*</span></a>trantor::Date*&#31867;&#22411;&#65292;&#23545;&#24212;&#25968;&#25454;&#24211;&#30340;date&#65292;datetime&#65292;timestamp&#31561;&#23383;&#27573;&#31867;&#22411;&#12290;</li>
+<li>&#20108;&#36827;&#21046;&#31867;&#22411;&#65306;<a href="#id5"><span class="problematic" id="id6">*</span></a>std::vector&lt;char&gt;*&#31867;&#22411;&#65292;&#23545;&#24212;PostgreSQL&#30340;bytea&#31867;&#22411;&#25110;&#32773;Mysql&#30340;blob&#31867;&#22411;&#65307;</li>
+</ul>
+</div></blockquote>
+<p>&#36825;&#20123;&#21442;&#25968;&#21487;&#20197;&#26159;&#24038;&#20540;&#65292;&#20063;&#21487;&#20197;&#26159;&#21491;&#20540;&#65292;&#21487;&#20197;&#26159;&#21464;&#37327;&#65292;&#20063;&#21487;&#20197;&#26159;&#23383;&#38754;&#24120;&#37327;&#65292;&#29992;&#25143;&#21487;&#20197;&#33258;&#30001;&#25484;&#25569;&#12290;</p>
+<p>&#21442;&#25968;rCallback&#21644;exceptCallback&#20998;&#21035;&#34920;&#31034;&#32467;&#26524;&#22238;&#35843;&#20989;&#25968;&#21644;&#24322;&#24120;&#22238;&#35843;&#20989;&#25968;&#65292;&#23427;&#20204;&#26377;&#22266;&#23450;&#30340;&#23450;&#20041;&#65292;&#22914;&#19979;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#32467;&#26524;&#22238;&#35843;&#20989;&#25968;&#65306;&#35843;&#29992;&#31867;&#22411;&#20026;void (const Result &amp;)&#65292;&#31526;&#21512;&#36825;&#20010;&#35843;&#29992;&#31867;&#22411;&#30340;&#21508;&#31181;&#21487;&#35843;&#29992;&#23545;&#35937;&#65292;std::function,lambda&#31561;&#31561;&#37117;&#21487;&#20197;&#20316;&#20026;&#21442;&#25968;&#20256;&#20837;&#65307;</li>
+<li>&#24322;&#24120;&#22238;&#35843;&#20989;&#25968;&#65306;&#35843;&#29992;&#31867;&#22411;&#20026;void (const DrogonDbException &amp;)&#65292;&#21487;&#20256;&#20837;&#21644;&#36825;&#20010;&#35843;&#29992;&#31867;&#22411;&#19968;&#33268;&#30340;&#21508;&#31181;&#21487;&#35843;&#29992;&#23545;&#35937;&#65307;</li>
+</ul>
+</div></blockquote>
+<p>sql&#25191;&#34892;&#25104;&#21151;&#21518;&#65292;&#25191;&#34892;&#32467;&#26524;&#30001;Result&#31867;&#21253;&#35013;&#24182;&#36890;&#36807;&#32467;&#26524;&#22238;&#35843;&#20989;&#25968;&#20256;&#36882;&#32473;&#29992;&#25143;&#65307;&#22914;&#26524;sql&#25191;&#34892;&#26377;&#20219;&#20309;&#24322;&#24120;&#65292;&#24322;&#24120;&#22238;&#35843;&#20989;&#25968;&#34987;&#25191;&#34892;&#65292;&#29992;&#25143;&#21487;&#20197;&#20174;DrogonDbException&#23545;&#35937;&#33719;&#24471;&#24322;&#24120;&#20449;&#24687;&#12290;</p>
+<p>&#25105;&#20204;&#20030;&#20010;&#20363;&#23376;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">clientPtr</span> <span class="o">=</span> <span class="n">drogon</span><span class="o">::</span><span class="n">app</span><span class="p">().</span><span class="n">getDbClient</span><span class="p">();</span>
+<span class="n">clientPtr</span><span class="o">-&gt;</span><span class="n">execSqlAsync</span><span class="p">(</span><span class="s">&quot;select * from users where org_name=$1&quot;</span><span class="p">,</span>
+                            <span class="p">[](</span><span class="k">const</span> <span class="n">Result</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; rows selected!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                                <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                                <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">row</span> <span class="p">:</span> <span class="n">r</span><span class="p">)</span>
+                                <span class="p">{</span>
+                                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">++</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: user name is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">row</span><span class="p">[</span><span class="s">&quot;user_name&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                                <span class="p">}</span>
+                            <span class="p">},</span>
+                            <span class="p">[](</span><span class="k">const</span> <span class="n">DrogonDbException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">base</span><span class="p">().</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                            <span class="p">},</span>
+                            <span class="s">&quot;default&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#20174;&#20363;&#23376;&#20013;&#25105;&#20204;&#21487;&#20197;&#30475;&#20986;&#65292;Result&#23545;&#35937;&#26159;&#20010;std&#26631;&#20934;&#20860;&#23481;&#30340;&#23481;&#22120;&#65292;&#25903;&#25345;&#36845;&#20195;&#22120;&#65292;&#23427;&#23553;&#35013;&#30340;&#32467;&#26524;&#38598;&#21487;&#20197;&#36890;&#36807;&#33539;&#22260;&#24490;&#29615;&#21462;&#21040;&#27599;&#19968;&#34892;&#30340;&#23545;&#35937;&#65292;Result&#65292;Row&#21644;Field&#23545;&#35937;&#30340;&#21508;&#31181;&#25509;&#21475;&#65292;&#35831;&#21442;&#32771;&#28304;&#30721;&#65307;</p>
+<p>DrogonDbException&#31867;&#26159;&#25152;&#26377;&#25968;&#25454;&#24211;&#24322;&#24120;&#30340;&#22522;&#31867;&#65292;&#20855;&#20307;&#30340;&#23450;&#20041;&#21644;&#23427;&#23376;&#31867;&#30340;&#35828;&#26126;&#65292;&#35831;&#21442;&#32771;&#28304;&#30721;&#20013;&#30340;&#27880;&#37322;&#12290;</p>
+</div>
+<div class="section" id="execsqlasyncfuture">
+<h3>execSqlAsyncFuture</h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Arguments</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Result</span><span class="o">&gt;</span> <span class="n">execSqlAsyncFuture</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">,</span>
+                                            <span class="n">Arguments</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>&#24322;&#27493;futrue&#25509;&#21475;&#30465;&#30053;&#20102;&#21069;&#19968;&#20010;&#25509;&#21475;&#30340;&#20013;&#38388;&#20004;&#20010;&#21442;&#25968;&#65288;&#20351;&#29992;future&#23545;&#35937;&#20195;&#26367;&#22238;&#35843;&#20989;&#25968;&#65289;&#65292;&#35843;&#29992;&#36825;&#20010;&#25509;&#21475;&#20250;&#31435;&#21363;&#36820;&#22238;&#19968;&#20010;future&#23545;&#35937;&#65292;&#29992;&#25143;&#24517;&#39035;&#35843;&#29992;future&#30340;get()&#26041;&#27861;&#65292;&#24471;&#21040;&#36820;&#22238;&#30340;&#32467;&#26524;&#65292;&#24322;&#24120;&#35201;&#36890;&#36807;try/catch&#26426;&#21046;&#24471;&#21040;&#65292;&#22914;&#26524;&#35843;&#29992;get()&#26041;&#27861;&#26102;&#27809;&#26377;try/catch&#65292;&#24182;&#19988;&#25972;&#20010;&#35843;&#29992;&#22534;&#26632;&#20013;&#20063;&#27809;&#26377;try/catch&#65292;&#21017;&#31243;&#24207;&#20250;&#22312;sql&#25191;&#34892;&#21457;&#29983;&#24322;&#24120;&#30340;&#26102;&#20505;&#36864;&#20986;&#12290;</p>
+<p>&#20363;&#22914;:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="n">clientPtr</span><span class="o">-&gt;</span><span class="n">execSqlAsyncFuture</span><span class="p">(</span><span class="s">&quot;select * from users where org_name=$1&quot;</span><span class="p">,</span>
+                                    <span class="s">&quot;default&quot;</span><span class="p">);</span>
+<span class="k">try</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">get</span><span class="p">();</span> <span class="c1">// Block until we get the result or catch the exception;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; rows selected!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">row</span> <span class="p">:</span> <span class="n">r</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">++</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: user name is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">row</span><span class="p">[</span><span class="s">&quot;user_name&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">DrogonDbException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">base</span><span class="p">().</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="execsqlsync">
+<h3>execSqlSync</h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Arguments</span><span class="o">&gt;</span>
+<span class="k">const</span> <span class="n">Result</span> <span class="n">execSqlSync</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">,</span>
+                        <span class="n">Arguments</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#21516;&#27493;&#25509;&#21475;&#26159;&#26368;&#31616;&#21333;&#30452;&#35266;&#30340;&#65292;&#36755;&#20837;&#21442;&#25968;&#26159;sql&#23383;&#31526;&#20018;&#21644;&#32465;&#23450;&#30340;&#21442;&#25968;&#65292;&#36820;&#22238;&#19968;&#20010;Result&#23545;&#35937;&#65292;&#35843;&#29992;&#20250;&#38459;&#22622;&#24403;&#21069;&#32447;&#31243;&#65292;&#24182;&#19988;&#22312;&#20986;&#29616;&#38169;&#35823;&#26102;&#25243;&#24322;&#24120;&#65292;&#25152;&#20197;&#20063;&#35201;&#27880;&#24847;*try/catch*&#25429;&#33719;&#24322;&#24120;&#12290;</p>
+<p>&#20363;&#22914;:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">clientPtr</span><span class="o">-&gt;</span><span class="n">execSqlSync</span><span class="p">(</span><span class="s">&quot;update users set user_name=$1 where user_id=$2&quot;</span><span class="p">,</span>
+                                        <span class="s">&quot;test&quot;</span><span class="p">,</span>
+                                        <span class="mi">1</span><span class="p">);</span> <span class="c1">// Block until we get the result or catch the exception;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="p">.</span><span class="n">affectedRows</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; rows updated!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">DrogonDbException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">base</span><span class="p">().</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operator">
+<h3>operator&lt;&lt;</h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">internal</span><span class="o">::</span><span class="n">SqlBinder</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>&#27969;&#24335;&#25509;&#21475;&#27604;&#36739;&#29305;&#27530;&#65292;&#23427;&#25226;sql&#35821;&#21477;&#21644;&#21442;&#25968;&#20381;&#27425;&#36890;&#36807;*&lt;&lt;<em>&#25805;&#20316;&#31526;&#36755;&#20837;&#65292;&#32780;&#36890;&#36807;</em>&gt;&gt;*&#25805;&#20316;&#31526;&#25351;&#23450;&#32467;&#26524;&#22238;&#35843;&#20989;&#25968;&#21644;&#24322;&#24120;&#22238;&#35843;&#20989;&#25968;&#65292;&#27604;&#22914;&#21069;&#38754;select&#30340;&#20363;&#23376;&#65292;&#20351;&#29992;&#27969;&#24335;&#25509;&#21475;&#26159;&#22914;&#19979;&#30340;&#26679;&#23376;&#65306;:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="n">clientPtr</span>  <span class="o">&lt;&lt;</span> <span class="s">&quot;select * from users where org_name=$1&quot;</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;default&quot;</span>
+            <span class="o">&gt;&gt;</span> <span class="p">[](</span><span class="k">const</span> <span class="n">Result</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; rows selected!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">row</span> <span class="p">:</span> <span class="n">r</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">++</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: user name is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">row</span><span class="p">[</span><span class="s">&quot;user_name&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="o">&gt;&gt;</span> <span class="p">[](</span><span class="k">const</span> <span class="n">DrogonDbException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">base</span><span class="p">().</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                <span class="p">};</span>
+</pre></div>
+</div>
+<p>&#36825;&#31181;&#20889;&#27861;&#21644;&#31532;&#19968;&#31181;&#24322;&#27493;&#38750;&#38459;&#22622;&#25509;&#21475;&#26159;&#23436;&#20840;&#31561;&#25928;&#30340;&#65292;&#37319;&#29992;&#21738;&#31181;&#25509;&#21475;&#21462;&#20915;&#20110;&#29992;&#25143;&#30340;&#20351;&#29992;&#20064;&#24815;&#12290;&#22914;&#26524;&#24819;&#35753;&#23427;&#24037;&#20316;&#20110;&#38459;&#22622;&#27169;&#24335;&#65292;&#21487;&#20197;&#20351;&#29992;*&lt;&lt;<a href="#id7"><span class="problematic" id="id8">*</span></a>&#36755;&#20837;&#19968;&#20010;*Mode::Blocking*&#21442;&#25968;&#65292;&#36825;&#37324;&#19981;&#20877;&#36184;&#36848;&#12290;</p>
+<p>&#21478;&#22806;&#65292;&#27969;&#24335;&#25509;&#21475;&#36824;&#26377;&#19968;&#20010;&#29305;&#27530;&#30340;&#29992;&#27861;&#65292;&#20351;&#29992;&#19968;&#31181;&#29305;&#27530;&#30340;&#32467;&#26524;&#22238;&#35843;&#65292;&#21487;&#20197;&#35753;&#26694;&#26550;&#36880;&#34892;&#30340;&#25226;&#32467;&#26524;&#20256;&#36882;&#32473;&#29992;&#25143;&#65292;&#36825;&#31181;&#22238;&#35843;&#30340;&#35843;&#29992;&#31867;&#22411;&#22914;&#19979;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="p">(</span><span class="kt">bool</span><span class="p">,</span><span class="n">Arguments</span><span class="p">...);</span>
+</pre></div>
+</div>
+<p>&#31532;&#19968;&#20010;bool&#21442;&#25968;&#20026;true&#26102;&#65292;&#34920;&#31034;&#36825;&#27425;&#22238;&#35843;&#26159;&#19968;&#20010;&#31354;&#34892;&#65292;&#20063;&#23601;&#26159;&#65292;&#25152;&#26377;&#32467;&#26524;&#37117;&#24050;&#32463;&#36820;&#22238;&#20102;&#65292;&#36825;&#26159;&#26368;&#21518;&#19968;&#27425;&#22238;&#35843;&#65307; &#21518;&#38754;&#26159;&#19968;&#31995;&#21015;&#21442;&#25968;&#65292;&#23545;&#24212;&#19968;&#34892;&#35760;&#24405;&#30340;&#27599;&#19968;&#21015;&#30340;&#20540;&#65292;&#26694;&#26550;&#20250;&#20570;&#22909;&#31867;&#22411;&#36716;&#25442;&#65292;&#24403;&#28982;&#65292;&#29992;&#25143;&#20063;&#35201;&#27880;&#24847;&#31867;&#22411;&#30340;&#21305;&#37197;&#12290;&#36825;&#20123;&#31867;&#22411;&#21487;&#20197;&#26159;const&#22411;&#30340;&#24038;&#20540;&#24341;&#29992;&#65292;&#20063;&#21487;&#20197;&#26159;&#21491;&#20540;&#24341;&#29992;&#65292;&#24403;&#28982;&#20063;&#21487;&#20197;&#26159;&#20540;&#31867;&#22411;&#12290;</p>
+<p>&#25105;&#20204;&#20877;&#25226;&#19978;&#19968;&#20010;&#20363;&#23376;&#29992;&#36825;&#31181;&#22238;&#35843;&#37325;&#20889;&#19968;&#19979;&#65306;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="o">*</span><span class="n">clientPtr</span>  <span class="o">&lt;&lt;</span> <span class="s">&quot;select user_name, user_id from users where org_name=$1&quot;</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;default&quot;</span>
+            <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">i</span><span class="p">](</span><span class="kt">bool</span> <span class="n">isNull</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">id</span><span class="p">)</span>
+                    <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isNull</span><span class="p">)</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">++</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: user name is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, user id is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">id</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                    <span class="k">else</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; rows selected!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                    <span class="p">}</span>
+            <span class="o">&gt;&gt;</span> <span class="p">[](</span><span class="k">const</span> <span class="n">DrogonDbException</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">base</span><span class="p">().</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                <span class="p">};</span>
+</pre></div>
+</div>
+<p>&#21487;&#20197;&#30475;&#21040;&#65292;select&#35821;&#21477;&#20013;&#30340;user_name&#21644;user_id&#23383;&#27573;&#30340;&#20540;&#65292;&#34987;&#20998;&#21035;&#36171;&#32473;&#20102;&#22238;&#35843;&#20989;&#25968;&#20013;&#30340;name&#21644;id&#21464;&#37327;&#65292;&#29992;&#25143;&#26080;&#38656;&#33258;&#24049;&#22788;&#29702;&#36825;&#20123;&#36716;&#25442;&#65292;&#36825;&#26174;&#28982;&#25552;&#20379;&#20102;&#19968;&#23450;&#30340;&#20415;&#21033;&#24615;&#65292;&#29992;&#25143;&#21487;&#20197;&#22312;&#23454;&#36341;&#20013;&#28789;&#27963;&#36816;&#29992;&#12290;</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#27880;&#24847;: &#20511;&#30528;&#36825;&#20010;&#20363;&#23376;&#65292;&#35201;&#24378;&#35843;&#19968;&#28857;&#24322;&#27493;&#32534;&#31243;&#24517;&#39035;&#27880;&#24847;&#30340;&#22320;&#26041;&#65292;&#23601;&#26159;&#19978;&#38754;&#20363;&#23376;&#20013;&#30340;&#21464;&#37327;i&#65292;&#29992;&#25143;&#24517;&#39035;&#20445;&#35777;&#22312;&#22238;&#35843;&#21457;&#29983;&#26102;&#65292;&#21464;&#37327;i&#36824;&#26159;&#26377;&#25928;&#30340;&#65292;&#22240;&#20026;&#23427;&#26159;&#34987;&#24341;&#29992;&#25429;&#33719;&#30340;&#65292;&#23427;&#30340;&#26377;&#25928;&#24615;&#24182;&#19981;&#26159;&#29702;&#25152;&#24403;&#28982;&#30340;&#65292;&#22238;&#35843;&#20250;&#22312;&#21035;&#30340;&#32447;&#31243;&#34987;&#35843;&#29992;&#65292;&#32780;&#22238;&#35843;&#21457;&#29983;&#26102;&#65292;&#24403;&#21069;&#30340;&#19978;&#19979;&#25991;&#29615;&#22659;&#24456;&#21487;&#33021;&#24050;&#32463;&#22833;&#25928;&#20102;&#12290;&#31867;&#20284;&#30340;&#22330;&#26223;&#24120;&#24120;&#20351;&#29992;&#26234;&#33021;&#25351;&#38024;&#25345;&#26377;&#20020;&#26102;&#21019;&#24314;&#30340;&#21464;&#37327;&#65292;&#20877;&#34987;&#22238;&#35843;&#25429;&#33719;&#65292;&#20174;&#32780;&#20445;&#35777;&#21464;&#37327;&#30340;&#26377;&#25928;&#24615;&#12290;</p>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>&#24635;&#32467;</h2>
+<p>&#27599;&#20010;DbClient&#23545;&#35937;&#26377;&#19988;&#20165;&#26377;&#19968;&#20010;&#33258;&#24049;&#30340;EventLoop&#32447;&#31243;&#65292;&#36825;&#20010;&#32447;&#31243;&#36127;&#36131;&#25511;&#21046;&#25968;&#25454;&#24211;&#36830;&#25509;IO&#65292;&#36890;&#36807;&#24322;&#27493;&#25110;&#21516;&#27493;&#25509;&#21475;&#25509;&#21463;&#35831;&#27714;&#65292;&#20877;&#36890;&#36807;&#22238;&#35843;&#20989;&#25968;&#36820;&#22238;&#32467;&#26524;&#12290;</p>
+<p>&#23427;&#34429;&#28982;&#20063;&#25552;&#20379;&#38459;&#22622;&#30340;&#25509;&#21475;&#65292;&#36825;&#31181;&#25509;&#21475;&#21482;&#26159;&#38459;&#22622;&#35843;&#29992;&#32773;&#32447;&#31243;&#65292;&#21482;&#35201;&#35843;&#29992;&#32773;&#32447;&#31243;&#19981;&#26159;EventLoop&#32447;&#31243;&#65292;&#23601;&#19981;&#20250;&#24433;&#21709;EventLoop&#32447;&#31243;&#30340;&#27491;&#24120;&#36816;&#36716;&#12290;&#22238;&#35843;&#20989;&#25968;&#34987;&#35843;&#29992;&#26102;&#65292;&#22238;&#35843;&#20869;&#30340;&#31243;&#24207;&#26159;&#36816;&#34892;&#22312;EventLoop&#32447;&#31243;&#30340;&#65292;&#25152;&#20197;&#65292;&#19981;&#35201;&#22312;&#22238;&#35843;&#20869;&#37096;&#36827;&#34892;&#20219;&#20309;&#38459;&#22622;&#25805;&#20316;&#65292;&#21542;&#21017;&#20250;&#24433;&#21709;&#25968;&#25454;&#24211;&#30340;&#24182;&#21457;&#65292;&#29087;&#24713;non-blocking I/O&#32534;&#31243;&#30340;&#20154;&#37117;&#24212;&#35813;&#26126;&#30333;&#36825;&#20010;&#32422;&#26463;&#12290;</p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

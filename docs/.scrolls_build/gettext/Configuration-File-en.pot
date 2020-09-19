@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Configuration-File-en.rstd:3
+msgid "Configuration File"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:5
+msgid "You can control various behaviors of the Http server by configuring various parameters through multiple interfaces of the DrogonAppFramework instance. However, using a configuration file is a better way for the following reasons:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:7
+msgid "Using a configuration file instead of source code can determine the behavior of the application at runtime rather than at compile time, which is undoubtedly a more convenient and flexible way;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:8
+msgid "Using a configuration file can make the main file more concise;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:10
+msgid "Based on these additional benefits, it is recommended that application developers use configuration files to configure various parameters of the application."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:12
+msgid "The configuration file can be loaded very simply by calling the loadConfigFile() interface before calling the run() interface. The parameter of the loadConfigFile() method is the file name of the configuration file, for example:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:14
+msgid "*main.cc*"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:23
+msgid "The above program loads the configuration file *config.json* and then runs the application. The specific listening port, log output, database configuration and so on can be configured by the configuration file. In fact, this program can basically be the entire code of the main file of the web application."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:27
+msgid "Configuration File Details"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:29
+msgid "An example of a configuration file is at the top level of the source directory, config.example.json. If you use the drogon_ctl create project command to create a project, you can also find the file config.json with the same content in the project directory. So, you basically don't need to create a new configuration file but make some changes to this file to complete the configuration of the web application."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:31
+msgid "The file is in *JSON* format and supports comments. You can comment out the unneeded configuration items with the c++ comment symbols /\\*\\*/ and //."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:33
+msgid "After commenting out a configuration option, the framework initializes it with default values. The default value for each option can be found in the comments in the configuration file."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:37
+msgid "SSL"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:39
+msgid "The ssl option is to configure SSL files of the https service as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:48
+msgid "Where *cert* is the path of the certificate file and *key* is the path of the private key file. If a file contains both a certificate and a private key, the two paths can be made the same."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:50
+msgid "The file is in PEM encoding format."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:54
+msgid "listeners"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:56
+msgid "As the name implies, the *listeners* option is to configure listeners for the web application. It is a JSON array type. Each JSON object represents a listener. The specific configuration is as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:75
+#: ../../source/Configuration-File-en.rstd:105
+#: ../../source/Configuration-File-en.rstd:141
+#: ../../source/Configuration-File-en.rstd:200
+#: ../../source/Configuration-File-en.rstd:220
+msgid "Among them:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:77
+msgid "*address*: With the string type indicates the IP address to be listened to. If this option is not available, the default value \"0.0.0.0\" is used."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:78
+msgid "*port*: port: An integer type option indicating the port to be listened to. It must be a valid port number. There is no default value."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:79
+msgid "*https*: Boolean type, indicating whether to use https, the default value is false, which means using http."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:80
+msgid "*cert* and *key*: The string type, is valid when https is true, indicating the certificate and private key of https. The default value is an empty string, indicating the certificate and private key file configured by the global option ssl;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:84
+msgid "db_clients"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:86
+msgid "This option is used to configure the database client. It is a JSON array type. Each JSON object represents a separate database client. The specific configuration is as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:107
+msgid "*name*: string type, client name, the default value is \"default\", name is the application developer to get the database client's markup from the framework, if there are multiple clients, the name field must be different;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:108
+msgid "*rdbms*：A string indicating the type of database server. Currently supports \"postgresql\" and \"mysql\", which is not case sensitive;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:109
+msgid "*host*：String, database server address, *localhost* is the default value;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:110
+msgid "*port*：An integer representing the port number of the database server;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:111
+msgid "*dbname*：String, database name;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:112
+msgid "*user*：String, user name;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:113
+msgid "*passwd*：String, password;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:114
+msgid "*is_fast*：bool，false by default, indicate if the client is a FastDbClient"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:115
+msgid "*connection_number*：A integer indicating the number of connections to the database server, at least 1, the default value is also 1, affecting the concurrent performance of data read and write; If the 'is_fast' is true, the number is the number of connections per event loop, otherwise it is the total number of all connections."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:116
+msgid "*filename*: The filename of sqlite3 database;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:120
+msgid "threads_num"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:122
+msgid "Suboption belonging to the app option, an integer, the default value is 1, indicating the number of IO threads, which has a clear impact on network concurrency. This number is not as big as possible. Users who understand the non-blocking I/O principle should know that this value should be the same as the number of processors that he expects network IO to occupy. If the value is set to 0, the number of IO threads will be the number of all hardware cores."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:128
+msgid "The above example shows that network IO uses 16 threads and can run up to 16 CPU cores under high load conditions."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:132
+msgid "Session"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:134
+msgid "Session-related options are also children of the app option, controlling whether session is used and the session timeout. Such as:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:143
+msgid "*enable_session*：A Boolean value indicating whether to use a session. The default is false. If the client does not support cookies, set it to false because the framework will create a new session for each request without a session cookie, which will result in completely unnecessary resource and performance loss;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:144
+msgid "*session_timeout*：An integer value indicating the timeout period of the session, in seconds. The default value is 0, indicating permanent validity. Only works if enable_session is true."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:148
+msgid "document_root"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:150
+msgid "The suboption of the *app* option, a string, indicates the document path corresponding to the Http root directory, and is the root path of the static file download. The default value is \"./\", which indicates the current path of the program running. such as:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:158
+msgid "upload_path"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:160
+msgid "The child of the app option, a string, represents the default path for uploading files. The default value is \"uploads\". If the value is not starting with /, ./ or ../, and this value is not .or..`, then this path is the relative path of the previous document_root entry, otherwise it is an absolute path or a relative path to the current directory. Such as:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:168
+msgid "file_types"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:170
+msgid "The suboption of the app option, an array of strings, with default values ​​as follows, indicates the static file download type supported by the framework. If the requested static file extension is outside of these types, the framework will return a 404 error."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:191
+msgid "Connection number control"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:193
+msgid "The children of the app option have two options, as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:202
+msgid "*max_connections*：Integer, the default value is 100000, which means the maximum number of simultaneous concurrent connections; when the number of connections maintained by the server reaches this number, the new TCP connection request will be rejected directly."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:203
+msgid "*max_connections_per_ip*：Integer, the default value is 0, which means the maximum number of connections for a single client IP, and 0 means no limit."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:207
+msgid "Log option"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:209
+msgid "The child of the *app* item, a JSON object, controls the behavior of the log output as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:222
+msgid "*log_path*：String, the default value is an empty string, indicating the path where the log file is stored. If it is an empty string, all logs are output to the standard output."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:223
+msgid "*logfile_base_name*：A string indicating the basename of the log file. The default value is an empty string which means the basename will be drogon."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:224
+msgid "*log_size_limit*：A integer, in bytes. The default value is 100000000 (100M). When the size of the log file reaches this value, the log file will be switched."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:225
+msgid "*log_level*：A string, the default value is \"DEBUG\", which indicates the lowest level of log output. The optional values ​​are from low to high: \"TRACE\", \"DEBUG\", \"INFO\", \"WARN\", where the TRACE level is only valid when compiling in DEBUG mode."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:228
+msgid "Note: Drogon's file log uses a non-blocking output structure that can achieve a log output of millions of lines per second and can be used with confidence."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:232
+msgid "Application control"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:234
+msgid "They are also children of the *app* option and have two options, as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:241
+#: ../../source/Configuration-File-en.rstd:302
+#: ../../source/Configuration-File-en.rstd:330
+msgid "Among them："
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:243
+msgid "*run_as_daemon*：Boolean value, the default value is false. When it is true, the application will be a child process of the No.1 process in the form of a daemon running in the background of the system."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:244
+msgid "*relaunch_on_error*：Boolean value, the default value is false. When it is true, the application will relaunches itself on error."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:248
+msgid "use_sendfile"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:250
+msgid "The suboption of app option, boolean, indicates whether the linux system call sendfile is used when sending the file. The default value is true. Using sendfile can improve the sending efficiency and reduce the memory usage of large files. as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:257
+msgid "Note: Even if this option is true, the sendfile system call will not be used, because the use of sendfile for small files is not necessarily cost-effective, and the framework will decide whether to adopt it according to its own optimization strategy."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:261
+msgid "use_gzip"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:263
+msgid "The *app* suboption, boolean, default value is true, indicating whether the body of the Http response uses compressed transmission. When it is true, compression is used in the following cases:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:265
+msgid "The client supports gzip compression;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:266
+msgid "The Http body is the text type;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:267
+msgid "The length of the body is greater than a certain value;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:269
+msgid "The configuration example is as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:277
+msgid "static_files_cache_time"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:279
+msgid "The *app* suboption, integer value, in seconds, indicates the cache time of the static file, that is, for the repeated request for the file during this time, the framework will return the response directly from the memory without reading the file system. The default value is 5 seconds, 0 means always cache (only read the file system once, use with caution), negative value means no cache. as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:287
+msgid "simple_controllers_map"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:289
+msgid "The *app* suboption, an array of JSON objects, each representing a mapping from the Http path to the HttpSimpleController, this configuration is just an alternative, not necessarily configured here, see HttpSimpleController. The specific configuration is as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:304
+msgid "*path*：String, Http path;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:305
+msgid "*controller*：String, the name of the HttpSimpleController;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:306
+msgid "*http_methods*：An array of strings representing the supported Http methods. Requests outside this list will be filtered out, returning a 405 error."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:307
+msgid "*filters*：String array, list of filters on the path, see Filter;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:311
+msgid "Idle connection timeout control"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:313
+msgid "The app suboption, integer value, in seconds, the default value is 60. When a connection exceeds this time without any reading and writing, the connection will be forcibly disconnected. as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:321
+msgid "Dynamic view loading"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:323
+msgid "The sub-options of the app, which control the enabling and the path of the dynamic view, have two options, as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:332
+msgid "*dynamic_views_path*：Boolean value, the default value is false. When it is true, the framework searches view files in the view path and dynamically compiles them into .so files, then loads them into the application. When any view file changes, it will also cause automatic compilation and re-loading;"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:333
+msgid "*dynamic_views_path*：An array of strings, each of which represents the search path of the dynamic view. If the path value is not starting with /, ./ or ../, and the value is not . or .., then This path is the relative path of the previous document_root entry, otherwise it is an absolute path or a relative path to the current directory."
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:335
+msgid "See View"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:339
+msgid "Server header field"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:341
+msgid "The sub-option of the app configures the server header field of all responses sent by the framework. The default value is an empty string. When this option is empty, the framework automatically generates a header field of the form *Server: drogon/version string*. It's as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:349
+msgid "Keepalive requests"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:351
+msgid "The *keepalive_requests* option sets the maximum number of requests that can be served through one keep-alive connection. After the maximum number of requests are made, the connection is closed. The default value of 0 means no limit. It's as follows:"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:359
+msgid "Pipelining requests"
+msgstr ""
+
+#: ../../source/Configuration-File-en.rstd:361
+msgid "The *pipelining_requests* sets the maximum number of unhandled requests that can be cached in pipelining buffer. After the maximum number of requests are made, the connection is closed. The default value of 0 means no limit. For details about pipelining, please see the *rfc2616-8.1.1.2*. It's as follows:"
+msgstr ""
+

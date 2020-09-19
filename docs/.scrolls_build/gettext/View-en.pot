@@ -1,0 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/View-en.rstd:3
+msgid "View"
+msgstr ""
+
+#: ../../source/View-en.rstd:7
+msgid "Views Introduction"
+msgstr ""
+
+#: ../../source/View-en.rstd:9
+msgid "Although the front-end rendering technology is popular, the back-end application service only needs to return the corresponding data to the front-end. However, a good web framework should provide back-end rendering technology, so that the server program can dynamically generate HTML pages. Views can help users generate these pages. As the name implies, it is only responsible for doing the work related to the presentation, and the complex business logic should be handed over to the controller."
+msgstr ""
+
+#: ../../source/View-en.rstd:11
+msgid "The earliest web applications embed HTML into the program code to achieve the purpose of dynamically generating HTML pages, but this is inefficient, not intuitive, and so on. So there are languages such as JSP, which are the opposite. , embed the program code into the HTML page. The drogon is of course the latter solution. However, it is obvious that since C++ is compiled and executed, we need to convert the page embedded in C++ code into a C++ source program to compile into the application. Therefore, drogon defines its own specialized CSP (C++ Server Pages) description language, using the command line tool drogon_ctl to convert CSP files into C++ source files for compilation."
+msgstr ""
+
+#: ../../source/View-en.rstd:15
+msgid "Drogon's CSP"
+msgstr ""
+
+#: ../../source/View-en.rstd:17
+msgid "Drogon's CSP solution is very simple, we use special markup symbols to embed C++ code into the HTML page. among them:"
+msgstr ""
+
+#: ../../source/View-en.rstd:19
+msgid "The content between the tags <%inc and %> is considered to be the part of the header file that needs to be referenced. Only the #include statement can be written here, such as <%inc#include \"xx.h\" %>, but many common header files are automatically included by drogon. The user basically does not use this tag;"
+msgstr ""
+
+#: ../../source/View-en.rstd:20
+msgid "Everything between the tags <%c++ and %> is treated as C++ code, such as <c++ std:string name=\"drogon\"; %>;"
+msgstr ""
+
+#: ../../source/View-en.rstd:22
+msgid "C++ code is generally transferred to the target source file intact, except for the following two special tags:"
+msgstr ""
+
+#: ../../source/View-en.rstd:22
+msgid "@@ represents the data variable passed by the controller, from which you can get the content you want to display;"
+msgstr ""
+
+#: ../../source/View-en.rstd:23
+msgid "$$ represents a stream object representing the content of the page, and the content to be displayed can be displayed on the page by the << operator;"
+msgstr ""
+
+#: ../../source/View-en.rstd:24
+msgid "The content sandwiched between the tags [[ and ]] is considered to be the variable name. The view will use the name as the key to find the corresponding variable from the data passed from the controller and output it to the page. Spaces before and after the variable name will be omitted. Paired [[ and ]] should be on the same line. And for performance reasons, only three string data types are supported(const char \\*, std::string and const std::string), other data types should be output in the above-mentioned way(by $$);"
+msgstr ""
+
+#: ../../source/View-en.rstd:25
+msgid "The content sandwiched between the tags {% and %} is considered to be the name of a variable or an expression of the C++ program (not the keyword of the data passed by the controller), and the view will output the contents of the variable or the value of the expression to the page. It's easy to know that {%val.xx%} is equivalent to <%c++$$<<val.xx;%>, but the former is simpler and more intuitive. Similarly, do not write two tags in separate lines;"
+msgstr ""
+
+#: ../../source/View-en.rstd:26
+msgid "The content sandwiched between the tags <%view and %> is considered to be the name of the sub-view. The framework will find the corresponding sub-view and fill its contents to the location of the tag; the spaces before and after the view name will be ignored. Do not write <%view and %> in separate lines. Can use multiple levels of nesting, but not loop nesting;"
+msgstr ""
+
+#: ../../source/View-en.rstd:27
+msgid "The content between the tags <%layout and %> is considered as the name of the layout. The framework will find the corresponding layout and fill the content of this view to a position in the layout (in the layout the placeholder [[]] marks this position); spaces before and after the layout name will be ignored, and <%layout and %> should not be written in separate lines. You can use multiple levels of nesting, but not loop nesting. One template file can only inherit from one base layout, multiple inheritance from different layouts is not supported."
+msgstr ""
+
+#: ../../source/View-en.rstd:31
+msgid "The use of views"
+msgstr ""
+
+#: ../../source/View-en.rstd:33
+msgid "The http response of the drogon application is generated by the controller handler, so the response rendered by the view is also generated by the handler, generated by calling the following interface:"
+msgstr ""
+
+#: ../../source/View-en.rstd:37
+msgid "This interface is a static method of the HttpResponse class, which has two parameters:"
+msgstr ""
+
+#: ../../source/View-en.rstd:39
+msgid "viewName: the name of the view, the name of the incoming csp file (*the extension can be omitted*);"
+msgstr ""
+
+#: ../../source/View-en.rstd:40
+msgid "data: The controller's handler passes the data to the view. The type is *HttpViewData*. This is a special map. You can save and retrieve any type of object. For details, please refer to [HttpViewData API] (API-HttpViewData) Description"
+msgstr ""
+
+#: ../../source/View-en.rstd:42
+msgid "As you can see, the controller does not need to reference the header file of the view. The controller and the view are well decoupled; their only connection is the data variable."
+msgstr ""
+
+#: ../../source/View-en.rstd:46
+msgid "A simple example"
+msgstr ""
+
+#: ../../source/View-en.rstd:48
+msgid "Now let's make a view that displays the parameters of the HTTP request sent by the browser in the returned html page."
+msgstr ""
+
+#: ../../source/View-en.rstd:50
+msgid "This time we directly define the handler with the HttpAppFramework interface. In the main file, add the following code before calling the run() method:"
+msgstr ""
+
+#: ../../source/View-en.rstd:67
+msgid "The above code registers a lambda expression handler on the */list_para* path, passing the requested parameters to the view display. Then, Go to the views folder and create a view file ListParameters.csp with the following contents:"
+msgstr ""
+
+#: ../../source/View-en.rstd:101
+msgid "We can use drogon_ctl command tool to convert ListParameters.csp into C++ source files as bellow:"
+msgstr ""
+
+#: ../../source/View-en.rstd:107
+msgid "After the operation is finished, two source files, ListParameters.h and ListParameters.cc, will appear in the current directory, which can be used to compile into the web application;"
+msgstr ""
+
+#: ../../source/View-en.rstd:109
+msgid "Recompile the entire project with cmake, run the target program webapp, you can test the effect in the browser, enter *http://localhost/list_para?p1=a&p2=b&p3=c* in the address bar, you can see the following page :"
+msgstr ""
+
+#: ../../source/View-en.rstd:111
+msgid "view page"
+msgstr ""
+
+#: ../../source/View-en.rstd:113
+msgid "The html page rendered by the backend is simply added."
+msgstr ""
+
+#: ../../source/View-en.rstd:117
+msgid "Automated processing of csp files"
+msgstr ""
+
+#: ../../source/View-en.rstd:120
+msgid "Note: If your project is create by the *drogon_ctl* command, the work described in this section is done automatically by *drogon_ctl*."
+msgstr ""
+
+#: ../../source/View-en.rstd:122
+msgid "Obviously, it is too inconvenient to manually run the drogon_ctl command every time you modify the csp file. We can put the processing of drogon_ctl into the CMakeLists.txt file. Still use the previous example as an example. Let's assume that we put all the csp files In the views folder, CMakeLists.txt can be added as follows:"
+msgstr ""
+
+#: ../../source/View-en.rstd:139
+msgid "Then add a new source file collection ${VIEWSRC} to the add_executable statement as follows:"
+msgstr ""
+
+#: ../../source/View-en.rstd:147
+msgid "Dynamic compilation and loading of views"
+msgstr ""
+
+#: ../../source/View-en.rstd:149
+msgid "Drogon provides a way to dynamically compile and load csp files during the application runtime, using the following interface:"
+msgstr ""
+
+#: ../../source/View-en.rstd:153
+msgid "The interface is a member method of *HttpAppFramework*, and the parameter is an array of strings representing a list of directories in which the view csp file is located. After calling this interface, drogon will automatically search for csp files in these directories. After discovering new or modified csp files, the source files will be automatically generated, compiled into dynamic library files and loaded into the application. The application process does not need to be restarted. Users can experiment on their own and observe the page changes caused by the modification of csp file."
+msgstr ""
+
+#: ../../source/View-en.rstd:155
+msgid "Obviously, this function depends on the development environment. If both drogon and webapp are compiled on this server, there should be no problem in dynamically loading the csp page."
+msgstr ""
+
+#: ../../source/View-en.rstd:158
+msgid "Note: Dynamic views should not be compiled into the application statically. This means that if the view is statically compiled, it cannot be updated via dynamic view loading. You can create a directory outside the compilation folder and move views into it during development."
+msgstr ""
+
+#: ../../source/View-en.rstd:161
+msgid "Note: This feature is best used to adjust the HTML page during the development phase. In the production environment, it is recommended to compile the csp file directly into the target file. This is mainly for security and stability."
+msgstr ""
+
+#: ../../source/View-en.rstd:164
+msgid "Note: If a *symbol not found* error occurs while loading a dynamic view, please use the *cmake .. -DCMAKE_ENABLE_EXPORTS=on* to configure your project, or uncomment the last line (*set_property(TARGET ${PROJECT_NAME} PROPERTY ENABLE_EXPORTS ON)*) in your project's CMakeLists.txt, and then rebuild the project"
+msgstr ""
+

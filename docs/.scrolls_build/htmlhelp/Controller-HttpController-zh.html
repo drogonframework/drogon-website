@@ -1,0 +1,325 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    <title>HttpController &#25511;&#21046;&#22120;</title>
+  
+    <link rel="stylesheet" href="_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="next" title="&#25511;&#21046;&#22120; WebSocketController" href="Controller-WebSocketController-zh.html" />
+    <link rel="prev" title="&#25511;&#21046;&#22120; HttpSimpleController" href="Controller-HttpSimpleController-zh.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="index.html"
+          title="back to the documentation overview"><span>HttpController &#25511;&#21046;&#22120;</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="Controller-HttpSimpleController-zh.html">&laquo; &#25511;&#21046;&#22120; HttpSimpleController</a> |
+        <a href="#">HttpController &#25511;&#21046;&#22120;</a>
+        | <a href="Controller-WebSocketController-zh.html">&#25511;&#21046;&#22120; WebSocketController &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li><a class="reference internal" href="#">HttpController &#25511;&#21046;&#22120;</a><ul>
+<li><a class="reference internal" href="#id1">&#29983;&#25104;</a></li>
+<li><a class="reference internal" href="#id2">&#20351;&#29992;</a></li>
+<li><a class="reference internal" href="#id9">&#21442;&#25968;&#26144;&#23556;</a></li>
+<li><a class="reference internal" href="#id10">&#22810;&#36335;&#24452;&#26144;&#23556;</a></li>
+<li><a class="reference internal" href="#id11">&#27491;&#21017;&#34920;&#36798;&#24335;</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+  <div class="section" id="httpcontroller">
+<h1>HttpController &#25511;&#21046;&#22120;</h1>
+<div class="section" id="id1">
+<h2>&#29983;&#25104;</h2>
+<p>&#21487;&#20197;&#30001;drogon_ctl&#21629;&#20196;&#34892;&#24037;&#20855;&#24555;&#36895;&#29983;&#25104;&#22522;&#20110;HttpController&#30340;&#33258;&#23450;&#20041;&#31867;&#30340;&#28304;&#25991;&#20214;&#65292;&#21629;&#20196;&#26684;&#24335;&#22914;&#19979;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create controller -h &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt;
+</pre></div>
+</div>
+<p>&#25105;&#20204;&#21019;&#24314;&#19968;&#20010;&#20301;&#20110;demo v1&#21517;&#31216;&#31354;&#38388;&#20869;&#19988;&#21517;&#31216;&#20026;User&#30340;&#25511;&#21046;&#22120;&#65306;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create controller -h demo::v1::User
+</pre></div>
+</div>
+<p>&#21487;&#20197;&#30475;&#21040;&#65292;&#30446;&#24405;&#19979;&#26032;&#22686;&#21152;&#20102;&#20004;&#20010;&#25991;&#20214;&#65292;demo_v1_User.h&#21644;demo_v1_User.cc:</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.h</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/HttpController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">demo</span>
+<span class="p">{</span>
+    <span class="k">namespace</span> <span class="n">v1</span>
+    <span class="p">{</span>
+        <span class="k">class</span> <span class="nc">User</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpController</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>
+        <span class="p">{</span>
+        <span class="k">public</span><span class="o">:</span>
+            <span class="n">METHOD_LIST_BEGIN</span>
+                <span class="c1">//use METHOD_ADD to add your custom processing function here;</span>
+            <span class="n">METHOD_LIST_END</span>
+            <span class="c1">//your declaration of processing function maybe like this:</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>demo_v1_User.cc is as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.cc</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;demo_v1_User.h&quot;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">demo</span><span class="o">::</span><span class="n">v1</span><span class="p">;</span>
+<span class="c1">//add definition of your processing function here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>&#20351;&#29992;</h2>
+<p>&#25105;&#20204;&#32534;&#36753;&#19968;&#19979;&#36825;&#20004;&#20010;&#25991;&#20214;&#65292;&#28982;&#21518;&#20877;&#38416;&#36848;&#23427;&#20204;&#12290;</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.h</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/HttpController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">demo</span>
+<span class="p">{</span>
+    <span class="k">namespace</span> <span class="n">v1</span>
+    <span class="p">{</span>
+        <span class="k">class</span> <span class="nc">User</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpController</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>
+        <span class="p">{</span>
+        <span class="k">public</span><span class="o">:</span>
+            <span class="n">METHOD_LIST_BEGIN</span>
+                <span class="c1">//use METHOD_ADD to add your custom processing function here;</span>
+                <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">User</span><span class="o">::</span><span class="n">login</span><span class="p">,</span><span class="s">&quot;/token?userId={1}&amp;passwd={2}&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+                <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">User</span><span class="o">::</span><span class="n">getInfo</span><span class="p">,</span><span class="s">&quot;/{1}/info?token={2}&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">);</span>
+            <span class="n">METHOD_LIST_END</span>
+            <span class="c1">//your declaration of processing function maybe like this:</span>
+            <span class="kt">void</span> <span class="n">login</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="n">userId</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">password</span><span class="p">);</span>
+            <span class="kt">void</span> <span class="nf">getInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">userId</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">token</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.cc</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;demo_v1_User.h&quot;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">demo</span><span class="o">::</span><span class="n">v1</span><span class="p">;</span>
+<span class="c1">//add definition of your processing function here</span>
+
+<span class="kt">void</span> <span class="n">User</span><span class="o">::</span><span class="n">login</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="n">userId</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">password</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">LOG_DEBUG</span><span class="o">&lt;&lt;</span><span class="s">&quot;User &quot;</span><span class="o">&lt;&lt;</span><span class="n">userId</span><span class="o">&lt;&lt;</span><span class="s">&quot; login&quot;</span><span class="p">;</span>
+    <span class="c1">//Authentication algorithm, read database, verify identity, etc...</span>
+    <span class="c1">//...</span>
+    <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;ok&quot;</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;token&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">drogon</span><span class="o">::</span><span class="n">utils</span><span class="o">::</span><span class="n">getUuid</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">resp</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpJsonResponse</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">User</span><span class="o">::</span><span class="n">getInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">userId</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">token</span><span class="p">)</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">LOG_DEBUG</span><span class="o">&lt;&lt;</span><span class="s">&quot;User &quot;</span><span class="o">&lt;&lt;</span><span class="n">userId</span><span class="o">&lt;&lt;</span><span class="s">&quot; get his information&quot;</span><span class="p">;</span>
+
+    <span class="c1">//Verify the validity of the token, etc.</span>
+    <span class="c1">//Read the database or cache to get user information</span>
+    <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;ok&quot;</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;user_name&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;Jack&quot;</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;user_id&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">userId</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;gender&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">resp</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpJsonResponse</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>&#27599;&#20010;*HttpController*&#31867;&#21487;&#20197;&#23450;&#20041;&#22810;&#20010;Http&#35831;&#27714;&#22788;&#29702;&#20989;&#25968;(handler)&#65292;&#30001;&#20110;&#20989;&#25968;&#25968;&#30446;&#21487;&#20197;&#20219;&#24847;&#22810;&#65292;&#25152;&#20197;&#36890;&#36807;&#34394;&#20989;&#25968;&#37325;&#36733;&#26159;&#19981;&#29616;&#23454;&#30340;&#65292;&#25105;&#20204;&#38656;&#35201;&#25226;&#22788;&#29702;&#20989;&#25968;&#26412;&#36523;(&#32780;&#19981;&#26159;&#31867;)&#27880;&#20876;&#21040;&#26694;&#26550;&#37324;&#21435;&#12290;</p>
+<p>&#20174;URL&#36335;&#24452;&#21040;&#22788;&#29702;&#20989;&#25968;&#30340;&#26144;&#23556;&#30001;&#23439;&#23436;&#25104;&#65292;&#21487;&#20197;&#29992;*METHOD_ADD*&#23439;&#25110;*ADD_METHOD_TO*&#23439;&#28155;&#21152;&#22810;&#37325;&#36335;&#24452;&#26144;&#23556;&#65292;&#25152;&#26377;*METHOD_ADD*&#21644;*ADD_METHOD_TO*&#35821;&#21477;&#24212;&#22841;&#22312;*METHOD_LIST_BEGIN*&#21644;*METHOD_LIST_END*&#23439;&#35821;&#21477;&#20043;&#38388;&#12290;</p>
+<p><em>METHOD_ADD*&#23439;&#20250;&#22312;&#36335;&#24452;&#26144;&#23556;&#20013;&#33258;&#21160;&#25226;**&#21517;&#23383;&#31354;&#38388;&#21644;&#31867;&#21517;**&#20316;&#20026;&#36335;&#24452;&#30340;&#21069;&#32512;&#65292;&#25152;&#20197;&#65292;&#26412;&#20363;&#23376;&#20013;&#65292;login&#20989;&#25968;&#65292;&#34987;&#27880;&#20876;&#21040;&#20102;</em>/demo/v1/user/token*&#36335;&#24452;&#19978;&#65292;getInfo&#20989;&#25968;&#34987;&#27880;&#20876;&#21040;&#20102;*/demo/v1/user/xxx/info*&#36335;&#24452;&#19978;&#12290;&#21518;&#38754;&#30340;&#32422;&#26463;&#36319;HttpSimpleController&#30340;PATH_ADD&#23439;&#31867;&#20284;&#65292;&#19981;&#20877;&#36184;&#36848;&#12290;</p>
+<p>&#22914;&#26524;&#20351;&#29992;&#20102;&#33258;&#21160;&#30340;&#21069;&#32512;&#65292;&#35775;&#38382;&#22320;&#22336;&#35201;&#21253;&#21547;&#21629;&#21517;&#31354;&#38388;&#21644;&#31867;&#21517;&#65292;&#27492;&#20363;&#20013;&#35201;&#20351;&#29992;*http://localhost/demo/v1/user/token?userid=xxx&amp;passwd=xxx*&#25110;&#32773;*http://localhost/demo/v1/user/xxxxx/info?token=xxxx*&#26469;&#35775;&#38382;&#12290;</p>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>ADD_METHOD_TO*&#23439;&#30340;&#20316;&#29992;&#19982;&#21069;&#32773;&#20960;&#20046;&#19968;&#26679;&#65292;&#38500;&#20102;&#23427;&#19981;&#20250;&#33258;&#21160;&#28155;&#21152;&#20219;&#20309;&#21069;&#32512;&#65292;&#21363;&#36825;&#20010;&#23439;&#27880;&#20876;&#30340;&#36335;&#24452;&#26159;&#19968;&#20010;&#32477;&#23545;&#36335;&#24452;&#12290;</p>
+<p>&#25105;&#20204;&#30475;&#21040;&#65292;<a href="#id5"><span class="problematic" id="id6">*</span></a>HttpController*&#25552;&#20379;&#20102;&#26356;&#20026;&#28789;&#27963;&#30340;&#36335;&#24452;&#26144;&#23556;&#21151;&#33021;&#65292;&#24182;&#19988;&#21487;&#20197;&#27880;&#20876;&#22810;&#20010;&#22788;&#29702;&#20989;&#25968;&#65292;&#25105;&#20204;&#21487;&#20197;&#25226;&#19968;&#31867;&#21151;&#33021;&#25918;&#22312;&#19968;&#20010;&#31867;&#37324;&#12290;</p>
+<p>&#21478;&#22806;&#21487;&#20197;&#30475;&#21040;&#65292;<a href="#id7"><span class="problematic" id="id8">*</span></a>METHOD_ADD*&#23439;&#25552;&#20379;&#20102;&#21442;&#25968;&#26144;&#23556;&#30340;&#26041;&#27861;&#65292;&#25105;&#20204;&#21487;&#20197;&#25226;&#36335;&#24452;&#19978;&#30340;&#21442;&#25968;&#26144;&#23556;&#21040;&#20989;&#25968;&#30340;&#21442;&#25968;&#34920;&#37324;&#65292;&#30001;&#21442;&#25968;&#30340;&#25968;&#30721;&#23545;&#24212;&#24418;&#21442;&#30340;&#20301;&#32622;&#65292;&#38750;&#24120;&#26041;&#20415;&#65292;&#24120;&#35265;&#30340;&#21487;&#20197;&#30001;&#23383;&#31526;&#20018;&#31867;&#22411;&#36716;&#25442;&#30340;&#31867;&#22411;&#37117;&#21487;&#20197;&#20316;&#20026;&#21442;&#25968;(&#22914;std::string,int,float,double&#31561;&#31561;)&#65292;&#26694;&#26550;&#22522;&#20110;&#27169;&#26495;&#30340;&#31867;&#22411;&#25512;&#26029;&#20250;&#33258;&#21160;&#24110;&#20320;&#36716;&#25442;&#31867;&#22411;&#65292;&#38750;&#24120;&#26041;&#20415;&#12290;&#27880;&#24847;&#24038;&#20540;&#24341;&#29992;&#24517;&#39035;&#26159;const&#31867;&#22411;&#12290;</p>
+<p>&#21516;&#19968;&#20010;&#36335;&#24452;&#36824;&#21487;&#20197;&#27880;&#20876;&#22810;&#27425;&#65292;&#30456;&#20114;&#20043;&#38388;&#36890;&#36807;Http Method&#21306;&#20998;&#65292;&#36825;&#26159;&#21512;&#27861;&#30340;&#65292;&#24182;&#19988;&#26159;Restful API&#30340;&#36890;&#24120;&#20570;&#27861;&#65292;&#27604;&#22914;:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">METHOD_LIST_BEGIN</span>
+    <span class="nf">METHOD_ADD</span><span class="p">(</span><span class="n">Book</span><span class="o">::</span><span class="n">getInfo</span><span class="p">,</span><span class="s">&quot;/{1}?detail={2}&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">);</span>
+    <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">Book</span><span class="o">::</span><span class="n">newBook</span><span class="p">,</span><span class="s">&quot;/{1}&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+    <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">Book</span><span class="o">::</span><span class="n">deleteOne</span><span class="p">,</span><span class="s">&quot;/{1}&quot;</span><span class="p">,</span><span class="n">Delete</span><span class="p">);</span>
+<span class="n">METHOD_LIST_END</span>
+</pre></div>
+</div>
+<p>&#36335;&#24452;&#21442;&#25968;&#30340;&#21344;&#20301;&#31526;&#26377;&#22810;&#31181;&#20889;&#27861;:</p>
+<blockquote>
+<div><ul class="simple">
+<li>{}: &#34920;&#31034;&#36825;&#20010;&#36335;&#24452;&#21442;&#25968;&#26144;&#23556;&#21040;&#22788;&#29702;&#20989;&#25968;&#30340;&#23545;&#24212;&#20301;&#32622;&#19978;&#65292;&#36335;&#24452;&#19978;&#30340;&#20301;&#32622;&#23601;&#26159;&#20989;&#25968;&#21442;&#25968;&#30340;&#20301;&#32622;&#12290;</li>
+<li>{1},{2}: &#20013;&#38388;&#26377;&#20010;&#25968;&#23383;&#30340;&#65292;&#34920;&#31034;&#26144;&#23556;&#21040;&#25968;&#23383;&#25351;&#23450;&#30340;&#22788;&#29702;&#20989;&#25968;&#21442;&#25968;&#19978;&#12290;</li>
+<li>{anystring}: &#20013;&#38388;&#30340;&#23383;&#31526;&#20018;&#27809;&#26377;&#23454;&#38469;&#20316;&#29992;&#65292;&#20294;&#21487;&#20197;&#25552;&#39640;&#31243;&#24207;&#30340;&#21487;&#35835;&#24615;&#65292;&#19982;{}&#31561;&#20215;&#12290;</li>
+<li>{1:anystring},{2:xxx}: &#20882;&#21495;&#21069;&#30340;&#25968;&#23383;&#34920;&#31034;&#20301;&#32622;&#65292;&#21518;&#38754;&#30340;&#23383;&#31526;&#20018;&#27809;&#26377;&#23454;&#38469;&#20316;&#29992;&#65292;&#20294;&#21487;&#20197;&#25552;&#39640;&#31243;&#24207;&#30340;&#21487;&#35835;&#24615;&#65292;&#19982;{1},{2}&#31561;&#20215;</li>
+</ul>
+</div></blockquote>
+<p>&#25512;&#33616;&#20351;&#29992;&#21518;&#20004;&#31181;&#20889;&#27861;&#65292;&#22914;&#26524;&#36335;&#24452;&#21442;&#25968;&#21644;&#20989;&#25968;&#21442;&#25968;&#39034;&#24207;&#19968;&#30452;&#65292;&#20351;&#29992;&#31532;&#19977;&#31181;&#20889;&#27861;&#21363;&#21487;&#12290;&#23481;&#26131;&#30693;&#36947;&#65292;&#20197;&#19979;&#20960;&#31181;&#20889;&#27861;&#26159;&#31561;&#20215;&#30340;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>“/users/{}/books/{}”</li>
+<li>“/users/{}/books/{2}”</li>
+<li>“/users/{user_id}/books/{book_id}”</li>
+<li>“/users/{1:user_id}/books/{2}”</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#27880;&#24847;&#65306;&#36335;&#24452;&#21305;&#37197;&#22823;&#23567;&#20889;&#19981;&#25935;&#24863;&#65292;&#21442;&#25968;&#21517;&#23383;&#22823;&#23567;&#20889;&#25935;&#24863;&#65292;&#21442;&#25968;&#20540;&#22823;&#23567;&#20889;&#20445;&#25345;&#21407;&#35980;</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>&#21442;&#25968;&#26144;&#23556;</h2>
+<p>&#36890;&#36807;&#21069;&#38754;&#30340;&#21465;&#36848;&#25105;&#20204;&#30693;&#36947;&#65292;&#36335;&#24452;&#19978;&#30340;&#21442;&#25968;&#21644;&#38382;&#21495;&#21518;&#38754;&#30340;&#35831;&#27714;&#21442;&#25968;&#37117;&#21487;&#20197;&#26144;&#23556;&#21040;&#22788;&#29702;&#20989;&#25968;&#30340;&#21442;&#25968;&#21015;&#34920;&#37324;&#65292;&#30446;&#26631;&#21442;&#25968;&#30340;&#31867;&#22411;&#38656;&#35201;&#28385;&#36275;&#22914;&#19979;&#26465;&#20214;&#65306;</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#24517;&#39035;&#26159;&#20540;&#31867;&#22411;&#12289;&#24120;&#24038;&#20540;&#24341;&#29992;&#25110;&#38750;const&#21491;&#20540;&#24341;&#29992;&#20013;&#30340;&#19968;&#31181;&#65292;&#19981;&#33021;&#26159;&#38750;const&#30340;&#24038;&#20540;&#24341;&#29992;&#65292;&#25512;&#33616;&#20351;&#29992;&#21491;&#20540;&#24341;&#29992;&#65292;&#36825;&#26679;&#29992;&#25143;&#21487;&#20197;&#38543;&#24847;&#22788;&#32622;&#23427;&#65307;</li>
+<li>int, long, long long, unsigned long, unsigned long long, float, double, long double&#31561;&#22522;&#30784;&#31867;&#22411;&#37117;&#21487;&#20197;&#20316;&#20026;&#21442;&#25968;&#31867;&#22411;&#65307;</li>
+<li>std::string&#31867;&#22411;&#65307;</li>
+<li>&#20219;&#20309;&#21487;&#20197;&#20351;&#29992;*stringstream &gt;&gt;*&#25805;&#20316;&#31526;&#36171;&#20540;&#30340;&#31867;&#22411;&#65307;</li>
+</ul>
+</div></blockquote>
+<p><em>&#21478;&#22806;&#65292;drogon&#26694;&#26550;&#36824;&#25552;&#20379;&#20102;&#20174;HttpRequestPtr&#23545;&#35937;&#21040;&#20219;&#24847;&#31867;&#22411;&#30340;&#21442;&#25968;&#30340;&#26144;&#23556;&#26426;&#21046;</em>&#65292;&#24403;&#20320;&#30340;handler&#21442;&#25968;&#21015;&#34920;&#20013;&#26144;&#23556;&#21442;&#25968;&#30340;&#25968;&#37327;&#22810;&#20110;&#36335;&#24452;&#19978;&#30340;&#21442;&#25968;&#26102;&#65292;&#21518;&#38754;&#22810;&#20313;&#30340;&#21442;&#25968;&#23558;&#30001;HttpRequestPtr&#23545;&#35937;&#36716;&#25442;&#24471;&#21040;&#65292;&#29992;&#25143;&#21487;&#20197;&#23450;&#20041;&#20219;&#24847;&#31867;&#22411;&#30340;&#36716;&#25442;&#65292;&#23450;&#20041;&#36825;&#31181;&#36716;&#25442;&#30340;&#26041;&#24335;&#26159;&#29305;&#21270;drogon&#21629;&#21517;&#31354;&#38388;&#30340;fromRequest&#27169;&#26495;(&#23450;&#20041;&#20110;HttpRequest.h&#22836;&#25991;&#20214;))&#65292;&#27604;&#22914;&#25105;&#20204;&#38656;&#35201;&#20570;&#19968;&#20010;&#21019;&#24314;&#26032;&#29992;&#25143;&#30340;RESTful&#30340;&#25509;&#21475;&#65292;&#25105;&#20204;&#23450;&#20041;&#29992;&#25143;&#30340;&#32467;&#26500;&#20307;&#22914;&#19979;:</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text"><em>myapp_User_drogon.cc</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">myapp</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">User</span><span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">userName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">email</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">address</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="p">}</span>
+<span class="k">namespace</span> <span class="n">drogon</span>
+<span class="p">{</span>
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="kr">inline</span> <span class="n">myapp</span><span class="o">::</span><span class="n">User</span> <span class="n">fromRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequest</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">json</span> <span class="o">=</span> <span class="n">req</span><span class="p">.</span><span class="n">getJsonObject</span><span class="p">();</span>
+    <span class="n">myapp</span><span class="o">::</span><span class="n">User</span> <span class="n">user</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">userName</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">json</span><span class="p">)[</span><span class="s">&quot;name&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">json</span><span class="p">)[</span><span class="s">&quot;email&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">json</span><span class="p">)[</span><span class="s">&quot;address&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">user</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>&#26377;&#20102;&#19978;&#38754;&#30340;&#23450;&#20041;&#21644;&#27169;&#26495;&#29305;&#21270;&#65292;&#25105;&#20204;&#23601;&#21487;&#20197;&#21521;&#19979;&#38754;&#36825;&#26679;&#23450;&#20041;&#36335;&#24452;&#21644;handler:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">cpp</span>
+</pre></div>
+</div>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">caption:</th><td class="field-body"><strong>UserController.cc</strong></td>
+</tr>
+</tbody>
+</table>
+<p>class UserController:public drogon::HttpController&lt;UserController&gt;
+{
+public:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>METHOD_LIST_BEGIN</dt>
+<dd>//use METHOD_ADD to add your custom processing function here;
+ADD_METHOD_TO(UserController::newUser,”/users”,Post);</dd>
+</dl>
+<p>METHOD_LIST_END
+//your declaration of processing function maybe like this:
+void newUser(const HttpRequestPtr &amp;req,</p>
+<blockquote>
+<div>std::function&lt;void (const HttpResponsePtr &amp;)&gt; &amp;&amp;callback,
+myapp::User &amp;&amp;pNewUser) const;</div></blockquote>
+</div></blockquote>
+<p>};</p>
+</div></blockquote>
+<p>&#21487;&#20197;&#30475;&#21040;&#65292;&#31532;&#19977;&#20010;*myapp::User*&#31867;&#22411;&#30340;&#21442;&#25968;&#22312;&#26144;&#23556;&#36335;&#24452;&#19978;&#27809;&#26377;&#23545;&#24212;&#30340;&#21344;&#20301;&#31526;&#65292;&#26694;&#26550;&#20250;&#23558;&#23427;&#35270;&#20026;&#30001;*req*&#23545;&#35937;&#36716;&#25442;&#30340;&#21442;&#25968;&#65292;&#36890;&#36807;&#29992;&#25143;&#29305;&#21270;&#30340;&#20989;&#25968;&#27169;&#26495;&#24471;&#21040;&#36825;&#20010;&#21442;&#25968;&#65292;&#36825;&#37117;&#26159;drogon&#36890;&#36807;&#27169;&#26495;&#25512;&#23548;&#33258;&#21160;&#22312;&#32534;&#35793;&#26399;&#23436;&#25104;&#30340;&#65292;&#20026;&#29992;&#25143;&#30340;&#24320;&#21457;&#25552;&#20379;&#20102;&#26497;&#22823;&#20415;&#21033;&#12290;</p>
+<p>&#26356;&#36827;&#19968;&#27493;&#65292;&#26377;&#20123;&#29992;&#25143;&#38500;&#20102;&#20182;&#20204;&#33258;&#23450;&#20041;&#31867;&#22411;&#30340;&#25968;&#25454;&#22806;&#65292;&#24182;&#19981;&#38656;&#35201;&#35775;&#38382;HttpRequestPtr&#23545;&#35937;&#65292;&#37027;&#20040;&#20182;&#21487;&#20197;&#25226;&#36825;&#20010;&#33258;&#23450;&#20041;&#30340;&#23545;&#35937;&#25918;&#22312;&#31532;&#19968;&#20010;&#21442;&#25968;&#30340;&#20301;&#32622;&#65292;&#26694;&#26550;&#20063;&#33021;&#27491;&#30830;&#23436;&#25104;&#26144;&#23556;&#65292;&#27604;&#22914;&#19978;&#38754;&#30340;&#20363;&#23376;&#20063;&#21487;&#20197;&#20889;&#25104;&#19979;&#38754;&#36825;&#26679;:</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text"><em>UserController.cc</em></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserController</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpController</span><span class="o">&lt;</span><span class="n">UserController</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">METHOD_LIST_BEGIN</span>
+        <span class="c1">//use METHOD_ADD to add your custom processing function here;</span>
+        <span class="n">ADD_METHOD_TO</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">newUser</span><span class="p">,</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+    <span class="n">METHOD_LIST_END</span>
+    <span class="c1">//your declaration of processing function maybe like this:</span>
+    <span class="kt">void</span> <span class="n">newUser</span><span class="p">(</span><span class="n">myapp</span><span class="o">::</span><span class="n">User</span> <span class="o">&amp;&amp;</span><span class="n">pNewUser</span><span class="p">,</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>&#22810;&#36335;&#24452;&#26144;&#23556;</h2>
+<p>drogon&#25903;&#25345;&#22312;&#36335;&#24452;&#26144;&#23556;&#20013;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#65292;&#22312;{}&#33457;&#25324;&#21495;&#20197;&#22806;&#30340;&#37096;&#20998;&#21487;&#20197;&#26377;&#38480;&#21046;&#30340;&#20351;&#29992;&#65292;&#27604;&#22914;:</p>
+<p>ADD_METHOD_TO(UserController::handler1,”/users/.*”,Post); /// Match any path prefixed with <cite>/users/</cite>
+ADD_METHOD_TO(UserController::handler2,”/{name}/[0-9]+”,Post); ///Match any path composed with a name string and a number.</p>
+<p>&#36825;&#31181;&#26041;&#27861;&#19981;&#25903;&#25345;&#23376;&#34920;&#36798;&#24335;&#65292;&#36127;&#21521;&#21305;&#37197;&#31561;&#27491;&#21017;&#34920;&#36798;&#24335;&#65292;&#22914;&#26524;&#24819;&#20351;&#29992;&#20182;&#20204;&#65292;&#35831;&#29992;&#22914;&#19979;&#30340;&#26041;&#26696;&#12290;</p>
+</div>
+<div class="section" id="id11">
+<h2>&#27491;&#21017;&#34920;&#36798;&#24335;</h2>
+<p>&#19978;&#38754;&#30340;&#26041;&#27861;&#23545;&#27491;&#21017;&#34920;&#36798;&#24335;&#30340;&#25903;&#25345;&#27604;&#36739;&#26377;&#38480;&#65292;&#22914;&#26524;&#29992;&#25143;&#24819;&#33258;&#30001;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#65292;drogon&#25552;&#20379;&#20102;ADD_METHOD_VIA_REGEX&#23439;&#26469;&#23454;&#29616;&#36825;&#19968;&#28857;&#65292;&#27604;&#22914;:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ADD_METHOD_VIA_REGEX</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">handler1</span><span class="p">,</span><span class="s">&quot;/users/(.*)&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span> <span class="c1">/// Match any path prefixed with `/users/` and map the rest of the path to a parameter of the handler1.</span>
+<span class="n">ADD_METHOD_VIA_REGEX</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">handler2</span><span class="p">,</span><span class="s">&quot;/.*([0-9]*)&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span> <span class="c1">/// Matche any path that ends in a number and map that number to a parameter of the handler2.</span>
+<span class="n">ADD_METHOD_VIA_REGEX</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">handler3</span><span class="p">,</span><span class="s">&quot;/(?!data).*&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span> <span class="c1">/// Matches any path that does not start with &#39;/data&#39;</span>
+</pre></div>
+</div>
+<p>&#21487;&#20197;&#30475;&#21040;&#65292;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#20063;&#21487;&#20197;&#23436;&#25104;&#21442;&#25968;&#26144;&#23556;&#65292;&#25152;&#26377;&#23376;&#34920;&#36798;&#24335;&#21305;&#37197;&#30340;&#23383;&#31526;&#20018;&#37117;&#20250;&#25353;&#39034;&#24207;&#26144;&#23556;&#21040;handler&#30340;&#21442;&#25968;&#19978;&#12290;</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#38656;&#35201;&#27880;&#24847;&#30340;&#26159;&#65292;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#35201;&#27880;&#24847;&#21305;&#37197;&#20914;&#31361;&#65288;&#22810;&#20010;&#19981;&#21516;&#30340;handler&#37117;&#21305;&#37197;&#65289;&#65292;&#24403;&#20914;&#31361;&#21457;&#29983;&#22312;&#21516;&#19968;&#20010;controller&#20869;&#37096;&#26102;&#65292;drogon&#21482;&#20250;&#25191;&#34892;&#31532;&#19968;&#20010;handler&#65288;&#20808;&#27880;&#20876;&#36827;&#26694;&#26550;&#30340;&#37027;&#20010;handler&#65289;&#65292;&#24403;&#20914;&#31361;&#21457;&#29983;&#22312;&#19981;&#21516;controller&#20043;&#38388;&#26102;&#65292;&#25191;&#34892;&#21738;&#20010;handler&#26159;&#19981;&#30830;&#23450;&#30340;&#65292;&#22240;&#27492;&#29992;&#25143;&#38656;&#35201;&#36991;&#20813;&#36825;&#31181;&#20914;&#31361;&#21457;&#29983;&#12290;</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

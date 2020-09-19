@@ -1,0 +1,20 @@
+Welcome to drogon’s documentation!
+**********************************
+
+Language Switch Index:
+
+* English-Index
+
+  * Welcome to drogon’s documentation!
+
+* 中文文档索引
+
+  * Drogon 中文文档索引
+
+
+Indices and tables
+******************
+
+* Index
+
+* Search Page

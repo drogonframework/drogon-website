@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:3
+msgid "drogon_ctl命令"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:5
+msgid "Drogon框架编译安装后，一个命令行程序*drogon_ctl*也同时被安装于系统，为了方便，还安装了一个完全一样的副本dg_ctl。用户可以按喜好自行选用。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:7
+msgid "该程序目前的主要功能是为了方便用户创建各种drogon工程文件，使用*dg_ctl help*命令可以看到它支持的功能，如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:21
+msgid "version子命令"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:23
+msgid "*version*子命令用于打印目前安装于系统的drogon版本，如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:40
+msgid "create子命令"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:42
+msgid "*create*子命令用于创建各种对象，目前是drogon_ctl的主要功能，使用*dg_ctl help create*命令可以打印该命令的详细帮助，如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:68
+msgid "视图创建"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:70
+#: ../../source/Drogon_ctl-Command-zh.rstd:80
+msgid "*dg_ctl create controller*命令用于帮助用户创建控制器的源文件，drogon目前支持的三种控制器都可以由该命令创建，只是参数稍有差别。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:78
+msgid "控制器创建"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:82
+msgid "创建HttpSimpleController的命令如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:89
+msgid "最后一个参数是控制器的类名，可以在前面附加命名空间。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:91
+msgid "创建HttpController的命令如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:98
+msgid "创建WebSocketController的命令如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:105
+msgid "参考wiki的控制器各个章节。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:109
+msgid "过滤器创建"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:111
+msgid "*dg_ctl create filter*命令用于帮助用户创建过滤器的源文件，参见过滤器一节。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:120
+msgid "创建工程"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:122
+msgid "用户创建一个新的Drogon应用工程的方法是通过drogon_ctl命令实现，如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:128
+msgid "该命令执行完后，在当前目录会创建完整的工程目录，目录名是ProjectName,用户可以直接进build目录编译这个工程，当然他没有任何业务逻辑。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:130
+msgid "工程的目录结构如下："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:151
+msgid "创建模型"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:153
+msgid "使用*dg_ctl create model*命令创建数据库模型源文件，最后一个参数是模型存放的目录，该目录里必须包含一个名为model.json的模型配置文件，用于告诉dg_ctl如何连接数据库以及映射哪些表。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:155
+msgid "比如，如果要在上面提到的工程目录里创建模型，请在工程目录下执行如下命令："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:161
+msgid "该命令会提示用户目录下已有的文件将被直接覆盖，用户输入y确认后就会生成所有模型文件。其他文件要引用模型类需要include模型的头文件，比如："
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:168
+msgid "注意要包含models目录名，这是为了区分同一个工程中多个数据源的情况。参见ORM。"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:172
+msgid "压力测试"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:174
+msgid "用户可以使用dg_ctl press命令进行压力测试，该命令有几个选项"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:176
+msgid "*-n num* 设置请求的总数(默认是1)"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:177
+msgid "*-t num* 设置线程总数(默认是1), 设置成CPU数目可以达到最大性能"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:178
+msgid "*-c num*  设置并发连接数(默认是1)"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:179
+msgid "*-q* 表示没有中间过程的信息输出(默认输出信息)"
+msgstr ""
+
+#: ../../source/Drogon_ctl-Command-zh.rstd:181
+msgid "例子:"
+msgstr ""
+

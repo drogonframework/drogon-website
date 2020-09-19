@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Session-en.rstd:3
+msgid "Session"
+msgstr ""
+
+#: ../../source/Session-en.rstd:5
+msgid "*Session* is an important concept of the web application. It is used to save the state of the client on the server. Generally, it cooperates with the browser's *cookie*, and drogon provides support for the session. Drogon close the session selection by default, you can also close or open it through the following interface:"
+msgstr ""
+
+#: ../../source/Session-en.rstd:12
+msgid "The above methods are all called through the *HttpAppFramework* singleton. The timeout parameter represents the time when the session is invalid. The unit is second. The default value is 1200. That is, if the user does not access the web application for more than 20 minutes, the corresponding session will be invalid. Setting timeout to 0 means that drogon will retain the user's session for the entire lifetime;"
+msgstr ""
+
+#: ../../source/Session-en.rstd:14
+msgid "Make sure your client supports cookies before opening the session feature. Otherwise, drogon will create a new session for each request without *SessionID* cookie, which will waste memory and computing resources."
+msgstr ""
+
+#: ../../source/Session-en.rstd:18
+msgid "Session object"
+msgstr ""
+
+#: ../../source/Session-en.rstd:20
+msgid "The session object type of drogon is *drogon::Session*, which is very similar to *HttpViewData*. It can access any type of object through keywords; support concurrent reading and writing; please refer to the description of Session class for specific usage;"
+msgstr ""
+
+#: ../../source/Session-en.rstd:22
+msgid "The drogon framework will pass the session object to the *HttpRequest* object and pass it to the user. The user can get the Session object through the following interface of the *HttpRequest* class."
+msgstr ""
+
+#: ../../source/Session-en.rstd:28
+msgid "The interface returns a smart pointer of the *Session* object, through which various objects can be accessed;"
+msgstr ""
+
+#: ../../source/Session-en.rstd:32
+msgid "Examples of sessions"
+msgstr ""
+
+#: ../../source/Session-en.rstd:34
+msgid "We add a feature that requires session support. For example, we want to limit the user's access frequency. After a visit, if it is accessed again within 10 seconds, it will return an error, otherwise it will return ok. We need to record the last access time in the session, and then compare it with the time of this visit, you can achieve this function."
+msgstr ""
+
+#: ../../source/Session-en.rstd:36
+msgid "We create a Filter to implement this function, assuming the class name is TimeFilter, the implementation is as follows:"
+msgstr ""
+
+#: ../../source/Session-en.rstd:77
+msgid "We then register a lambda expression to the */slow* path and attach the TimeFilter with the following code:"
+msgstr ""
+
+#: ../../source/Session-en.rstd:93
+msgid "Call the framework interface to open the session:"
+msgstr ""
+
+#: ../../source/Session-en.rstd:99
+msgid "Recompile the entire project with cmake, run the target program webapp, and you can see the effect through the browser."
+msgstr ""
+

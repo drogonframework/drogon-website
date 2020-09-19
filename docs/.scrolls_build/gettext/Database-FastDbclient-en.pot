@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Database-FastDbclient-en.rstd:3
+msgid "DataBase FastDbClient"
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:5
+msgid "As the name implies, FastDbClient will provide higher performance than the normal DbClient. Unlike DbClient has own event loop, it shares the event loop with network IO threads and the main thread of the web application, which makes the internal implementation of FastDbClient available in a lock-free mode and more efficient."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:7
+msgid "Tests show that FastDbClient has a 10% to 20% performance improvement over DbClient under extremely high load conditions."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:11
+msgid "Create and Get"
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:13
+msgid "FastDbClient must be created automatically by the framework with the configuration file, or by calling the app.createDbClient() interface:"
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:15
+msgid "The sub-option *is_fast* of the db_client option in the configuration file indicates if the client is a FastDbClient.Or user can create a FastDbClient by calling the app.createDbClient() method with the last parameter set to true."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:17
+msgid "The framework creates a separate FastDbClient for each IO's event loop and the main event loop, and each FastDbClient manages several database connections internally. The number of event loop of IO is controlled by the framework's \"threads_num\" option, which is generally set to the number of CPU cores of the host. The number of the DB connections per event loop is the value of the DB client \"connection_number\" option. Please refer to Configuration File. Therefore, the total number of DB connections held by FastDbClient is *(threads_num+1) * connection_number*."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:19
+msgid "The interface to get a FastDbClient is similar to the normal DbClient, as follows:"
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:26
+msgid "It should be pointed out that due to the special nature of FastDbClient, the user must call the above interface in the IO event loop thread or the main thread to get the correct smart pointer. In other threads, only the null pointer can be obtained and cannot be used."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:30
+msgid "Usage"
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:32
+msgid "The use of FastDbClient is almost identical to that of the normal DbClient, except for the following limitations:"
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:34
+msgid "Both the get and the use of it must be in the framework's IO event loop thread or the main thread. If it is used in other threads, there will be unpredictable errors (because the lock-free condition is destroyed). Fortunately, most of the application programming is in the IO thread, such as within the processing functions of various controllers, within the filter function of filters. It is easy to know that the various callback functions of the FastDbClient interface are also in the current IO thread, and can be safely nestedly used."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:35
+msgid "Never use the blocking interface of FastDbClient, because this interface will block the current thread, and the current thread is also the thread that handles the database IO of this object, which will cause permanent blocking, and the user has no chance to get the result."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:36
+msgid "Synchronous transaction creation interfaces are likely to block (when all connections are busy), so FastDbClient's synchronous transaction creation interface returns null pointers directly. If you want to use transactions on FastDbClient, please use the asynchronous transaction creation interface."
+msgstr ""
+
+#: ../../source/Database-FastDbclient-en.rstd:37
+msgid "After using the FastDbClient to create an Orm Mapper object, you should also use only asynchronous non-blocking interfaces of the mapper object."
+msgstr ""
+

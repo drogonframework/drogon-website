@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Coz</title>
+    <link rel="stylesheet" href="_static/nonav.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head><body>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="coz">
+<h1>Coz</h1>
+<div class="section" id="causal-profiling-with-coz">
+<h2>Causal profiling with coz</h2>
+<p>With coz you can profile two things:</p>
+<blockquote>
+<div><ul class="simple">
+<li>throughput</li>
+<li>latency</li>
+</ul>
+</div></blockquote>
+<p>If you want to profile throughput of your application, you should switch on the <em>COZ_PROFILING</em> cmake option and include debug information in your exectuable with <em>Debug</em> or <em>RelWithDebInfo</em> release modes in cmake. Doing so will include coz progress points when serving a request. Profiling latency is currently not supported in whole application scope, but can still be done in user code.</p>
+<p>When you’re done compiling you application with progress points included. You need to run the executable with the coz profiler, for example <em>coz run — [path to your executable]</em>.</p>
+<p>Lastly, the application needs to be stressed, for best results you need to stress all code paths and run the profile for a good amount of time, 15+ min.</p>
+<p>The final profile will be a <em>profile.coz</em> file created in the current working directory. To view results, open the profile in the official <a class="reference external" href="https://plasma-umass.org/coz/">viewer</a> , or you could run a local copy from the official <a class="reference external" href="https://github.com/plasma-umass/coz">git repo</a> .</p>
+<p>Coz also supports scoping source files included for the profile with –source-scope &lt;pattern&gt; or -s &lt;pattern&gt; among other things, that should prove useful.</p>
+<p>For more information checkout:</p>
+<blockquote>
+<div><ul class="simple">
+<li>coz run –help</li>
+<li><a class="reference external" href="https://github.com/plasma-umass/coz">Git repo</a></li>
+<li><a class="reference external" href="https://github.com/plasma-umass/coz">Coz whitepaper</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

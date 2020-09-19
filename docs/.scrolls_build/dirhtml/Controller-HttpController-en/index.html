@@ -1,0 +1,321 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Controller HttpController &#8212; drogon v1.0.0-beta21 documentation</title>
+  
+    <link rel="stylesheet" href="../_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Controller WebSocketController" href="../Controller-WebSocketController-en/" />
+    <link rel="prev" title="Controller HttpSimpleController" href="../Controller-HttpSimpleController-en/" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../"
+          title="back to the documentation overview"><span>Controller HttpController</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="../Controller-HttpSimpleController-en/">&laquo; Controller HttpSimpleController</a> |
+        <a href="#">Controller HttpController</a>
+        | <a href="../Controller-WebSocketController-en/">Controller WebSocketController &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li><a class="reference internal" href="#">Controller HttpController</a><ul>
+<li><a class="reference internal" href="#generation">Generation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#parameters-mapping">Parameters mapping</a></li>
+<li><a class="reference internal" href="#multiple-path-mapping">multiple path mapping</a></li>
+<li><a class="reference internal" href="#regular-expression">Regular expression</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+  <div class="section" id="controller-httpcontroller">
+<h1>Controller HttpController<a class="headerlink" href="#controller-httpcontroller" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generation">
+<h2>Generation<a class="headerlink" href="#generation" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <em>drogon_ctl</em> command line tool to quickly generate custum controller class source files based on <em>HttpController</em>, the command format is as bellow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create controller -h &lt;<span class="o">[</span>namespace::<span class="o">]</span>class_name&gt;
+</pre></div>
+</div>
+<p>We create one controller class named <em>User</em>, under namespace <em>demo v1</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>drogon_ctl create controller -h demo::v1::User
+</pre></div>
+</div>
+<p>As you can see, two files have been added to the current directory, demo_v1_User.h and demo_v1_User.cc.</p>
+<p>demo_v1_User.h is as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.h</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/HttpController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">demo</span>
+<span class="p">{</span>
+    <span class="k">namespace</span> <span class="n">v1</span>
+    <span class="p">{</span>
+        <span class="k">class</span> <span class="nc">User</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpController</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>
+        <span class="p">{</span>
+        <span class="k">public</span><span class="o">:</span>
+            <span class="n">METHOD_LIST_BEGIN</span>
+                <span class="c1">//use METHOD_ADD to add your custom processing function here;</span>
+            <span class="n">METHOD_LIST_END</span>
+            <span class="c1">//your declaration of processing function maybe like this:</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>demo_v1_User.cc is as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.cc</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;demo_v1_User.h&quot;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">demo</span><span class="o">::</span><span class="n">v1</span><span class="p">;</span>
+<span class="c1">//add definition of your processing function here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Let’s edit the two files:</p>
+<p>demo_v1_User.h is as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.h</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;drogon/HttpController.h&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">drogon</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">demo</span>
+<span class="p">{</span>
+    <span class="k">namespace</span> <span class="n">v1</span>
+    <span class="p">{</span>
+        <span class="k">class</span> <span class="nc">User</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpController</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>
+        <span class="p">{</span>
+        <span class="k">public</span><span class="o">:</span>
+            <span class="n">METHOD_LIST_BEGIN</span>
+                <span class="c1">//use METHOD_ADD to add your custom processing function here;</span>
+                <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">User</span><span class="o">::</span><span class="n">login</span><span class="p">,</span><span class="s">&quot;/token?userId={1}&amp;passwd={2}&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+                <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">User</span><span class="o">::</span><span class="n">getInfo</span><span class="p">,</span><span class="s">&quot;/{1}/info?token={2}&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">);</span>
+            <span class="n">METHOD_LIST_END</span>
+            <span class="c1">//your declaration of processing function maybe like this:</span>
+            <span class="kt">void</span> <span class="n">login</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="n">userId</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">password</span><span class="p">);</span>
+            <span class="kt">void</span> <span class="nf">getInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">userId</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">token</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>demo_v1_User.cc is as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><em>demo_v1_User.cc</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;demo_v1_User.h&quot;</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">demo</span><span class="o">::</span><span class="n">v1</span><span class="p">;</span>
+<span class="c1">//add definition of your processing function here</span>
+
+<span class="kt">void</span> <span class="n">User</span><span class="o">::</span><span class="n">login</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="n">userId</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">password</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">LOG_DEBUG</span><span class="o">&lt;&lt;</span><span class="s">&quot;User &quot;</span><span class="o">&lt;&lt;</span><span class="n">userId</span><span class="o">&lt;&lt;</span><span class="s">&quot; login&quot;</span><span class="p">;</span>
+    <span class="c1">//Authentication algorithm, read database, verify identity, etc...</span>
+    <span class="c1">//...</span>
+    <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;ok&quot;</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;token&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">drogon</span><span class="o">::</span><span class="n">utils</span><span class="o">::</span><span class="n">getUuid</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">resp</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpJsonResponse</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">User</span><span class="o">::</span><span class="n">getInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">userId</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">token</span><span class="p">)</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">LOG_DEBUG</span><span class="o">&lt;&lt;</span><span class="s">&quot;User &quot;</span><span class="o">&lt;&lt;</span><span class="n">userId</span><span class="o">&lt;&lt;</span><span class="s">&quot; get his information&quot;</span><span class="p">;</span>
+
+    <span class="c1">//Verify the validity of the token, etc.</span>
+    <span class="c1">//Read the database or cache to get user information</span>
+    <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;ok&quot;</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;user_name&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;Jack&quot;</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;user_id&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">userId</span><span class="p">;</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s">&quot;gender&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">resp</span><span class="o">=</span><span class="n">HttpResponse</span><span class="o">::</span><span class="n">newHttpJsonResponse</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">resp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Each <em>HttpController</em> class can define many Http request handlers. Since the number of functions can be arbitrarily large, it is unrealistic to overload them with virtual functions. We need to register the handler itself (not the class) in the framework.</p>
+<p>The mapping from the URL path to the handler is done by macros. You can add a multipath map with the <em>METHOD_ADD</em> macro or the <em>ADD_METHOD_TO</em> macro. All <em>METHOD_ADD</em> and <em>ADD_METHOD_TO</em> statements should be sandwiched between the <em>METHOD_LIST_BEGIN</em> and <em>METHOD_LIST_END</em> macro statements.</p>
+<p>The <em>METHOD_ADD</em> macro automatically prefixes the namespace and class name in the path map. Therefore, in this example, the login function is registered to the <em>/demo/v1/user/token</em> path, and the getInfo function is registered to the <em>/demo/v1/user/xxx/info</em> path. Constraints are similar to the <em>PATH_ADD</em> macro of HttpSimpleController and not be described here.</p>
+<p>The <em>ADD_METHOD_TO</em> macro acts almost as much as the former, except that it does not automatically add any prefixes, i.e. the path registered by the macro is an absolute path.</p>
+<p>We see that <em>HttpController</em> provides a more flexible path mapping mechanism, we can put a class of functions in a class.</p>
+<p>In addition, you can see that the macros provide a method for parameters mapping. We can map the parameters on the path to the parameter list of the function. The number of URL path parameter corresponds to the function parameter’s position, this is very convenient. The common types which can be converted by string type all can be used as function parameters (such as std::string, int, float, double, etc.), the drogon framework will automatically help you convert the type, this is very convenient for developing. Note that lvalue references must be of type const.</p>
+<p>The same path can be mapped multiple times, distinguished from each other by Http Method, which is legal and is a common practice of the Restful API, such as:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">METHOD_LIST_BEGIN</span>
+    <span class="nf">METHOD_ADD</span><span class="p">(</span><span class="n">Book</span><span class="o">::</span><span class="n">getInfo</span><span class="p">,</span><span class="s">&quot;/{1}?detail={2}&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">);</span>
+    <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">Book</span><span class="o">::</span><span class="n">newBook</span><span class="p">,</span><span class="s">&quot;/{1}&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+    <span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">Book</span><span class="o">::</span><span class="n">deleteOne</span><span class="p">,</span><span class="s">&quot;/{1}&quot;</span><span class="p">,</span><span class="n">Delete</span><span class="p">);</span>
+<span class="n">METHOD_LIST_END</span>
+</pre></div>
+</div>
+<p>When you use the <em>ADD_METHOD</em> macro and the class belongs to some namespace, you should add namespace to the access url, in this example, use <em>http://localhost/demo/v1/user/token?userid=xxx&amp;passwd=xxx</em> or <em>http://localhost/demo/v1/user/xxxxx/info?token=xxxx</em> to access.</p>
+<p>The placeholders of path parameters can be written in several ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li>{}: The position on the path is the position of the function parameter, which indicates that the path parameter maps to the corresponding position of the handler parameters.</li>
+<li>{1},{2}: The path parameters with a number in are mapped to the handler parameters specified by the number.</li>
+<li>{anystring}: Strings here have no practical effect, but can improve the readability of the program, equivalent to {}.</li>
+<li>{1:anystring},{2:xxx}: The number before the colon represents the position, and the string behind it does not actually work, but can improve the readability of the program, which is equivalent to the {1} and {2}.</li>
+</ul>
+</div></blockquote>
+<p>The latter two writes are recommended, and if the path parameters and function parameters are in the same order, the third is enough. It is easy to know that the following writes are equivalent:</p>
+<blockquote>
+<div><ul class="simple">
+<li>“/users/{}/books/{}”</li>
+<li>“/users/{}/books/{2}”</li>
+<li>“/users/{user_id}/books/{book_id}”</li>
+<li>“/users/{1:user_id}/books/{2}”</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note: Path matching is not case sensitive, parameter names are case sensitive, (Parameter values ​​can be mixed in uppercase and lowercase and passed unchanged to the controller)</p>
+</div>
+</div>
+<div class="section" id="parameters-mapping">
+<h2>Parameters mapping<a class="headerlink" href="#parameters-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Through the previous description, we know that the parameters on the path and the query parameters after the question mark can be mapped to the parameter list of the handler function. The type of the target parameter needs to meet the following conditions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Must be one of a value type, a constant left value reference, or a non-const right value reference. It cannot be a non-const lvalue reference. It is recommended to use an rvalue reference so that the user can dispose of it at will;</li>
+<li>Basic types such as int, long, long long, unsigned long, unsigned long long, float, double, long double, etc can be used as parameter types;</li>
+<li>std::string；</li>
+<li>Any type that can be assigned using the <em>stringstream &gt;&gt;</em> operator;</li>
+</ul>
+</div></blockquote>
+<p><em>In addition, the drogon framework also provides a mapping mechanism from the HttpRequestPtr object to any type of parameter</em>. When the number of mapping parameters in your handler parameter list is more than the parameters on the path, the extra parameters will be converted by the HttpRequestPtr object. The user can define any type of conversion, the way to define this conversion is to specialize the <em>fromRequest</em> template (which is defined in the HttpRequest.h header file) in the drogon namespace, for example, say we need to make a RESTful interface to create a new user, we define the user’s structure as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><em>myapp_User_drogon.cc</em></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">myapp</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">User</span><span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">userName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">email</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">address</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="p">}</span>
+<span class="k">namespace</span> <span class="n">drogon</span>
+<span class="p">{</span>
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="kr">inline</span> <span class="n">myapp</span><span class="o">::</span><span class="n">User</span> <span class="n">fromRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequest</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">json</span> <span class="o">=</span> <span class="n">req</span><span class="p">.</span><span class="n">getJsonObject</span><span class="p">();</span>
+    <span class="n">myapp</span><span class="o">::</span><span class="n">User</span> <span class="n">user</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">userName</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">json</span><span class="p">)[</span><span class="s">&quot;name&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">json</span><span class="p">)[</span><span class="s">&quot;email&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">json</span><span class="p">)[</span><span class="s">&quot;address&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">user</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>With the above definition and template specialization, we can define the path map and handler as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><em>UserController.cc</em></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserController</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpController</span><span class="o">&lt;</span><span class="n">UserController</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">METHOD_LIST_BEGIN</span>
+        <span class="c1">//use METHOD_ADD to add your custom processing function here;</span>
+        <span class="n">ADD_METHOD_TO</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">newUser</span><span class="p">,</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+    <span class="n">METHOD_LIST_END</span>
+    <span class="c1">//your declaration of processing function maybe like this:</span>
+    <span class="kt">void</span> <span class="n">newUser</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">,</span>
+                <span class="n">myapp</span><span class="o">::</span><span class="n">User</span> <span class="o">&amp;&amp;</span><span class="n">pNewUser</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<p>It can be seen that the third parameter of <em>myapp::User</em> type has no corresponding placeholder on the mapping path, and the framework regards it as a parameter converted from the <em>req</em> object, and obtains this parameter through the user-specialized function template. This is very convenient for users.</p>
+<p>Further, some users do not need to access the HttpRequestPtr object except for their custom type data, so he can put the custom object in the position of the first parameter, and the framework can also correctly complete the mapping, such as the above example. It can also be written as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><em>UserController.cc</em></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserController</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpController</span><span class="o">&lt;</span><span class="n">UserController</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">METHOD_LIST_BEGIN</span>
+        <span class="c1">//use METHOD_ADD to add your custom processing function here;</span>
+        <span class="n">ADD_METHOD_TO</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">newUser</span><span class="p">,</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span>
+    <span class="n">METHOD_LIST_END</span>
+    <span class="c1">//your declaration of processing function maybe like this:</span>
+    <span class="kt">void</span> <span class="n">newUser</span><span class="p">(</span><span class="n">myapp</span><span class="o">::</span><span class="n">User</span> <span class="o">&amp;&amp;</span><span class="n">pNewUser</span><span class="p">,</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="multiple-path-mapping">
+<h2>multiple path mapping<a class="headerlink" href="#multiple-path-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Drogon supports the use of regular expressions in path mapping, which can be used outside the ‘{}’ curly brackets, for example:</p>
+<p>ADD_METHOD_TO(UserController::handler1,”/users/.*”,Post); /// Match any path prefixed with <cite>/users/</cite>
+ADD_METHOD_TO(UserController::handler2,”/{name}/[0-9]+”,Post); ///Match any path composed with a name string and a number.</p>
+</div>
+<div class="section" id="regular-expression">
+<h2>Regular expression<a class="headerlink" href="#regular-expression" title="Permalink to this headline">¶</a></h2>
+<p>The above method has limited support for regular expressions. If users want to use regular expressions freely, drogon provides the <em>ADD_METHOD_VIA_REGEX</em> macro to achieve this, such as:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ADD_METHOD_VIA_REGEX</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">handler1</span><span class="p">,</span><span class="s">&quot;/users/(.*)&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span> <span class="c1">/// Match any path prefixed with `/users/` and map the rest of the path to a parameter of the handler1.</span>
+<span class="n">ADD_METHOD_VIA_REGEX</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">handler2</span><span class="p">,</span><span class="s">&quot;/.*([0-9]*)&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span> <span class="c1">/// Matche any path that ends in a number and map that number to a parameter of the handler2.</span>
+<span class="n">ADD_METHOD_VIA_REGEX</span><span class="p">(</span><span class="n">UserController</span><span class="o">::</span><span class="n">handler3</span><span class="p">,</span><span class="s">&quot;/(?!data).*&quot;</span><span class="p">,</span><span class="n">Post</span><span class="p">);</span> <span class="c1">/// Matches any path that does not start with &#39;/data&#39;</span>
+</pre></div>
+</div>
+<p>As can be seen, parameter mapping can also be done using regular expressions, and all strings matched by subexpressions will be mapped to the parameters of the handler in order.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It should be noted that when using regular expressions, you should pay attention to matching conflicts (multiple different handlers are matched). When conflicts happen in the same controller, drogon will only execute the first handler (the one registered in the framework first). When conflicts happen between different controllers, which handler to be executed is uncertain. Therefore, users need to avoid this kind of conflicts.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

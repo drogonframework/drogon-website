@@ -1,0 +1,283 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Installation-zh.rstd:3
+msgid "Installation"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:5
+msgid "本节以Linux为例，简介安装过程，其它系统，大同小异"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:9
+msgid "系统要求"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:12
+msgid "Linux内核应不低于2.6.9，64位版本；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:13
+msgid "gcc版本不低于5.4.0；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:14
+msgid "构建工具是cmake,cmake版本应不低于3.5；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:15
+msgid "git版本管理工具；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:20
+msgid "依赖库"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:22
+msgid "trantor，non-blocking I/O C++网络库，也是作者开发，已作为git仓库submodule，无需提前安装；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:23
+msgid "jsoncpp，json的c++库，版本不低于1.7；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:24
+msgid "libuuid，生成uuid的c库；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:25
+msgid "zlib，用于支持压缩传输；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:26
+msgid "OpenSSL，并非必须，如果安装了OpenSSL库，drogon将支持HTTPS，否则drogon只支持HTTP；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:27
+msgid "c-ares, 并非必须，如果安装了ares库，drogon对DNS的支持会具有更好的性能；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:28
+msgid "libbrotli，并非必须，如果安装了brotli库，drogon的HTTP响应会支持brotli压缩；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:29
+msgid "boost，版本不低于1.61，只在C++编译器不支持c++17时才需要安装；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:30
+msgid "postgreSQL, mariadb, sqlite3的客户端开发库，并非必须，安装后drogon会提供对响应的库的访问能力；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:31
+msgid "gtest, 并非必须，如果安装了gtest库，drogon的单元测试代码可以被编译；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:36
+msgid "系统准备范例"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:39
+msgid "Ubuntu 18.04"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:41
+#: ../../source/Installation-zh.rstd:78
+msgid "环境"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:50
+#: ../../source/Installation-zh.rstd:105
+msgid "jsoncpp"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:56
+#: ../../source/Installation-zh.rstd:116
+msgid "uuid"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:62
+#: ../../source/Installation-zh.rstd:122
+msgid "OpenSSL"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:69
+#: ../../source/Installation-zh.rstd:128
+msgid "zlib"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:76
+msgid "CentOS 7.5"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:86
+msgid "默认安装的cmake版本太低，使用源码安装"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:94
+msgid "升级gcc"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:103
+msgid "注意: *scl enable devtoolset-8* bash命令仅是临时性的使新的gcc生效，直到会话结束。如果想永久使用新版gcc,可以使用命令*echo \"scl enable devtoolset-8 bash\" >> ~/.bash_profile*, 系统重新启动后将自动使用新版gcc。"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:136
+msgid "数据库环境"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:139
+msgid "注意：下面的这些库都不是必须的, 用户可以根据实际需求选择安装一个或者多个数据库。"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:142
+msgid "注意：如果将来的开发需要用到数据库，请先安装好数据库环境，再安装drogon, 否则，会出现找不到数据库的问题。"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:145
+msgid "PostgreSQL"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:147
+msgid "PostgreSQL的原生C库libpq是需要安装的，安装方法如下："
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:149
+msgid "ubuntu 16: sudo apt-get install postgresql-server-dev-all"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:150
+msgid "ubuntu 18: sudo apt-get install postgresql-all"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:151
+msgid "centOS 7: yum install postgresql-devel"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:152
+msgid "MacOS: brew install postgresql"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:155
+msgid "MySQL"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:157
+msgid "MySQL的原生库不支持异步读写，而通过同步接口+线程池的方式对上层提供异步接口并不是一个好的策略，幸好，MySQL还有一个原开发者社区维护的版本MariaDB，该版本和MySQL的对应版本兼容，并且它的开发库支持异步读写，因此，Drogon的MySQL支持采用MariaDB开发库，你的系统，Mysql和MariaDB最好不要混用，可以统一安装成MariaDB。"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:159
+msgid "安装方法如下:"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:161
+msgid "ubuntu: sudo apt install libmariadbclient-dev"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:162
+msgid "centOS 7: yum install mariadb-devel"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:163
+msgid "MacOS: brew install mariadb"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:166
+msgid "Sqlite3"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:168
+msgid "ubuntu: sudo apt-get install libsqlite3-dev"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:169
+msgid "centOS: yum install sqlite-devel"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:170
+msgid "MacOS: brew install sqlite3"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:173
+msgid "注意: 上述有些命令只安装了开发库，如果还要安装server端，请自行google。"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:177
+msgid "安装drogon"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:179
+msgid "假设上述系统环境和库依赖都已经准备好，安装过程是非常简单的；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:192
+msgid "默认是编译debug版本，如果想编译release版本，cmake命令要带如下参数："
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:198
+msgid "安装结束后，将有如下文件被安装在系统中(CMAKE_INSTALL_PREFIX可以改变安装位置)："
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:200
+msgid "drogon的头文件被安装到/usr/local/include/drogon中；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:201
+msgid "drogon的库文件libdrogon.a被安装到/usr/local/lib中；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:202
+msgid "drogon的命令行工具drogon_ctl被安装到/usr/local/bin中；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:203
+msgid "trantor的头文件被安装到/usr/local/include/trantor中；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:204
+msgid "trantor的库文件libtrantor.a被安装到/usr/local/lib中；"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:208
+msgid "直接使用drogon源码"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:210
+msgid "当然，你也可以在你的项目中包含drogon源码，比如将drogon放置在你的项目目录的third_party下，那么，你只需要在你项目的cmake文件里添加如下两行："
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:218
+msgid "使用vcpkg安装"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:220
+msgid "The easiest way to install drogon on windows is to use vcpkg"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:226
+msgid "或者"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:233
+msgid "使用docker镜像"
+msgstr ""
+
+#: ../../source/Installation-zh.rstd:235
+msgid "我们也在 `docker hub <https://hub.docker.com/r/drogonframework/drogon>`_ . 上提供了构建好的docker镜像. 在这个docker里Drogon和它所有的依赖都已经安装完毕，用户可以在上面直接开发Drogon应用程序。"
+msgstr ""
+

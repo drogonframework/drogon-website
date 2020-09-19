@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Plugins-en.rstd:3
+msgid "Plugins"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:5
+msgid "Plugins are use to help users build complex applications. In Drogon, all plugins are built and installed into the application based on the configuration file. Plugins in Drogon are single-instance, and users can implement any functionality they want with plugins."
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:7
+msgid "When Drogon runs the run() interface, it instantiates each plugin one by one according to the configuration file and calls the *initAndStart()* interface of them."
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:11
+msgid "Configuration"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:13
+msgid "Plugin configuration is done through the configuration file, for example:"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:29
+msgid "It can be seen that there are three configurations for each plugin:"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:31
+msgid "name: is the class name of the plugin (including the namespace). The framework will create a plugin instance based on the class name. If the item is commented out, the plugin becomes disabled."
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:32
+msgid "dependencies: Is a list of names of other plugins that the plugin depends on. The framework creates and initializes all plugins in a specific order. Prioritize the creation and initialization of plugins that are dependent by others. At the end of the program, plugins are closed and destroyed in reverse order. Please note that circular dependencies in plugins are forbidden. Drogon will report an error and exit the program if it detects a circular dependency. If the item is commented out, the list of dependencies is empty."
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:33
+msgid "config: is the json object used to initialize the plugin, the object is passed as an input parameter to the plugin's initAndStart() interface. If the item is commented out, the json object passed to the initAndStart interface is an empty object;"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:37
+msgid "Definition"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:39
+msgid "User-defined plugins must inherit from the drogon::Plugin class template, and the template parameter is the plugin type, such as the following definition:"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:51
+msgid "One can create source files of plugin by drogon_ctl command:"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:59
+msgid "Getting Instance"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:61
+msgid "The plugin instance is created by drogon, and the user can get the plugin instance through the following interface of drogon:"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:67
+msgid "Or"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:73
+msgid "Obviously, the first method is more convenient. For example, the DataDictionary plugin mentioned above can be obtained like this:"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:79
+msgid "Note that it is best to get the plugin after calling the framework's run() interface, otherwise one will get an uninitialized plugin instance (this doesn't necessarily lead to an error, it is ok to just make sure to use the plugin after initialization). Of course, since the plugin is initialized in a dependency order, it is no problem to get the instance of another plugin in the *initAndStart()* interface."
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:83
+msgid "Life Cycle"
+msgstr ""
+
+#: ../../source/Plugins-en.rstd:85
+msgid "All plugins are initialized in the run() interface of the framework and are destroyed when the application exits. Therefore, the plugin's lifecycle is almost identical to the application, which is why the getPlugin() interface does not need to return a smart pointer."
+msgstr ""
+

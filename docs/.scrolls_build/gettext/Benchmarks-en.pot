@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Benchmarks-en.rstd:3
+msgid "Benchmarks"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:5
+msgid "As a C++ Http application framework, performance should be one of the focus of attention. This section introduces Drogon's simple tests and achievements;"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:9
+msgid "Test environment"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:11
+msgid "The system is Linux CentOS 7.4;"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:12
+msgid "The device is a Dell server, the CPU is two Intel(R) Xeon(R) CPUs E5-2670 @ 2.60GHz, 16 cores and 32 threads;"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:13
+msgid "Memory 64GB;"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:14
+msgid "gcc version 7.3.0;"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:18
+msgid "Test plan and results"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:20
+msgid "We just want to test the performance of the drogon framework, so we want to simplify the controller's processing as much as possible. We only do an HttpSimpleController and register it on the */benchmark* path. The controller returns *<p>Hello, world!</p>* for any request. Set the number of drogon threads to 16. The processing function is as follows and you can find the source code at the *drogon/examples/benchmark* path:"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:33
+msgid "For comparison, I chose nginx for comparison testing, wrote a *hello_world_module*, and compiled it with the nginx source. The nginx worker_processes parameter is set to 16."
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:35
+msgid "The test tool is *httpress*, a good performance HTTP stress test tool."
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:37
+msgid "We adjust the parameters of httpress, test each set of parameters five times, and record the maximum and minimum values ​of the number of requests processed per second. The test results are as follows:"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:40
+msgid "Command line"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:40
+msgid "Description"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:40
+msgid "Drogon(kQPS)   nginx(kQPS)"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:42
+msgid "httpress -c 100 -n 1000000 -t 16 -k -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:42
+msgid "100 connections, 1 million requests, 16 threads,Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:42
+msgid "561/552"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:42
+msgid "330/329"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:43
+msgid "httpress -c 100 -n 1000000 -t 12 -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:43
+msgid "100 connections, 1 million requests, 12 threads, no Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:43
+msgid "140/135"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:43
+msgid "31/49"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:44
+msgid "httpress -c 1000 -n 1000000 -t 16 -k -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:44
+msgid "1000 connections, 1 million requests, 16 threads,Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:44
+msgid "573/565"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:44
+msgid "333/327"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:45
+msgid "httpress -c 1000 -n 1000000 -t 16 -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:45
+msgid "1000 connections, 1 million requests, 16 threads,no Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:45
+msgid "155/143"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:45
+msgid "52/50"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:46
+msgid "httpress -c 10000 -n 4000000 -t 16 -k -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:46
+msgid "10000 connections, 4 million requests, 16 threads,Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:46
+msgid "512/508"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:46
+msgid "316/314"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:47
+msgid "httpress -c 10000 -n 1000000 -t 16 -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:47
+msgid "10000 connections, 1 million requests, 16 threads,no Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:47
+msgid "143/141"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:47
+msgid "43/40"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:50
+msgid "As you can see, using the Keep-Alive option on the client side, drogon can process more than 500,000 requests per second in the case where a connection can send multiple requests. This score is quite good. In the case that each request initiates a connection, CPU time will be spent on TCP connection establishment and disconnection, and the throughput will drop to 140,000 requests per second, which is reasonable."
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:52
+msgid "It's easy to see that drogon has a clear advantage over nginx in the above test. If someone does a more accurate test, please correct me."
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:54
+msgid "The image below is a screenshot of a test:"
+msgstr ""
+
+#: ../../source/Benchmarks-en.rstd:56
+msgid "Test Result"
+msgstr ""
+

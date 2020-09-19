@@ -1,0 +1,93 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>控制器 简介 &#8212; drogon v1.0.0-beta21 documentation</title>
+  
+    <link rel="stylesheet" href="../_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="控制器 HttpSimpleController" href="../Controller-HttpSimpleController-zh/" />
+    <link rel="prev" title="快速开始" href="../Quick-Start-zh/" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../"
+          title="back to the documentation overview"><span>控制器 简介</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="../Quick-Start-zh/">&laquo; 快速开始</a> |
+        <a href="#">控制器 简介</a>
+        | <a href="../Controller-HttpSimpleController-zh/">控制器 HttpSimpleController &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        <div id="toc" role="navigation" aria-label="table of contents navigation">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li><a class="reference internal" href="#">控制器 简介</a><ul>
+<li><a class="reference internal" href="#id2">简介</a></li>
+<li><a class="reference internal" href="#id7">控制器的生命周期</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+  <div class="section" id="id1">
+<h1>控制器 简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>简介<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>控制器(controller)在web应用开发中处于相当重要的地位，它处理浏览器发来的请求，然后生成响应发送给浏览器；drogon框架已经帮我们处理好网络传输、Http协议的解析等等细节，我们只需要关注控制器的逻辑即可；每一个控制器对象可以有一个或者多个处理函数(一般称为handler)，函数的接口，一般定义成如下形式：</p>
+<dl class="function">
+<dt id="_CPPv311handlerNameRK14HttpRequestPtrRRNSt8functionIFvRK15HttpResponsePtrEEEz">
+<span id="_CPPv211handlerNameRK14HttpRequestPtrRRNSt8functionIFvRK15HttpResponsePtrEEEz"></span>Void <code class="descname">handlerName</code><span class="sig-paren">(</span><em class="property">const</em> HttpRequestPtr &amp;<em>req</em>, std::function&lt;void<span class="sig-paren">(</span><em class="property">const</em> HttpResponsePtr&amp;<span class="sig-paren">)</span>&gt; &amp;&amp;<em>callback</em>, ..., <span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+<p>其中，<a href="#id3"><span class="problematic" id="id4">*</span></a>req*是Http请求的对象(被智能指针包裹)，<a href="#id5"><span class="problematic" id="id6">*</span></a>callback*是框架传给控制器的回调函数对象，控制器生成应答对象(也通过智能指针包裹)后，通过callback把该对象传给drogon，然后框架会帮你把响应内容发送给浏览器，最后面的是若干参数列表…，由drogon根据映射规则把Http请求中的参数映射到对应的handler的形参上，这是对应用开发是非常方便的。</p>
+<p>很明显，这是个异步接口，用户可以在其它线程完成耗时操作后再调用callback；</p>
+<p>drogon的控制器分为三种类型，<em>HttpSimpleController</em>,*HttpController*和*WebSocketController*，用户使用时，需要继承相应的类模板，比如，一个HttpSimpleController的自定义类”MyClass”声明如下：</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><em>MyClass.h</em></span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpSimpleController</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//TestController(){}</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">asyncHandleHttpRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                                        <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span> <span class="p">(</span><span class="k">const</span> <span class="n">HttpResponsePtr</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">callback</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+
+    <span class="n">PATH_LIST_BEGIN</span>
+    <span class="nf">PATH_ADD</span><span class="p">(</span><span class="s">&quot;/json&quot;</span><span class="p">);</span>
+    <span class="n">PATH_LIST_END</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>控制器的生命周期<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>注册到drogon框架的控制器最多只会有一个实例，在整个应用运行期间都不会销毁，所以，用户可以在控制器类中声明和使用成员变量。注意，控制器的handler被调用时，是在多线程环境下的（当框架的IO线程数配置成大于1的值时），如果需要访问非临时变量，请做好并发保护工作。</p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Overview</title>
+  
+    <link rel="stylesheet" href="_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="Installation-zh.html" />
+    <link rel="prev" title="中文文档" href="index-zh.html" /> 
+  </head><body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="index.html"
+          title="back to the documentation overview"><span>Overview</span></a></h1>
+      </div>
+      <div class="relnav" role="navigation" aria-label="related navigation">
+        <a href="index-zh.html">&laquo; 中文文档</a> |
+        <a href="#">Overview</a>
+        | <a href="Installation-zh.html">Installation &raquo;</a>
+      </div>
+      <div id="contentwrapper">
+        
+  <div class="section" id="overview">
+<h1>Overview</h1>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Drogon*是一个基于C++14/17的Http应用框架，使用Drogon可以方便的使用C++构建各种类型的Web应用服务端程序。</p>
+<p><a href="#id3"><span class="problematic" id="id4">*</span></a>Drogon*的主要应用平台是Linux，也支持Mac OS、FreeBSD和Windows。</p>
+<p>它的主要特点如下：</p>
+<ul class="simple">
+<li>网络层使用基于epoll(macOS/FreeBSD下是kqueue)的非阻塞IO框架，提供高并发、高性能的网络IO。详细请见TFB Tests Results；</li>
+<li>全异步编程模式；</li>
+<li>支持Http1.0/1.1(server端和client端)；</li>
+<li>基于template实现了简单的反射机制，使主程序框架、控制器(controller)和视图(view)完全解耦；</li>
+<li>支持cookies和内建的session；</li>
+<li>支持后端渲染，把控制器生成的数据交给视图生成Html页面，视图由CSP模板文件描述，通过CSP标签把C++代码嵌入到Html页面，由drogon的命令行工具在编译阶段自动生成C++代码并编译；</li>
+<li>支持运行期的视图页面动态加载(动态编译和加载so文件)；</li>
+<li>非常方便灵活的路径(path)到控制器处理函数(handler)的映射方案；</li>
+<li>支持过滤器(filter)链，方便在控制器之前执行统一的逻辑(如登录验证、Http Method约束验证等)；</li>
+<li>支持https(基于OpenSSL实现);</li>
+<li>支持websocket(server端和client端);</li>
+<li>支持Json格式请求和应答, 对Restful API应用开发非常友好;</li>
+<li>支持文件下载和上传,支持sendfile系统调用；</li>
+<li>支持gzip/brotli压缩传输；</li>
+<li>支持pipelining；</li>
+<li>提供一个轻量的命令行工具drogon_ctl，帮助简化各种类的创建和视图代码的生成过程；</li>
+<li>基于非阻塞IO实现的异步数据库读写，目前支持PostgreSQL和MySQL(MariaDB)数据库；</li>
+<li>基于线程池实现sqlite3数据库的异步读写，提供与上文数据库相同的接口；</li>
+<li>支持ARM架构；</li>
+<li>方便的轻量级ORM实现，支持常规的对象到数据库的双向映射操作；</li>
+<li>支持插件，可通过配置文件在加载期动态拆装；</li>
+<li>支持内建插入点的AOP</li>
+</ul>
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, an-tao.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

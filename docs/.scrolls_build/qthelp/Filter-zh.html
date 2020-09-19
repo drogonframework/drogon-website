@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>过滤器</title>
+    <link rel="stylesheet" href="_static/nonav.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head><body>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>过滤器</h1>
+<p>过滤器(filter)可以帮助用户提高编程效率，在HttpController的例子中，getInfo方法在返回用户信息之前应该先校验用户是否登录，我们把这个逻辑写在getInfo方法里当然是可以的，但是，很显然，校验用户登录属于通用逻辑，很多接口都将用到，应该把它单独提取出来，再配置到调用handler之前，这就是filter的作用。</p>
+<p>drogon框架做完URL路径匹配后，会先依次调用注册到该路径上的过滤器，只有当所有过滤器都允许”通过”时，对应的handler才会被调用;</p>
+<div class="section" id="id2">
+<h2>内置过滤器</h2>
+<p>drogon内置了如下常用过滤器:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>drogon::IntranetIpFilter</em>: 只放行内网ip发来的http请求，否则返回404页面；</li>
+<li><em>drogon::LocalHostFilter</em>: 只放行本机127.0.0.1或者::1发来的http请求，否则返回404页面；</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>自定义过滤器</h2>
+<p>当然，用户可以自定义过滤器，需要继承HttpFilter类模板，模板类型就是子类类型，比如我们想做一个LoginFilter，就可以定义如下:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LoginFilter</span><span class="o">:</span><span class="k">public</span> <span class="n">drogon</span><span class="o">::</span><span class="n">HttpFilter</span><span class="o">&lt;</span><span class="n">LoginFilter</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">doFilter</span><span class="p">(</span><span class="k">const</span> <span class="n">HttpRequestPtr</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+                        <span class="n">FilterCallback</span> <span class="o">&amp;&amp;</span><span class="n">fcb</span><span class="p">,</span>
+                        <span class="n">FilterChainCallback</span> <span class="o">&amp;&amp;</span><span class="n">fccb</span><span class="p">)</span> <span class="k">override</span> <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>你可以通过 drogon_ctl 命令创建过滤器, 见 drogon_ctl.</p>
+<p>我们需要重载父类的doFilter虚函数实现过滤器逻辑；</p>
+<p>这个虚函数有三个参数，分别是：</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>req</em>: http请求；</li>
+<li><em>fcb</em>: 过滤器回调函数，函数类型是void (HttpResponsePtr)，当过滤器判定请求不合法时，通过这个回调把特定的响应返回给浏览器；</li>
+<li><em>fccb</em>: 过滤器链回调函数，函数类型是void ()，当过滤器判定请求合法时，通过这个回调告诉drogon调用下一个过滤器或者最终的handler</li>
+</ul>
+</div></blockquote>
+<p>具体的实现可以参考drogon内置过滤器的实现。</p>
+</div>
+<div class="section" id="id4">
+<h2>过滤器的注册</h2>
+<p>过滤器总是伴随controller的注册进行，前面提到的注册handler的宏(PATH_ADD,METHOD_ADD等)都可以在最后添加一个或多个过滤器名字；比如，我们把前面getInfo方法的注册行改为如下形式：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">METHOD_ADD</span><span class="p">(</span><span class="n">User</span><span class="o">::</span><span class="n">getInfo</span><span class="p">,</span><span class="s">&quot;/{1}/info?token={2}&quot;</span><span class="p">,</span><span class="n">Get</span><span class="p">,</span><span class="s">&quot;LoginFilter&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>则在路径匹配成功后，必须满足如下条件，getInfo方法才会被调用：</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>请求必须是http get请求；</li>
+<li>请求方必须已经登录；</li>
+</ol>
+</div></blockquote>
+<p>可以看到，过滤器的配置和注册是非常简单的，注册过滤器的controller文件并不需要引用过滤器的头文件，过滤器和控制器也是充分解耦的。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">注意: 如果过滤器定义在命名空间里，注册过滤器时必须把命名空间写全</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

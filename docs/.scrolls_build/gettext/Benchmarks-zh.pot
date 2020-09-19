@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Benchmarks-zh.rstd:3
+msgid "性能测试"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:5
+msgid "作为C++的Http应用框架，性能应该是关注的重点之一，本节介绍Drogon的简单测试和成绩；"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:9
+msgid "测试环境"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:11
+msgid "系统是Linux CentOS 7.4；"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:12
+msgid "设备是Dell服务器，CPU是两颗Intel(R) Xeon(R) CPU E5-2670 @ 2.60GHz，16核32线程；"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:13
+msgid "内存64GB；"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:14
+msgid "gcc版本7.3.0；"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:18
+msgid "测试方案和结果"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:20
+msgid "我们只是为了测试drogon框架的性能，因而要尽量简化controller的处理，我们只做了一个HttpSimpleController，注册到*/benchmark*路径上。controller对任何请求都返回*<p>Hello, world!</p>*。设置drogon线程数为16。handler函数的代码如下, 你可以在*drogon/examples/benchmark*目录找到这些源码："
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:33
+msgid "作为对比，我选取了nginx来做对比测试，使用nginx+module源码编译的方式，写了一个hello_world_module，测试时nginx的worker_processes参数设为16。"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:35
+msgid "测试工具是一个性能不错的HTTP压力测试工具*httpress*。"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:37
+msgid "我们调整httpress的参数，每组参数测试五次，记录每秒处理请求数的最大值和最小值。测试结果如下表："
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:40
+msgid "命令行"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:40
+msgid "说明"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:40
+msgid "Drogon(千QPS)"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:40
+msgid "nginx(千QPS)"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:42
+msgid "httpress -c 100 -n 1000000 -t 16 -k -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:42
+msgid "100连接，100万请求，16线程，Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:42
+msgid "561/552"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:42
+msgid "330/329"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:43
+msgid "httpress -c 100 -n 1000000 -t 12 -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:43
+msgid "100连接，100万请求，12线程，一次请求一次连接"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:43
+msgid "140/135"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:43
+msgid "31/49"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:44
+msgid "httpress -c 1000 -n 1000000 -t 16 -k -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:44
+msgid "1000连接，100万请求，16线程，Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:44
+msgid "573/565"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:44
+msgid "333/327"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:45
+msgid "httpress -c 1000 -n 1000000 -t 16 -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:45
+msgid "1000连接，100万请求，16线程，一次请求一次连接"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:45
+msgid "155/143"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:45
+msgid "52/50"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:46
+msgid "httpress -c 10000 -n 4000000 -t 16 -k -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:46
+msgid "10000连接，400万请求，16线程，Keep-Alive"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:46
+msgid "512/508"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:46
+msgid "316/314"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:47
+msgid "httpress -c 10000 -n 1000000 -t 16 -q URL"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:47
+msgid "10000连接，100万请求，16线程，一次请求一次连接"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:47
+msgid "143/141"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:47
+msgid "43/40"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:50
+msgid "可以看到，在客户端使用Keep-Alive选项，在一个连接可以发送多个请求的情况下，drogon每秒可以处理50多万次请求，这个成绩是相当不错的。每次请求都发起一次连接的情况下，CPU会消耗在TCP建立和断开等环节，吞吐量会下降至每秒14万次请求，这也是正常的。drogon对比nginx的成绩处于明显优势，也许是由于nginx配置不当未能发挥它的最大吞吐量，如果哪位高手做了更好的测试，欢迎指正。"
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:52
+msgid "下图是某一次测试的截图："
+msgstr ""
+
+#: ../../source/Benchmarks-zh.rstd:54
+msgid "测试截图"
+msgstr ""
+

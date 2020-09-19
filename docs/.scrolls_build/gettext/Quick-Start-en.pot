@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, an-tao
+# This file is distributed under the same license as the drogon package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: drogon \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 19:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/Quick-Start-en.rstd:3
+msgid "Quick Start"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:7
+msgid "Static Site"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:9
+msgid "Let's start with a simple example that introduces the usage of drogon. In this example we create a project using the command line tool *drogon_ctl*:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:15
+msgid "There are several useful folders in the project directory already:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:29
+msgid "Users can put various files (such as controllers, filters, views, etc.) into corresponding folders. For more convenience and less error, we strongly recommend that users create their own web application projects using the ``drogon_ctl`` command. See drogon_ctl for more details."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:31
+msgid "Let's look at the main.cc file:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:33
+msgid "*main.cpp*"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:47
+msgid "Then build your project as below:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:55
+msgid "After the compilation is complete, run the target *./your_project_name*."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:57
+msgid "Now, we add one simply static file index.html to the Http root path:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:63
+msgid "The default root path is *\"./\"*, this could be modified by config.json also, See Configureation File for more details. Then you can visit this page by URL *\"http://localhost\"* or *\"http://localhost/index.html\"* (or the IP of the server where your wepapp running)."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:66
+msgid "Hello Drogon!"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:68
+msgid "If server cannot find the the page you have requested, it return 404 page: 404 page"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:71
+msgid "Note: Make sure your server firewall have allowed the 80 port, otherwise you won't see these pages."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:73
+msgid "We could copy the directory and files of a static website to the startup directory of this running webapp, then we can access them from the browser. The file types supported by drogon are \"html\", \"js\", \"css\", \"xml\", \"xsl\", \"txt\", \"svg\", \"ttf\", \"otf\", \"woff2\", \"woff\" , \"eot\", \"png\", \"jpg\", \"jpeg\", \"gif\", \"bmp\", \"ico\", \"icns\", etc by default. Drogon also provides interfaces to change these file types. For details, please refer to the HttpAppFramework API."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:77
+msgid "Dynamic Site"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:79
+msgid "Let's see how to add controllers to this application， and let the controller respond contents."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:81
+msgid "One can use the drogon_ctl command line tool to generate controller source files. Let's run it in the *controllers* directory:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:87
+msgid "As you can see, there are two new files, TestCtrl.h and TestCtrl.cc："
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:89
+#: ../../source/Quick-Start-en.rstd:122
+msgid "TestCtrl.h is as follows:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:91
+#: ../../source/Quick-Start-en.rstd:124
+#: ../../source/Quick-Start-en.rstd:147
+msgid "*TestCtrl.h*"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:108
+#: ../../source/Quick-Start-en.rstd:145
+msgid "TestCtrl.cc is as follows:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:110
+msgid "*TestCtrl.cc*"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:120
+msgid "Let's edit the two files and let the controller handle the function response to a simple \"Hello World!\""
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:143
+msgid "Use PATH_ADD to map processing functions on the two paths '/' and '/test' respectively, and adding constraints on these path."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:162
+msgid "Recompile this project with cmake, then run the target ./your_project_name:"
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:171
+msgid "Typing *\"http://localhost/\"* or *\"http://localhost/test\"* in the browser address bar, and you will see \"Hello World!\" in the browser."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:174
+msgid "Note: If your server both have static and dynamic resource, Drogon use dynamic resource first, In this example，the respond of http://localhost/ is Hello Word! in TestCtrl controller instead of Hello Drogon! in static file index.html."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:176
+msgid "We see that adding a controller to an application is very simple. You only need to add the corresponding source file. Even the main file does not need to be modified. This low-coupling design is very effective for web application development."
+msgstr ""
+
+#: ../../source/Quick-Start-en.rstd:179
+msgid "Note: Drogon has no restrictions to the location of the controllers source file, you could save it at the project directory also, even you could define new directory in the CMakeLists.txt, it is recommended to use the controllers directory for the convenience of management."
+msgstr ""
+
