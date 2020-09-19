@@ -48,7 +48,13 @@ aux_source_directory(plugins PLUGIN_SRC)
 aux_source_directory(models MODEL_SRC)
 
 file(GLOB_RECURSE SCP_LIST ${CMAKE_CURRENT_SOURCE_DIR}/views/*.csp)
-set(DROGON_CTL_PATH_EXE C:\\ProgramData\\vcpkg\\vcpkg\\installed\\x86-windows\\tools\\drogon\\drogon_ctl.exe)
+
+if(win)
+		set(DROGON_CTL_PATH_EXE C:\\ProgramData\\vcpkg\\vcpkg\\installed\\x86-windows\\tools\\drogon\\drogon_ctl.exe)
+else()
+		set(DROGON_CTL_PATH_EXE drogon_ctl)
+endif()
+
 foreach(cspFile ${SCP_LIST})
     message(STATUS "cspFile:" ${cspFile})
     get_filename_component(classname ${cspFile} NAME_WE)
