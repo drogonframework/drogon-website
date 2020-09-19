@@ -2,8 +2,6 @@ cmake_minimum_required (VERSION 3.5)
 #set(VCPKG_ROOT "C:\\Users\\itgeek\\software\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake" CACHE PATH "")
 #set(CMAKE_TOOLCHAIN_FILE ${VCPKG_ROOT})
 #set(JSONCPP_INCLUDE_DIRS, "C:\\Users\\itgeek\\software\\vcpkg\\packages\\jsoncpp_x64-windows\\include")
-
-include_directories(C:\\ProgramData\\vcpkg\\vcpkg\\installed\\x86-windows\\include)
 project(website_backend_drogon CXX)
 
 include(CheckIncludeFileCXX)
@@ -22,8 +20,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(${PROJECT_NAME} main.cc controllers/consts.h)
 
 #########
-#add_subdirectory(drogon)
-#target_link_libraries(${PROJECT_NAME} PRIVATE drogon)
+add_subdirectory(drogon)
+target_link_libraries(${PROJECT_NAME} PRIVATE drogon)
 #########
 # -DCMAKE_TOOLCHAIN_FILE=/scripts/buildsystems/vcpkg.cmake”
 # set(DCMAKE_TOOLCHAIN_FILE, "C:\\Users\\itgeek\\software\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake")
@@ -48,19 +46,12 @@ aux_source_directory(plugins PLUGIN_SRC)
 aux_source_directory(models MODEL_SRC)
 
 file(GLOB_RECURSE SCP_LIST ${CMAKE_CURRENT_SOURCE_DIR}/views/*.csp)
-
-if(win)
-		set(DROGON_CTL_PATH_EXE C:\\ProgramData\\vcpkg\\vcpkg\\installed\\x86-windows\\tools\\drogon\\drogon_ctl.exe)
-else()
-		set(DROGON_CTL_PATH_EXE drogon_ctl)
-endif()
-
 foreach(cspFile ${SCP_LIST})
     message(STATUS "cspFile:" ${cspFile})
     get_filename_component(classname ${cspFile} NAME_WE)
     message(STATUS "view classname:" ${classname})
     ADD_CUSTOM_COMMAND(OUTPUT ${classname}.h ${classname}.cc
-            COMMAND ${DROGON_CTL_PATH_EXE}
+            COMMAND drogon_ctl
             ARGS create view ${cspFile}
             DEPENDS ${cspFile}
             VERBATIM )
