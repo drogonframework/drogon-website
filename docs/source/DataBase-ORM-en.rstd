@@ -179,7 +179,7 @@ At the same time, since the enable_reverse option is set to true, the following 
 has many
 --------
 
-has many represents a one-to-many relationship. In such a relationship, the table representing many generally has a field associated with the primary key of another table. For example, products and reviews usually have a one-to-many relationship, we can define as follows:
+*has many* represents a one-to-many relationship. In such a relationship, the table representing *many* generally has a field associated with the primary key of another table. For example, products and reviews usually have a one-to-many relationship, we can define as follows:
 
 .. code-block:: bash
 

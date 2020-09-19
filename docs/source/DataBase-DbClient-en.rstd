@@ -19,7 +19,7 @@ There are two ways to construct a DbClient object. One is through the static met
 
 Use the above interface to get the smart pointer of the DbClient implementation object. The parameter connInfo is a connection string. Set a series of connection parameters in the form of key=value. For details, please refer to the comments in the header file. The parameter connNum is the number of database connections of DbClient, which has a key impact on concurrency. Please set it according to the actual situation.
 
-The object obtained by the above method, the user has to find a way to persist it, such as putting it in some global container. *Creating a temporary object and then releasing it after use is a very unrecommended solution* for the following reasons:
+The object obtained by the above method, the user has to find a way to **persist** it, such as putting it in some global container. **Creating a temporary object and then releasing it after use is a very unrecommended solution** for the following reasons:
 
     * This will waste time creating connections and disconnections, increasing system latency;
     * The interface is also a non-blocking interface. That is to say, when the user gets the DbClient object, the connection managed by the it has not been established yet. The framework does not (intentionally) provide a callback interface for successful connection establishment. Do you still have to sleep before starting the query?? This is contrary to the original intention of the asynchronous framework.

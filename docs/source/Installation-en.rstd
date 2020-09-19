@@ -200,7 +200,6 @@ After the installation is complete, the following files will be installed in the
     * The trantor header file is installed into /usr/local/include/trantor;
     * The trantor library file libtrantor.a is installed into /usr/local/lib;
 
-----------------------------------
 Include drogon source code locally
 ----------------------------------
 
