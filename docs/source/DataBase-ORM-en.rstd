@@ -18,7 +18,7 @@ The command to create model classes is as follows:
 
 The last parameter is the path to store model classes. There must be a configuration file model.json in the path to configure the connection parameters of drogon_ctl to the database. It is a file in JSON format and supports comments. The examples are as follows:
 
-.. code-block:: guess
+.. code-block:: bash
 
     {
         "rdbms":"postgresql",
@@ -132,7 +132,7 @@ has one
 
 *has one* represents a one-to-one relationship. A record in the original table can be associated with a record in the target table, and vice versa. For example, the *products* table and *skus* table have a one-to-one relationship, we can define as follows:
 
-.. code-block:: guess
+.. code-block:: bash
 
     {
         "type": "has one",
@@ -215,7 +215,7 @@ many to many
 
 As the name implies, many to many represents a many-to-many relationship. Usually, a many-to-many relationship requires a pivot table. Each record in the pivot table corresponds to a record in the original table and another record in the target table. For example, the products table and carts table have a many-to-many relationship, which can be defined as follows:
 
-.. code-block:: guess
+.. code-block:: bash
 
     {
         "type": "many to many",

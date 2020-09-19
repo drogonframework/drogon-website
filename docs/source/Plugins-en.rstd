@@ -12,7 +12,7 @@ Configuration
 
 Plugin configuration is done through the configuration file, for example:
 
-.. code-block:: guess
+.. code-block:: bash
 
     "plugins": [
         {

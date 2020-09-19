@@ -66,7 +66,7 @@ This time we directly define the handler with the HttpAppFramework interface. In
 
 The above code registers a lambda expression handler on the */list_para* path, passing the requested parameters to the view display. Then, Go to the views folder and create a view file ListParameters.csp with the following contents:
 
-.. code-block:: guess
+.. code-block:: bash
 
     <!DOCTYPE html>
     <html>
