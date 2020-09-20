@@ -92,6 +92,9 @@ pygments_style = 'sphinx'
 # html_theme = 'nature'
 # html_theme = 'pyramid'
 # html_theme = 'haiku'
+
+# html_theme = 'sphinx_rtd_theme'
+
 html_theme = 'nature'
 
 # Theme options are theme-specific and customize the look and feel of a theme
