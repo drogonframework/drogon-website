@@ -52,17 +52,19 @@ drogon应用程序的http响应都是由控制器handler生成的，所以，由
 .. code-block:: cpp
 
     drogon::HttpAppFramework::instance()
-            .registerHttpMethod("/list_para",
-                               [=](const HttpRequestPtr &req,
-                                   std::function<void (const HttpResponsePtr &)> &&callback)
-                               {
-                                    auto para=req->getParameters();
-                                    HttpViewData data;
-                                    data.insert("title","ListParameters");
-                                    data.insert("parameters",para);
-                                    auto resp=HttpResponse::newHttpViewResponse("ListParameters.csp",data);
-                                    callback(resp);
-                               });
+            .registerHandler
+            ("/list_para",
+            [=](const HttpRequestPtr &req,
+                std::function<void (const HttpResponsePtr &)> &&callback)
+                {
+                        auto para=req->getParameters();
+                        HttpViewData data;
+                        data.insert("title","ListParameters");
+                        data.insert("parameters",para);
+                        auto resp=HttpResponse::newHttpViewResponse("ListParameters.csp",data);
+                        callback(resp);
+                    }
+            );
 
 上面这段代码把一个lambda表达式handler注册到*/list_para*路径上，获取请求的参数传递给视图显示。 然后进入views文件夹，创建一个视图文件ListParameters.csp，内容如下：
 
