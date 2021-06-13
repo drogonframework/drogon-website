@@ -3,7 +3,8 @@ pkgver=0.0.1
 pkgrel=1
 arch=('aarch64' 'x86_64')
 source=($pkgname.tar.zst)
-backup=(usr/share/$pkgname/drogon_config.json)
+pkg_pathname=`echo $pkgname | sed 's/-/_/g'`
+backup=(usr/share/$pkg_pathname/drogon_config.json)
 sha1sums=('SKIP')
 depends=(
 	'drogon-git>=1.4'
@@ -16,8 +17,6 @@ makedepends=(
 optdepends=(
 	'openssl'
 )
-
-pkg_pathname=`echo $pkgname | sed 's/-/_/g'`
 
 build() {
 	cd $srcdir/$pkgname
