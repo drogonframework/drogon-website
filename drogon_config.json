@@ -1,0 +1,16 @@
+{
+	"log": {
+		"log_level" : "INFO"
+	},
+	"listeners": [
+		{
+			"address": "0.0.0.0",
+			"port": 4231,
+			"https": false
+		}
+	],
+	"app": {
+		"document_root": "../content",
+		"enable_session": false
+	}
+}

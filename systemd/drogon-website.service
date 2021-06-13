@@ -1,0 +1,25 @@
+[Unit]
+Description=Drogon Website Server
+After=syslog.target network.target
+
+[Service]
+User=drogonwebsite
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+WorkingDirectory=/usr/share/nsysu-ai-website
+ExecStart=/usr/bin/nsysu_ai_backend
+
+# Hardening
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+# Enable this as long as there's no JIT in the server
+MemoryDenyWriteExecute=true
+
+# Log to systemd
+StandardOutput=syslog
+StandardError=syslog
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

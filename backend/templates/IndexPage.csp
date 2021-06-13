@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+	<%view CommonResources %>
+    <title>Homepage | Drogon Web Framework</title>
+  </head>
+  <body>
+    <div id="app">
+		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+			<el-menu-item index="1">Drogon</el-menu-item>
+			<el-submenu index="2">
+				<template #title>Community</template>
+				<el-menu-item index="2-1"><a href="https://gitter.im/drogon-web/community" target="_blank">Gitter</a></el-menu-item>
+				<el-menu-item index="2-2"><a href="https://github.com/an-tao/drogon/issues" target="_blank">GitHub Issues</a></el-menu-item>
+			</el-submenu>
+			<el-menu-item index="3"><a href="https://drogon.docsforge.com/" target="_blank">Docs</a></el-menu-item>
+			<div class="line"></div>
+		</el-menu>
+		<el-row class="main-page-slide">
+			<el-col class="logo-img-container" :span="8">
+				<a href="https://github.com/an-tao/drogon"><img class="shrink-img-to-fit"src="/images/drogon-concise-white.png"></a>
+			</el-col>
+			<el-col :span="16">
+				<section id="intro">
+					<h1>Drogon, the fast C++ web framework</h1>
+					<p>
+						Run your application anywhere, knowing it is as fast as it could be.
+					</p>
+
+					<p>
+					<el-button type="success" onclick=" window.open('https://github.com/an-tao/drogon/releases','_blank')">View releases</el-button>
+					<el-button type="primary" onclick=" window.open('https://github.com/an-tao/drogon','_blank')">On GitHub</el-button>
+					</p>
+				</section>
+			</el-col>
+		</el-row>
+
+		<main>
+			<section class="features_secion">
+				<div class="exclusive-line">
+					<h2>Features</h2>
+				<div>
+				<div style="padding-left:4%;padding-right:4%;">
+					<el-row :gutter="25">
+						<el-col class="grid-content" :span="8">
+							<h3>Fast and asynchronous</h3>
+							<p>
+								Drogon is fully asynchronous and designed to have the lowest overhead without sacrificing usablity.
+							</p>
+						</el-col>
+						<el-col class="grid-content" :span="8">
+							<h3>Portable</h3>
+							<p>
+								Drogon supports a wide range of platforms. Linux, Windows, OS X and *BSD. It also runs on differnt CPUs. x86, ARM, s390x, ...
+							</p>
+						</el-col>
+						<el-col class="grid-content" :span="8">
+							<h3>Single core, &gt; 150K requests/s</h3>
+							<p>
+								Drogon is multi threaded. But on a single core of a Ryzen 3700X. Drogon can process more than 150K HTTP requests per second.
+							</p>
+						</el-col>
+						<div class="exclusive-line" style="min-height: 2em"></div>
+						<el-col class="grid-content" :span="8">
+							<h3>C++ coroutines</h3>
+							<p>
+								Coroutine support allows users to write asynchronous code without bothering with the callback hell.
+							</p>
+						</el-col>
+						<el-col class="grid-content" :span="8">
+							<h3>RDBMS & Redis</h3>
+							<p>
+								Drogon supports ORM and can connect to major open source DBs. It also speaks Redis for the in-memory goodness.
+							</p>
+						</el-col>
+						<el-col class="grid-content" :span="8">
+							<h3>More...</h3>
+							<p>
+								Drogon is more than a HTTP server. It can also act as client, speak and serve Websocket and comes with helpful utilites.
+							</p>
+						</el-col>
+					</el-row>
+				</div>
+			</section>
+
+			<section>
+				<div class="exclusive-line">
+					<h2>Code snippets</h2>
+					<h3>Hello World</h3>
+					<pre><code class="c++">using Callback = std::function&lt;void (const HttpResponsePtr &)&gt; ;
+
+app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
+{
+	auto resp = HttpResponse::newHttpResponse();
+	resp->setBody("Hello World");
+	callback(resp);
+});</code></pre>
+				<div class="exclusive-line" style="min-height: 2em"></div>
+				<h3>File upload</h3>
+					<pre><code class="c++">app().registerHandler("/upload", [](const HttpRequestPtr& req, Callback &&callback))
+{
+	MultiPartParser fileUpload;
+	if (fileUpload.parse(req) != 0 || fileUpload.getFiles().size() == 0) {
+		// Framrwork handles exception by logging and sneds 500 back
+		throw std::runtime_error("Something went wrong");
+	}
+
+	auto &file = fileUpload.getFiles()[0];
+	file.save();
+	callback(HttpResponse::newHttpResponse());
+});</code></pre>
+				<div class="exclusive-line" style="min-height: 2em"></div>
+				<h3>DB with coroutines</h3>
+				<pre><code class="c++">app().registerHandler("/get_num_users", [](const HttpRequestPtr& req) -&gt; Task&lt;HttpResponsePtr&gt;
+{
+	auto client = app().getDbClient();
+	auto result = co_await sql->execSqlCoro("SELECT COUNT(*) FROM users;");
+
+	auto resp = HttpResponse::newHttpResponse();
+	resp->setBody(std::to_string(result[0][0].as&lt;size_t&gt;()));
+	co_return resp;
+});</code></pre>
+				<div>
+			</section>
+
+			<section>
+				<div class="exclusive-line">
+					<h2>Join Us</h2>
+				<div>
+					
+				<el-row :gutter="30">
+					<el-col class="grid-content" :span="12">
+						<h3 class="exclusive-line text-center">Getting started</h3>
+						<p style="text-justify: auto">
+							Start using Drogon with these <a href="https://github.com/an-tao/drogon/tree/master/examples">examples</a> and the <a href="https://drogon.docsforge.com/master/installation/">intallation instructions</a>.
+						</p>
+					</el-col>
+					<el-col class="grid-content" :span="12">
+						<h3 class="exclusive-line text-center">Contribution</h3>
+						<p style="text-justify: auto">
+							We welcome anyone to contribute to the project. In fact Drogon's development is driven by the community. Feel free to <a href="https://github.com/an-tao/drogon/issues">open
+							an issue</a>, or directly make a <a href="https://github.com/an-tao/drogon/pulls">Pull Request</a>. The maintainers will respond as soon as they saw it and is free.
+						</p>
+					<el-col>
+				</el-row>
+
+				<p>We also want to thank everyone whom contributed to the project:</p>
+				<img v-for="link in contributor_avatar_link" v-bind:src="link" class="contributor-icon">
+			</section>
+		</main>
+
+		<footer>
+			<el-row>
+				<el-col>
+					<p>
+						This website is built with Drogon, VueJS and ElementPlus.
+					</p>
+				</el-col>
+			</el-row>
+		</footer>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+			  contributor_avatar_link: null,
+			  activeIndex: '1'
+          };
+        },
+		mounted: function() {
+			var self = this;
+			axios.get("/api/v1/contributor_avatar_links").then(function(res) {
+				self.contributor_avatar_link = res.data;
+			});
+		}
+      };
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.mount("#app");
+	  hljs.highlightAll();
+    </script>
+</body>
+</html>
+
