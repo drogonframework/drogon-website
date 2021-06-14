@@ -52,7 +52,7 @@
 						<el-col class="grid-content" :span="8">
 							<h3>Portable</h3>
 							<p>
-								Drogon supports a wide range of platforms. Linux, Windows, OS X and *BSD. It also runs on differnt CPUs. x86, ARM, s390x, ...
+								Drogon supports a wide range of platforms. Linux, Windows, OS X and *BSD. It also runs on different CPUs. x86, ARM, s390x, ...
 							</p>
 						</el-col>
 						<el-col class="grid-content" :span="8">
