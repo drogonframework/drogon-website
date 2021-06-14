@@ -127,7 +127,7 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 				<pre><code class="c++">app().registerHandler("/get_num_users", [](const HttpRequestPtr& req) -&gt; Task&lt;HttpResponsePtr&gt;
 {
 	auto client = app().getDbClient();
-	auto result = co_await sql->execSqlCoro("SELECT COUNT(*) FROM users;");
+	auto result = co_await client->execSqlCoro("SELECT COUNT(*) FROM users;");
 
 	auto resp = HttpResponse::newHttpResponse();
 	resp->setBody(std::to_string(result[0][0].as&lt;size_t&gt;()));
