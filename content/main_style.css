@@ -99,6 +99,10 @@ main {
 	margin-top: 0.6em;
 }
 
+.force-pad-bottom {
+	padding-bottom: 2em;
+}
+
 code * {
 	font-family: monospace, monospace !important;
 }
@@ -109,7 +113,7 @@ code {
 }
 
 pre {
-	padding-top: 1.5em;
+	padding-top: 0.8em;
 }
 
 
@@ -133,4 +137,25 @@ footer {
 
 footer p {
 	color: #eeeeee
+}
+
+@media only screen and (max-width: 925px) {
+	.main-page-slide {
+		padding: 0;
+	}
+
+	.logo-img-container {
+		margin: 0 auto !important;
+		padding-right: 0 !important;
+		padding-top: 2.5em;
+	}
+
+	.pad-right-if-large {
+		padding-right: 0;
+	}
+
+	#intro {
+		padding-left: 1em;
+		padding-right: 1em;
+	}
 }

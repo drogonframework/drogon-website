@@ -18,10 +18,10 @@
 			<div class="line"></div>
 		</el-menu>
 		<el-row class="main-page-slide">
-			<el-col class="logo-img-container" :span="8">
-				<a href="https://github.com/an-tao/drogon"><img class="shrink-img-to-fit"src="/images/drogon-concise-white.png"></a>
+			<el-col class="logo-img-container" :span="8" :xs="24">
+				<a href="https://github.com/an-tao/drogon"><img class="shrink-img-to-fit logo-image"src="/images/drogon-concise-white.png"></a>
 			</el-col>
-			<el-col :span="16">
+			<el-col :span="16" :xs="24">
 				<section id="intro">
 					<h1>Drogon, the fast C++ web framework</h1>
 					<p>
@@ -43,42 +43,53 @@
 				<div>
 				<div style="padding-left:4%;padding-right:4%;">
 					<el-row :gutter="25">
-						<el-col class="grid-content" :span="8">
-							<h3>Fast and asynchronous</h3>
-							<p>
-								Drogon is fully asynchronous and designed to have the lowest overhead without sacrificing usablity.
-							</p>
+						<el-col class="grid-content" :span="8" :xs="24">
+							<div class="force-pad-bottom">
+								<h3>Fast and asynchronous</h3>
+								<p>
+									Drogon is fully asynchronous and designed to have the lowest overhead without sacrificing usablity.
+								</p>
+							</div>
 						</el-col>
-						<el-col class="grid-content" :span="8">
-							<h3>Portable</h3>
-							<p>
-								Drogon supports a wide range of platforms. Linux, Windows, OS X and *BSD. It also runs on different CPUs. x86, ARM, s390x, ...
-							</p>
+						<el-col class="grid-content" :span="8" :xs="24">
+							<div class="force-pad-bottom">
+								<h3>Portable</h3>
+								<p>
+									Drogon supports a wide range of platforms. Linux, Windows, OS X and *BSD. It also runs on different CPUs. x86, ARM, s390x, ...
+								</p>
+							</div>
 						</el-col>
-						<el-col class="grid-content" :span="8">
-							<h3>Single core, &gt; 150K requests/s</h3>
-							<p>
-								Drogon is multi threaded. But on a single core of a Ryzen 3700X. Drogon can process more than 150K HTTP requests per second.
-							</p>
+						<el-col class="grid-content" :span="8" :xs="24">
+							<div class="force-pad-bottom">
+								<h3>Single core, &gt; 150K requests/s</h3>
+								<p>
+									Drogon is multi threaded. But on a single core of a Ryzen 3700X. Drogon can process more than 150K HTTP requests per second.
+								</p>
+							</div>
 						</el-col>
-						<div class="exclusive-line" style="min-height: 2em"></div>
-						<el-col class="grid-content" :span="8">
-							<h3>C++ coroutines</h3>
-							<p>
-								Coroutine support allows users to write asynchronous code without bothering with the callback hell.
-							</p>
+						<el-col class="grid-content" :span="8" :xs="24">
+							<div class="force-pad-bottom">
+								<h3>C++ coroutines</h3>
+								<p>
+									Coroutine support allows users to write asynchronous code without bothering with the callback hell.
+								</p>
+							</div>
 						</el-col>
-						<el-col class="grid-content" :span="8">
-							<h3>RDBMS & Redis</h3>
-							<p>
-								Drogon supports ORM and can connect to major open source DBs. It also speaks Redis for the in-memory goodness.
-							</p>
+						<el-col class="grid-content" :span="8" :xs="24">
+							<div class="force-pad-bottom">
+								<h3>RDBMS & Redis</h3>
+								<p>
+									Drogon supports ORM and can connect to major open source DBs. It also speaks Redis for the in-memory goodness.
+								</p>
+							</div>
 						</el-col>
-						<el-col class="grid-content" :span="8">
-							<h3>More...</h3>
-							<p>
-								Drogon is more than a HTTP server. It can also act as client, speak and serve Websocket and comes with helpful utilites.
-							</p>
+						<el-col class="grid-content" :span="8" :xs="24">
+							<div class="force-pad-bottom">
+								<h3>More...</h3>
+								<p>
+									Drogon is more than a HTTP server. It can also act as client, speak and serve Websocket and comes with helpful utilites.
+								</p>
+							</div>
 						</el-col>
 					</el-row>
 				</div>
@@ -129,19 +140,24 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 					<h2>Join Us</h2>
 				<div>
 					
-				<el-row :gutter="30">
-					<el-col class="grid-content" :span="12">
-						<h3 class="exclusive-line text-center">Getting started</h3>
-						<p style="text-justify: auto">
-							Start using Drogon with these <a href="https://github.com/an-tao/drogon/tree/master/examples">examples</a> and the <a href="https://drogon.docsforge.com/master/installation/">intallation instructions</a>.
-						</p>
+				<el-row>
+					<el-col class="grid-content" :span="11" :xs="24">
+						<div class="force-pad-bottom pad-right-if-large">
+							<h3 class="exclusive-line text-center">Getting started</h3>
+							<p style="text-justify: auto">
+								Start using Drogon with these <a href="https://github.com/an-tao/drogon/tree/master/examples">examples</a> and the <a href="https://drogon.docsforge.com/master/installation/">intallation instructions</a>.
+							</p>
+						</div>
 					</el-col>
-					<el-col class="grid-content" :span="12">
-						<h3 class="exclusive-line text-center">Contribution</h3>
-						<p style="text-justify: auto">
-							We welcome anyone to contribute to the project. In fact Drogon's development is driven by the community. Feel free to <a href="https://github.com/an-tao/drogon/issues">open
-							an issue</a>, or directly make a <a href="https://github.com/an-tao/drogon/pulls">Pull Request</a>. The maintainers will respond as soon as they saw it and is free.
-						</p>
+					<el-col :span="2" :xs="0"></el-col>
+					<el-col class="grid-content" :span="11" :xs="24">
+						<div class="force-pad-bottom">
+							<h3 class="exclusive-line text-center">Contribution</h3>
+							<p style="text-justify: auto">
+								We welcome anyone to contribute to the project. In fact Drogon's development is driven by the community. Feel free to <a href="https://github.com/an-tao/drogon/issues">open
+								an issue</a>, or directly make a <a href="https://github.com/an-tao/drogon/pulls">Pull Request</a>. The maintainers will respond as soon as they saw it and is free.
+							</p>
+						</div>
 					<el-col>
 				</el-row>
 
