@@ -139,6 +139,25 @@ footer p {
 	color: #eeeeee
 }
 
+.logo-image-square {
+	display: none;
+}
+
+@media only screen and (max-width: 1366px) {
+	.main-page-slide {
+		padding: 0;
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	.logo-image-square {
+		display: block;
+	}
+	.logo-image {
+		display: none;
+	}
+}
+
 @media only screen and (max-width: 925px) {
 	.main-page-slide {
 		padding: 0;
@@ -157,5 +176,14 @@ footer p {
 	#intro {
 		padding-left: 1em;
 		padding-right: 1em;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.logo-image-square {
+		display: none;
+	}
+	.logo-image {
+		display: block;
 	}
 }

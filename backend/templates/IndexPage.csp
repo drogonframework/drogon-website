@@ -20,6 +20,7 @@
 		<el-row class="main-page-slide">
 			<el-col class="logo-img-container" :span="8" :xs="24">
 				<a href="https://github.com/an-tao/drogon"><img class="shrink-img-to-fit logo-image"src="/images/drogon-concise-white.png"></a>
+				<a href="https://github.com/an-tao/drogon"><img class="shrink-img-to-fit logo-image-square"src="/images/drogon-dragon-white.png"></a>
 			</el-col>
 			<el-col :span="16" :xs="24">
 				<section id="intro">
