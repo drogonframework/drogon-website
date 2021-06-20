@@ -13,6 +13,6 @@ drogon_create_views(drogon_website backend/templates ${CMAKE_CURRENT_BINARY_DIR}
 file(COPY drogon_config.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(drogon_website ${DROGON_LIBRARIES})
 
-install(TARGETS drogon_website)
+install(TARGETS drogon_website RUNTIME DESTINATION share/drogon_website/bin)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/content DESTINATION share/drogon_website)
-install(FILES ${CMAKE_SOURCE_DIR}/drogon_config.json DESTINATION share/drogon_website/)
+install(FILES ${CMAKE_SOURCE_DIR}/drogon_config.json DESTINATION share/drogon_website/bin)
