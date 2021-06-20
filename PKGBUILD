@@ -30,7 +30,7 @@ build() {
 package() {
 	cd $srcdir/$pkgname/build
 	make install
-	sed -i "s|\"document_root\": \".*\"|\"document_root\": \"/usr/share/$pkgname/content\"|" ${pkgdir}/usr/share/$pkg_pathname/drogon_config.json
+	sed -i "s|\"document_root\": \".*\"|\"document_root\": \"/usr/share/$pkgname/content\"|" ${pkgdir}/usr/share/$pkg_pathname/bin/drogon_config.json
 
 	# Remove upload folder that may be created during development
 	if [ -d ${pkgdir}/usr/share/$pkgname/content/uploads ]; then
