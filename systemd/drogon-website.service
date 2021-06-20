@@ -6,8 +6,8 @@ After=syslog.target network.target
 User=drogonwebsite
 AmbientCapabilities=CAP_NET_BIND_SERVICE
 CapabilityBoundingSet=CAP_NET_BIND_SERVICE
-WorkingDirectory=/usr/share/nsysu-ai-website
-ExecStart=/usr/bin/nsysu_ai_backend
+WorkingDirectory=/usr/share/drogon_website/bin
+ExecStart=/usr/share/drogon_website/bin/drogon_website
 
 # Hardening
 PrivateTmp=true
