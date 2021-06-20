@@ -1,49 +1,50 @@
 {
-	"listeners": [
-		{
-			"address": "0.0.0.0",
-			"port": 80,
-			"https": false
-		}
-	],
-	"app": {
-		"document_root": "../content",
-		"enable_session": false,
-	        "log": {
-                       "log_path": "../logs",
-                       "logfile_base_name": "drogon_website",
-                       "log_size_limit": 100000000,
-                       "log_level": "TRACE"
-                },
-		"run_as_daemon": true,
-		"relaunch_on_error": true,
-	        "file_types": [
-                    "gif",
-                    "png",
-                    "jpg",
-                    "js",
-                    "css",
-                    "html",
-                    "ico",
-                    "swf",
-                    "xap",
-                    "apk",
-                    "cur",
-                    "xml",
-		    "woff"
-                ]
-	},
-	"plugins":[
-	         {
-                         "name": "drogon::plugin::AccessLogger",
-                         "dependencies": [],
-                         "config": {
-                                   "log_path": "../logs",
-                                   "log_format": "$request_date $method $url [$body_bytes_received] ($remote_addr - $local_addr) $status $body_bytes_sent $processing_time",
-                                   "log_file": "access.log",
-                                   "log_size_limit": 100000000,
-                                   "use_local_time": true,
-                                   "log_index": 0
-                         }
-                }]
+    "listeners": [
+        {
+            "address": "0.0.0.0",
+            "port": 80,
+            "https": false
+        }
+    ],
+    "app": {
+        "document_root": "../content",
+        "enable_session": false,
+        "log": {
+            "log_path": "../logs",
+            "logfile_base_name": "drogon_website",
+            "log_size_limit": 100000000,
+            "log_level": "TRACE"
+        },
+        "run_as_daemon": true,
+        "relaunch_on_error": true,
+        "file_types": [
+            "gif",
+            "png",
+            "jpg",
+            "js",
+            "css",
+            "html",
+            "ico",
+            "swf",
+            "xap",
+            "apk",
+            "cur",
+            "xml",
+            "woff"
+        ]
+    },
+    "plugins": [
+        {
+            "name": "drogon::plugin::AccessLogger",
+            "dependencies": [],
+            "config": {
+                "log_path": "../logs",
+                "log_format": "$request_date $method $url [$body_bytes_received] ($remote_addr - $local_addr) $status $body_bytes_sent $processing_time",
+                "log_file": "access.log",
+                "log_size_limit": 100000000,
+                "use_local_time": true,
+                "log_index": 0
+            }
+        }
+    ]
 }
