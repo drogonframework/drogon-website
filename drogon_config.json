@@ -16,7 +16,22 @@
                        "log_level": "TRACE"
                 },
 		"run_as_daemon": true,
-		"relaunch_on_error": true
+		"relaunch_on_error": true,
+	        "file_types": [
+                    "gif",
+                    "png",
+                    "jpg",
+                    "js",
+                    "css",
+                    "html",
+                    "ico",
+                    "swf",
+                    "xap",
+                    "apk",
+                    "cur",
+                    "xml",
+		    "woff"
+                ]
 	},
 	"plugins":[
 	         {
