@@ -8,8 +8,7 @@ class MainPagesController : public HttpController<MainPagesController>
     ADD_METHOD_TO(MainPagesController::indexPage, "/", {Get});
     METHOD_LIST_END
 
-    void indexPage(const HttpRequestPtr& req,
-                   std::function<void(const HttpResponsePtr&)>&& callback)
+    void indexPage(const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback)
     {
         auto resp = HttpResponse::newHttpViewResponse("IndexPage");
         callback(resp);
