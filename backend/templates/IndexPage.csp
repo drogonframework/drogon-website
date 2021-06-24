@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
 	<%view CommonResources %>
     <title>Homepage | Drogon Web Framework</title>
+	<link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body>
     <div id="app">
