@@ -125,7 +125,7 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 });</code></pre>
 				<div class="exclusive-line" style="min-height: 2em"></div>
 				<h3>DB with coroutines</h3>
-				<pre><code class="c++">app().registerHandler("/get_num_users", [](const HttpRequestPtr& req) -&gt; Task&lt;HttpResponsePtr&gt;
+				<pre><code class="c++">app().registerHandler("/get_num_users", [](HttpRequestPtr req) -&gt; Task&lt;HttpResponsePtr&gt;
 {
 	auto client = app().getDbClient();
 	auto result = co_await client->execSqlCoro("SELECT COUNT(*) FROM users;");
