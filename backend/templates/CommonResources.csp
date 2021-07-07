@@ -6,4 +6,4 @@
 <link rel="stylesheet" href="/main_style.css">
 <link rel="stylesheet" href="/dracula.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
-<meta name="description" content="drogon,web application,framework,c++,coroutine,coroutines,asynchronous,asynchronous programming,async,high throughput,c++17,c++20,web,webapp,database,db,redis,fast">
+<meta name="keywords" content="drogon,web application,framework,c++,coroutine,coroutines,asynchronous,asynchronous programming,async,high throughput,c++17,c++20,web,webapp,database,db,redis,fast">
