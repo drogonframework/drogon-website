@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-	<%view CommonResources %>
-    <title>Homepage | Drogon Web Framework</title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  </head>
-  <body>
-    <div id="app">
+	<head>
+		<meta charset="UTF-8" />
+		<%view CommonResources %>
+		<meta description="Drogon, the fast C++ web framework"/>
+		<title>Homepage | Drogon Web Framework</title>
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	</head>
+	<body>
+		<div id="app">
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			<el-menu-item index="1">Drogon</el-menu-item>
 			<el-submenu index="2">
@@ -177,27 +178,27 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 				</el-col>
 			</el-row>
 		</footer>
-    </div>
-    <script>
-      const App = {
-        data() {
-          return {
-			  contributor_avatar_link: null,
-			  activeIndex: '1'
-          };
-        },
-		mounted: function() {
-			var self = this;
-			axios.get("/api/v1/contributor_avatar_links").then(function(res) {
-				self.contributor_avatar_link = res.data;
-			});
-		}
-      };
-      const app = Vue.createApp(App);
-      app.use(ElementPlus);
-      app.mount("#app");
-	  hljs.highlightAll();
-    </script>
+		</div>
+		<script>
+			const App = {
+				data() {
+					return {
+						contributor_avatar_link: null,
+						activeIndex: '1'
+					};
+				},
+				mounted: function() {
+					var self = this;
+					axios.get("/api/v1/contributor_avatar_links").then(function(res) {
+						self.contributor_avatar_link = res.data;
+					});
+				}
+			};
+			const app = Vue.createApp(App);
+			app.use(ElementPlus);
+			app.mount("#app");
+		hljs.highlightAll();
+		</script>
 </body>
 </html>
 
