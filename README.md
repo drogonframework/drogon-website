@@ -5,7 +5,7 @@ The source code for Drogon's official website.
 ## Dependencies
 
 * C++ 20 capable compiler
-* [Drogon](https://github.com/an-tao/drogon)
+* [Drogon](https://github.com/drogonframework/drogon)
 * [nlohmann-json](https://github.com/nlohmann/json)
 
 ## How to deploy
