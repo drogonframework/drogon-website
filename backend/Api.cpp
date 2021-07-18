@@ -22,7 +22,7 @@ class v1 : public HttpController<v1>
     Task<> getContributors(HttpRequestPtr req, std::function<void(const HttpResponsePtr&)> callback)
     {
         auto apiReq = HttpRequest::newHttpRequest();
-        apiReq->setPath("/repos/an-tao/drogon/contributors");
+        apiReq->setPath("/repos/drogonframework/drogon/contributors");
         auto res = co_await client_->sendRequestCoro(apiReq);
         if (res->contentType() != CT_APPLICATION_JSON || res->statusCode() != k200OK)
             throw std::runtime_error("GitHub contributors API did not respond with expected result");
