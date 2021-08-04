@@ -116,7 +116,8 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 {
 	MultiPartParser fileUpload;
 	if (fileUpload.parse(req) != 0 || fileUpload.getFiles().size() == 0) {
-		// Framrwork handles exception by logging and sneds 500 back
+		// The framework handles an exception by logging it, and
+		// by responding to the client with an HTTP 500 status code.
 		throw std::runtime_error("Something went wrong");
 	}
 
