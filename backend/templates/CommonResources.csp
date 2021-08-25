@@ -1,8 +1,8 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<script src="https://unpkg.com/vue@next"></script>
-<link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css">
-<script src="https://unpkg.com/element-plus/lib/index.full.js"></script>
+<script src="https://unpkg.com/vue@3.2.2/dist/vue.global.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/element-plus@1.1.0-beta.4/dist/index.css">
+<script src="https://unpkg.com/element-plus@1.1.0-beta.4/dist/index.full.js"></script>
 <link rel="stylesheet" href="/main_style.css">
 <link rel="stylesheet" href="/dracula.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
