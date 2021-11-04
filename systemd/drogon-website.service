@@ -17,8 +17,8 @@ ProtectHome=read-only
 MemoryDenyWriteExecute=true
 
 # Log to systemd
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 Restart=on-failure
 
 [Install]
