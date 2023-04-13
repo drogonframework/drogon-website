@@ -16,7 +16,7 @@
 				<el-menu-item index="2-1"><a href="https://gitter.im/drogon-web/community" target="_blank">Gitter</a></el-menu-item>
 				<el-menu-item index="2-2"><a href="https://github.com/drogonframework/drogon/issues" target="_blank">GitHub Issues</a></el-menu-item>
 			</el-sub-menu>
-			<el-menu-item index="3"><a href="https://github.com/drogonframework/drogon/wiki/ENG-01-Overview" target="_blank">Docs</a></el-menu-item>
+			<el-menu-item index="3"><a href="https://drogonframework.github.io/drogon-docs/#/" target="_blank">Docs</a></el-menu-item>
 			<div class="line"></div>
 		</el-menu>
 		<el-row class="main-page-slide">
@@ -149,7 +149,7 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 						<div class="force-pad-bottom pad-right-if-large">
 							<h3 class="exclusive-line text-center">Getting started</h3>
 							<p style="text-justify: auto">
-								Start using Drogon with these <a href="https://github.com/drogonframework/drogon/tree/master/examples">examples</a> and the <a href="https://drogon.docsforge.com/master/installation/">installation instructions</a>.
+								Start using Drogon with these <a href="https://github.com/drogonframework/drogon/tree/master/examples">examples</a> and the <a href="https://drogonframework.github.io/drogon-docs/#/ENG-02-Installation">installation instructions</a>.
 							</p>
 						</div>
 					</el-col>
