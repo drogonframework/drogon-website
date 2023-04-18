@@ -169,7 +169,44 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 				<img v-for="link in contributor_avatar_link" v-bind:src="link" class="contributor-icon">
 			</section>
 		</main>
-
+        <docs>
+          <script>
+            window.$docsify = {
+              coverpage: '_Cover.md',
+              themeColor: '#1373b3',
+              loadSidebar: '_Sidebar.md',
+              loadFooter: '_Footer.md',
+              homepage: '/ENG-01-Overview.md',
+              name: 'Drogon docs',
+              alias: { // Prevent unnecesary nested _Sidebar.md to be used (optional)
+                '/.*/_Sidebar.md': '/_Sidebar.md'
+              },
+              subMaxLevel: 1, // Generate a maximum of two levels of chapters in TOC
+              repo: 'true', // set the docsify show the corner
+              corner: {
+                  // the icon link url to another site
+                  url: "https://github.com/drogonframework/drogon",
+                  // the default preset icon in docsify-corner
+                  icon: "github"
+              }
+            }
+          </script>
+          <!-- Docsify v4 -->
+          <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+          <!-- Syntax highlighting -->
+          <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+          <script>
+            // Add additional language aliases here
+            Prism.languages['c++'] = Prism.languages['cpp'];
+          </script>
+          <!-- Additional functionality -->
+          <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/docsify-corner/dist/docsify-corner.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/@alertbox/docsify-footer/dist/docsify-footer.min.js"></script>
+        </docs>
 		<footer>
 			<el-row>
 				<el-col>
