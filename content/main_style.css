@@ -90,6 +90,12 @@ main {
   	margin-right: auto;
 }
 
+docs {
+	max-width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .contributor-icon {
 	border-radius: 50%;
 	width: 3em;
