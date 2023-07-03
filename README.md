@@ -22,12 +22,12 @@ make -j
 ./drogon_website
 ```
 
-It load it's configuration from `drogon_config.json` in the current directory. Which is requently replaced when building the backend itself. Please edit `drogon_config.json` in the project root to have a permanent effect. 
+It load it's configuration from `drogon_config.json` in the current directory. Which is frequently replaced when building the backend itself. Please edit `drogon_config.json` in the project root to have a permanent effect. 
 
 ### Arch Linux
 
 If you are using Arch Linux, the PKGBUILD file contains everything you need to build the backend. (NOTE: This PKGBUILD is aimed for making local builds)
-Assuming your `pwd` is in the same folder as this README file is. Run
+Assuming your `pwd` is in the same folder as this README file is.
 
 ```bash
 # We need to perform some stuff outside of the directory
@@ -42,14 +42,14 @@ cd trunk
 makepkg
 ```
 
-Then is should generate `drogon-website-0.0.1-x86_64.tar.zst` inside `trunk`. Just use `pacman -U` to install it and start it through systemd.
+The generated `drogon-website-0.0.1-x86_64.tar.zst` should be located inside `trunk`.  Just use `pacman -U` to install it and start it through systemd.
 
 ```bash
 sudo pacman -U drogon-website*.pkg.tar.zst
 sudo systemctl start drogon-website
 ```
 
-By default the service listens on 0.0.0.0 port 4231. To change the IP address that the service is listening on. Edit `/usr/share/drogon-website/drogon_config.json` and change `address`.
+By default, the service listens on 0.0.0.0 port 4231. To change the IP address that the service is listening on, edit `/usr/share/drogon-website/drogon_config.json` and change `address`.
 
 ```json
 /*inside the configuration file*/
