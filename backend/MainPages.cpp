@@ -1,6 +1,7 @@
 #include <drogon/HttpController.h>
 #include <drogon/HttpClient.h>
 using namespace drogon;
+
 class MainPagesController : public HttpController<MainPagesController>
 {
   public:
