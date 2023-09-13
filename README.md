@@ -49,14 +49,14 @@ sudo pacman -U drogon-website*.pkg.tar.zst
 sudo systemctl start drogon-website
 ```
 
-By default, the service listens on 0.0.0.0 port 4231. To change the IP address that the service is listening on, edit `/usr/share/drogon-website/drogon_config.json` and change `address`.
+By default, the service listens on 0.0.0.0 port 8848. To change the IP address that the service is listening on, edit `/usr/share/drogon-website/drogon_config.json` and change `address`.
 
 ```json
 /*inside the configuration file*/
 "listeners": [
     {
         "address": "0.0.0.0", /* <==== change this*/
-        "port": 4231,
+        "port": 8848,
         "https": false
     }
 ],
