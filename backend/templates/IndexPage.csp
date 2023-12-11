@@ -13,6 +13,7 @@
 			<el-menu-item index="1">Drogon</el-menu-item>
 			<el-sub-menu index="2">
 				<template #title>Community</template>
+				<el-menu-item index="2-1"><a href="https://discord.com/invite/3DvHY6Ewuj" target="_blank">Discord</a></el-menu-item>
 				<el-menu-item index="2-1"><a href="https://gitter.im/drogon-web/community" target="_blank">Gitter</a></el-menu-item>
 				<el-menu-item index="2-2"><a href="https://github.com/drogonframework/drogon/issues" target="_blank">GitHub Issues</a></el-menu-item>
 			</el-sub-menu>
