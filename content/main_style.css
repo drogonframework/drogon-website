@@ -143,6 +143,18 @@ footer p {
 	display: none;
 }
 
+.sponsor-image img {
+	max-width: 20em;
+	max-height: 20em;
+	margin-left: 1em;
+	margin-right: 1em;
+	transition: transform .2s;
+}
+
+.sponsor-image img:hover {
+	transform: scale(1.1); 
+}
+
 @media only screen and (max-width: 1366px) {
 	.main-page-slide {
 		padding: 0;
