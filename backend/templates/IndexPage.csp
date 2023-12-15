@@ -151,7 +151,7 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 					</p>
 					<el-col class="grid-content" :span="8" :xs="24">
 						<div class="force-pad-bottom sponsor-image">
-							<a href="https://tuta.com/"><img src="/images/sponsors/tuta_strike_white.png"></a>
+							<a href="https://tuta.com/" target="_blank"><img src="/images/sponsors/tuta_strike_white.png"></a>
 						</div>
 				</el-row>
 			</section>
