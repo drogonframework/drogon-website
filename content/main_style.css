@@ -143,6 +143,12 @@ footer p {
 	display: none;
 }
 
+.sponsor-image {
+	margin-top: auto;
+	margin-bottom: auto;
+	display: block;
+}
+
 .sponsor-image img {
 	max-width: 20em;
 	max-height: 20em;
