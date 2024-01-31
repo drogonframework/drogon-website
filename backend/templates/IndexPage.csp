@@ -142,6 +142,22 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 
 			<section>
 				<div class="exclusive-line">
+					<h2>Sponsors</h2>
+				<div>
+
+				<el-row justify="center">
+					<p class="text-center exclusive-line force-pad-bottom">
+						We are grateful for the organizations that have generously supported us:
+					</p>
+					<el-col class="grid-content" :span="8" :xs="24">
+						<div class="force-pad-bottom sponsor-image">
+							<a href="https://tuta.com/" target="_blank"><img src="/images/sponsors/tuta_strike_white.png"></a>
+						</div>
+				</el-row>
+			</section>
+
+			<section>
+				<div class="exclusive-line">
 					<h2>Join Us</h2>
 				<div>
 					
