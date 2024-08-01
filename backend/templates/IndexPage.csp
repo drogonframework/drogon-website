@@ -169,7 +169,7 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 						<div class="force-pad-bottom pad-right-if-large">
 							<h3 class="exclusive-line text-center">Getting started</h3>
 							<p style="text-justify: auto">
-								Start using Drogon with these <a href="https://github.com/drogonframework/drogon/tree/master/examples">examples</a> and the <a href="https://drogonframework.github.io/drogon-docs/#/ENG-02-Installation">installation instructions</a>.
+								Start using Drogon with these <a href="https://github.com/drogonframework/drogon/tree/master/examples">examples</a> and the <a href="https://drogonframework.github.io/drogon-docs/#/ENG/ENG-02-Installation">installation instructions</a>.
 							</p>
 						</div>
 					</el-col>
