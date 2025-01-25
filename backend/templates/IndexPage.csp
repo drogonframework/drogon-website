@@ -154,7 +154,7 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 							<a href="https://tuta.com/" target="_blank"><img src="/images/sponsors/tuta_strike_white.png"></a>
 						</div>
 						<div class="force-pad-bottom sponsor-image">
-							<a href="https://jetbrains.com/" target="_blank"><img src="/images/sponsors/jb_beam.png"></a>
+							<a href="https://jetbrains.com/" target="_blank"><img src="/images/sponsors/jetbrains.png"></a>
 						</div>
 				</el-row>
 			</section>
@@ -163,7 +163,7 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 				<div class="exclusive-line">
 					<h2>Join Us</h2>
 				<div>
-					
+
 				<el-row>
 					<el-col class="grid-content" :span="11" :xs="24">
 						<div class="force-pad-bottom pad-right-if-large">
@@ -222,4 +222,3 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 		</script>
 </body>
 </html>
-
