@@ -31,7 +31,7 @@
 					<p>
 						Run your application anywhere, knowing it is as fast as it could be.
 					</p>
-
+	
 					<p>
 					<el-button type="success" onclick=" window.open('https://github.com/drogonframework/drogon/releases','_blank')">View releases</el-button>
 					<el-button type="primary" onclick=" window.open('https://github.com/drogonframework/drogon','_blank')">On GitHub</el-button>
@@ -39,7 +39,7 @@
 				</section>
 			</el-col>
 		</el-row>
-
+	
 		<main>
 			<section class="features_secion">
 				<div class="exclusive-line">
@@ -98,48 +98,48 @@
 					</el-row>
 				</div>
 			</section>
-
+	
 			<section>
 				<div class="exclusive-line">
 					<h2>Code snippets</h2>
 					<h3>Hello World</h3>
 					<pre><code class="c++">using Callback = std::function&lt;void (const HttpResponsePtr &)&gt; ;
-
-app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
-{
+	
+	app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
+	{
 	auto resp = HttpResponse::newHttpResponse();
 	resp->setBody("Hello World");
 	callback(resp);
-});</code></pre>
+	});</code></pre>
 				<div class="exclusive-line" style="min-height: 2em"></div>
 				<h3>File upload</h3>
 					<pre><code class="c++">app().registerHandler("/upload", [](const HttpRequestPtr& req, Callback &&callback))
-{
+	{
 	MultiPartParser fileUpload;
 	if (fileUpload.parse(req) != 0 || fileUpload.getFiles().size() == 0) {
 		// The framework handles an exception by logging it, and
 		// by responding to the client with an HTTP 500 status code.
 		throw std::runtime_error("Something went wrong");
 	}
-
+	
 	auto &file = fileUpload.getFiles()[0];
 	file.save();
 	callback(HttpResponse::newHttpResponse());
-});</code></pre>
+	});</code></pre>
 				<div class="exclusive-line" style="min-height: 2em"></div>
 				<h3>DB with coroutines</h3>
 				<pre><code class="c++">app().registerHandler("/get_num_users", [](HttpRequestPtr req) -&gt; Task&lt;HttpResponsePtr&gt;
-{
+	{
 	auto client = app().getDbClient();
 	auto result = co_await client->execSqlCoro("SELECT COUNT(*) FROM users;");
-
+	
 	auto resp = HttpResponse::newHttpResponse();
 	resp->setBody(std::to_string(result[0][0].as&lt;size_t&gt;()));
 	co_return resp;
-});</code></pre>
+	});</code></pre>
 				<div>
 			</section>
-
+	
 			<section>
 				<div class="exclusive-line">
 					<h2>Sponsors</h2>
@@ -184,12 +184,12 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 						</div>
 					<el-col>
 				</el-row>
-
+	
 				<p>We also want to thank everyone whom contributed to the project:</p>
 				<img v-for="link in contributor_avatar_link" v-bind:src="link" class="contributor-icon">
 			</section>
 		</main>
-
+	
 		<footer>
 			<el-row>
 				<el-col>
@@ -220,5 +220,5 @@ app().registerHandler("/", [](const HttpRequestPtr& req, Callback &&callback)
 			app.mount("#app");
 		hljs.highlightAll();
 		</script>
-</body>
+	</body>
 </html>
